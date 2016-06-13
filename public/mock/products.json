@@ -1,0 +1,26 @@
+[{
+  "name": "Art By Cale0",
+  "pictures": ["http://www.stopaddiction.ca/wp-content/uploads/2016/02/tumblr_o33tcjbPZ41rrjjxto1_500.jpg", "https://www.happybrainscience.com/wp-content/uploads/2014/06/BEST-POSSIBLE-FUTURE-300-FIXED.png", "https://papercallio-production.s3.amazonaws.com/uploads/event/logo/2/mid_300_rsz_happy_face.png"],
+  "price": {
+    "amount":"50",
+    "currency": "USD"
+  },
+  "category": {
+    "_id": "Elephant",
+    "parent": "Paintings",
+    "ancestors": ["canvas"]
+  }
+},
+{
+"name": "Art By Cale1",
+"pictures": ["http://www.stopaddiction.ca/wp-content/uploads/2016/02/tumblr_o33tcjbPZ41rrjjxto1_500.jpg", "https://www.happybrainscience.com/wp-content/uploads/2014/06/BEST-POSSIBLE-FUTURE-300-FIXED.png", "https://papercallio-production.s3.amazonaws.com/uploads/event/logo/2/mid_300_rsz_happy_face.png"],
+"price": {
+  "amount":"50",
+  "currency": "USD"
+},
+"category": {
+  "_id": "SunsetWave",
+  "parent": "Paintings",
+  "ancestors": ["canvas"]
+}
+}];

@@ -1,0 +1,28 @@
+<div class="row" id="">
+  <div class="col-xs-12">
+    Username: <input ng-model="user.profile.username">
+    <br/>
+    Email: <input ng-model="user.data.email">
+    <br/>
+    Password: <input ng-model="user.data.password">
+    <br/>
+    First Name: <input ng-model="user.data.firstName">
+    <br/>
+    Last Name: <input ng-model="user.data.lastName">
+    <br/>
+    Become an Inside Informant:   <select class="click" name="catagory" ng-model="user.data.emailMailingList">
+      <option value="true" selected>Call me Secret Squirrel</option>
+        <option value="false">I like living in my Mom's basement</option>
+      </select>
+    <br/>
+    Contribute to the Advancement of Goal Wizard: <select class="click" name="catagory" ng-model="user.data.researchAndDevelopment">
+        <option value="true" selected>Ask long as I become a Wizard too.</option>
+        <option value="false">Who believes in magic?</option>
+      </select>
+    <br/>
+    Random #: <input ng-model="user.data.oauth">
+    <br/>
+      <button ng-click='addUser(user);' class="btn btn-success"><i class="fa fa-plus click"></i></button>
+      </div>
+
+  </div>
