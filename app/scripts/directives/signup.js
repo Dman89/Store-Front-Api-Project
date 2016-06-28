@@ -1,9 +1,9 @@
 'use strict';
 angular.module('lionHeart')
-.directive("signup", function() {
+.directive("signupform", function() {
   return {
-    templateUrl: 'templates/signupform.html',
-    controller: 'signUpForm',
+    templateUrl: 'templates/signUpForm.html',
+    controller: 'signUpFormCtrl',
     replace: true
   }
 })

@@ -1,0 +1,10 @@
+
+#menu {
+  & .clickMe {
+    cursor: pointer;
+  }
+}
+.stop {
+  cursor: none;
+  pointer-events: none;
+}

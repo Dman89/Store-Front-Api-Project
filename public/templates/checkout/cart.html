@@ -1,0 +1,97 @@
+<div class="row text-center" id="cart">
+  <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <h1 class="text-left">Cart</h1>
+    <div class="row innerRow">
+      <div class="col-xs-12" ng-repeat="item in cart.items">
+        <div class="row">
+          <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+            <div class="row">
+                <div class="col-xs-12 col-sm-8 col-md-5 col-lg-3">
+                  <img ng-src="{{item.product.pictures[0]}}" alt="" class="thumb"/>
+                </div>
+              <div class="col-xs-12 col-sm-4 col-md-7 col-lg-9 title">
+                <a href="#"><h3>{{item.product.name}}</h3></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-6 col-sm-2 col-md-2 col-lg-1">
+            <label>{{item.quantity}}</label><br/>
+            <input class="quanity" ng-model="item.quantity"/><br/>
+            <span id="stock" class="">In Stock</span>
+          </div>
+          <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
+          {{item.product.displayPrice}}
+          </div>
+        </div>
+      </div>
+      </div>
+      <div class="row innerRow">
+            <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+              <div class="row innerShipping">
+                <div class="col-xs-12">
+                  <h3>Postal Code: </h3>
+                  <div class="zipcode"><label ng-click="zipEdit = !zipEdit" ng-hide="zipEdit">{{user.data.shippingAddress.zip}}</label><input ng-show="zipEdit" ng-blur="zipEdit = false;" type="text" class="zipcode" ng-model="user.data.shippingAddress.zip"/>
+                  </div>
+                </div>
+              </div>
+            <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-lg-3 col-md-offset-3 col-lg-offset-3">
+              <div class="row innerShipping" ng-hide="cart.items">
+                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                  Subtotal:
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  $0
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                  Tax:
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  $0
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                  Shipping:
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  $0
+                </div>
+                <div class="col-xs-12">
+                  <h3>Total:</h3>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  <h4>$0</h4>
+                </div>
+              </div>
+              <div class="row innerShipping" ng-show="cart.items">
+                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                  Subtotal:
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  ${{cart.subTotal}}
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                  Tax:
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  ${{cart.tax}}
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                  Shipping:
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  ${{cart.shipping}}
+                </div>
+                <div class="col-xs-12">
+                  <h3>Total:</h3>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                  <h4>${{cart.total}}</h4>
+                </div>
+              </div>
+              </div>
+            <div class="col-xs-12">
+              <button ui-sref="cart.review" type="button" class="abtn btn-success"><i class="fa fa-shopping-cart"></i> Checkout</button>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>

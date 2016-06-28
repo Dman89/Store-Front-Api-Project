@@ -1,0 +1,35 @@
+#category {
+  & input.quanity {
+    width: 50px;
+  }
+  & img.thumb {
+    width: 200px;
+    height: 200px;
+  }
+  & div.title, & div.title a, & div.title a h3 {
+    text-align: left;
+    @media (max-width: 900px) {
+      text-align: center;
+    }
+  }
+  & div.innerRow {
+    padding: 0 2.5%;
+    @media (max-width: 900px) {
+      padding: 0 1%;
+    }
+  }
+  & input.zipcode {
+    width: 80px;
+    margin: 1em auto;
+  }
+  & div.zipcode {
+    text-align: center;
+    @media (min-width: 668px) {
+      text-align: left;
+    }
+  }
+  & div.row div.innerShipping {
+    padding: 0 1em;
+    text-align: left;
+  }
+}

@@ -1,0 +1,166 @@
+$b: rgb(6, 17, 21);
+$p: rgb(26, 62, 115);
+$s: rgb(67, 132, 183);
+$a: rgb(167, 218, 218);
+$h: rgb(249, 190, 54);
+$ha: rgb(66, 62, 128);
+body {
+  background: $s;
+}
+
+#categoryDisplay {
+  & .card-container {
+  transform-orgin: bottom center;
+  }
+  & #categoryContent {
+    @media (max-width: 768px) {
+      margin-top: 120px;
+    }
+  }
+  & #navBarCategories {
+    margin-top: 50px;
+    z-index: 10;
+    color: white;
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#7db9e8+0,2989d8+70,2989d8+70,1e5799+100 */
+    /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#1a3e73+0,33578c+50,1e5799+100 */
+    background: #1a3e73;
+    /* Old browsers */
+    background: -moz-linear-gradient(top, #1a3e73 0%, #33578c 50%, #1e5799 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #1a3e73 0%, #33578c 50%, #1e5799 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #1a3e73 0%, #33578c 50%, #1e5799 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    // filter: progid: DXImageTransform.Microsoft.gradient( startColorstr='#1a3e73', endColorstr='#1e5799', GradientType=0);
+    /* IE6-9 */
+    & a.dropdown-toggle:hover,
+    & .open a.dropdown-toggle {
+      background: inherit;
+      color: white;
+    }
+    & a.dropdown-toggle {
+      color: rgba(255, 255, 255, .6);
+    }
+  }
+  & #menuOther {
+    margin: auto;
+    border: $p 2px solid;
+    border-radius: 4px;
+    padding: 1em;
+    position: absolute;
+    background: $a;
+    font-size: 2em;
+    top: 3em;
+    left: 1em;
+    & a,
+    & a:hover,
+    & a:active {
+      color: $b;
+      text-decoration: none;
+    }
+    & ul,
+    & li {
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      list-style-type: none;
+    }
+    & ul {
+      padding: 1em 1.7em;
+    }
+    & li {
+      text-indent: 10px;
+    }
+  }
+  & .card {
+    & .bottomPicFooter {
+      height: 60px;
+    }
+  }
+  & p.title {
+    bottom: .5em;
+  }
+}
+.blinkOut {
+  animation: blinkOut 1.5s 1s linear 1 forwards;
+}
+.hideIt {
+  animation: hideIt 1s linear 1 forwards;
+}
+.selected {
+  transform-origin: bottom center;
+  animation: selected 1s linear 1 forwards;
+}
+@-webpack-keyframes selected {
+  100% {transform: rotate(7deg);}
+}
+@keyframes selected {
+  100% {transform: rotate(7deg);}
+}
+@-o-keyframes selected {
+  100% {transform: rotate(7deg);}
+}
+@-moz-keyframes selected {
+  100% {transform: rotate(7deg);}
+}
+@-ms-keyframes selected {
+  100% {transform: rotate(7deg);}
+}
+
+
+
+@-webpack-keyframes hideIt {
+  0% {opacity: 1}
+  100% {opacity: 0}
+}
+@keyframes hideIt {
+  0% {opacity: 1}
+  100% {opacity: 0}
+}
+@-moz-keyframes hideIt {
+  0% {opacity: 1}
+  100% {opacity: 0}
+}
+@-o-keyframes hideIt {
+  0% {opacity: 1}
+  100% {opacity: 0}
+}
+@-ms-keyframes hideIt {
+  0% {opacity: 1}
+  100% {opacity: 0}
+}
+@-webpack-keyframes blinkOut {
+  0% {opacity: 1}
+  35% {opacity: 0}
+  70% {opacity: 1}
+  85% {opacity: .5}
+  100% {opacity: 0}
+}
+@keyframes blinkOut {
+  0% {opacity: 1}
+  35% {opacity: 0}
+  70% {opacity: 1}
+  85% {opacity: .5}
+  100% {opacity: 0}
+}
+@-moz-keyframes blinkOut {
+  0% {opacity: 1}
+  35% {opacity: 0}
+  70% {opacity: 1}
+  85% {opacity: .5}
+  100% {opacity: 0}
+}
+@-o-keyframes blinkOut {
+  0% {opacity: 1}
+  35% {opacity: 0}
+  70% {opacity: 1}
+  85% {opacity: .5}
+  100% {opacity: 0}
+}
+@-ms-keyframes blinkOut {
+  0% {opacity: 1}
+  35% {opacity: 0}
+  70% {opacity: 1}
+  85% {opacity: .5}
+  100% {opacity: 0}
+}

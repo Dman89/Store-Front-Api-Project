@@ -9,13 +9,12 @@ productRouter.get('/products', function (req, res) {
       console.log('Oh Shucks!');
       return res.status(500).json({message: err.message});
     }
-      console.log('Products Returned');
     res.json({products:products});
   })
 })
 productRouter.get('/products/:id', function(req, res) {
   var id = req.params.id.toLowerCase();
-  Products.find({ 'urlCode': id }, function(err, products) {
+  Products.findOne({ 'urlCode': id }, function(err, products) {
     if (err) {
       console.error("Oh Shucks!");
     }
@@ -49,7 +48,7 @@ productRouter.put('/products/id/:id', function (req, res) {
     console.log(req.body.name + ' has been edited!')
   })
 })
-productRouter.post('/products/id/', function(req, res) {
+productRouter.post('/products', function(req, res) {
   var product = req.body;
   Products.create(product, function(err, product) {
     if (err) {
@@ -66,8 +65,28 @@ productRouter.delete('/products/id/:id', function (req, res) {
       return res.status(500).json({message: err.message})
     } else {
       res.json({message: 'Deleted Product'});
+      console.log('Product Added')
     }
   })
 })
+// Search name
+productRouter.get('/products/search/:query', function (req, res) {
+  Products.find({ $text: { $search : req.params.query } },
+                { score : { $meta : 'textScore' } } )
+                .sort({ score : { $meta : 'textScore' } })
+                .limit(10)
+                .exec(handleMany.bind(null, 'products', res))
+})
+function handleMany(property, res, error, result) {
+  if (error) {
+    console.log(error);
+    return res.
+      status(status.INTERNAL_SERVER_ERROR).
+      json({ error: error.toString() });
+  }
 
+  var json = {};
+  json[property] = result;
+  res.json(json);
+}
 module.exports = productRouter;

@@ -1,0 +1,117 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+      Display Name:<br/><input type="text" ng-model="user.profile.displayName"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Username:<br/><label class="profileUserName">{{user.profile.username}}</label>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Picture:<br/><input type="text" ng-model="user.profile.picture"/>
+      </div>
+    </div>
+  </div>
+  <div class="divider col-xs-12"></div>
+  <div class="col-xs-12">
+    <div class="row">
+    <div class="col-xs-12 col-sm-4">
+    First Name:<br/><input type="text" ng-model="user.data.firstName"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+    Last Name:<br/><input type="text" ng-model="user.data.lastName"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+    Email:<br/><label class="profileUserName">{{user.data.email[0]}}</label>
+    </div>
+    </div>
+  </div>
+  <div class="divider col-xs-12"></div>
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        Billing Address:
+      </div>
+      <div class="col-xs-12 col-sm-4">
+<input type="text" ng-model="user.data.billingAddress.name"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <input type="text" ng-model="user.data.billingAddress.address"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <input type="text" ng-model="user.data.billingAddress.city"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <input type="text" ng-model="user.data.billingAddress.state"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <input type="text" ng-model="user.data.billingAddress.zip"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <input type="text" ng-model="user.data.billingAddress.country"/>
+      </div>
+    </div>
+  </div>
+  <div class="divider col-xs-12"></div>
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        Shipping Address:
+      </div>
+      <div class="row" ng-class="{'hidden': user.data.shippingAddress.useBilling == true}">
+        <div class="col-xs-12 col-sm-4">
+          <input type="text" ng-model="user.data.shippingAddress.name"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <input type="text" ng-model="user.data.shippingAddress.address"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <input type="text" ng-model="user.data.shippingAddress.city"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <input type="text" ng-model="user.data.shippingAddress.state"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <input type="text" ng-model="user.data.shippingAddress.zip"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <input type="text" ng-model="user.data.shippingAddress.country"/>
+        </div>
+      </div>
+      <div class="row"  ng-class="{'hidden': user.data.shippingAddress.useBilling == false, 'profileUserName': user.data.shippingAddress.useBilling == true}">
+          <div class="col-xs-12 col-sm-4">
+            <label>{{user.data.billingAddress.name}}</label>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <label>{{user.data.billingAddress.address}}</label>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <label>{{user.data.billingAddress.city}}</label>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <label>{{user.data.billingAddress.state}}</label>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <label>{{user.data.billingAddress.zip}}</label>
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <label>{{user.data.billingAddress.country}}</label>
+          </div>
+      </div>
+      <div class="col-xs-12">
+        Use Billing Address:<br/><input type="checkbox" ng-model="user.data.shippingAddress.useBilling"/>
+      </div>
+    </div>
+  </div>
+  <div class="divider col-xs-12"></div>
+  <div class="col-xs-12">
+    <div class="row">
+    <div class="col-xs-12 col-sm-6">
+    emailMailingList:<br/><input type="checkbox" ng-model="user.data.emailMailingList"/>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+    researchAndDevelopment:<br/><input type="checkbox" ng-model="user.data.researchAndDevelopment" />
+    </div>
+    </div>
+  </div>
+</div>

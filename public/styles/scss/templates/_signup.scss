@@ -1,0 +1,28 @@
+
+img {
+  width: 300px;
+height: 300px;
+}
+/*SIGN UP FORM CSS*/
+/*MEDIA QUERIES*/
+@media (min-width: 668px) {
+  #signUp a {width: 50%;margin: auto}
+  #signUp .login {font-size: 5em;}
+}
+/*REGULAR CSS*/
+#signUp h1 {
+  color: $b;
+  margin-bottom: 1.35em;
+@media #{$small} {
+  margin: 1.75em auto .25em auto;
+  }
+}
+#signUp .login{
+margin: .225em auto;
+font-size: 2.75em;
+border-radius: 4px;
+border: $b 2px solid;
+@media #{$normal} {
+  font-size: 5em;
+}
+}

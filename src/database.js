@@ -4,6 +4,6 @@ mongoose.connect('mongodb://localhost/store', function(err) {
   if (err) {
     console.log("Error Connecting");
   } else {
-    console.log('Connected to MongoDB!\nDaniel,\nWhat are you foccusing on?\nWhat does it mean?\nWhat are you gonna do?')
+    console.log('Connected to MongoDB!\nDaniel,\nWhat are you focusing on?\nWhat does it mean?\nWhat are you gonna do?')
   }
 })

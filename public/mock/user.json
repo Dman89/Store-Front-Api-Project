@@ -1,0 +1,71 @@
+{
+      "_id": "5761bffc113565b620",
+      "__v": 0,
+      "data": {
+        "url": "https://www.facebook.com",
+        "email": "XxX@gmail.com",
+        "socialLogin": "facebook",
+        "oauth": "mnmn",
+        "customerNumber": "1745054754442415",
+        "lastName": "XxX",
+        "firstName": "Daniel",
+        "emailMailingList": true,
+        "researchAndDevelopment": true,
+        "billingAddress": {
+        "name": "Daniel",
+        "address": "777 Beverarly Hills Ln",
+        "city": "Beaverly Hills",
+        "state": "CA",
+        "zip": "90210",
+        "country": "USA"
+        },
+        "shippingAddress": {
+        "name": "Daniel",
+        "address": "777 Beverarly Hills Ln",
+        "city": "Beaverly Hills",
+        "state": "CA",
+        "zip": "90210",
+        "country": "USA",
+        "useBilling": true
+        },
+        "orderHistory": [{
+        "date": "2016-06-15",
+        "cart": {
+            "items":
+            [
+              {"product": "57607a0bd5c3538c23878ee0", "quantity": 1}, {"product": "57607ac39d58ccf400ef4454", "quantity": 1}, {"product": "57607a70485f3be4297d91fb", "quantity": 1}
+            ],
+            "billingAddress": {
+            "name": "Daniel XxX",
+            "address": "777 Beverarly Hills Ln",
+            "city": "Beaverly Hills",
+            "state": "CA",
+            "zip": "90210",
+            "country": "USA"
+          },
+              "shippingAddress": {
+              "name": "Daniel XxX",
+              "address": "777 Beverarly Hills Ln",
+              "city": "Beaverly Hills",
+              "state": "CA",
+              "zip": "90210",
+              "country": "USA",
+              "useBilling": true
+              },
+              "subTotal": "900",
+              "shipping": "100",
+              "total": "1000"
+              }
+        }],
+         "cart": [{"items":[{"product": "57607b77d1f85f7032216357", "quantity": 1}, {"product": "57607bcdc917e7b018b9ecb8", "quantity": 1}],
+        "subTotal": "45",
+        "shipping": "10",
+        "total": "55"
+        }]
+      },
+      "profile": {
+        "picture": "https://s-media-cache-ak0.pinimg.com/236x/7d/58/b9/7d58b96c32209a0f061d0ea46053f95f.jpg",
+        "displayName": "Daniel Xxx",
+        "username": "daniel_XxX"
+      }
+    }

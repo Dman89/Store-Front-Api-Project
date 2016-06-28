@@ -4,6 +4,7 @@ angular.module("lionHeart")
   dataService.getProducts(function(response) {
     $scope.products = response.data.products
   })
+  
   $scope.checkout = function() {
     var user = {
       "_id": "575b3533ad679e741c73eee0",

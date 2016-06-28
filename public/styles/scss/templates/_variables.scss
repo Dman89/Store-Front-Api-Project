@@ -1,0 +1,28 @@
+//black
+$b: rgb(6,17,21);
+$color-black: $b;
+// primary
+$p: rgb(26,62,115);
+$color-prim: $p;
+// secondary
+$s: rgb(67,132,183);
+$color-sec: $s;
+// accent
+$a: rgb(167,218,218);
+$color-acc: $a;
+// highlight
+$h: rgb(249,190,54);
+$color-high: $h;
+// highlightAccent
+$ha: rgb(66,62,128);
+$color-highacc: $ha;
+// gray
+$gray: rgba(168,179,184, 0.5);
+//Media Queries
+$mobileVert: '(max-width: 400px)';
+$mobileLong: '(max-width: 480px)';
+$small: '(max-width: 668px)';
+$medium: '(max-width: 900px)';
+$large: '(max-width: 1200px)';
+$notMobile: '(min-width: 480px)';
+$normal: '(min-width: 668px)';

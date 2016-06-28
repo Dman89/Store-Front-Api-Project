@@ -1,0 +1,79 @@
+    <div class="row text-center" id="orderHistory">
+      <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+        <h1 class="text-left">Order History</h1>
+        <div class="row innerRow">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                <div class="row">
+                  <div class="col-xs-12">
+                    <h1>Date</h1>
+                  </div>
+                    <div class="col-xs-12" ng-repeat="x in orderHistory">
+                    <div class="row">
+                      <div class="col-xs-12" ng-click="reveal=!reveal">
+                        <h2>{{x.date}}</h2>
+                      </div>
+                      <div class="row" ng-show="reveal">
+                      <div class="row innerRow" ng-repeat="y in x.cart.items">
+                        <div class="col-xs-12">
+                          <div class="row">
+                            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                              <div class="row">
+                                  <div class="col-xs-12 col-sm-8 col-md-5 col-lg-4">
+                                    <img ng-src="{{y.product.pictures[0]}}" alt="" class="thumb"/>
+                                  </div>
+                                <div class="col-xs-12 col-sm-4 col-md-7 col-lg-8 title">
+                                  <a href="#"><h3>{{y.product.name}}</h3></a>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-1">
+                              <label>{{y.quantity}}</label>
+                            </div>
+                            <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
+                            {{y.product.displayPrice}}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-xs-12 col-sm-4 col-sm-offset-8 col-md-9 col-lg-3 col-md-offset-3 col-lg-offset-9">
+                          <div class="row innerShipping">
+                            <div class="col-xs-12">
+                              <h3>Total:</h3>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                              Subtotal:
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                              {{x.cart.subTotal}}
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                              Tax:
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                              {{x.cart.tax}}
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                              Shipping:
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                              {{x.cart.shipping}}
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
+                              <h4>Total:</h4>
+                            </div>
+                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
+                              <h4>{{x.cart.total}}</h4>
+                            </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

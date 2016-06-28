@@ -1,0 +1,14 @@
+<div class="row">
+  <div class="col-xs-12" ng-repeat="user in users">
+    <div class="row">
+      <div class="col-xs-12">
+      <label type="text" ng-click="revealUserAdminPanel=!revealUserAdminPanel">{{user.profile.displayName}}</label>
+      </div>
+      <div class="col-xs-12" ng-show="revealUserAdminPanel">
+        <label ng-hide='user.admin.status == "777"'>Admin:  </label>
+        <input ng-model="user.admin.status" ng-hide='user.admin.status == "777"' type="checkbox" class="btn btn-primary"/>
+        <label ng-class="{'profileUserName': user.admin.status == '777'}" ng-show='user.admin.status == "777"'>Full Access User</label>
+      </div>
+    </div>
+  </div>
+</div>

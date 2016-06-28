@@ -1,0 +1,111 @@
+#ui-view {
+  margin-top: 75px;
+}
+#body {
+  & h1, & h2, & h3, & h4, & h5, & h6 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+  }
+  & h1 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 26px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 26px;
+}
+
+& h2 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 23px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 26px;
+}
+& h3 {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: bold;
+	line-height: 26px;
+}
+
+& button {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 600;
+	line-height: 26px;
+}
+& .abtn:active{
+box-shadow: none;
+-webkit-box-shadow: inset 3px 0px 35px 3px rgba(0,0,0,0.33);
+-moz-box-shadow: inset 3px 0px 35px 3px rgba(0,0,0,0.33);
+box-shadow: inset 3px 0px 35px 3px rgba(0,0,0,0.33);
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff9000+0,e8a200+14,e8a200+85,efb82b+100,ff9000+100 */
+background: rgb(255,144,0); /* Old browsers */
+background: -moz-linear-gradient(left,  rgba(255,144,0,1) 0%, rgba(232,162,0,1) 14%, rgba(232,162,0,1) 85%, rgba(239,184,43,1) 100%, rgba(255,144,0,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(255,144,0,1) 0%,rgba(232,162,0,1) 14%,rgba(232,162,0,1) 85%,rgba(239,184,43,1) 100%,rgba(255,144,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(255,144,0,1) 0%,rgba(232,162,0,1) 14%,rgba(232,162,0,1) 85%,rgba(239,184,43,1) 100%,rgba(255,144,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9000', endColorstr='#ff9000',GradientType=1 ); /* IE6-9 */
+
+
+}
+& .abtn:hover {
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#ff9f00+0,eaa910+14,eaa910+85,efb82b+100,eda600+100 */
+background: rgb(255,159,0); /* Old browsers */
+background: -moz-linear-gradient(left,  rgba(255,159,0,1) 0%, rgba(234,169,16,1) 14%, rgba(234,169,16,1) 85%, rgba(239,184,43,1) 100%, rgba(237,166,0,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left,  rgba(255,159,0,1) 0%,rgba(234,169,16,1) 14%,rgba(234,169,16,1) 85%,rgba(239,184,43,1) 100%,rgba(237,166,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right,  rgba(255,159,0,1) 0%,rgba(234,169,16,1) 14%,rgba(234,169,16,1) 85%,rgba(239,184,43,1) 100%,rgba(237,166,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff9f00', endColorstr='#eda600',GradientType=1 ); /* IE6-9 */
+
+}
+& .abtn {
+box-shadow: .5px 1px 1.5px #000;
+padding: .333em 1em;
+font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+font-style: normal;
+font-variant: normal;
+font-weight: 800;
+line-height: 28px;
+border-radius: 3px;
+border: 0 rgba(6,17,21, 1) solid;
+color: rgba(66,62,128, 1);
+
+/* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#f5ae00+0,efb82b+14,f9d67c+50,efb82b+86,efb82b+100,eda600+100 */
+background: rgb(245,174,0);
+background: -moz-linear-gradient(left,  rgba(245,174,0,1) 0%, rgba(239,184,43,1) 14%, rgba(239,184,43,1) 86%, rgba(239,184,43,1) 100%, rgba(237,166,0,1) 100%);
+background: -webkit-linear-gradient(left,  rgba(245,174,0,1) 0%,rgba(239,184,43,1) 14%,rgba(239,184,43,1) 86%,rgba(239,184,43,1) 100%,rgba(237,166,0,1) 100%);
+background: linear-gradient(to right,  rgba(245,174,0,1) 0%,rgba(239,184,43,1) 14%,rgba(239,184,43,1) 86%,rgba(239,184,43,1) 100%,rgba(237,166,0,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f5ae00', endColorstr='#eda600',GradientType=1 );
+
+
+
+}
+& p {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 16px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 26px;
+}
+& blockquote {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 20px;
+	font-style: italic;
+	font-variant: small-caps;
+	font-weight: 100;
+	line-height: 26px;
+}
+& pre {
+	font-family: "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
+	font-size: 13px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 400;
+	line-height: 26px;
+}
+}

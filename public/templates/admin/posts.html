@@ -1,0 +1,59 @@
+<div class="row" ng-repeat="post in blog">
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12">
+        <img ng-src="{{post.img}}" alt="" style="height: 50px; width: 50px;"/>
+      </div>
+      <div class="col-xs-12">
+        <h3>{{post.title}}</h3>
+      </div>
+    </div>
+  </div>
+  <div class="divider col-xs-12"></div>
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+      Title:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.title}}</label><input type="text" ng-model="post.title" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Description:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.description}}</label><input type="text" ng-model="post.description" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Body:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.body}}</label><input type="text" ng-model="post.body" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      urlCode:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.urlCode}}</label><input type="text" ng-model="post.urlCode" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+      Live:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.live}}</label><input type="text" ng-model="post.live" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Description:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.description}}</label><input type="text" ng-model="post.title" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Month/Day/Year/Time:
+      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.month}}</label><input type="text" ng-model="post.date.month" ng-blur="editing = false;" ng-show="editing"/>
+      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.day}}</label><input type="text" ng-model="post.date.day" ng-blur="editing = false;" ng-show="editing"/>
+      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.year}}</label><input type="text" ng-model="post.date.year" ng-blur="editing = false;" ng-show="editing"/>
+      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.time}}</label><input type="text" ng-model="post.date.time" ng-blur="editing = false;" ng-show="editing"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      Location:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.loc}}</label><select type="text" ng-model="post.loc" ng-blur="editing = false;" ng-show="editing">
+          <option value="main">
+          </option>
+          <option value="subA">
+          </option>
+          <option value="subB">
+          </option>
+          <option value="subC">
+          </option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+</div>

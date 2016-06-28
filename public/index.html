@@ -1,31 +1,21 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" charset="utf-8">
-    <link rel="stylesheet" href="styles/main.css" charset="utf-8">
-    <meta charset="utf-8">
-  <title>Art By Cale</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8"/>
+    <base href="/">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.2/css/font-awesome.min.css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="screen" charset="utf-8"/>
+    <link rel="stylesheet" href="styles/css/main.css" charset="utf-8"/>
+    <title>Art By Cale</title>
   </head>
-  <body ng-app="lionHeart" class="container-fluid">
-<div class="">
-<div id="fb-root"><fb:login-button data-scope="public_profile,email,user_friends" data-show-faces="false"
-data-size="large" data-auto-logout-link="true" data-default-audience="everyone" onlogin="checkLoginState();"></fb:login-button></div>
-<button class="btn btn-primary" ng-Click="checkout();" >Checkout</button>
-<div id="status">
-</div>
-<products > </products>
+  <body ng-app="lionHeart" class="container-fluid" id="body">
 
-
-
-</div>
-<script src="https://code.jquery.com/jquery-2.2.4.min.js" charset="utf-8"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-<script src="/scripts/vendor.bundle.js" charset="utf-8"></script>
-<script src="/scripts/lion.bundle.js" charset="utf-8"></script>
-<script src="scripts\facebookLoginButton.js" charset="utf-8"></script>
+      <header ng-include="'templates/menu.html'"></header>
+      <div id="ui-view" ui-view></div>
+  <script src="https://code.jquery.com/jquery-2.2.4.min.js" charset="utf-8"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" charset="utf-8"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+  <script src="/scripts/vendor.bundle.js" charset="utf-8"></script>
+  <script src="/scripts/lion.bundle.js" charset="utf-8"></script>
   </body>
 </html>

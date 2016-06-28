@@ -1,10 +1,14 @@
 var mongoose = require('mongoose');
+var superagent = require('superagent');
+var _ = require('underscore');
 var Category = require('./category');
 var fx = require('./fx');
 var product = {
-  name: { type: String, required: true },
+  name: { type: String},
+  weight: { type: Number, default: 0.2 },
+  size: { type: Number, default: 1 },
   // Pictures must start with "http://"
-  pictures: [{ type: String, match: /^http:\/\//i }],
+  pictures: [{ type: String}],
   price: {
     amount: {
       type: Number,
@@ -36,6 +40,8 @@ var product = {
 
 var productSchema = new mongoose.Schema(product);
 
+productSchema.index({ name: 'text' });
+
 var currencySymbols = {
   'USD': '$',
   'EUR': '€',
@@ -50,9 +56,16 @@ productSchema.virtual('displayPrice').get(function() {
   return currencySymbols[this.price.currency] +
     '' + this.price.amount;
 });
+// add output price for grand total
+productSchema.virtual('subTotal').get(function() {
+  return this.price.amount;
+});
 
 productSchema.set('toObject', { virtuals: true });
 productSchema.set('toJSON', { virtuals: true });
+
+
+
 
 var model = mongoose.model('Products', productSchema);
 module.exports = model;

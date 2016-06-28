@@ -1,0 +1,18 @@
+#profile {
+  & .profileUserName {
+    color: #999;
+    cursor: none;
+    pointer-events: none;
+  }
+  & label {
+    cursor: pointer;
+  }
+  & .divider {
+    height: 20px;
+    text-align:center;
+    background-color: $p;
+    background-position: center;
+    border-top: $b 1px solid;
+    border-bottom: $s 2px solid;
+  }
+}

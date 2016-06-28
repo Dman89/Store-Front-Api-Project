@@ -1,22 +1,82 @@
-<div class="row">
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-md-6 col-lg-4" ng-repeat="product in products">
-        <div class="row">
-          <div class="col-xs-12">
-        {{product.name}}
-          </div>
-          <div class="col-xs-12">
-            <img data-ng-src="{{product.pictures[0]}}" alt="" />
-          </div>
-          <div class="col-xs-12" ng-repeat="picture in product.pictures">
-            <img data-ng-src="{{picture}}" alt="" />
-          </div>
-          <div class="col-xs-12">
-            {{product.displayPrice}}
-          </div>
+<div class="row" id='products'>
+  <div class="col-xs-12" id="cards">
+    <div class="row text-center">
+      <div class="floatSingleItem relative hidden" id="popUpScreenForProducts">
+        <i id="xOutOfScreen" class="fa fa-times floatRight"></i>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4">
+          <img src="https://placeholdit.imgix.net/~text?txtsize=28&bg=0099ff&txtclr=ffffff&txt=300%C3%97300&w=300&h=300&fm=png" alt="" />
         </div>
+        <div class="col-xs-12 col-sm-6 col-md-7 col-lg-8">
+          <div class="row">
+            <div class="col-xs-12">
+              <a href class="hidden-xs"><h1 class="">Product Title</h1></a>
+              <a href class="show-mobile"><h3>Product Title</h3></a>
+              <p class="hidden-mobile">Wayfarers pickled forage, irony direct trade sustainable cronut raw denim wolf shoreditch. <span class="hidden-landscape">Pour-over pug blue bottle, put a bird on it wolf cornhole sartorial thundercats truffaut quinoa marfa. Forage flannel freegan try-hard stumptown four dollar toast.</span><p class="hidden-xs hidden-landscape hidden-overflow indent">Sartorial microdosing shoreditch selfies butcher, bitters cred biodiesel shabby chic. Sriracha retro wolf thundercats aesthetic. Austin heirloom beard, letterpress photo booth pickled blog four dollar toast umami try-hard seitan bitters. Pabst scenester ethical normcore, pinterest gluten-free pug banh mi keffiyeh art party venmo you probably haven't heard of them humblebrag.</p></p>
+                </div>
+              </div>
+          </div>
+            <button class="btnProductDisplay btnCart"><span class="hidden-xs hidden-landscape">Add to </span><i class="fa fa-shopping-cart"></i></button>
+        </div>
+      <div class="col-xs-12 col-md-6 col-lg-4 fivehundredpx"  ng-repeat="product in products">
+      <div class="hover">
+
+        <div class="card-container" ng-class="{'flip': learnMore}">
+        <div class="card sideA">
+          <a ui-sref="store.product({ urlCode: product.urlCode })">
+                    <div class="imgBackground">
+                      <img ng-src="{{product.pictures[0]}}" alt="" />
+                    </div>
+                    </a>
+                    <p class="title highlight">{{product.name}}</p>
+                    <button href class="btnProductDisplay btnInfo" id="infoOne" ng-click="learnMore = !learnMore">
+              <i class="fa fa-info-circle"></i><span class="learnMore"></span>
+            </button>
+                    <button href class="btnProductDisplay btnCart">
+              <span></span>
+              <i class="fa fa-shopping-cart"></i>
+            </button>
+        </div>
+        <div class="card sideB">
+                        <a ui-sref="store.product({ urlCode: product.urlCode })">
+                        <div class="imgBackground backside">
+                          <p class="backsideTitle">Pheonix</p>
+                          <p class="body hidden-xs hidden-landscape">The Pheonix lives a long powerful life before dying and becoming reborn again from the ashes.</p>
+                        </div>
+                        </a>
+                        <p class="title">{{product.displayPrice}}</p>
+                        <button href class="btnProductDisplay btnInfo" id="backOne" ng-click="learnMore = !learnMore">
+                  <i class="fa fa-info-circle"></i><span class="artwork"></span>
+                </button>
+                        <button href class="btnProductDisplay btnCart">
+                  <span></span>
+                  <i class="fa fa-shopping-cart"></i>
+                </button>
+        </div>
+
       </div>
+
+
+
+
+
+
+          <!-- <a ui-sref="store.product({ urlCode: product.urlCode })">
+      <div class="card flip">
+        <div class="imgBackground">
+          <img ng-src="{{product.pictures[0]}}" alt="" />
+        </div>
+        <p class="highlight">{{product.name}}</p>
+        <button href class="btn btnInfo">
+    <i class="fa fa-info-circle"></i><span class="learnMore"></span>
+  </button>
+        <button href class="btn btnCart">
+    <span></span>
+    <i class="fa fa-shopping-cart"></i>
+  </button>
+      </div>
+    </a> -->
+    </div>
     </div>
   </div>
+</div>
 </div>

@@ -1,0 +1,30 @@
+#category {
+  & img.actionShots {
+    text-align:center;
+    width: 100%;
+    margin: 0 auto;
+  }
+  & .action {
+    min-width: 200px;
+    margin: auto;
+  }
+  & div.actionShotsLabel {
+    text-align: center;
+  }
+  & h4 {
+    position: absolute;
+    color: white;
+    top: 48%;
+    left: 44%;
+  }
+  & .categoryBox {
+    height: 300px;
+    width: 300px;
+    background: url('http://dreamatico.com/data_images/garden/garden-6.jpg') center center no-repeat;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 2em;
+    text-align: center;
+    display: block;
+  }
+}

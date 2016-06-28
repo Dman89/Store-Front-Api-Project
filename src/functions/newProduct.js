@@ -1,18 +1,17 @@
 var mongoose = require('mongoose');
 var Products = require('../models/products.js');
 var product = new Products({
-    name: "Here We Go",
-    pictures: "http://papercallio-production.s3.amazonaws.com/uploads/event/logo/2/mid_300_rsz_happy_face.png",
+    name: "Freestyle Lion",
+    pictures: "http://localhost:3000/img/stickers/stickers4.jpg",
     price: {
-      amount:"50",
+      amount:"35",
       currency: "USD"
     },
     category: {
-      _id: "Elephant",
-      parent: "Paintings",
-      ancestors: ["canvas"]
+      _id: "Graphic Lion",
+      parent: "Graphic Design"
     },
-    urlCode: "elephant-painting-on-canvas"
+    urlCode: "Graphic-King-Lion"
   });
 product.save(function(error) {
   if (error) {

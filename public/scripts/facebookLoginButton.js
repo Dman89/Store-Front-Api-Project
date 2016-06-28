@@ -41,7 +41,7 @@ window.fbAsyncInit = function() {
   }(document, 'script', 'facebook-jssdk'));
  function testAPI() {
      console.log('Welcome!  Fetching your information.... ');
-     FB.api('/auth/facebook', function(response) {
-       console.log('Successful login for: ' + response);
+     FB.api('/me', function(response) {
+       console.log(response);
      });
    }

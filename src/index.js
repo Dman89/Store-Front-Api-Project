@@ -1,37 +1,47 @@
 'use strict';
+var cookieParser = require('cookie-parser');
 var express = require('express');
-var parser = require('body-parser');
-var passport = require('passport');
+var expressSession = require('express-session');
 var flash = require('connect-flash');
+var passport = require('passport');
+var parser = require('body-parser');
 var passportFB = require('passport-facebook');
-var app = express();
-var productRouter = require('./api/products');
-var categoryRouter = require('./api/category');
+var adminRouter = require('./api/admin');
+var blogRouter = require('./api/posts');
 var cartRouter = require('./api/cart');
+var categoryRouter = require('./api/category');
+var productRouter = require('./api/products');
+var orderHistoryRouter = require('./api/orderHistory');
 var userRouter = require('./api/user');
+var app = express();
 require('./config/passport.js')(passport);
 require('./database.js');
+// require('./seed.js');
 // Creates a new Product in database~: require('./functions/newProduct.js');
 //require('./functions/newUser.js');
 app.use('/', express.static('public'));
+app.use(cookieParser('keyboardWarriors'));
 app.use(parser.json());
 app.use(flash());
-  app.use(require('express-session')({ secret: 'keyboardWarriors',
+app.use(expressSession({ secret: 'keyboardWarriors',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }
+  cookie: { expires: false }
  }));
- app.use(passport.initialize());
- app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use('/api', userRouter);
+app.use('/api', blogRouter);
+app.use('/api', adminRouter);
 app.use('/api', productRouter);
 app.use('/api', categoryRouter);
 app.use('/api', cartRouter);
-app.get('/auth/facebook', passport.authenticate('facebook', { scope : ['email'] }));
+app.use('/api', orderHistoryRouter);
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
-        successRedirect : '/api/profile',
-        failureRedirect : '/fail',
+        successRedirect : '/#/store',
+        failureRedirect : '/#/login',
         successFlash: 'Welcome!'
     }));
 
@@ -40,21 +50,6 @@ app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-app.get('/profile', function(req, res) {
-  // User.find({_id: id}, function(err, users) {
-  //   if (err) {
-  //     console.log('Oh Shucks!');
-  //     return res.status(500).json({message: err.message});
-  //   }
-  //   if (users == undefined) {
-  //     res.status(404).json({"message": "Not a User"})
-  //   } else {
-  //   var tempUsers = users;
-  //   var users = users.profile;
-  //   res.json({"users":tempUsers});
-  // }
-  // })
-})
 app.listen(3000, function() {
   console.log("Express Server is Running on Port 3000")
 });

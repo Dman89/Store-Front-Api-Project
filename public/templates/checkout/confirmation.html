@@ -1,0 +1,190 @@
+<div class="row text-center" id="confirmation">
+  <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <h1 class="text-left">Confirmation</h1>
+    <div class="row">
+      <div class="col-xs-12 status" ng-class="{'success': statusCharge == 'succeeded', 'failed': statusCharge == true, 'waiting': !statusCharge}">
+        <div class="row">
+          <div class="col-xs-12" ng-show="statusCharge">
+            Success
+          </div>
+          <div class="col-xs-12" ng-show="statusCharge == false">
+            Failed
+          </div>
+          <div class="col-xs-12" ng-show="!statusCharge">
+            Waiting...
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-md-5 col-lg-5 text-left confirm">
+        <h2 class="">Billing Info</h2>
+        <div class="row one">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Name:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.billingAddress.name}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Address:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.billingAddress.address}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                City:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.billingAddress.city}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                State:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.billingAddress.state}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Zip:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.billingAddress.zip}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Country:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.billingAddress.country}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 text-left confirm">
+        <h2 class="text-left">Shipping Info</h2>
+        <div class="col-xs-12">
+          <label>Use Billing Info:</label> <input type="checkbox" ng-model="
+                        user.data.shippingAddress.useBilling" />
+        </div>
+        <div class="row one">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Name:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.shippingAddress.name}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Address:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.shippingAddress.address}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                City:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.shippingAddress.city}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                State:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.shippingAddress.state}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Zip:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.shippingAddress.zip}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+                Country:
+              </div>
+              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+                {{user.data.shippingAddress.country}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 stripe text-left confirm stripe">
+        <h2 class="text-left">Stripe<small>&reg;</small></h2>
+        <div class="row one">
+          <div class="col-xs-12">
+                Card:<br/>{{lastFourDigits}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4 col-sm-offset-8 col-md-4 col-md-offset-8 col-lg-offset-9 col-lg-3 confirm">
+        <h2 class="text-left">Order Summary</h2>
+        <div class="row one">
+          <div class="col-xs-12">
+            <div class="row">
+              <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-left">
+                # items:
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                {{cartLength}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-left">
+                  Sub-Total:
+                </div>
+                <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                  ${{user.data.cart.subTotal}}
+                </div>
+              </div>
+              <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-left">
+                Shipping:
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                ${{user.data.cart.shipping}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-left">
+                Tax:
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                ${{user.data.cart.tax}}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10 text-left">
+                Grand total:
+              </div>
+              <div class="col-xs-2 col-sm-2 col-md-1 col-lg-1">
+                ${{user.data.cart.total}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

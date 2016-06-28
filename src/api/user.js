@@ -17,7 +17,23 @@ userRouter.post('/user', function(req, res) {
   })
 })
 // Update User
-//TODO: Delete Temp User
+userRouter.put('/profile', function (req, res) {
+  var id = req.user._id;
+  var user = req.body;
+  if (user && user._id !== id) {
+    return res.status(500).json({err: user});
+    console.log('ID does not match.')
+  }
+  User.findByIdAndUpdate(id, user, {new: true}, function(err, user) {
+    if(err) {
+      return res.status(500).json({err: err.message});
+    }
+    //TODO: Remove or only return profile
+    res.send({'user': user, 'message':'Profile Updated'});
+    console.log(req.body.profile.username + ' your profile has been edited!')
+  })
+})
+
 userRouter.put('/user/id/:id', function (req, res) {
   var id = req.params.id;
   var user = req.body;
@@ -29,9 +45,8 @@ userRouter.put('/user/id/:id', function (req, res) {
     if(err) {
       return res.status(500).json({err: err.message});
     }
-    var tempUser = user;
-    var user = user.profile;
-    res.send({'user': tempUser, 'message':'Profile Updated'});
+    //TODO: Remove or only return profile
+    res.send({'user': user, 'message':'Profile Updated'});
     console.log(req.body.profile.username + ' your profile has been edited!')
   })
 })
@@ -48,7 +63,6 @@ userRouter.delete('/user/id/:id', function (req, res) {
   })
 })
 // Get User By ID
-//TODO: Delete Temp User
 userRouter.get('/user/id/:id', function(req, res) {
   var id = req.params.id;
   User.find({_id: id}, function(err, users) {
@@ -59,14 +73,32 @@ userRouter.get('/user/id/:id', function(req, res) {
     if (users == undefined) {
       res.status(404).json({"message": "Not a User"})
     } else {
-    var tempUsers = users;
-    var users = users.profile;
-    res.json({"users":tempUsers});
+      //TODO: return only profiles
+    res.json({"users":users});
   }
   })
 });
+// Get profile
+userRouter.get('/profile', function(req, res) {
+  if (req.user == undefined) {
+    res.status(401).json({message: "Please Log In"})
+  } else {
+    var id = req.user._id;
+
+  User.findOne({_id: id}, function(err, user) {
+    if (err) {
+      console.log('Oh Shucks!');
+      return res.status(500).json({message: err.message});
+    }
+    if (user == undefined) {
+      res.status(404).json({"message": "Not a User"})
+    } else {
+    res.json({"user":user});
+  }
+  })
+}
+});
 //Users Personal Route VIA Username
-//TODO: Delete Temp User
 userRouter.get('/user/:id', function(req, res) {
   var id = req.params.id;
   User.find({"profile.username": id}, function(err, users) {
@@ -77,24 +109,35 @@ userRouter.get('/user/:id', function(req, res) {
     if (users == undefined) {
       res.status(404).json({"message": "Not a User"})
     } else {
-    var tempUsers = users;
-    var users = users.profile;
-    res.json({"users":tempUsers});
+    //TODO: Return only Profiles
+    res.json({"users":users});
   }
   })
 });
 //List Users
-//TODO: delete tempUser
+var tempUsers = {};
 userRouter.get('/users', function(req, res) {
   User.find({}, function(err, users) {
     if (err) {
       console.error('Oh Shucks!');
       return res.status(500).json({message: err.message});
+    } else {
+      res.json({"users":users});
     }
-    var tempUsers = users;
-    var users = users.profile;
-    res.json({"users":tempUsers});
   })
 })
+//Borrowed from ( MongoDBx: M101x Introduction to MongoDB using the MEAN Stack )
+function handleOne(property, res, error, result) {
+  if (error) {
+    return res.status(500).json(error);
+  }
+  if (!result) {
+    return res.status(404).json(error);
+  }
+  var json = {};
+  json[property] = result;
+  res.json(json);
+}
+
 
 module.exports = userRouter;

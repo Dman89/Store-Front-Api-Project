@@ -5,11 +5,79 @@ angular.module("lionHeart")
     $http.get("/api/products")
     .then(callback)
   };
+  this.getSingleItem = function(params, callback) {
+    var tempUrl = '/api/products/' + params;
+    $http.get(tempUrl)
+    .then(callback)
+  }
+  this.getCategoryGraphics = function(callback) {
+    $http.get("/api/category/Graphic%20Design")
+    .then(callback)
+  };
+  this.getCategoryPaintings = function(callback) {
+    $http.get("/api/category/Paintings")
+    .then(callback)
+  };
+  this.getCategoryPrints = function(callback) {
+    $http.get("/api/category/Prints")
+    .then(callback)
+  };
+  this.getCategoryUpcycle = function(callback) {
+    $http.get("/api/category/Upcycle")
+    .then(callback)
+  };
+  this.getCategorySkateboards = function(callback) {
+    $http.get("/api/category/Skateboard")
+    .then(callback)
+  };
+  this.getCategoryStickers = function(callback) {
+    $http.get("/api/category/Stickers")
+    .then(callback)
+  };
+    this.getAdmin = function(url, input, callback) {
+      var tempUrl = '/api/admin/' + url;
+      $http.post(tempUrl, input)
+      .then(callback)
+    };
+      this.getUser = function(callback) {
+        $http.get("/api/profile")
+        .then(callback)
+      };
+      this.getUsers = function(callback) {
+        $http.get("/api/users")
+        .then(callback)
+      };
   this.newUser = function(user) {
     $http.post('/api/users', user)
   }
-  this.checkout = function(user) {
-    $http.post('/user/'+req.user._id+'/checkout', user)
+    this.getOrderHistory = function(callback) {
+      $http.get("/api/cart/history")
+      .then(callback)
+    };
+    this.getCategory = function(callback) {
+      $http.get("/api/category")
+      .then(callback)
+    };
+    this.getCart = function(callback) {
+      $http.get("/api/cart")
+      .then(callback)
+    };
+    this.updateCart = function(a, b) {
+      $http.post("/api/user/cart", a)
+      .then(b)
+    };
+  this.checkout = function(token, callback) {
+    $http.post('/api/user/checkout', token)
+    .then(callback)
+  }
+  this.searchText = function(input, callback) {
+    var search = "/api/products/search/" + input;
+    $http.get(search)
+    .then(callback)
+  };
+  this.getBlog = function(callback) {
+    $http.get("/api/blog")
+    .then(callback);
   }
   this.newGoal = function(goal) {
     $http.post("/api/goals", goal);

@@ -1,0 +1,23 @@
+#confirmationPage {
+  & h1 {
+    margin-top: 1.45em;
+  }
+  & div.status {
+    border-radius: 13px;
+    border: $b 2px solid;
+  }
+  & .display {
+    padding: 2.5%;
+  }
+  & div.status.completed {
+    border-color: green;
+    color: green;
+  }
+  & div.status.failed {
+    border-color: red;
+    color: red;
+  }
+  & .redirect {
+    margin-top: 5em;
+  }
+}

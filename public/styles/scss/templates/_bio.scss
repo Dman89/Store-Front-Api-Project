@@ -1,0 +1,267 @@
+#bio {
+  & img {
+    width: 300px;
+    height: 300px;
+    @media (max-width: 480px) {
+      width: 200px;
+      height: 200px;
+    }
+  }
+  & .inner {
+    padding: 1em 2em;
+  }
+}
+
+
+@import url(https://fonts.googleapis.com/css?family=Arvo:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+#one {
+  transform-origin: center;
+  transform: rotate(15deg) translateX(-30px);
+}
+
+#two {
+  transform-origin: center;
+  transform: rotate(-15deg) translateX(30px);
+}
+
+#three {
+  position: absoulte;
+  z-index: 100;
+}
+#bio #bioCards {
+  margin: auto;
+  height: 375px;
+}
+@media (max-width: 480px) {
+  #one {
+    transform: rotate(10deg) translateX(-20px);
+  }
+
+  #two {
+    transform: rotate(-10deg) translateX(20px);
+  }
+
+  #three {
+    position: absoulte;
+    z-index: 100;
+  }
+  #bio #bioCards {
+    max-width: 250px;
+    height: 200px;
+  }
+}
+body {
+  background-color:rgb(67,132,183);
+  height: 100vh;
+}
+.hidden-mobile {
+  @media (max-height: 600px) and (max-width: 480px) {
+  display: none;
+  }
+}
+.show-mobile {
+  display: none;
+  @media (max-width: 480px) {
+  display: block;
+  }
+}
+.hidden-overflow {
+  display: inline;
+  text-align: center;
+  @media (max-height: 600px) and (max-width: 999px) {
+  display: none;
+  }
+}
+.indent {
+    text-indent: 20px;
+}
+.hidden-landscape {
+  @media  (max-height: 480px) and (orientation: landscape) {
+    display: none;
+    visibility: hidden;
+  }
+}
+.relative {
+  position: relative;
+}
+#bio #cards {
+& .space {
+  margin-top: 100px;
+}
+& a, & a:hover, & a:active, & a:focus {
+  color: black;
+}
+& .floatRight {
+  position: absolute;
+  z-index: 1000;
+  right: 10px;
+  top: 10px;
+  font-size: 32px;
+  cursor: pointer;
+  color: rgb(66,62,128);
+}
+// CHANGE SMALLER SCREENS
+@media (max-width: 480px), (max-height: 480px) and (orientation: landscape) {
+
+& .threeD .flip {
+  perspective: 300px;
+  perspective-orgin: center;
+}
+
+& .card-container {
+  transform-style: preserve-3d;
+  transform-orgin: center;
+}
+
+& .imgBackground.backside.cobra::after {
+  background: url(http://coolblackppt.com/wp-content/uploads/king-cobra-snake-20150419110955-55338d037e72e-150x150.jpg);
+}
+    & .card, & .card-container {
+      min-width: 180px;
+      max-width: 175px;
+  }
+  & .row {
+    margin: auto;
+    padding: 0;
+  }
+  & .card img, & .floatSingleItem img {
+      width: 150px;
+      height: 150px;
+      margin: 0.5em auto;
+    }
+    & button.btnProductDisplay {
+      margin-bottom: .75em;
+      margin-top: .25em;
+      font-size: 14px;
+      padding: .05em;
+    }
+    & .card p.title {
+      font-size: 2em;
+      left: 15px;
+     bottom: 20px;
+    }
+
+    & span.learnMore:after {
+      content: '';
+    }
+
+& .card p.highlight {
+  // CHANGE Highlight Color !!!SMALLER MEDIA SCREENS
+  background-color: rgba(255,255,255, 0.55);
+  // CHANGE Length of the Highlight !!!SMALLER MEDIA SCREENS
+  padding-right: 10px;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+  }
+
+& .floatSingleItem button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+      margin-bottom: 0;
+}
+}
+div.fivehundredpx {
+  text-align: center;
+  margin: 0 auto;
+  position: relative;
+  height: 500px;
+  @media (max-width: 480px), (max-height: 480px) and (orientation: landscape) {
+    height: 250px;
+  }
+}
+#bio .card p.title.highlight {
+  // CHANGE Highlight Color
+  background-color: rgba(255,255,255, 1);
+  // CHANGE Length of the Highlight
+  padding-right: 10px;
+  padding-left: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+#bio .card p.title {
+  font-family: 'Kaushan Script', cursive;
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  // CHANGE The angle of signature
+  -o-transform: rotate(-7deg);
+  -ms-transform: rotate(-7deg);
+  -moz-transform: rotate(-7deg);
+  -webkit-transform: rotate(-7deg);
+  //
+  font-size: 42px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 800;
+  line-height: 28px;
+
+}
+#bio .card p {
+  font-family: 'Arvo', serif;
+  font-size: 16px;
+  font-style: normal;
+  font-variant: normal;
+  font-weight: 600;
+  line-height: 22px;
+  margin-top: 20px;
+  text-align: left;
+
+  & .body {
+    text-indent: 20px;
+  margin-left: 10px;
+    margin-right: 10px;
+  }
+}
+.card img, {
+  width: 300px;
+  height: 300px;
+  display: block;
+  margin: .75em auto;
+  // CHANGE Inner border of image
+  border: 1px rgba(67,118,118, 1) solid;
+  // CHANGE Background color of image
+  background-color:rgb(93,174,255);
+}
+.card button {
+  margin: .75em auto;
+  display: inline-block;
+}
+.card-container {
+  width: 340px;
+  margin: auto;
+}
+
+.card {
+  position: relative;
+  width: 320px;
+  text-align: center;
+// CHANGE Inner Background Color *light blue
+  background-color:  rgb(167,218,218);
+  margin: 2em auto;
+border-radius: 4px;
+box-shadow: 1px 2px 3px rgba(0,0,0,.5);
+  //CHANGE Outer boarder
+  border: 3px rgb(26,62,115) solid;
+}
+.sideA, .sideB {
+  backface-visibility: hidden;
+  position: absolute;
+  display: block;
+}
+.sideA {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+}
+.sideB {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+.card-container {
+  transform-style: preserve-3d;
+  transition: transform 1.5s cubic-bezier(.55, -.62, .27, 1.2);
+  transform-orgin: center;
+}

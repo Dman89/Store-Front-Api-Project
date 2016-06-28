@@ -1,0 +1,44 @@
+<nav id="menu" class="navbar-fixed-top navbar navbar-default" ng-controller='menuCtrl'>
+         <div class="container-fluid">
+            <div class="navbar-header" id="">
+               <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                 <i class="fa fa-navicon"></i>
+      </button>
+               <a class="navbar-brand" id="BRAND" href="#">King Champion</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+               <ul class="nav navbar-nav navbar-right" id="myNav123">
+                  <li  ng-class="{ active: isActive('/')}">
+                     <a ui-sref="home" class="" target="">Home</a>
+                  </li>
+                     <li  ng-class="{ active: isActive('/portfolio')}">
+                        <a ui-sref="portfolio" class="" target="">Portfolio</a>
+                     </li>
+                  <li ng-class="{ active: isActive('/bio')}">
+                     <a ui-sref="bio" class="">Bio</a>
+                  </li>
+                  <li ng-class="{ active: isActive('/store')}">
+                     <a ui-sref="store" class="">Store</a>
+                  </li>
+                  <li ng-class="{ active: isActive('/profile')}">
+                     <a ui-sref="profile" class="" ng-show="user.profile"><i class="fa fa-profile"></i> Profile</a>
+                  </li>
+                  <li class="" ng-hide="user.profile">
+                     <a href="/auth/facebook" class=""><i class="fa fa-sign-in"></i> Login</a>
+                  </li>
+                  <li ng-class="{ active: isActive('/cart')}" ng-show="user.profile">
+                     <a ui-sref="cart" class=""><i class="fa fa-shopping-cart"></i> Cart</a>
+                  </li>
+                  <li ng-class="{ active: isActive('/admin')}" ng-show="user.admin">
+                     <a ui-sref="admin" class=""><i class="fa fa-puzzle-piece"></i> Admin</a>
+                  </li>
+                  <li class="hidden-xs" ng-show="user.profile">
+                     <img ng-src="{{user.profile.picture}}" class="loginThumbnail" alt=""/>
+                  </li>
+                  <li class="" ng-show="user.profile">
+                     <a class="" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </nav>
