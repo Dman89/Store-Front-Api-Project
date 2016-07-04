@@ -84,7 +84,7 @@ body .btnProductDisplay {
 
 }
 
-#cards {
+#products #cards {
 & .space {
   margin-top: 100px;
 }
@@ -142,7 +142,7 @@ body .btnProductDisplay {
     }
 
     & span.learnMore:after {
-      content: '';
+      content: ' More';
     }
 
 & .card p.highlight {

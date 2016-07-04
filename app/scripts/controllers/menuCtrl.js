@@ -1,20 +1,28 @@
 'use strict';
   angular.module("lionHeart")
     .controller("menuCtrl", function($scope, dataService, $location) {
+      $(function(){
+      var navMain = $("#myNavbar");
+      var menuBar = $(".menuBar");
+      menuBar.on("click", "a", null, function () {
+          navMain.collapse('hide');
+      });
+  });
       dataService.getUser(function(response) {
         $scope.user = response.data.user;
       });
       $scope.isActive = function (viewLocation) {
             if (viewLocation === $location.path()) {
-              if ($location.path() == '/') {
-                  document.getElementById("body").style.backgroundColor='rgb(6,17,21)';
-                  document.getElementById("body").style.backgroundImage='url("/img/actionshots/actionshot0.jpg")';
-                  document.getElementById("body").style.backgroundPosition='center top';
-                  document.getElementById("body").style.backgroundRepeat='no-repeat';
-              } else {
+              // if ($location.path() == '/') {
+              //     document.getElementById("body").style.backgroundColor='rgb(6,17,21)';
+              //     document.getElementById("body").style.backgroundImage='url("/img/actionshots/actionshot0.jpg")';
+              //     document.getElementById("body").style.backgroundPosition='center top';
+              //     document.getElementById("body").style.backgroundRepeat='no-repeat';
+              // }
+              // else {
                   document.getElementById("body").style.backgroundColor='rgb(67,132,183)';
                   document.getElementById("body").style.backgroundImage='none';
-              }
+              // }
             return viewLocation === $location.path();
           }
           else if (viewLocation == '/') {
@@ -51,4 +59,8 @@
             }
           }
         };
-    });
+    }
+
+
+
+  );

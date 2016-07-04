@@ -1,79 +1,184 @@
-    <div class="row text-center" id="orderHistory">
-      <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
-        <h1 class="text-left">Order History</h1>
-        <div class="row innerRow">
-          <div class="col-xs-12">
-            <div class="row">
-              <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                <div class="row">
-                  <div class="col-xs-12">
-                    <h1>Date</h1>
-                  </div>
-                    <div class="col-xs-12" ng-repeat="x in orderHistory">
-                    <div class="row">
-                      <div class="col-xs-12" ng-click="reveal=!reveal">
-                        <h2>{{x.date}}</h2>
-                      </div>
-                      <div class="row" ng-show="reveal">
-                      <div class="row innerRow" ng-repeat="y in x.cart.items">
-                        <div class="col-xs-12">
-                          <div class="row">
-                            <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
-                              <div class="row">
-                                  <div class="col-xs-12 col-sm-8 col-md-5 col-lg-4">
-                                    <img ng-src="{{y.product.pictures[0]}}" alt="" class="thumb"/>
-                                  </div>
-                                <div class="col-xs-12 col-sm-4 col-md-7 col-lg-8 title">
-                                  <a href="#"><h3>{{y.product.name}}</h3></a>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-xs-6 col-sm-2 col-md-2 col-lg-1">
-                              <label>{{y.quantity}}</label>
-                            </div>
-                            <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
-                            {{y.product.displayPrice}}
-                            </div>
-                          </div>
+    <div class="text-center" id="orderHistory">
+        <div class="topOH">
+            <h1 class="title highlight hidden-xs titleOH">Order History</h1>
+            </div>
+                    <div class="row orderHistoryDiv" ng-repeat="x in orderHistory">
+                        <div class="col-xs-12 text-center" ng-click="reveal=!reveal">
+                          <h3>{{x.date}}</h3>
                         </div>
-                      </div>
-                      <div class="col-xs-12 col-sm-4 col-sm-offset-8 col-md-9 col-lg-3 col-md-offset-3 col-lg-offset-9">
-                          <div class="row innerShipping">
-                            <div class="col-xs-12">
-                              <h3>Total:</h3>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
-                              Subtotal:
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-                              {{x.cart.subTotal}}
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
-                              Tax:
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-                              {{x.cart.tax}}
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
-                              Shipping:
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-                              {{x.cart.shipping}}
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-8 col-lg-10">
-                              <h4>Total:</h4>
-                            </div>
-                            <div class="col-xs-6 col-sm-6 col-md-4 col-lg-2">
-                              <h4>{{x.cart.total}}</h4>
-                            </div>
+                        <div class="col-xs-12 cartOH" ng-show="reveal">
+                          <div class="row innerRow" ng-repeat="y in x.cart.items">
+                                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5 col-lg-offset-1" id="cards">
+                                      <div class="" id="singleCards">
+                                        <div class="card-container">
+                                          <div class="card sideA">
+                                            <div class="imgBackground">
+                                              <a ui-sref="store.product({ urlCode: y.urlCode })">
+                                              <img src="{{y.product.pictures[0]}}" alt="{{y.product.name}}" />
+                                              </a>
+                                            </div>
+                                            <p class="title highlight"></p>
+                                          </div>
+                                        </div>
+                                  </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 title">
+                                  <h2>{{y.product.name}}</h2>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1 col-md-offset-1 col-lg-offset-2 text-center">
+                                  <h3>{{y.quantity}}</h3>
+                                </div>
+                                <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1 col-md-offset-5 col-lg-offset-5 text-center">
+                                  <h3>{{y.product.displayPrice}}</h3>
+                                </div>
+                              </div><div class="col-xs-12 col-sm-5 col-sm-offset-7 col-md-4 col-lg-5 col-md-offset-8 col-lg-offset-7">
+                                <div class="">
+                                  <button type="button" class="btn btn-primary btn-block" ng-click="showTotal = !showTotal; hideAll = !hideAll" ng-hide="showTotal; hideAll">Total</button>
+                                  <button type="button" class="btn btn-primary btn-block" ng-click="showCharge = !showCharge; hideAll = !hideAll" ng-hide="showCharge; hideAll">Charge</button>
+                                  <button type="button" class="btn btn-primary btn-block" ng-click="showBilling = !showBilling; hideAll = !hideAll" ng-hide="showBilling; hideAll">Billing Address</button>
+                                  <button type="button" class="btn btn-primary btn-block" ng-click="showShipping = !showShipping; hideAll = !hideAll" ng-hide="showShipping; hideAll">Shipping Address</button>
+                                </div>
+                                <div class="row innerShipping" ng-show="showTotal">
+                                  <div class="closeOut" ng-click="showTotal = !showTotal; hideAll = !hideAll">
+                                    <i class="fa fa-times"></i>
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+                                    Subtotal:
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{"$" + x.cart.subTotal}}
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+                                    Tax:
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{"$" + x.cart.tax}}
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+                                    Shipping:
+                                  </div>
+                                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{"$" + x.cart.shipping}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    <h2>Total:</h2>
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    <h2>{{"$" + x.cart.total}}</h2>
+                                  </div>
+                                </div>
+                                <div class="row innerShipping" ng-show="showCharge">
+                                  <div class="closeOut" ng-click="showCharge = !showCharge; hideAll = !hideAll">
+                                    <i class="fa fa-times"></i>
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Transaction ID:
+                                  </div>
+                                  <div class="col-xs-12 text-right totalMargin">
+                                    {{x.charge.displayId[0] + " " + x.charge.displayId[1] + " " + x.charge.displayId[2] + " " + x.charge.displayId[3]}}
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Card Brand:
+                                  </div>
+                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{x.charge.source.brand}}
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Last Four Digits:
+                                  </div>
+                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{x.charge.source.last4}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    <h2>Total:</h2>
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    <h2>{{"$" + x.charge.amount}}</h2>
+                                  </div>
+                                </div>
+                                <div class="row innerShipping" ng-show="showBilling">
+                                  <div class="closeOut" ng-click="showBilling = !showBilling; hideAll = !hideAll">
+                                    <i class="fa fa-times"></i>
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Name:
+                                  </div>
+                                  <div class="col-xs-12 text-right totalMargin">
+                                    {{x.billingAddress.name}}
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Address:
+                                  </div>
+                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{x.billingAddress.address}}
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    City:
+                                  </div>
+                                  <div class="col-xs-12 text-right totalMargin">
+                                    {{x.billingAddress.city}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    State:
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    {{x.billingAddress.state}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    Postal Code:
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    {{x.billingAddress.zip}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    Country:
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    {{x.billingAddress.country}}
+                                  </div>
+                                </div>
+                                <div class="row innerShipping" ng-show="showShipping">
+                                  <div class="closeOut" ng-click="showShipping = !showShipping; hideAll = !hideAll">
+                                    <i class="fa fa-times"></i>
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Name:
+                                  </div>
+                                  <div class="col-xs-12 text-right totalMargin">
+                                    {{x.shippingAddress.name}}
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    Address:
+                                  </div>
+                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+                                    {{x.shippingAddress.address}}
+                                  </div>
+                                  <div class="col-xs-12 col-md-8 col-lg-10">
+                                    City:
+                                  </div>
+                                  <div class="col-xs-12 text-right totalMargin">
+                                    {{x.shippingAddress.city}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    State:
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    {{x.shippingAddress.state}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    Postal Code:
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    {{x.shippingAddress.zip}}
+                                  </div>
+                                  <div class="col-xs-12">
+                                    Country:
+                                  </div>
+                                  <div class="col-xs-12 text-right">
+                                    {{x.shippingAddress.country}}
+                                  </div>
+                                </div>
+                                </div>
                     </div>
-                  </div>
-                </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>

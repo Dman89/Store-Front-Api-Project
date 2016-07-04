@@ -1,3 +1,8 @@
+
+
+@import url(https://fonts.googleapis.com/css?family=Arvo:400,400italic);
+@import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
+@import url(https://fonts.googleapis.com/css?family=Work+Sans:300);
 //black
 $b: rgb(6,17,21);
 $color-black: $b;
@@ -26,3 +31,7 @@ $medium: '(max-width: 900px)';
 $large: '(max-width: 1200px)';
 $notMobile: '(min-width: 480px)';
 $normal: '(min-width: 668px)';
+// Font Families
+$mainTitle: 'Kaushan Script', cursive;
+$price: 'Work Sans', sans-serif;
+$sku: $price;

@@ -44,34 +44,35 @@ cartRouter.get('/:id/cart/', function(req, res) {
       res.status(404).json({"message":"Not a User"});
       console.log("Not a User")
     } else {
-    req.user.populate({ path: 'data.cart.product', model: 'Products' },
+    req.user.populate({ path: 'data.cart.items.product', model: 'Products' },
     handleOne.bind(null, 'user', res));
   }
   })
 })
-cartRouter.post('/user/cart/', function (req, res) {
+cartRouter.put('/user/cart/', function (req, res) {
   var id = req.user._id
   if (!req.user) {
-    return res.status(404).json({'message': 'Not logged in'});
+    return res.status(404).json({'error': 'Not logged in'});
     console.log('Not logged in');
   }
   if (!req.body) {
-    return res.status(404).json({'message': 'Cart not found'});
+    return res.status(404).json({'error': 'Cart not found'});
   console.log('No cart specified');
   }
   var cart = req.body
   User.findByIdAndUpdate(id, cart, {new: true}, function(err, response) {
     if(err) {
       return res.status(500).json(err);
-    } else if (response == undefined) {
+    }
+    else if (response == undefined) {
     return res.status(500).json({message: "Not Found?!"});
-    } else {
-       return res.json({user: cart});
+    }
+    else {
+       return res.json({user: response});
      console.log('Shopping cart has been edited!');
       }
 
   })
-
 
 })
 cartRouter.post('/user/checkout', function (req, res) {

@@ -1,4 +1,18 @@
 #profile {
+  padding-top: 2em;
+    margin-bottom: 2.5%;
+      & .btnbar {
+        & .active {
+          pointer-events: none;
+          cursor: none;
+        }
+    @media (max-width: 480px) {
+      margin-bottom: 7.5%;
+    }
+    @media (max-width: 767px) {
+      margin-bottom: 5%;
+    }
+  }
   & .profileUserName {
     color: #999;
     cursor: none;
@@ -8,11 +22,26 @@
     cursor: pointer;
   }
   & .divider {
+    position: relative;
+    display: inline-block;
     height: 20px;
+    width: 100%;
     text-align:center;
-    background-color: $p;
-    background-position: center;
+    background-color: $a;
     border-top: $b 1px solid;
-    border-bottom: $s 2px solid;
+    border-bottom: $p 2px solid;
+    margin: 6% auto;
+    @media (min-width: 1500px) {
+      margin: 50px auto;
+    }
   }
+}
+.toggleBar {
+  width: 100%;
+  margin: 1% auto;
+    height: 100%;
+    background: rgb(167,218,218);
+  border-radius: 4px;
+  padding: 1em 2em;
+  border: rgb(26,62,115) 4px solid;
 }

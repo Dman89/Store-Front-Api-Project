@@ -35,12 +35,13 @@ var product = {
   internal: {
     approximatePriceUSD: Number
   },
-  urlCode: {type: String, required: true, lowercase: true, unique: true}
+  urlCode: {type: String, required: true, lowercase: true, unique: true},
+  sku: {type: String, required: true, lowercase: true, unique: true}
 };
 
 var productSchema = new mongoose.Schema(product);
 
-productSchema.index({ name: 'text' });
+productSchema.index({ name: 'text', sku: 'text' });
 
 var currencySymbols = {
   'USD': '$',

@@ -120,32 +120,32 @@ webpackJsonp([0],[
 	      .state('store.stickers', {
 	      url: '/stickers',
 	      templateUrl: 'templates/products.html',
-	      controller: 'category.stickersCtrl'
+	      controller: 'productCtrl'
 	      })
 	      .state('store.paintings', {
 	      url: '/paintings',
 	      templateUrl: 'templates/products.html',
-	      controller: 'category.paintingsCtrl'
+	      controller: 'productCtrl'
 	      })
 	      .state('store.prints', {
 	      url: '/prints',
 	      templateUrl: 'templates/products.html',
-	      controller: 'category.printsCtrl'
+	      controller: 'productCtrl'
 	      })
 	      .state('store.upcycle', {
 	      url: '/upcycle',
 	      templateUrl: 'templates/products.html',
-	      controller: 'category.upcycleCtrl'
+	      controller: 'productCtrl'
 	      })
 	      .state('store.graphics', {
 	      url: '/graphics',
 	      templateUrl: 'templates/products.html',
-	      controller: 'category.graphicsCtrl'
+	      controller: 'productCtrl'
 	      })
 	      .state('store.skateboards', {
 	      url: '/skateboards',
 	      templateUrl: 'templates/products.html',
-	      controller: 'category.skateboardsCtrl'
+	      controller: 'productCtrl'
 	      })
 	    .state('bio', {
 	    url: '/bio',
@@ -4804,45 +4804,31 @@ webpackJsonp([0],[
 	  dataService.getProducts(function(response) {
 	    $scope.products = response.data.products
 	  })
-	  
-	  $scope.checkout = function() {
-	    var user = {
-	      "_id": "575b3533ad679e741c73eee0",
-	      "__v": 0,
-	      "data": {
-	        "firstName": "Tupac3",
-	        "email": "KingD@Tupac.com",
-	        "password": "catmouse",
-	        "lastName": "King",
-	        "location": "At the Top",
-	        "emailMailingList": true,
-	        "researchAndDevelopment": true,
-	        "oauth": "123",
-	        "cart": [
-	          {
-	            "product": "5759c172532990e03b37d9b2",
-	            "_id": "575b3533ad679e741c73ded3",
-	            "quantity": 1
-	          },
-	          {
-	            "product": "5759c172532990e03b37d9b2",
-	            "_id": "575b3533ad679e741c73ded2",
-	            "quantity": 1
-	          },
-	          {
-	            "product": "5759c1c59e38917831d9efa7",
-	            "_id": "575b3533ad679e741c73ded1",
-	            "quantity": 1
-	          }
-	        ]
-	      },
-	      "profile": {
-	        "username": "anewnameqwe",
-	        "picture": "http://www.google.com"
-	      }
+	  dataService.getCart(function(response) {
+	    $scope.cart = response.data.cart.data.cart;
+	  })
+	  dataService.getUser(function(response) {
+	    $scope.user = response.data.user;
+	  })
+	  var items = [];
+	  var user = {};
+	  $scope.addToCart = function(id, quantity) {
+	    var itemsOld = [];
+	    var item = {"product": id, "quantity": quantity}
+	    user = $scope.user;
+	    if ($scope.cart !== null) {
+	      items = $scope.cart.items;
+	      items.push(item);
 	    }
-	    dataService.checkout(user);
+	    else {
+	      items = item;
+	    }
+	    user.data.cart = {"items" : items};
+	dataService.updateCart(user, function(response) {});
+	items = [];
+	user = {};
 	  }
+
 	});
 
 
@@ -4962,7 +4948,11 @@ webpackJsonp([0],[
 	      };
 	  this.newUser = function(user) {
 	    $http.post('/api/users', user)
-	  }
+	  };
+	  this.saveUser = function(user, callback) {
+	  $http.put('/api/profile', user)
+	  .then(callback)
+	  };
 	    this.getOrderHistory = function(callback) {
 	      $http.get("/api/cart/history")
 	      .then(callback)
@@ -4976,7 +4966,7 @@ webpackJsonp([0],[
 	      .then(callback)
 	    };
 	    this.updateCart = function(a, b) {
-	      $http.post("/api/user/cart", a)
+	      $http.put("/api/user/cart", a)
 	      .then(b)
 	    };
 	  this.checkout = function(token, callback) {
@@ -5114,29 +5104,25 @@ webpackJsonp([0],[
 	angular.module("lionHeart")
 	.controller("cartCtrl", function($scope, dataService) {
 	  dataService.getCart(function(response) {
-	  if (response.data.cart.items == null) {
-	    $scope.cart = {"items": [{ "product": {
-	      "name": "Find Your Art",
-	      "pictures": ["http://www.stopaddiction.ca/wp-content/uploads/2016/02/tumblr_o33tcjbPZ41rrjjxto1_500.jpg", "https://www.happybrainscience.com/wp-content/uploads/2014/06/BEST-POSSIBLE-FUTURE-300-FIXED.png", "https://papercallio-production.s3.amazonaws.com/uploads/event/logo/2/mid_300_rsz_happy_face.png"],
-	      "price": {
-	        "amount":"50",
-	        "currency": "USD"
-	      },
-	      "displayPrice": "$0.00",
-	      "category": {
-	        "_id": "Elephant",
-	        "parent": "Paintings",
-	        "ancestors": ["canvas"]
-	      }},
-	      "quantity": 1
-	    }]}
-	  } else {
-	    $scope.cart = response.data.cart;
-	  }
+	    $scope.cartA = response.data.cart.data.cart;
+	    var cart = $scope.cartA.items;
+	    var user = $scope.user;
+	    cartTotal(cart, user)
 	  });
 	dataService.getUser(function(response) {
 	  $scope.user = response.data.user;
 	});
+	$scope.deleteCartItem = function(index) {
+	  $scope.user.data.cart.items.splice(index, 1);
+	  var user = $scope.user;
+	  dataService.updateCart(user, function(response) {});
+	  dataService.getCart(function(response) {
+	    $scope.cartA = response.data.cart.data.cart;
+	    var cart = $scope.cartA.items;
+	    var user = $scope.user;
+	    cartTotal(cart, user)
+	  });
+	}
 	$scope.stripeToken = {stripeToken: {
 	  number: '4242424242424242',
 	  cvc: '123',
@@ -5162,15 +5148,32 @@ webpackJsonp([0],[
 	    exp_year: ''
 	  }}
 	}
-	// $scope.getTotal = function() {
-	//   var total = 0;
-	//   for (var x = 0; x < $scope.cart.items.length; x++) {
-	//     var subTotal = $scope.cart.items[x];
-	//     var a = math.round(subTotal.displayPrice);
-	//     total += (a * subTotal.quantity);
-	//   }
-	//   return total;
-	// }
+	var sub = function (cart, user, sub) {
+	  var total = 0;
+	  for (var x = 0; x < cart.length; x++) {
+	          total += cart[x].product.subTotal;
+	        }
+	  sub(total, user);
+	}
+	var cartTotal = function(cart, user) {
+	  var tax = 0;
+	  var total = 0;
+	  var shipping = 0;
+	  sub(cart, user, function(sub, user) {
+	    var tax = sub * .1;
+	    var total = sub + tax;
+	    user.data.cart.subTotal = sub;
+	    user.data.cart.tax = tax;
+	    user.data.cart.total = total;
+	    user.data.cart.shipping = shipping;
+	    user.data.cart.len = cart.length;
+	    dataService.updateCart(user, function(response) {});
+	    $scope.cartA.subTotal = sub;
+	    $scope.cartA.tax = tax;
+	    $scope.cartA.total = total;
+	    $scope.cartA.shipping = shipping;
+	  })
+	}
 	});
 
 
@@ -5195,10 +5198,22 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("profileCtrl", function($scope, dataService) {
+	.controller("profileCtrl", function($scope, dataService, $location) {
 	  dataService.getUser(function(response) {
 	    $scope.user = response.data.user;
 	  });
+	  //save user on btn click
+	  $scope.saveUser = function(user) {
+	    dataService.saveUser(user, function(response) {
+	      $scope.successDisplaySaveUser = response.data.user.message;
+	    })
+	  }
+	  $scope.isActiveProfile = function (viewLocation) {
+	        if (viewLocation === $location.path()) {
+	        return viewLocation === $location.path();
+	      }
+	    };
+
 	});
 
 
@@ -5225,7 +5240,69 @@ webpackJsonp([0],[
 	angular.module("lionHeart")
 	.controller("orderHistoryCtrl", function($scope, dataService) {
 	dataService.getOrderHistory(function(response) {
+	  var aday, year, month, date, chargeId, chargeIdA, chargeIdB, chargeIdC, chargeIdD;
 	  $scope.orderHistory = response.data.orders;
+	  for (var x = 0; x < response.data.orders.length; x++) {
+	    chargeId = response.data.orders[x].charge.id;
+	    chargeId.toString(chargeId)
+	    var tempNum = chargeId.length;
+	    chargeIdD = chargeId.slice(21, tempNum);
+	    chargeIdC = chargeId.slice(14, 21);
+	    chargeIdB = chargeId.slice(7, 14);
+	    chargeIdA = chargeId.slice(0, 7);
+	    var pushArr = [];
+	    pushArr.push(chargeIdA);
+	    pushArr.push(chargeIdB);
+	    pushArr.push(chargeIdC);
+	    pushArr.push(chargeIdD);
+	    date = response.data.orders[x].date.split("T");
+	    date.splice(1, 1);
+	    date = date[0].split("-");
+	    month = date[1];
+	    year = date[0];
+	    aday = date[2];
+	    switch(month) {
+	      case "01":
+	        month = "January";
+	        break;
+	      case "02":
+	        month = "February";
+	        break;
+	      case "03":
+	        month = "March";
+	        break;
+	      case "04":
+	        month = "April";
+	        break;
+	      case "05":
+	        month = "May";
+	        break;
+	      case "06":
+	        month = "Jun";
+	        break;
+	      case "07":
+	        month = "July";
+	        break;
+	      case "08":
+	        month = "August";
+	        break;
+	      case "09":
+	        month = "September";
+	        break;
+	      case "10":
+	        month = "October";
+	        break;
+	      case "11":
+	        month = "November";
+	        break;
+	      case "12":
+	        month = "December";
+	        break;
+	}
+	date = month + " " + aday + ", " + year;
+	    $scope.orderHistory[x].date = date;
+	    $scope.orderHistory[x].charge.displayId = pushArr;
+	  }
 	});
 	});
 
@@ -5252,7 +5329,22 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("categoryCtrl", function($scope, dataService) {
+	  $("#owlCategory").owlCarousel({
 
+	        navigation : false, // Show next and prev buttons
+	        slideSpeed : 200,
+	        paginationSpeed : 800,
+	        singleItem:true,
+	        autoPlay: true
+
+	        // "singleItem:true" is a shortcut for:
+	        // items : 1,
+	        // itemsDesktop : false,
+	        // itemsDesktopSmall : false,
+	        // itemsTablet: false,
+	        // itemsMobile : false
+
+	    });
 	});
 
 
@@ -5278,20 +5370,28 @@ webpackJsonp([0],[
 	'use strict';
 	  angular.module("lionHeart")
 	    .controller("menuCtrl", function($scope, dataService, $location) {
+	      $(function(){
+	      var navMain = $("#myNavbar");
+	      var menuBar = $(".menuBar");
+	      menuBar.on("click", "a", null, function () {
+	          navMain.collapse('hide');
+	      });
+	  });
 	      dataService.getUser(function(response) {
 	        $scope.user = response.data.user;
 	      });
 	      $scope.isActive = function (viewLocation) {
 	            if (viewLocation === $location.path()) {
-	              if ($location.path() == '/') {
-	                  document.getElementById("body").style.backgroundColor='rgb(6,17,21)';
-	                  document.getElementById("body").style.backgroundImage='url("/img/actionshots/actionshot0.jpg")';
-	                  document.getElementById("body").style.backgroundPosition='center top';
-	                  document.getElementById("body").style.backgroundRepeat='no-repeat';
-	              } else {
+	              // if ($location.path() == '/') {
+	              //     document.getElementById("body").style.backgroundColor='rgb(6,17,21)';
+	              //     document.getElementById("body").style.backgroundImage='url("/img/actionshots/actionshot0.jpg")';
+	              //     document.getElementById("body").style.backgroundPosition='center top';
+	              //     document.getElementById("body").style.backgroundRepeat='no-repeat';
+	              // }
+	              // else {
 	                  document.getElementById("body").style.backgroundColor='rgb(67,132,183)';
 	                  document.getElementById("body").style.backgroundImage='none';
-	              }
+	              // }
 	            return viewLocation === $location.path();
 	          }
 	          else if (viewLocation == '/') {
@@ -5328,7 +5428,11 @@ webpackJsonp([0],[
 	            }
 	          }
 	        };
-	    });
+	    }
+
+
+
+	  );
 
 
 /***/ },
@@ -5353,7 +5457,353 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("bioCtrl", function($scope, dataService) {
+	// You posse everything a real women has, a loving touch, determined nurturing character, and a gourgous vibrant soul. When I first laid eyes on you, I was attracted to your vibration. Once I began to get to know you I understood what I felt that night. I began falling in love with you in every moment, by your side. I know I want something more with you, I always have. I just have never told you and planned on telling you Wednesday night. I love your Being with my whole soul and now, you are free. I know you will find everything you are lookin for in life, I believe in you. When I said, "if it is meant to be, we will end up together" I believed we would. When your friend said I was your soulmate did you believe?
+	function pushOut(card) {
+	  if (card == 1) {
+	    var card = one;
+	  }
+	  else if (card == 2) {
+	      var card = two;
+	  }
+	  else if (card == 3) {
+	        var card = three;
+	  }
+	  $("#"+card).addClass("out");
+	}
+	function pushIn(card) {
+	  if (card == 1) {
+	    var card = one;
+	  }
+	  else if (card == 2) {
+	      var card = two;
+	  }
+	  else if (card == 3) {
+	        var card = three;
+	  }
+	  $("#"+card).removeClass("out");
+	}
+	$scope.cardShuffle = function(card) {
+	  if (card == 1) {
+	    if ($('#bio #onea').hasClass('move')) {
+	      $('#bio #onea').removeClass('move');
+	      $('#bio #onea').addClass('out');
+	    } else if ($('#bio #onea').hasClass('out')) {
+	      $('#bio #onea').removeClass('out');
+	      $('#bio #onea').addClass('move');
+	    } else {
+	      $('#bio #onea').addClass('move');
+	    }
+	  }
+	  else if (card == 2) {
+	        if ($('#bio #two').hasClass('move')) {
+	          $('#bio #two').removeClass('move');
+	          $('#bio #two').addClass('out');
+	        } else if ($('#bio #two').hasClass('out')) {
+	          $('#bio #two').removeClass('out');
+	          $('#bio #two').addClass('move');
+	        } else {
+	          $('#bio #two').addClass('move');
+	        }
+	      }
+	  else if (card == 3) {
+	            if ($('#bio #three').hasClass('move')) {
+	              $('#bio #three').removeClass('move');
+	              $('#bio #three').addClass('out');
+	            } else if ($('#bio #three').hasClass('out')) {
+	              $('#bio #three').removeClass('out');
+	              $('#bio #three').addClass('move');
+	            } else {
+	              $('#bio #three').addClass('move');
+	            }
+	          }
+	}
+	var oneIndex = 1,
+	  twoIndex = 2,
+	  threeIndex = 3;
+	$scope.zIndex = function(card) {
+	var zIndex = "";
+	  if (card == 1) {
+	    if (!$("#one").hasClass("zIndex4")) {
+	          var tempNum = oneIndex;
+	          setTimeout(function() {
+	              $("#one").addClass("out");
+	              $("#one").css( "zIndex", tempNum );
+	          }, 1)
+	          if (oneIndex > twoIndex && oneIndex > threeIndex) {
+	            if (twoIndex < threeIndex) {
+	              twoIndex = 3,
+	              threeIndex = 4;
+	              zIndex = "zIndex" + twoIndex;
+	              document.getElementById("two").className = "card-container " + zIndex;
+	              zIndex = "zIndex" + threeIndex;
+	              document.getElementById("three").className = "card-container " + zIndex;
+	            }
+	            else {
+	              twoIndex = 4,
+	              threeIndex = 3;
+	              zIndex = "zIndex" + twoIndex;
+	              document.getElementById("two").className = "card-container " + zIndex;
+	              zIndex = "zIndex" + threeIndex;
+	              document.getElementById("three").className = "card-container " + zIndex;
+	            }
+	            oneIndex = 1;
+	            zIndex = "zIndex" + oneIndex;
+	            document.getElementById("one").className = "card-container " + zIndex;
+	            }
+	      else {
+	        if (twoIndex < threeIndex) {
+	          twoIndex = 2,
+	          threeIndex = 3;
+	          zIndex = "zIndex" + twoIndex;
+	          document.getElementById("two").className = "card-container " + zIndex;
+	          zIndex = "zIndex" + threeIndex;
+	          document.getElementById("three").className = "card-container " + zIndex;
+	        }
+	      else {
+	          twoIndex = 3,
+	          threeIndex = 2;
+	          zIndex = "zIndex" + twoIndex;
+	          document.getElementById("two").className = "card-container " + zIndex;
+	          zIndex = "zIndex" + threeIndex;
+	          document.getElementById("three").className = "card-container " + zIndex;
+	          }
+	        oneIndex = 4;
+	        zIndex = "zIndex" + oneIndex;
+	        document.getElementById("one").className = "card-container " + zIndex;
+	        }
+	      setTimeout(function() {
+	          $("#one").css( "zIndex", oneIndex );
+	          $("#two").css( "zIndex", twoIndex );
+	          $("#three").css( "zIndex", threeIndex );
+	      }, 601);
+	      setTimeout(function pushIn() {
+	        $("#one").removeClass("out");
+	        $("#one").css( "zIndex", oneIndex );
+	      }, 1000);
+	    }
+	    else if ($("#one").hasClass("zIndex4")) {
+	        if (twoIndex < threeIndex) {
+	          twoIndex = 3,
+	          threeIndex = 4;
+	          zIndex = "zIndex" + threeIndex;
+	          document.getElementById("three").className = "card-container " + zIndex;
+	          zIndex = "zIndex" + twoIndex;
+	          document.getElementById("two").className = "card-container " + zIndex;
+	        }
+	        else {
+	          twoIndex = 4,
+	          threeIndex = 3;
+	          zIndex = "zIndex" + threeIndex;
+	          document.getElementById("three").className = "card-container " + zIndex;
+	          zIndex = "zIndex" + twoIndex;
+	          document.getElementById("two").className = "card-container " + zIndex;
+	        }
+	        oneIndex = 1;
+	        setTimeout(function pushOut() {
+	          $("#one").addClass("out");
+	            $("#one").css( "zIndex", 4 );
+	        }, 1);
+	        setTimeout(function() {
+	            $("#one").css( "zIndex", 1 );
+	            $("#two").css( "zIndex", twoIndex );
+	            $("#three").css( "zIndex", threeIndex );
+	        }, 601);
+	        setTimeout(function pushIn() {
+	          $("#one").removeClass("out");
+	            $("#one").removeClass("zIndex4");
+	            $("#one").addClass("zIndex1");
+	        }, 1001);
+	        }
+	    }
 
+	  else if (card == 2) {
+	      if (!$("#two").hasClass("zIndex4")) {
+	          var tempNum = twoIndex;
+	          setTimeout(function() {
+	              $("#two").addClass("out");
+	              $("#two").css( "zIndex", tempNum );
+	          }, 1)
+	          if (twoIndex > oneIndex && twoIndex > threeIndex) {
+	          twoIndex = 1;
+	              if (oneIndex < threeIndex) {
+	                oneIndex = 3,
+	                threeIndex = 4;
+	              } else {
+	                oneIndex = 4,
+	                threeIndex = 3;
+	              }
+	              zIndex = "zIndex" + oneIndex;
+	              document.getElementById("one").className = "card-container " + zIndex;
+	              zIndex = "zIndex" + twoIndex;
+	              document.getElementById("two").className = "card-container " + zIndex;
+	              zIndex = "zIndex" + threeIndex;
+	              document.getElementById("three").className = "card-container " + zIndex;
+	        } else {
+	          twoIndex = 4;
+	              if (oneIndex < threeIndex) {
+	                oneIndex = 2,
+	                threeIndex = 3;
+	              } else {
+	                oneIndex = 3,
+	                threeIndex = 2;
+	              }
+	              zIndex = "zIndex" + oneIndex;
+	              document.getElementById("one").className = "card-container " + zIndex;
+	              zIndex = "zIndex" + twoIndex;
+	              document.getElementById("two").className = "card-container " + zIndex;
+	              zIndex = "zIndex" + threeIndex;
+	              document.getElementById("three").className = "card-container " + zIndex;
+	        }
+	        setTimeout(function() {
+	            $("#two").css( "zIndex", twoIndex );
+	            $("#one").css( "zIndex", oneIndex );
+	            $("#three").css( "zIndex", threeIndex );
+	        }, 500);
+	        setTimeout(function pushIn() {
+	          $("#two").removeClass("out");
+	            $("#two").css( "zIndex", twoIndex );
+	        }, 1000);
+	        }
+	    else if ($("#two").hasClass("zIndex4")) {
+	        if (oneIndex < threeIndex) {
+	          oneIndex = 3,
+	          threeIndex = 4;
+	          zIndex = "zIndex" + oneIndex;
+	          document.getElementById("one").className = "card-container " + zIndex;
+	          zIndex = "zIndex" + threeIndex;
+	          document.getElementById("three").className = "card-container " + zIndex;
+	        }
+	        else {
+	          oneIndex = 4,
+	          threeIndex = 3;
+	          zIndex = "zIndex" + oneIndex;
+	          document.getElementById("one").className = "card-container " + zIndex;
+	          zIndex = "zIndex" + twoIndex;
+	          document.getElementById("two").className = "card-container " + zIndex;
+	        }
+	      twoIndex = 1;
+	      setTimeout(function pushOut() {
+	        $("#two").addClass("out");
+	          $("#two").css( "zIndex", 4 );
+	      }, 1);
+	      setTimeout(function() {
+	          $("#two").css( "zIndex", 1 );
+	          $("#one").css( "zIndex", oneIndex );
+	          $("#three").css( "zIndex", threeIndex );
+	      }, 501);
+	      setTimeout(function pushIn() {
+	        $("#two").removeClass("out");
+	          $("#two").removeClass("zIndex4");
+	          $("#two").addClass("zIndex1");
+	      }, 1001);
+	      }
+	    }
+
+	  else if (card == 3) {
+	      if (!$("#three").hasClass("zIndex4")) {
+	            var tempNum = threeIndex;
+	            setTimeout(function() {
+	                $("#three").addClass("out");
+	                $("#three").css( "zIndex", tempNum );
+	            }, 1)
+	            if (threeIndex > twoIndex && threeIndex > oneIndex) {
+	              threeIndex = 1;
+	                  if (oneIndex < twoIndex) {
+	                    oneIndex = 3,
+	                    twoIndex = 4;
+	                    document.getElementById("two").className = "card-container " + zIndex;
+	                    zIndex = "zIndex" + threeIndex;
+	                    document.getElementById("three").className = "card-container " + zIndex;
+	                  } else {
+	                    oneIndex = 4,
+	                    twoIndex = 3;
+	                    document.getElementById("two").className = "card-container " + zIndex;
+	                    zIndex = "zIndex" + threeIndex;
+	                    document.getElementById("three").className = "card-container " + zIndex;
+	                  }
+	                  zIndex = "zIndex" + oneIndex;
+	                  document.getElementById("one").className = "card-container " + zIndex;
+	                  zIndex = "zIndex" + twoIndex;
+	          }
+	          else {
+	            threeIndex = 4;
+	                  if (oneIndex < twoIndex) {
+	                    oneIndex = 2,
+	                    twoIndex = 3;
+	                    zIndex = "zIndex" + oneIndex;
+	                    document.getElementById("one").className = "card-container " + zIndex;
+	                    zIndex = "zIndex" + twoIndex;
+	                    document.getElementById("two").className = "card-container " + zIndex;
+	                  } else {
+	                    oneIndex = 3,
+	                    twoIndex = 2;
+	                    zIndex = "zIndex" + oneIndex;
+	                    document.getElementById("one").className = "card-container " + zIndex;
+	                    zIndex = "zIndex" + twoIndex;
+	                    document.getElementById("two").className = "card-container " + zIndex;
+	                  }
+	                  zIndex = "zIndex" + threeIndex;
+	                  document.getElementById("three").className = "card-container " + zIndex;
+	          }
+	          setTimeout(function() {
+	              $("#three").css( "zIndex", threeIndex );
+	              $("#one").css( "zIndex", oneIndex );
+	              $("#two").css( "zIndex", twoIndex );
+	          }, 601);
+	          setTimeout(function pushIn() {
+	            $("#three").removeClass("out");
+	              $("#three").css( "zIndex", threeIndex );
+	          }, 1000);
+	        }
+	      else if ($("#three").hasClass("zIndex4")) {
+	          if (oneIndex < twoIndex) {
+	            oneIndex = 3,
+	            twoIndex = 4;
+	            zIndex = "zIndex" + oneIndex;
+	            document.getElementById("one").className = "card-container " + zIndex;
+	            zIndex = "zIndex" + twoIndex;
+	            document.getElementById("two").className = "card-container " + zIndex;
+	          }
+	          else {
+	            oneIndex = 4,
+	            twoIndex = 3;
+	            zIndex = "zIndex" + oneIndex;
+	            document.getElementById("one").className = "card-container " + zIndex;
+	            zIndex = "zIndex" + twoIndex;
+	            document.getElementById("two").className = "card-container " + zIndex;
+	          }
+	          threeIndex = 1;
+	        setTimeout(function pushOut() {
+	          $("#three").addClass("out");
+	            $("#three").css( "zIndex", 4 );
+	        }, 1);
+	        setTimeout(function() {
+	            $("#three").css( "zIndex", 1 );
+	            $("#one").css( "zIndex", oneIndex );
+	            $("#two").css( "zIndex", twoIndex );
+	        }, 601);
+	        setTimeout(function pushIn() {
+	          $("#three").removeClass("out");
+	            $("#three").removeClass("zIndex4");
+	            $("#three").addClass("zIndex1");
+	        }, 1001);
+	        }
+	      }
+	// var zIndex = "";
+	//   if (!$("#one").hasClass("zIndex4")) {
+	//     if
+	//   twoIndex -= 1;
+	//   threeIndex -= 1;
+	//   oneIndex -= 1;
+	//   zIndex = "zIndex" + oneIndex;
+	//   document.getElementById("one").className = "card-container " + zIndex;
+	//   zIndex = "zIndex" + twoIndex;
+	//   document.getElementById("two").className = "card-container " + zIndex;
+	//   zIndex = "zIndex" + threeIndex;
+	//   document.getElementById("three").className = "card-container " + zIndex;
+	//   document.getElementById(card).className = "card-container zIndex4";
+	//   }
+	}
 	});
 
 
@@ -5497,20 +5947,22 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("indexHomeCtrl", function($scope, dataService) {
-	// Carousel by http://www.w3schools.com/w3css/w3css_slideshow.asp
-	// var slideIndex = 0;
-	// carousel();
-	// function carousel() {
-	//     var i;
-	//     var x = document.getElementsByClassName("mySlides");
-	//     for (i = 0; i < x.length; i++) {
-	//       x[i].style.display = "none";
-	//     }
-	//     slideIndex++;
-	//     if (slideIndex > x.length) {slideIndex = 1}
-	//     x[slideIndex-1].style.display = "block";
-	//     setTimeout(carousel, 2000); // Change image every 2 seconds
-	//   }
+	  $("#owl").owlCarousel({
+
+	        navigation : false, // Show next and prev buttons
+	        slideSpeed : 200,
+	        paginationSpeed : 800,
+	        singleItem:true,
+	        autoPlay: true
+
+	        // "singleItem:true" is a shortcut for:
+	        // items : 1,
+	        // itemsDesktop : false,
+	        // itemsDesktopSmall : false,
+	        // itemsTablet: false,
+	        // itemsMobile : false
+
+	    });
 	});
 
 
@@ -5546,6 +5998,86 @@ webpackJsonp([0],[
 	dataService.getSingleItem(urlCode, function(response) {
 	  $scope.singleItem = response.data.products;
 	});
+	dataService.getUser(function(response) {
+	  $scope.user = response.data.user;
+	})
+	dataService.getCart(function(response) {
+	  $scope.cart = response.data.cart.data.cart;
+	})
+	var items = [];
+	var user = {};
+	$scope.addToCart = function(id, quantity) {
+	  var itemsOld = [];
+	  var item = {"product": id, "quantity": quantity}
+	  user = $scope.user;
+	  if ($scope.cart !== null) {
+	    items = $scope.cart.items;
+	    items.push(item);
+	  }
+	  else {
+	    items = item;
+	  }
+	  user.data.cart = {"items" : items};
+	dataService.updateCart(user, function(response) {});
+	items = [];
+	user = {};
+	}
+
+	dataService.getProducts(function(response) {
+	  var productsRes = response.data.products;
+	  var productLength = productsRes.length;
+	  var tempArr = []
+	  var items = [];
+
+	  var searchForItem = function(callback) {
+	  var removeItem = []
+	    for (var x = 0; x < productLength; x++) {
+	      removeItem.push(productsRes[x].urlCode);
+	    }
+	    var removeNum = removeItem.indexOf(urlCode);
+	    var templength = urlCode.length;
+	    productsRes.splice(removeNum, 1);
+	    callback();
+	  }
+
+	  var lengthBuild = function(productLength, callback) {
+	    for (var x = 0; x < productLength; x++) {
+	      tempArr.push(x);
+	      productLength = productLength - 1;
+	    }
+	    callback();
+	  }
+
+	  var rnd = function (tempArr, callback) {
+	    var tempNum = Math.floor(Math.random() * tempArr.length);
+	    callback(tempNum);
+	  }
+	searchForItem(function() {
+	  lengthBuild(productLength, function() {
+	    for (var x = 0; x < 3; x++) {
+	      rnd(tempArr, function (rndNum) {
+	        var tempItem = productsRes[rndNum];
+	        productsRes.splice(rndNum, 1);
+	        items.push(tempItem);
+	      });
+	    }
+	    var submit = {"related": items};
+	    $scope.relatedItems = submit;
+	  });
+	});
+	});
+	// get products
+	// create array with digits = to array.length
+	// run a random number
+	// get number from array (NOT INDEX)
+	// splice out [x] from array
+	// repeat three times
+	// save related items to $scope
+	// Display in angular
+	// prevent duplicates
+
+
+
 	});
 
 
@@ -5556,36 +6088,6 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("cart.cartCtrl", function($scope, dataService) {
-	  dataService.getCart(function(response) {
-	    $scope.inputData = response.data.cart;
-	    $scope.temp = $scope.inputData.data.cart;
-	    $scope.num = $scope.temp.items;
-	    var total = 0;
-	    var tax = 0;
-	    var shipping = 0;
-	    var shippingRate = 0;
-	    var grandTotal = 0;
-	    for (var x = 0; x < $scope.num.length; x++) {
-	      total += $scope.num[x].product.subTotal;
-	      tax += ($scope.num[x].product.subTotal * 0.0085);
-	      shipping += ($scope.num[x].product.weight * $scope.num[x].product.size * shippingRate);
-	      grandTotal += total + tax + shipping;
-	    }
-	    grandTotal = total + tax + shipping;
-	    $scope.temp.subTotal = total;
-	    $scope.temp.tax = tax;
-	    $scope.temp.shipping = shipping;
-	    $scope.temp.total = grandTotal;
-	    $scope.temp.len = $scope.num.length
-	    $scope.cart = $scope.temp
-	    $scope.inputData.data.cart = $scope.temp;
-	    var here = $scope.inputData;
-	    dataService.updateCart(here, function(response) {
-	      $scope.cart = response.data.user.data.cart;
-	    }
-	    )
-	  });
-
 	});
 
 

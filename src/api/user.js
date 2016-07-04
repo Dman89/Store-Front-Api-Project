@@ -20,17 +20,15 @@ userRouter.post('/user', function(req, res) {
 userRouter.put('/profile', function (req, res) {
   var id = req.user._id;
   var user = req.body;
-  if (user && user._id !== id) {
-    return res.status(500).json({err: user});
-    console.log('ID does not match.')
+  if (!user && user._id !== id) {
+    return res.status(500).json({err: "ID does not match.", user: user, 'message':'ID does not match.'});
   }
   User.findByIdAndUpdate(id, user, {new: true}, function(err, user) {
     if(err) {
-      return res.status(500).json({err: err.message});
+      return res.status(500).json({err: err.message, 'message':'Profile Failed Updated'});
     }
     //TODO: Remove or only return profile
     res.send({'user': user, 'message':'Profile Updated'});
-    console.log(req.body.profile.username + ' your profile has been edited!')
   })
 })
 
@@ -39,7 +37,6 @@ userRouter.put('/user/id/:id', function (req, res) {
   var user = req.body;
   if (user && user._id !== id) {
     return res.status(500).json({err: user});
-    console.log('ID does not match.')
   }
   User.findByIdAndUpdate(id, user, {new: true}, function(err, user) {
     if(err) {

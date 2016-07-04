@@ -2,29 +2,25 @@
 angular.module("lionHeart")
 .controller("cartCtrl", function($scope, dataService) {
   dataService.getCart(function(response) {
-  if (response.data.cart.items == null) {
-    $scope.cart = {"items": [{ "product": {
-      "name": "Find Your Art",
-      "pictures": ["http://www.stopaddiction.ca/wp-content/uploads/2016/02/tumblr_o33tcjbPZ41rrjjxto1_500.jpg", "https://www.happybrainscience.com/wp-content/uploads/2014/06/BEST-POSSIBLE-FUTURE-300-FIXED.png", "https://papercallio-production.s3.amazonaws.com/uploads/event/logo/2/mid_300_rsz_happy_face.png"],
-      "price": {
-        "amount":"50",
-        "currency": "USD"
-      },
-      "displayPrice": "$0.00",
-      "category": {
-        "_id": "Elephant",
-        "parent": "Paintings",
-        "ancestors": ["canvas"]
-      }},
-      "quantity": 1
-    }]}
-  } else {
-    $scope.cart = response.data.cart;
-  }
+    $scope.cartA = response.data.cart.data.cart;
+    var cart = $scope.cartA.items;
+    var user = $scope.user;
+    cartTotal(cart, user)
   });
 dataService.getUser(function(response) {
   $scope.user = response.data.user;
 });
+$scope.deleteCartItem = function(index) {
+  $scope.user.data.cart.items.splice(index, 1);
+  var user = $scope.user;
+  dataService.updateCart(user, function(response) {});
+  dataService.getCart(function(response) {
+    $scope.cartA = response.data.cart.data.cart;
+    var cart = $scope.cartA.items;
+    var user = $scope.user;
+    cartTotal(cart, user)
+  });
+}
 $scope.stripeToken = {stripeToken: {
   number: '4242424242424242',
   cvc: '123',
@@ -50,13 +46,30 @@ $scope.checkout = function() {
     exp_year: ''
   }}
 }
-// $scope.getTotal = function() {
-//   var total = 0;
-//   for (var x = 0; x < $scope.cart.items.length; x++) {
-//     var subTotal = $scope.cart.items[x];
-//     var a = math.round(subTotal.displayPrice);
-//     total += (a * subTotal.quantity);
-//   }
-//   return total;
-// }
+var sub = function (cart, user, sub) {
+  var total = 0;
+  for (var x = 0; x < cart.length; x++) {
+          total += cart[x].product.subTotal;
+        }
+  sub(total, user);
+}
+var cartTotal = function(cart, user) {
+  var tax = 0;
+  var total = 0;
+  var shipping = 0;
+  sub(cart, user, function(sub, user) {
+    var tax = sub * .1;
+    var total = sub + tax;
+    user.data.cart.subTotal = sub;
+    user.data.cart.tax = tax;
+    user.data.cart.total = total;
+    user.data.cart.shipping = shipping;
+    user.data.cart.len = cart.length;
+    dataService.updateCart(user, function(response) {});
+    $scope.cartA.subTotal = sub;
+    $scope.cartA.tax = tax;
+    $scope.cartA.total = total;
+    $scope.cartA.shipping = shipping;
+  })
+}
 });

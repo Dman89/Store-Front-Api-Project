@@ -1,4 +1,2 @@
 node_modules
-src/auth.js
-src\config\passport.js
 src\config\auth.js

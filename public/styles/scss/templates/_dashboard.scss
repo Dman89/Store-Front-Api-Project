@@ -1,0 +1,302 @@
+#profile #dashboard label {
+  pointer-events: none;
+}
+#html #body #dashboard {
+  & .footing {
+    margin-bottom: 20px;
+  }
+    & .footingSA {
+      margin-bottom: 0px;
+    }
+  & .thumbnailDashboardConfessions {
+    height: 50px;
+    width: 50px;
+    border-radius: 2px;
+    @media (min-width: 768px) {
+    position: relative;
+    top: 25px;
+    }
+  }
+  .overflowHidden {
+    overflow: hidden;
+  }
+  & .title {
+    font-family: $mainTitle;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background-color: $h;
+    border-radius: 5px;
+    padding: .2em .5em;
+    @media (min-width: 1200px) {
+    top: -40px;
+    left: 15px;
+      }
+    @media (min-width: 982px) and (max-width: 1200px) {
+    top: -36px;
+    left: 13px;
+      }
+    @media (min-width: 768px) and (max-width: 981px) {
+    top: -33px;
+    left: 13px;
+      }
+    @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+    top: -28px;
+    left: 10px;
+      }
+    @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+    top: -15px;
+    left: 10px;
+      }
+  }
+  & .highlight {
+    transform: rotate(-3deg);
+    margin: auto;
+  }
+  .light {
+    @media (max-width: 767px) {
+      background-color: rgba(255, 255, 255, .1);
+      border-radius: 4px;
+    }
+  }
+  font-size: 21px;
+  line-height: 34px;
+  @media (min-width: 982px) and (max-width: 1200px) {
+      font-size: 19px;
+      line-height: 37px;
+  }
+  @media (min-width: 768px) {
+      font-size: 17px;
+      line-height: 28px;
+  }
+  @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+      font-size: 15px;
+      line-height: 24px;
+  }
+  @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+font-size: 15px;
+line-height: 23px;
+  }
+  & h3 {
+    font-family: $mainTitle;
+  font-size: 27px;
+  line-height: 41px;
+  text-align: left;
+  @media (min-width: 982px) and (max-width: 1200px) {
+      font-size: 24px;
+      line-height: 36px;
+  }
+  @media (min-width: 768px) {
+      font-size: 22px;
+      line-height: 33px;
+  }
+  @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+      font-size: 22px;
+      line-height: 29px;
+  }
+  @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+font-size: 19px;
+line-height: 27px;
+  }
+  }
+.checkboxDiv {
+  @media (min-width: 768px) {
+  text-align: center;
+}
+}
+
+  & h1 {
+    font-family: $mainTitle;
+  font-size: 45px;
+  line-height: 65px;
+  @media (min-width: 982px) and (max-width: 1200px) {
+      font-size: 42px;
+      line-height: 59px;
+    }
+  @media (min-width: 768px) and (max-width: 981px) {
+      font-size: 40px;
+      line-height: 58px;
+    }
+  @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+      font-size: 37px;
+      line-height: 50px;
+    }
+  @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+}
+#html #body #ui-view {
+  & #edit {
+    & .red, & .green {
+      margin: 2em auto 0 auto;
+    }
+  }
+  & .green {
+    color: green;
+    pointer-events: none;
+    background-color: white;
+    padding: 0.2em;
+    border-radius: 15px;
+    text-align: center;
+    }
+    & #edit .green {
+    border-radius: 4px;
+    padding: 0.5em 1em;
+    background-color: rgba(255,255,255,.7);
+    pointer-events: auto;
+      &:hover {
+        background-color: white;
+        background-color: rgba(255,255,255,1);
+        }
+      }
+}
+#html #body #ui-view {
+  & .red {
+    color: red;
+    pointer-events: none;
+    background-color: white;
+    padding: .2em;
+    border-radius: 15px;
+    text-align: center;
+    }
+    & #edit .red {
+    padding: 0.5em 1em;
+    border-radius: 4px;
+    background-color: rgba(255,255,255,.7);
+    pointer-events: auto;
+      &:hover {
+        background-color: white;
+        background-color: rgba(255,255,255,1);
+        }
+      }
+}
+#html #body #edit {
+
+    & .footing {
+      margin-bottom: 20px;
+    }
+  .overflowHidden {
+    overflow: hidden;
+  }
+  h1.title {
+    font-family: $mainTitle;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    background-color: $h;
+    border-radius: 5px;
+    padding: .2em .5em;
+    @media (min-width: 1200px) {
+    top: -40px;
+    left: 15px;
+      }
+    @media (min-width: 982px) and (max-width: 1200px) {
+    top: -36px;
+    left: 13px;
+      }
+    @media (min-width: 768px) and (max-width: 981px) {
+    top: -33px;
+    left: 13px;
+      }
+    @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+    top: -28px;
+    left: 10px;
+      }
+    @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+    top: -15px;
+    left: 10px;
+      }
+  }
+  h1.highlight {
+    transform: rotate(-3deg);
+    margin: auto;
+  }
+  .light {
+    @media (min-width: 767px), (max-height: 767px) and (orientation: landscape) {
+    background-color: rgba(255, 255, 255, .1);
+    border-radius: 4px;
+  }
+  }
+  font-size: 21px;
+  line-height: 34px;
+  @media (min-width: 982px) and (max-width: 1200px) {
+      font-size: 19px;
+      line-height: 37px;
+  }
+  @media (min-width: 768px) {
+      font-size: 17px;
+      line-height: 28px;
+  }
+  @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+      font-size: 15px;
+      line-height: 24px;
+  }
+  @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+font-size: 15px;
+line-height: 23px;
+  }
+  & h3 {
+  font-size: 27px;
+  line-height: 41px;
+  text-align: left;
+  @media (min-width: 982px) and (max-width: 1200px) {
+      font-size: 24px;
+      line-height: 36px;
+  }
+  @media (min-width: 768px) {
+      font-size: 22px;
+      line-height: 33px;
+  }
+  @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+      font-size: 22px;
+      line-height: 29px;
+  }
+  @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+font-size: 19px;
+line-height: 27px;
+  }
+  }
+
+
+  & h1 {
+    font-family: $mainTitle;
+  font-size: 45px;
+  line-height: 65px;
+  @media (min-width: 982px) and (max-width: 1200px) {
+      font-size: 42px;
+      line-height: 59px;
+    }
+  @media (min-width: 768px) and (max-width: 981px) {
+      font-size: 40px;
+      line-height: 58px;
+    }
+  @media (max-width: 767px), (max-width: 767px) and (min-height: 480px) and (orientation: landscape) {
+      font-size: 37px;
+      line-height: 50px;
+    }
+  @media (max-width: 480px), (min-height:480px) and (max-width: 480px) {
+      font-size: 24px;
+      line-height: 32px;
+    }
+  }
+
+  & .divider {
+    margin: 9% auto;
+    @media (min-width: 800px) {
+      margin: 70px auto;
+    }
+  }
+}
+#html #body #ui-view #edit {
+  & h1, & h2, & h3, & h4, & h5, & h6 {
+    font-family: $mainTitle;
+  }
+}
+#useBill.green:after {
+  content: "Use Billing Address";
+}#useBill.red:after {
+  content: "Do Not Use Billing Address";
+}

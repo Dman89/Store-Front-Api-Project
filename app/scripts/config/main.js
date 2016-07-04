@@ -60,32 +60,32 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
       .state('store.stickers', {
       url: '/stickers',
       templateUrl: 'templates/products.html',
-      controller: 'category.stickersCtrl'
+      controller: 'productCtrl'
       })
       .state('store.paintings', {
       url: '/paintings',
       templateUrl: 'templates/products.html',
-      controller: 'category.paintingsCtrl'
+      controller: 'productCtrl'
       })
       .state('store.prints', {
       url: '/prints',
       templateUrl: 'templates/products.html',
-      controller: 'category.printsCtrl'
+      controller: 'productCtrl'
       })
       .state('store.upcycle', {
       url: '/upcycle',
       templateUrl: 'templates/products.html',
-      controller: 'category.upcycleCtrl'
+      controller: 'productCtrl'
       })
       .state('store.graphics', {
       url: '/graphics',
       templateUrl: 'templates/products.html',
-      controller: 'category.graphicsCtrl'
+      controller: 'productCtrl'
       })
       .state('store.skateboards', {
       url: '/skateboards',
       templateUrl: 'templates/products.html',
-      controller: 'category.skateboardsCtrl'
+      controller: 'productCtrl'
       })
     .state('bio', {
     url: '/bio',

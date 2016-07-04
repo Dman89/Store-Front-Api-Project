@@ -2,7 +2,23 @@
   & img.actionShots {
     text-align:center;
     width: 100%;
+    height: 100%;
+    max-width: 100vw;
     margin: 0 auto;
+    position: relative;
+    @media (max-width: 400px) {
+    }
+    @media (max-width: 480px) {
+    }
+    @media (max-width: 600px) {
+    }
+    @media (max-width: 767px) {
+    }
+    @media (min-width: 992px) {
+    max-width: 75vw;
+    max-height: 75vh;
+    margin-top: 1.5em;
+    }
   }
   & .action {
     min-width: 200px;
@@ -26,5 +42,27 @@
     margin-top: 2em;
     text-align: center;
     display: block;
+  }
+  & #owlCategory .owl-item {
+    height: 50vh;
+    @media (max-width: 400px) {
+      height: 10vw;
+    }
+    @media (max-width: 480px) {
+      height: 23vw;
+    }
+    @media (max-width: 600px) {
+      height: 30vw;
+    }
+    @media (max-width: 767px) {
+      height: 37vw;
+    }
+    @media (max-width: 991px) {
+      height: 58vw;
+    }
+    @media (min-width: 992px) {
+      height: 50vh;
+      width: 50vw;
+    }
   }
 }

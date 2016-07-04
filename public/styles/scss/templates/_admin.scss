@@ -1,0 +1,12 @@
+.posts {
+  margin-bottom: 50px;
+}
+.editSpace {
+  margin-bottom: 2em;
+}
+#products .editSpace img {
+  @media (max-width: 480px) {
+    width: 150px;
+    height: 150px;
+  }
+}

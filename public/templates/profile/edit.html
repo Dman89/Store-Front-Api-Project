@@ -1,39 +1,40 @@
-<div class="row">
-  <div class="col-xs-12">
+<div class="row" id="edit">
+  <div class="divider"><h1 class="title highlight">Public Profile</h1></div>
+  <div class="col-xs-12 footing">
     <div class="row">
       <div class="col-xs-12 col-sm-4">
-      Display Name:<br/><input type="text" ng-model="user.profile.displayName"/>
+      <h3>Display Name:</h3><input type="text" ng-model="user.profile.displayName"/>
       </div>
       <div class="col-xs-12 col-sm-4">
-      Username:<br/><label class="profileUserName">{{user.profile.username}}</label>
+      <h3>Username:</h3><label class="profileUserName">{{user.profile.username}}</label>
       </div>
       <div class="col-xs-12 col-sm-4">
-      Picture:<br/><input type="text" ng-model="user.profile.picture"/>
+      <h3>Picture:</h3><input type="text" ng-model="user.profile.picture"/>
       </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
+  <div class="divider"><h1 class="title highlight">Account Info</h1></div>
+  <div class="col-xs-12 footing">
     <div class="row">
-    <div class="col-xs-12 col-sm-4">
-    First Name:<br/><input type="text" ng-model="user.data.firstName"/>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-    Last Name:<br/><input type="text" ng-model="user.data.lastName"/>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-    Email:<br/><label class="profileUserName">{{user.data.email[0]}}</label>
-    </div>
+      <div class="col-xs-12 col-sm-4">
+      <h3>First Name:</h3><input type="text" ng-model="user.data.firstName"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      <h3>Last Name:</h3><input type="text" ng-model="user.data.lastName"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+      <h3>Email:</h3><label class="profileUserName">{{user.data.email[0]}}</label>
+      </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
+  <div class="divider"><h1 class="title highlight">Billing Address</h1></div>
+  <div class="col-xs-12 footing">
     <div class="row">
       <div class="col-xs-12">
-        Billing Address:
+        <h3>Billing Address:</h3>
       </div>
       <div class="col-xs-12 col-sm-4">
-<input type="text" ng-model="user.data.billingAddress.name"/>
+        <input type="text" ng-model="user.data.billingAddress.name"/>
       </div>
       <div class="col-xs-12 col-sm-4">
         <input type="text" ng-model="user.data.billingAddress.address"/>
@@ -52,11 +53,11 @@
       </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
+  <div class="divider"><h1 class="title highlight">Shipping Address</h1></div>
+  <div class="col-xs-12 footingSA">
     <div class="row">
       <div class="col-xs-12">
-        Shipping Address:
+        <h3>Shipping Address:</h3>
       </div>
       <div class="row" ng-class="{'hidden': user.data.shippingAddress.useBilling == true}">
         <div class="col-xs-12 col-sm-4">
@@ -99,19 +100,23 @@
           </div>
       </div>
       <div class="col-xs-12">
-        Use Billing Address:<br/><input type="checkbox" ng-model="user.data.shippingAddress.useBilling"/>
+        <button type="button" ng-click="user.data.shippingAddress.useBilling = !user.data.shippingAddress.useBilling" ng-class="{'green': user.data.shippingAddress.useBilling, 'red': !user.data.shippingAddress.useBilling}" ng-model="user.data.shippingAddress.useBilling" class="abtn btn-success" title="Join Our Mailing List">Use Billing Address</button>
       </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
+  <div class="divider"><h1 class="title highlight">Extras</h1></div>
+  <div class="col-xs-12 footing">
     <div class="row">
     <div class="col-xs-12 col-sm-6">
-    emailMailingList:<br/><input type="checkbox" ng-model="user.data.emailMailingList"/>
+    <button type="button" ng-click="user.data.emailMailingList = !user.data.emailMailingList" ng-class="{'green': user.data.emailMailingList, 'red': !user.data.emailMailingList}" ng-model="user.data.emailMailingList" class="abtn btn-success" title="Use Your Billing Address as Your Shipping Address">Be the First to Know</button>
     </div>
     <div class="col-xs-12 col-sm-6">
-    researchAndDevelopment:<br/><input type="checkbox" ng-model="user.data.researchAndDevelopment" />
+    <button type="button" ng-click="user.data.researchAndDevelopment = !user.data.researchAndDevelopment" ng-class="{'green': user.data.researchAndDevelopment, 'red': !user.data.researchAndDevelopment}" ng-model="user.data.researchAndDevelopment" class="abtn btn-success" title="Participate in Research and Development by Sumbiting Data">Contribute to Humanity</button>
     </div>
     </div>
+  </div>
+  <div class="divider"></div>
+  <div class="col-xs-12 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-10">
+    <button ui-sref="profile.dashboard" type="button" class="abtn btn-success btn-block" ng-click="saveUser(user)"><i class="fa fa-floppy-o"></i> Save</button>
   </div>
 </div>

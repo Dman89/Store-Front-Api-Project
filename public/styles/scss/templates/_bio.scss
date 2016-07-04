@@ -1,3 +1,268 @@
+ #ui-view #bio {
+   & .titleOH {
+     width: 100px;
+     @media (min-width: 600px) {
+         width: 160px;
+     }
+     @media (min-width: 768px) {
+         width: 200px;
+     }
+   }
+   & h1.title {
+     font-family: $mainTitle;
+     position: absolute;
+     background-color: $h;
+     border-radius: 5px;
+     padding: 0em 0.5em;
+     @media (min-width: 1200px) {
+       }
+     @media (min-width: 982px) and (max-width: 1200px) {
+       }
+     @media (min-width: 768px) and (max-width: 981px) {
+       }
+   }
+   & h1.highlight {
+     transform: rotate(-3deg);
+     margin: auto;
+   }
+
+   &  {
+
+      @media (max-width: 400px) {
+        font-size: 9px;
+        line-height: 15px;
+        & p, &, & label {
+          font-size: 9px;
+          line-height: 15px;
+
+        }
+        & h1 {
+          font-size: 24px;
+          line-height: 39px;
+
+        }
+        & h2 {
+          font-size: 15px;
+          line-height: 24px;
+
+        }
+        & h3 {
+          font-size: 11px;
+          line-height: 18px;
+
+        }
+        & h4 {
+          font-size: 9px;
+          line-height: 15px;
+
+        }
+        & h5 {
+          font-size: 7px;
+          line-height: 11px;
+
+        }
+      }
+      @media (max-width: 530px) {
+        font-size: 12px;
+        line-height: 19px;
+        & p, &, & label {
+          font-size: 12px;
+          line-height: 19px;
+
+        }
+        & h1 {
+          font-size: 31px;
+          line-height: 50px;
+
+        }
+        & h2 {
+          font-size: 19px;
+          line-height: 31px;
+
+        }
+        & h3 {
+          font-size: 15px;
+          line-height: 24px;
+
+        }
+        & h4 {
+          font-size: 12px;
+          line-height: 19px;
+
+        }
+        & h5 {
+          font-size: 9px;
+          line-height: 15px;
+
+        }}
+      @media (max-width: 600px) {
+        font-size: 14px;
+        line-height: 23px;
+        & p, &, & label {
+          font-size: 14px;
+          line-height: 23px;
+
+        }
+        & h1 {
+          font-size: 37px;
+          line-height: 60px;
+
+        }
+        & h2 {
+          font-size: 23px;
+          line-height: 37px;
+
+        }
+        & h3 {
+          font-size: 18px;
+          line-height: 29px;
+
+        }
+        & h4 {
+          font-size: 14px;
+          line-height: 23px;
+
+        }
+        & h5 {
+          font-size: 11px;
+          line-height: 18px;
+
+        }}
+      @media (max-width: 767px) {
+        font-size: 15px;
+        line-height: 24px;
+        & p, &, & label {
+          font-size: 15px;
+          line-height: 24px;
+
+        }
+        & h1 {
+          font-size: 39px;
+          line-height: 63px;
+
+        }
+        & h2 {
+          font-size: 24px;
+          line-height: 19px;
+
+        }
+        & h3 {
+          font-size: 19px;
+          line-height: 31px;
+
+        }
+        & h4 {
+          font-size: 15px;
+          line-height: 24px;
+
+        }
+        & h5 {
+          font-size: 12px;
+          line-height: 19px;
+
+        }}
+      @media (min-width: 768px) {
+        font-size: 16px;
+        line-height: 26px;
+        & p, &, & label {
+          font-size: 16px;
+          line-height: 26px;
+
+        }
+        & h1 {
+          font-size: 42x;
+          line-height: 68px;
+
+        }
+        & h2 {
+          font-size: 26px;
+          line-height: 42px;
+
+        }
+        & h3 {
+          font-size: 20px;
+          line-height: 32px;
+
+        }
+        & h4 {
+          font-size: 16px;
+          line-height: 26px;
+
+        }
+        & h5 {
+          font-size: 13px;
+          line-height: 21px;
+
+        }}
+      @media (min-width: 980px) {
+        font-size: 17px;
+        line-height: 28px;
+        & p, &, & label {
+          font-size: 17px;
+          line-height: 28px;
+
+        }
+        & h1 {
+          font-size: 45px;
+          line-height: 79px;
+
+        }
+        & h2 {
+          font-size: 28px;
+          line-height: 45px;
+
+        }
+        & h3 {
+          font-size: 22px;
+          line-height: 36px;
+
+        }
+        & h4 {
+          font-size: 17px;
+          line-height: 28px;
+
+        }
+        & h5 {
+          font-size: 13px;
+          line-height: 21px;
+
+        }}
+      @media (min-width: 1200px) {
+        font-size: 21px;
+        line-height: 34px;
+        & p, &, & label {
+          font-size: 21px;
+          line-height: 34px;
+        }
+        & h1 {
+          font-size: 55px;
+          line-height: 89px;
+
+        }
+        & h2 {
+          font-size: 34px;
+          line-height: 55px;
+
+        }
+        & h3 {
+          font-size: 27px;
+          line-height: 44px;
+
+        }
+        & h4 {
+          font-size: 21px;
+          line-height: 34px;
+
+        }
+        & h5 {
+          font-size: 17px;
+          line-height: 28px;
+
+        }
+      }
+    }
+}
+
 #bio {
   & img {
     width: 300px;
@@ -15,41 +280,163 @@
 
 @import url(https://fonts.googleapis.com/css?family=Arvo:400,400italic);
 @import url(https://fonts.googleapis.com/css?family=Kaushan+Script);
-#one {
+.zIndex4, .zIndex3, .zIndex2, .zIndex1 {
+  transition: all 1s;
+}
+.zIndex4 {
+  z-index: 4;
+}
+
+.zIndex3 {
+  z-index: 3;
+}
+
+.zIndex2 {
+  z-index: 2;
+}
+
+.zIndex1 {
+  z-index: 1;
+}
+
+#bio .biotron {
+  margin-top: 1em;
+  border: $p 5px solid;
+  border-radius: 5px;
+  background: white;
+  text-align: left;
+  text-indent: 50px;
+  padding: 1.5em 2.75em;
+  @media (max-width: 600px) {
+    text-indent: 20px;
+  }
+  & h1 {
+  text-indent: 0px;
+    text-align: center;
+    font-family: 'Kaushan Script', cursive;
+  }
+}
+#one, #two, #three {
   transform-origin: center;
-  transform: rotate(15deg) translateX(-30px);
+    position: relative;
+}
+#one {
+  transform: rotate(-15deg) translate(10px, 15px);
+}
+#one.move {
+  animation: oneSlide 1s linear forwards;
+}
+#one.out {
+  animation: oneSlide 1s linear reverse;
 }
 
 #two {
-  transform-origin: center;
-  transform: rotate(-15deg) translateX(30px);
+  transform: rotate(-20deg) translate(-110px, -15px);
+}
+#two.out {
+  animation: twoSlide 1s linear backwards;
 }
 
-#three {
-  position: absoulte;
-  z-index: 100;
+#three.move {
+  animation: threeSlide 1s linear forwards;
 }
+#three.out {
+  animation: threeSlide 1s linear backwards;
+}
+@-webkit-keyframes oneSlide {
+0% {}
+50% {transform: rotate(-10deg) translate(400px, 5px);}
+100% {}
+}
+@keyframes oneSlide {
+0% {}
+50% {transform: rotate(-10deg) translate(400px, 5px);}
+100% {}
+}
+@-webkit-keyframes twoSlide {
+0% {}
+50% {transform: translate(-475px, -15px) rotate(-15deg);}
+100% {}
+}
+@keyframes twoSlide {
+0% {}
+50% {transform: translate(-475px, -15px) rotate(-15deg);}
+100% {}
+}
+@-webkit-keyframes threeSlide {
+0% {}
+50% {transform: rotate(5deg) translate(24px, -450px);}
+100% {}
+}
+@keyframes threeSlide {
+0% {}
+50% {transform: rotate(5deg) translate(24px, -450px);}
+100% {}
+}
+
+@-webkit-keyframes threeSlideMobile {
+0% {}
+50% {transform: rotate(5deg) translate(24px, -225px);}
+100% {}
+}
+@keyframes threeSlideMobile {
+0% {}
+50% {transform: rotate(5deg) translate(24px, -225px);}
+100% {}
+}
+@-webkit-keyframes twoSlideMobile {
+0% {}
+50% {transform: rotate(5deg) translate(0px, -225px); transform-origin: center;}
+100% {}
+}
+@keyframes twoSlideMobile {
+0% {}
+50% {transform: rotate(5deg) translate(0px, -225px); transform-origin: center;}
+100% {}
+}
+@-webkit-keyframes oneSlideMobile {
+0% {}
+50% {transform: rotate(5deg) translate(24px, -225px);}
+100% {}
+}
+@keyframes oneSlideMobile {
+0% {}
+50% {transform: rotate(5deg) translate(24px, -225px);}
+100% {}
+}
+
 #bio #bioCards {
   margin: auto;
-  height: 375px;
+  height: 420px;
 }
-@media (max-width: 480px) {
+@media (max-width: 600px) {
   #one {
-    transform: rotate(10deg) translateX(-20px);
+    transform: rotate(-10deg) translate(10px, 10px);
   }
 
   #two {
-    transform: rotate(-10deg) translateX(20px);
+    transform: rotate(10deg) translate(0px, 20px);
   }
 
   #three {
-    position: absoulte;
-    z-index: 100;
+    transform: translate(0px, -10px);
   }
   #bio #bioCards {
     max-width: 250px;
-    height: 200px;
+    height: 230px;
   }
+}
+
+@media (max-width: 600px) {
+#one.out {
+  animation: oneSlideMobile 1.3s linear forwards;
+}
+#two.out {
+  animation: twoSlideMobile 1.3s linear forwards;
+}
+#three.out {
+  animation: threeSlideMobile 1.3s linear forwards;
+}
 }
 body {
   background-color:rgb(67,132,183);
@@ -101,61 +488,62 @@ body {
   cursor: pointer;
   color: rgb(66,62,128);
 }
-// CHANGE SMALLER SCREENS
-@media (max-width: 480px), (max-height: 480px) and (orientation: landscape) {
+    // CHANGE SMALLER SCREENS
+@media (max-width: 600px), (max-height: 480px) and (orientation: landscape) {
 
-& .threeD .flip {
-  perspective: 300px;
-  perspective-orgin: center;
-}
-
-& .card-container {
-  transform-style: preserve-3d;
-  transform-orgin: center;
-}
-
-& .imgBackground.backside.cobra::after {
-  background: url(http://coolblackppt.com/wp-content/uploads/king-cobra-snake-20150419110955-55338d037e72e-150x150.jpg);
-}
-    & .card, & .card-container {
-      min-width: 180px;
-      max-width: 175px;
-  }
-  & .row {
-    margin: auto;
-    padding: 0;
-  }
-  & .card img, & .floatSingleItem img {
-      width: 150px;
-      height: 150px;
-      margin: 0.5em auto;
-    }
-    & button.btnProductDisplay {
-      margin-bottom: .75em;
-      margin-top: .25em;
-      font-size: 14px;
-      padding: .05em;
-    }
-    & .card p.title {
-      font-size: 2em;
-      left: 15px;
-     bottom: 20px;
+    & .threeD .flip {
+      perspective: 300px;
+      perspective-orgin: center;
     }
 
-    & span.learnMore:after {
-      content: '';
+    & .card-container {
+      transform-style: preserve-3d;
+      transform-orgin: center;
     }
 
-& .card p.highlight {
-  // CHANGE Highlight Color !!!SMALLER MEDIA SCREENS
-  background-color: rgba(255,255,255, 0.55);
-  // CHANGE Length of the Highlight !!!SMALLER MEDIA SCREENS
-  padding-right: 10px;
-  padding-left: 0px;
-  padding-top: 0px;
-  padding-bottom: 0px;
-}
-  }
+    & .imgBackground.backside.cobra::after {
+      background: url(http://coolblackppt.com/wp-content/uploads/king-cobra-snake-20150419110955-55338d037e72e-150x150.jpg);
+    }
+        & .card, & .card-container {
+          min-width: 180px;
+          max-width: 175px;
+          margin-bottom: 2em;
+      }
+      & .row {
+        margin: auto;
+        padding: 0;
+      }
+      & .card img, & .floatSingleItem img {
+          width: 150px;
+          height: 150px;
+          margin: 0.5em auto;
+        }
+        & button.btnProductDisplay {
+          margin-bottom: .75em;
+          margin-top: .25em;
+          font-size: 14px;
+          padding: .05em;
+        }
+        & .card p.title {
+          font-size: 2em;
+          left: 15px;
+         bottom: 20px;
+        }
+
+        & span.learnMore:after {
+          content: '';
+        }
+
+    & .card p.highlight {
+      // CHANGE Highlight Color !!!SMALLER MEDIA SCREENS
+      background-color: rgba(255,255,255, 0.55);
+      // CHANGE Length of the Highlight !!!SMALLER MEDIA SCREENS
+      padding-right: 10px;
+      padding-left: 0px;
+      padding-top: 0px;
+      padding-bottom: 0px;
+    }
+      }
 
 & .floatSingleItem button {
   position: absolute;
@@ -163,13 +551,13 @@ body {
   right: 10px;
       margin-bottom: 0;
 }
-}
-div.fivehundredpx {
+  }
+#bio div.fivehundredpx {
   text-align: center;
   margin: 0 auto;
   position: relative;
   height: 500px;
-  @media (max-width: 480px), (max-height: 480px) and (orientation: landscape) {
+  @media (max-width: 600px), (max-height: 480px) and (orientation: landscape) {
     height: 250px;
   }
 }

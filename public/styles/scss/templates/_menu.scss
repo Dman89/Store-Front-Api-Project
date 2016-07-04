@@ -8,3 +8,11 @@
   cursor: none;
   pointer-events: none;
 }
+.navbar-brand {
+  color: $h;
+  border-radius: 100%;
+  border: $ha 1px solid;
+  @media (max-width: 480px) {
+    margin:  5px;
+  }
+}

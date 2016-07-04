@@ -1,0 +1,42 @@
+Cart
+                        Style
+                        Disable Checkout
+Checkout Review
+                        Style
+                        Save Billing as Shipping
+                        Save User
+Checkout Page
+                        Checkout
+                        Save User
+Confirmation
+                        Style
+Add To Cart
+                        Edit Inventory
+                        Disable
+Admin Panel Posts
+                        Save Posts
+                        New Posts
+                        Style
+                        Delete Posts
+Admin Panel Users
+                        Save User (Admin Status)
+                        Delete User (Temporary)
+                        Style
+Admin Panel Products
+                        Style
+                        Edit
+                        Save Item
+                        New Item
+                        Edit Item Page
+Products
+                        In Stock Model
+                        Style “In Stock”
+                        Quantity
+                        Quantity Select
+Portfolio
+                        Link to Individual Picture
+Home Page
+                        Carousel
+                        CTA
+                        Photos
+                        Upcoming Events

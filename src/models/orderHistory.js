@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var orderHistorySchema = {
+var order = {
   date:
     {
       type: Date,
@@ -45,6 +45,9 @@ var orderHistorySchema = {
     shippingAddress: {name: {type: String}, address: {type: String}, city: {type: String}, state: {type: String}, zip:{type: String}, country: {type: String}, useBilling: {type: Boolean}},
     charge: { type: Object }
 };
+
+var orderHistorySchema = new mongoose.Schema(order);
+
 
 
 var model = mongoose.model('OrderHistory', orderHistorySchema);

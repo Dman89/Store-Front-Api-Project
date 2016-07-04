@@ -49,7 +49,11 @@ angular.module("lionHeart")
       };
   this.newUser = function(user) {
     $http.post('/api/users', user)
-  }
+  };
+  this.saveUser = function(user, callback) {
+  $http.put('/api/profile', user)
+  .then(callback)
+  };
     this.getOrderHistory = function(callback) {
       $http.get("/api/cart/history")
       .then(callback)
@@ -63,7 +67,7 @@ angular.module("lionHeart")
       .then(callback)
     };
     this.updateCart = function(a, b) {
-      $http.post("/api/user/cart", a)
+      $http.put("/api/user/cart", a)
       .then(b)
     };
   this.checkout = function(token, callback) {
