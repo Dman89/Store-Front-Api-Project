@@ -1,7 +1,7 @@
 <div class="row text-center" id="cart">
   <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <h1 class="text-left">Cart</h1>
-    <div class="row innerRow">
+    <div class="row">
       <div class="col-xs-12" ng-repeat="item in cartA.items">
         <div class="row">
           <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
@@ -21,7 +21,7 @@
             <span id="stock" class="">In Stock</span>
           </div>
           <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1">
-          {{item.product.displayPrice}}
+            {{item.product.displayPrice}}
           </div>
         </div>
       </div>
@@ -96,4 +96,3 @@
         </div>
       </div>
     </div>
-  </div>

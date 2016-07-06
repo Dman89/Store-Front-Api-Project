@@ -5457,7 +5457,6 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("bioCtrl", function($scope, dataService) {
-	// You posse everything a real women has, a loving touch, determined nurturing character, and a gourgous vibrant soul. When I first laid eyes on you, I was attracted to your vibration. Once I began to get to know you I understood what I felt that night. I began falling in love with you in every moment, by your side. I know I want something more with you, I always have. I just have never told you and planned on telling you Wednesday night. I love your Being with my whole soul and now, you are free. I know you will find everything you are lookin for in life, I believe in you. When I said, "if it is meant to be, we will end up together" I believed we would. When your friend said I was your soulmate did you believe?
 	function pushOut(card) {
 	  if (card == 1) {
 	    var card = one;
