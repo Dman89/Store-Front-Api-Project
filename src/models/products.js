@@ -7,7 +7,6 @@ var product = {
   name: { type: String},
   weight: { type: Number, default: 0.2 },
   size: { type: Number, default: 1 },
-  // Pictures must start with "http://"
   pictures: [{ type: String}],
   price: {
     amount: {
@@ -36,7 +35,8 @@ var product = {
     approximatePriceUSD: Number
   },
   urlCode: {type: String, required: true, lowercase: true, unique: true},
-  sku: {type: String, required: true, lowercase: true, unique: true}
+  sku: {type: String, required: true, lowercase: true, unique: true},
+  quantity: {type: Number, required: true}
 };
 
 var productSchema = new mongoose.Schema(product);

@@ -51,32 +51,82 @@ img {
 #confirmationPage .redirect {
   margin-top: 5em; }
 
-#category input.quanity {
+#cart input.quantity {
   width: 50px; }
-#category img.thumb {
+#cart img.thumb {
   width: 200px;
   height: 200px; }
-#category div.title, #category div.title a, #category div.title a h3 {
+#cart div.title, #cart div.title a, #cart div.title a h3 {
   text-align: left; }
   @media (max-width: 900px) {
-    #category div.title, #category div.title a, #category div.title a h3 {
+    #cart div.title, #cart div.title a, #cart div.title a h3 {
       text-align: center; } }
-#category div.innerRow {
+#cart div.innerRow {
   padding: 0 2.5%; }
   @media (max-width: 900px) {
-    #category div.innerRow {
+    #cart div.innerRow {
       padding: 0 1%; } }
-#category input.zipcode {
+#cart input.zipcode {
   width: 80px;
   margin: 1em auto; }
-#category div.zipcode {
+#cart div.zipcode {
   text-align: center; }
   @media (min-width: 668px) {
-    #category div.zipcode {
+    #cart div.zipcode {
       text-align: left; } }
-#category div.row div.innerShipping {
+#cart div.row div.innerShipping {
   padding: 0 1em;
   text-align: left; }
+#cart .cartNoItems {
+  margin-top: 2em;
+  border: #061115 4px solid;
+  padding: 25vh 4vw; }
+  #cart .cartNoItems a {
+    color: #061115; }
+  #cart .cartNoItems h1 {
+    font-size: 10vh; }
+#cart h1.title {
+  font-family: "Kaushan Script", cursive;
+  position: absolute;
+  background-color: #f9be36;
+  border-radius: 5px;
+  padding: 0em 0.5em; }
+#cart h1.highlight {
+  transform: rotate(-3deg);
+  margin: auto; }
+#cart .spacerA {
+  margin-top: 2.5em;
+  height: 75px; }
+#cart .itemStart {
+  margin-top: 50px; }
+#cart .disableArrow {
+  display: none; }
+#cart #stock.inStock::after {
+  color: green;
+  content: 'In Stock'; }
+#cart #stock.outStock::after {
+  color: red;
+  content: 'Out Of Stock'; }
+@media (max-width: 992px) {
+  #cart .title h2 {
+    text-align: center; } }
+#cart .cartSpacer {
+  margin: 1.75em auto; }
+  @media (max-width: 767px), (max-height: 530px) and (orientation: landscape) {
+    #cart .cartSpacer {
+      margin: 1em auto; } }
+#cart .cartButton {
+  border-radius: 4px; }
+#cart div.row div.innerShipping {
+  padding: .5em 1em;
+  text-align: left;
+  border: #1a3e73 4px solid;
+  border-radius: 4px;
+  margin: 1.75em auto; }
+#cart .cartRight {
+  text-align: right; }
+#cart #checkoutBtn {
+  margin: 2em auto 5em; }
 
 #orderHistory .closeOut {
   cursor: pointer;
@@ -1056,175 +1106,175 @@ button.btnCart {
     transform: rotateY(0deg); }
   100% {
     transform: rotateY(-180deg); } }
-#bio .titleOH {
+#ui-view #bio .titleOH {
   width: 100px; }
   @media (min-width: 600px) {
-    #bio .titleOH {
+    #ui-view #bio .titleOH {
       width: 160px; } }
   @media (min-width: 768px) {
-    #bio .titleOH {
+    #ui-view #bio .titleOH {
       width: 200px; } }
-#bio h1.title {
+#ui-view #bio h1.title {
   font-family: "Kaushan Script", cursive;
   position: absolute;
   background-color: #f9be36;
   border-radius: 5px;
   padding: 0em 0.5em; }
-#bio h1.highlight {
+#ui-view #bio h1.highlight {
   transform: rotate(-3deg);
   margin: auto; }
 @media (max-width: 400px) {
-  #bio {
+  #ui-view #bio {
     font-size: 9px;
     line-height: 15px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 9px;
       line-height: 15px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 24px;
       line-height: 39px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 15px;
       line-height: 24px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 11px;
       line-height: 18px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 9px;
       line-height: 15px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 7px;
       line-height: 11px; } }
 @media (max-width: 530px) {
-  #bio {
+  #ui-view #bio {
     font-size: 12px;
     line-height: 19px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 12px;
       line-height: 19px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 31px;
       line-height: 50px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 19px;
       line-height: 31px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 15px;
       line-height: 24px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 12px;
       line-height: 19px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 9px;
       line-height: 15px; } }
 @media (max-width: 600px) {
-  #bio {
+  #ui-view #bio {
     font-size: 14px;
     line-height: 23px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 14px;
       line-height: 23px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 37px;
       line-height: 60px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 23px;
       line-height: 37px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 18px;
       line-height: 29px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 14px;
       line-height: 23px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 11px;
       line-height: 18px; } }
 @media (max-width: 767px) {
-  #bio {
+  #ui-view #bio {
     font-size: 15px;
     line-height: 24px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 15px;
       line-height: 24px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 39px;
       line-height: 63px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 24px;
       line-height: 19px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 19px;
       line-height: 31px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 15px;
       line-height: 24px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 12px;
       line-height: 19px; } }
 @media (min-width: 768px) {
-  #bio {
+  #ui-view #bio {
     font-size: 16px;
     line-height: 26px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 16px;
       line-height: 26px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 42x;
       line-height: 68px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 26px;
       line-height: 42px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 20px;
       line-height: 32px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 16px;
       line-height: 26px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 13px;
       line-height: 21px; } }
 @media (min-width: 980px) {
-  #bio {
+  #ui-view #bio {
     font-size: 17px;
     line-height: 28px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 17px;
       line-height: 28px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 45px;
       line-height: 79px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 28px;
       line-height: 45px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 22px;
       line-height: 36px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 17px;
       line-height: 28px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 13px;
       line-height: 21px; } }
 @media (min-width: 1200px) {
-  #bio {
+  #ui-view #bio {
     font-size: 21px;
     line-height: 34px; }
-    #bio p, #bio, #bio label {
+    #ui-view #bio p, #ui-view #bio, #ui-view #bio label {
       font-size: 21px;
       line-height: 34px; }
-    #bio h1 {
+    #ui-view #bio h1 {
       font-size: 55px;
       line-height: 89px; }
-    #bio h2 {
+    #ui-view #bio h2 {
       font-size: 34px;
       line-height: 55px; }
-    #bio h3 {
+    #ui-view #bio h3 {
       font-size: 27px;
       line-height: 44px; }
-    #bio h4 {
+    #ui-view #bio h4 {
       font-size: 21px;
       line-height: 34px; }
-    #bio h5 {
+    #ui-view #bio h5 {
       font-size: 17px;
       line-height: 28px; } }
 
@@ -2465,6 +2515,59 @@ body {
 #useBill.red:after {
   content: "Do Not Use Billing Address"; }
 
+.next-buttons div {
+  text-align: center;
+  margin: 2em auto; }
+
+#reviewUseBilling.greena {
+  color: green; }
+
+#reviewUseBilling.reda {
+  color: red; }
+
+.thumbAnimation {
+  transition: opacity .15s ease-in-out;
+  -moz-transition: opacity .15s ease-in-out;
+  -webkit-transition: opacity .15s ease-in-out; }
+  .thumbAnimation.showAnimation {
+    opacity: 1; }
+  .thumbAnimation.hideAnimation {
+    opacity: 0; }
+
+.itemDelete {
+  perspective: 1000px;
+  -webkit-perspective: 1000px;
+  perspective-origin: 50% 50%;
+  -webkit-perspective-origin: 50% 50%; }
+  .itemDelete .item {
+    animation: deleteItem 1s ease-out forwards; }
+
+@keyframes deleteItem {
+  from {
+    transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -moz-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -webkit-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -o-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  to {
+    transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -moz-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); } }
+@-webkit-keyframes deleteItem {
+  from {
+    transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -moz-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -webkit-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -o-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
+  to {
+    transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -moz-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
+    -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); } }
 .hexagon {
   position: relative;
   width: 300px;

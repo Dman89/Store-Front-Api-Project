@@ -173,7 +173,8 @@ webpackJsonp([0],[
 	      })
 	      .state('cart.checkout', {
 	      url: '/checkout',
-	      templateUrl: 'templates/checkout/checkout.html'
+	      templateUrl: 'templates/checkout/checkout.html',
+	      controller: 'cart.checkoutCtrl'
 	      })
 	      .state('cart.confirmation', {
 	      url: '/confirmation',
@@ -5106,22 +5107,24 @@ webpackJsonp([0],[
 	  dataService.getCart(function(response) {
 	    $scope.cartA = response.data.cart.data.cart;
 	    var cart = $scope.cartA.items;
-	    var user = $scope.user;
+	    $scope.UserWithCart = response.data.cart;
+	    var user = $scope.UserWithCart;
+	    $scope.user = $scope.UserWithCart;
 	    cartTotal(cart, user)
 	  });
-	dataService.getUser(function(response) {
-	  $scope.user = response.data.user;
-	});
 	$scope.deleteCartItem = function(index) {
-	  $scope.user.data.cart.items.splice(index, 1);
-	  var user = $scope.user;
+	  setTimeout(function(index) {
+	  $scope.UserWithCart.data.cart.items.splice(index, 1);
+	  var user = $scope.UserWithCart;
 	  dataService.updateCart(user, function(response) {});
 	  dataService.getCart(function(response) {
 	    $scope.cartA = response.data.cart.data.cart;
 	    var cart = $scope.cartA.items;
-	    var user = $scope.user;
+	    $scope.UserWithCart = response.data.cart;
+	    var user = $scope.UserWithCart;
 	    cartTotal(cart, user)
-	  });
+	  })
+	}, 1001);
 	}
 	$scope.stripeToken = {stripeToken: {
 	  number: '4242424242424242',
@@ -5130,6 +5133,13 @@ webpackJsonp([0],[
 	  exp_year: '2016'
 	}
 	};
+	// Review Page: < > Arrow's function to save User Data
+	$scope.saveSetUp = function() {
+	  // Get User / Cart
+	  var aUser = $scope.user;
+	  // Save User / Cart
+	  dataService.updateCart(aUser, function(response) {});
+	}
 	$scope.checkout = function() {
 	  var stripeToken = $scope.stripeToken;
 	  var tempLength = $scope.stripeToken.stripeToken.number.length;
@@ -5141,6 +5151,7 @@ webpackJsonp([0],[
 	    $scope.statusCharge = false;
 	  }
 	  });
+	  // Reset Token
 	  $scope.stripeToken = {stripeToken: {
 	    number: '',
 	    cvc: '',
@@ -5150,29 +5161,64 @@ webpackJsonp([0],[
 	}
 	var sub = function (cart, user, sub) {
 	  var total = 0;
+	  var len = 0;
 	  for (var x = 0; x < cart.length; x++) {
-	          total += cart[x].product.subTotal;
+	          var price = cart[x].product.subTotal;
+	          var quantity = cart[x].quantity;
+	          cart[x].total = price * quantity;
+	          total += price * quantity;
+	          len += quantity;
 	        }
-	  sub(total, user);
+	  sub(total, user, len);
 	}
 	var cartTotal = function(cart, user) {
 	  var tax = 0;
 	  var total = 0;
 	  var shipping = 0;
-	  sub(cart, user, function(sub, user) {
-	    var tax = sub * .1;
-	    var total = sub + tax;
-	    user.data.cart.subTotal = sub;
+	  sub(cart, user, function(aSubTotal, user, len) {
+	    var newSubtotal = aSubTotal
+	    newSubtotal = Number(newSubtotal.toFixed(2));
+	    var tax = newSubtotal * .1;
+	    tax = Number(tax.toFixed(2));
+	    var total = newSubtotal + tax;
+	    total = Number(total.toFixed(2));
+	    user.data.cart.subTotal = newSubtotal;
 	    user.data.cart.tax = tax;
 	    user.data.cart.total = total;
 	    user.data.cart.shipping = shipping;
-	    user.data.cart.len = cart.length;
-	    dataService.updateCart(user, function(response) {});
-	    $scope.cartA.subTotal = sub;
-	    $scope.cartA.tax = tax;
-	    $scope.cartA.total = total;
-	    $scope.cartA.shipping = shipping;
+	    user.data.cart.len = len;
+	    dataService.updateCart(user, function(response) {
+	      $scope.cartA.total = response.data.user.data.cart.total;
+	    });
 	  })
+	}
+	$scope.quantityTotalAddition = function(index) {
+	  if ($scope.UserWithCart.data.cart.items[index].product.quantity > $scope.UserWithCart.data.cart.items[index].quantity) {
+	    $scope.UserWithCart.data.cart.items[index].quantity += 1;
+	    var userWithCart = $scope.UserWithCart
+	    dataService.updateCart(userWithCart, function(response) {});
+	    dataService.getCart(function(response) {
+	      $scope.cartA = response.data.cart.data.cart;
+	      var cart = $scope.cartA.items;
+	      $scope.UserWithCart = response.data.cart;
+	      var user = $scope.UserWithCart;
+	      cartTotal(cart, user)
+	    });
+	  }
+	}
+	$scope.quantityTotalMinus = function(index) {
+	  if ($scope.UserWithCart.data.cart.items[index].quantity > 1) {
+	    $scope.UserWithCart.data.cart.items[index].quantity -= 1;
+	    var userWithCart = $scope.UserWithCart;
+	    dataService.updateCart(userWithCart, function(response) {});
+	    dataService.getCart(function(response) {
+	      $scope.cartA = response.data.cart.data.cart;
+	      var cart = $scope.cartA.items;
+	      $scope.UserWithCart = response.data.cart;
+	      var user = $scope.UserWithCart;
+	      cartTotal(cart, user)
+	    });
+	  }
 	}
 	});
 
@@ -5457,7 +5503,6 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("bioCtrl", function($scope, dataService) {
-	// You posse everything a real women has, a loving touch, determined nurturing character, and a gourgous vibrant soul. When I first laid eyes on you, I was attracted to your vibration. Once I began to get to know you I understood what I felt that night. I began falling in love with you in every moment, by your side. I know I want something more with you, I always have. I just have never told you and planned on telling you Wednesday night. I love your Being with my whole soul and now, you are free. I know you will find everything you are lookin for in life, I believe in you. When I said, "if it is meant to be, we will end up together" I believed we would. When your friend said I was your soulmate did you believe?
 	function pushOut(card) {
 	  if (card == 1) {
 	    var card = one;
@@ -6102,7 +6147,7 @@ webpackJsonp([0],[
 	  $scope.cart = response.data.cart;
 	  });
 	dataService.getUser(function(response) {
-	  $scope.user = response.data.user;
+	  $scope.userCheckout = response.data.user;
 	});
 	});
 

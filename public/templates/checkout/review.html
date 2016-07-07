@@ -1,48 +1,8 @@
-<div class="row">
-  <div class="col-xs-12">
+<div class="row" id="profile">
+  <div class="" id="dashboard">
+  <div class="divider"><h1 class="title highlight">Billing Address</h1></div>
+  <div class="col-xs-12 footing">
     <div class="row">
-      <div class="col-xs-12">
-        <img ng-src="{{user.profile.picture}}" alt="" style="height: 50px; width: 50px;"/>
-      </div>
-      <div class="col-xs-12">
-        <h3>{{user.profile.displayName}}</h3>
-      </div>
-    </div>
-  </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-      Display Name:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.profile.displayName}}</label><input type="text" ng-model="user.profile.displayName" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Username:<br/><label class="profileUserName">{{user.profile.username}}</label><input type="text" ng-model="user.profile.username" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Picture:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.profile.picture}}</label><input type="text" ng-model="user.profile.picture" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-    </div>
-  </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-    <div class="col-xs-12 col-sm-4">
-    First Name:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.data.firstName}}</label><input type="text" ng-model="user.data.firstName" ng-blur="editing = false;" ng-show="editing"/>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-    Last Name:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.data.lastName}}</label><input type="text" ng-model="user.data.lastName" ng-blur="editing = false;" ng-show="editing"/>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-    Email:<br/><label class="profileUserName">{{user.data.email[0]}}</label><input type="text" ng-model="user.data.username" ng-blur="editing = false;" ng-show="editing"/>
-    </div>
-    </div>
-  </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        Billing Address:
-      </div>
       <div class="col-xs-12 col-sm-4">
         <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.name}}</label><input type="text" ng-model="user.data.billingAddress.name" ng-blur="editing = false;" ng-show="editing"/>
       </div>
@@ -64,8 +24,8 @@
       </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
+  <div class="divider"><h1 class="title highlight">Shipping Address</h1></div>
+  <div class="col-xs-12 footingSA">
     <div class="row">
       <div class="col-xs-12">
         Shipping Address:
@@ -110,37 +70,31 @@
             <label>{{user.data.billingAddress.country}}</label>
           </div>
         </div>
-      <div class="col-xs-12">
-        Use Billing Address:<br/><input type="checkbox" ng-model="user.data.shippingAddress.useBilling"/>
+      <div class="col-xs-12 col-sm-4 col-sm-offset-8">
+        <button type="button" class="abtn" ng-click="user.data.shippingAddress.useBilling = !user.data.shippingAddress.useBilling" id="useBill">
+        <label ng-class="{'greena': user.data.shippingAddress.useBilling, 'reda': !user.data.shippingAddress.useBilling}" id="reviewUseBilling">Use Billing <span class="thumbAnimation" ng-class="{'showAnimation': user.data.shippingAddress.useBilling, 'hideAnimation': !user.data.shippingAddress.useBilling}"><i class="fa fa-thumbs-up"></i></span><span class="thumbAnimation" ng-class="{'showAnimation': !user.data.shippingAddress.useBilling, 'hideAnimation': user.data.shippingAddress.useBilling}"><i class="fa fa-thumbs-down"></i></span></label></button>
       </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
+  <div class="divider"><h1 class="title highlight">Payment</h1></div>
   <div class="col-xs-12">
     <div class="row">
     <div class="col-xs-12 col-sm-6">
     Number:<br/><input type="text" ng-model="stripeToken.stripeToken.number"/><br/>
-    CVC:<br/><input type="text" ng-model="stripeToken.stripeToken.cvc"/><br/>
+    CVC:<br/><input type="text" ng-model="stripeToken.stripeToken.cvc" maxlength="3"/><br/>
     </div>
     <div class="col-xs-12 col-sm-6">
-    Exp Month/Year:<br/><input type="text" ng-model="stripeToken.stripeToken.exp_month"/>/<input type="text" ng-model="stripeToken.stripeToken.exp_year"/>
+    Exp Month/Year:<br/><input type="text" ng-model="stripeToken.stripeToken.exp_month" maxlength="2"/>/<input type="text" ng-model="stripeToken.stripeToken.exp_year" maxlength="4"/>
     </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-    <div class="col-xs-12 col-sm-6">
-    emailMailingList:<br/><input type="checkbox" ng-model="user.data.emailMailingList"/>
+  <div class="col-xs-12 next-buttons">
+    <div class="col-xs-6">
+      <button ui-sref="cart.view" type="button" class="abtn btn-success" ng-click="saveSetUp()"><i class="fa fa-arrow-left"></i> Back</button>
     </div>
-    <div class="col-xs-12 col-sm-6">
-    researchAndDevelopment:<br/><input type="checkbox" ng-model="user.data.researchAndDevelopment" />
-    </div>
+    <div class="col-xs-6">
+    <button ui-sref="cart.checkout" type="button" class="abtn btn-success" ng-click="saveSetUp()">Next <i class="fa fa-arrow-right"></i></button>
     </div>
   </div>
-
-  <div class="col-xs-12">
-    <button ui-sref="cart.view" type="button" class="abtn btn-success"><i class="fa fa-arrow-left"></i> Back</button>
-    <button ui-sref="cart.checkout" type="button" class="abtn btn-success">Next <i class="fa fa-arrow-right"></i></button>
-  </div>
+</div>
 </div>

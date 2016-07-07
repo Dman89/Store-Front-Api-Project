@@ -1,0 +1,37 @@
+.next-buttons div {
+  text-align: center;
+  margin: 2em auto;
+}
+#reviewUseBilling.greena {
+  color: green;
+}
+#reviewUseBilling.reda {
+  color: red;
+}
+.thumbAnimation {
+    transition: opacity .15s ease-in-out;
+   -moz-transition: opacity .15s ease-in-out;
+   -webkit-transition: opacity .15s ease-in-out;
+  &.showAnimation {
+      opacity: 1;
+  }
+  &.hideAnimation {
+      opacity: 0;
+  }
+}
+.itemDelete {
+perspective: 1000px;-webkit-perspective: 1000px; perspective-origin: 50% 50%; -webkit-perspective-origin: 50% 50%;
+  & .item {
+    animation: deleteItem 1s ease-out forwards
+}
+}
+@keyframes deleteItem {
+from {transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); -moz-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); -webkit-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+-o-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); -ms-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+to {transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -moz-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);}
+}
+@-webkit-keyframes deleteItem {
+from {transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); -moz-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); -webkit-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+-o-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg); -ms-transform: scaleX(1) scaleY(1) scaleZ(1) rotateX(0deg) rotateY(0deg) rotateZ(0deg);}
+to {transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -moz-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);}
+}
