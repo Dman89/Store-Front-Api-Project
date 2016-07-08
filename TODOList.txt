@@ -8,14 +8,16 @@ Cart
                                 go to product page of random number (get)
     (Completed)         Up/Down Quality for Items
 
-
 Checkout Review
-                        Style
-    (Completed)         Save Billing as Shipping
+    (Completed)         Style
     (Completed)         Save User
+
+
+
 Checkout Page
                         Checkout
                         Save User
+                        Save Billing as Shipping
                         Check Product Availability
                         Set Product Quantity
 Confirmation
