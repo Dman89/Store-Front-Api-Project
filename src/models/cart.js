@@ -10,7 +10,8 @@ var cart = {
           type: Number,
           default: 1,
           min: 1
-        }
+        },
+        total: {type: Number}
       }],
   subTotal: {
     type: Number,

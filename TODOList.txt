@@ -1,13 +1,23 @@
 Cart
-                        Style
-                        Disable Checkout
+    (Completed)         Style
+    (Completed)         Disable Checkout
+  Optional/Later Date   View a Random Item
+                                Pull product lists
+                                (for) save the id's to an array
+                                call random number
+                                go to product page of random number (get)
+    (Completed)         Up/Down Quality for Items
+
+
 Checkout Review
                         Style
-                        Save Billing as Shipping
-                        Save User
+    (Completed)         Save Billing as Shipping
+    (Completed)         Save User
 Checkout Page
                         Checkout
                         Save User
+                        Check Product Availability
+                        Set Product Quantity
 Confirmation
                         Style
 Add To Cart
@@ -40,3 +50,6 @@ Home Page
                         CTA
                         Photos
                         Upcoming Events
+Profile
+                        Email Add Button
+                        Email remove (not for zero)

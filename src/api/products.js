@@ -50,12 +50,12 @@ productRouter.put('/products/id/:id', function (req, res) {
 })
 productRouter.post('/products', function(req, res) {
   var product = req.body;
+  console.log(product);
   Products.create(product, function(err, product) {
     if (err) {
       return res.status(500).json({err: err.message});
     }
     res.send({'products': product, message: "Product Added"});
-    console.log('Product Added');
   })
 })
 productRouter.delete('/products/id/:id', function (req, res) {

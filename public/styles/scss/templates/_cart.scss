@@ -1,5 +1,5 @@
-#category {
-  & input.quanity {
+#cart {
+  & input.quantity {
     width: 50px;
   }
   & img.thumb {
@@ -31,5 +31,79 @@
   & div.row div.innerShipping {
     padding: 0 1em;
     text-align: left;
+  }
+  & .cartNoItems {
+    margin-top: 2em;
+    border: $b 4px solid;
+    padding: 25vh 4vw;
+    & a {
+      color: $b;
+    }
+    & h1 {
+      font-size: 10vh;
+    }
+  }
+
+  & h1.title {
+    font-family: $mainTitle;
+    position: absolute;
+    background-color: $h;
+    border-radius: 5px;
+    padding: 0em 0.5em;
+    @media (min-width: 1200px) {
+      }
+    @media (min-width: 982px) and (max-width: 1200px) {
+      }
+    @media (min-width: 768px) and (max-width: 981px) {
+      }
+  }
+  & h1.highlight {
+    transform: rotate(-3deg);
+    margin: auto;
+  }
+  & .spacerA {
+    margin-top: 2.5em;
+    height: 75px;
+  }
+  & .itemStart {
+    margin-top: 50px;
+  }
+  & .disableArrow {
+    display: none;
+  }
+  & #stock.inStock::after {
+    color: green;
+    content: 'In Stock';
+  }
+  & #stock.outStock::after {
+    color: red;
+    content: 'Out Of Stock';
+  }
+  & .title h2 {
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+  }
+  & .cartSpacer {
+    margin: 1.75em auto;
+      @media (max-width: 767px), (max-height: 530px) and (orientation: landscape) {
+        margin: 1em auto;
+      }
+  }
+  & .cartButton {
+    border-radius: 4px;
+  }
+  & div.row div.innerShipping {
+    padding: .5em 1em;
+    text-align: left;
+    border: $p 4px solid;
+    border-radius: 4px;
+    margin: 1.75em auto;
+  }
+  & .cartRight {
+    text-align: right;
+  }
+  & #checkoutBtn {
+    margin: 2em auto 5em;
   }
 }

@@ -113,7 +113,8 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
       })
       .state('cart.checkout', {
       url: '/checkout',
-      templateUrl: 'templates/checkout/checkout.html'
+      templateUrl: 'templates/checkout/checkout.html',
+      controller: 'cart.checkoutCtrl'
       })
       .state('cart.confirmation', {
       url: '/confirmation',
