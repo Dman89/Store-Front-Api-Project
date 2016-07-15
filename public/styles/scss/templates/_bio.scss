@@ -10,6 +10,7 @@
    }
    & h1.title {
      font-family: $mainTitle;
+     box-shadow: 1.5px 3px 4.5px rgba(0,0,0, .7);
      position: absolute;
      background-color: $h;
      border-radius: 5px;
@@ -167,7 +168,6 @@
         & p, &, & label {
           font-size: 16px;
           line-height: 26px;
-
         }
         & h1 {
           font-size: 42x;
@@ -472,7 +472,7 @@ body {
 .relative {
   position: relative;
 }
-#bio #cards {
+#html #body #ui-view #bio #cards {
 & .space {
   margin-top: 100px;
 }
@@ -570,7 +570,7 @@ body {
   padding-top: 0px;
   padding-bottom: 0px;
 }
-#bio .card p.title {
+#html #body #ui-view #bio .card p.title {
   font-family: 'Kaushan Script', cursive;
   position: absolute;
   bottom: 30px;

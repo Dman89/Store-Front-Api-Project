@@ -1,6 +1,10 @@
 'use strict';
 angular.module("lionHeart")
 .controller("indexHomeCtrl", function($scope, dataService) {
+
+
+
+
   $("#owl").owlCarousel({
 
         navigation : false, // Show next and prev buttons

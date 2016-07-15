@@ -1,6 +1,7 @@
 'use strict';
   angular.module("lionHeart")
     .controller("menuCtrl", function($scope, dataService, $location) {
+
       $(function(){
       var navMain = $("#myNavbar");
       var menuBar = $(".menuBar");

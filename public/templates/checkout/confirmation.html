@@ -1,20 +1,22 @@
 <div class="row text-center" id="confirmation">
   <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
     <h1 class="text-left">Confirmation</h1>
-    <div class="row">
-      <div class="col-xs-12 status" ng-class="{'success': statusCharge == 'succeeded', 'failed': statusCharge == true, 'waiting': !statusCharge}">
-        <div class="row">
-          <div class="col-xs-12" ng-show="statusCharge">
-            Success
-          </div>
-          <div class="col-xs-12" ng-show="statusCharge == false">
-            Failed
-          </div>
-          <div class="col-xs-12" ng-show="!statusCharge">
-            Waiting...
-          </div>
+  </div>
+    <div class="col-xs-12" id="status" ng-class="{'success': statusCharge == true, 'failed': statusCharge == false, 'waiting': !statusCharge}">
+      <div class="row">
+        <div class="col-xs-12" ng-show="statusCharge == true">
+          Success
+        </div>
+        <div class="col-xs-12" ng-show="statusCharge == false">
+          Failed
+        </div>
+        <div class="col-xs-12" ng-show="!statusCharge">
+          Waiting...
         </div>
       </div>
+    </div>
+  <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1">
+    <div class="row">
       <div class="col-xs-12 col-sm-4 col-md-5 col-lg-5 text-left confirm">
         <h2 class="">Billing Info</h2>
         <div class="row one">

@@ -68,7 +68,7 @@
       </div>
   </div>
   <div class="col-xs-12 col-sm-4 col-sm-offset-8 reviewUseBill">
-        <button type="button" class="abtn" ng-click="user.data.shippingAddress.useBilling = !user.data.shippingAddress.useBilling" id="useBill">
+        <button type="button" class="abtn gold" ng-click="user.data.shippingAddress.useBilling = !user.data.shippingAddress.useBilling" id="useBill">
         <label ng-class="{'greena': user.data.shippingAddress.useBilling, 'reda': !user.data.shippingAddress.useBilling}" id="reviewUseBilling">Use Billing <span class="thumbAnimation" ng-class="{'showAnimation': user.data.shippingAddress.useBilling, 'hideAnimation': !user.data.shippingAddress.useBilling}"><i class="fa fa-thumbs-up"></i></span><span class="thumbAnimation" ng-class="{'showAnimation': !user.data.shippingAddress.useBilling, 'hideAnimation': user.data.shippingAddress.useBilling}"><i class="fa fa-thumbs-down"></i></span></label></button>
   </div>
   <div class="divider"><h1 class="title highlight">Payment</h1></div>
@@ -90,7 +90,7 @@
       <button ui-sref="cart.view" type="button" class="abtn btn-success" ng-click="saveSetUp()"><i class="fa fa-arrow-left"></i> Back</button>
     </div>
     <div class="col-xs-6">
-    <button ui-sref="cart.checkout" type="button" class="abtn btn-success" ng-click="saveSetUp()">Next <i class="fa fa-arrow-right"></i></button>
+    <button ui-sref="cart.checkout" type="button" class="abtn btn-success" ng-click="saveSetUp(stripeToken)">Next <i class="fa fa-arrow-right"></i></button>
     </div>
   </div>
 </div>

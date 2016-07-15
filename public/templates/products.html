@@ -1,6 +1,6 @@
 <div class="row" id='products'>
   <div class="" id="cards">
-      <div class="col-xs-12 col-md-6 col-lg-4 fivehundredpx"  ng-repeat="product in products">
+      <div class="col-xs-12 col-md-6 col-lg-4 fivehundredpx"  ng-repeat="product in products | filter:{active: true}">
       <div class="hover">
         <div class="card-container" ng-class="{'flip': learnMore}">
         <div class="card sideA">
