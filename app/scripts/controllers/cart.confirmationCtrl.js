@@ -5,6 +5,7 @@ dataService.getCart(function(response) {
   var tempObject = response.data.cart.data.orderHistory;
   var tempLength = tempObject.length - 1;
   var order = tempObject[tempLength].charge.status;
+    console.log(tempObject[tempLength]);
   if ( order == "succeeded" ) {
     $scope.statusCharge = true;
   }

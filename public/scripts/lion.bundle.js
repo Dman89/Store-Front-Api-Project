@@ -49,12 +49,12 @@ webpackJsonp([0],[
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
-	__webpack_require__(48);
-
-
-
-	__webpack_require__(49);
 	__webpack_require__(50);
+
+
+
+	__webpack_require__(48);
+	__webpack_require__(49);
 
 
 /***/ },
@@ -5033,6 +5033,7 @@ webpackJsonp([0],[
 	    // Save User / Cart
 	    dataService.updateCart(aUser, function(response) {});
 	    // Pass CC info to next State
+	    console.log(stripeToken);
 	    var token = stripeToken;
 	    $state.go('cart.checkout', token);
 	  }
@@ -6047,18 +6048,12 @@ webpackJsonp([0],[
 	  //   }
 	  //   };
 	// Checkout With Stripe
-	  $scope.checkoutStripe = function(stripeToken, callback) {
+	  $scope.checkoutStripe = function(stripeToken) {
 	    var stripeToken = $scope.stripeToken;
 	    var tempLength = $scope.stripeToken.stripeToken.number.length;
 	    // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
 	    dataService.checkout(stripeToken, function(response) {
 	      $location.path('/cart/confirmation');
-	      if (response.data.charge.paid == true) {
-	        callback(true);
-	      } else {
-	        callback(false);
-	      }
-	        console.log(response);
 	    });
 	    // Reset Token
 	    $scope.stripeToken =
@@ -6080,7 +6075,21 @@ webpackJsonp([0],[
 	      var productCheck = response.data.products;
 	      functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
 	        if (response == true) {
-	          cb(true)
+	          //save inventory
+	          for (var x = 0; x < saveItems.length; x++) {
+	            var lookUp = saveItems[x].urlCode;
+	            var tempQuantity = saveItems[x].quantity;
+	            var tempActive = saveItems[x].active;
+	            dataService.getSingleItem(lookUp, function(item) {
+	            var temp = item.data.products;
+	            temp.quantity = tempQuantity;
+	            temp.active = tempActive;
+	              //save product
+	              dataService.saveItem(temp.id, temp, function(response) {
+	                cb(true)
+	              })
+	            })
+	          }
 	        }
 	        else {
 	          cb(false)
@@ -6091,53 +6100,12 @@ webpackJsonp([0],[
 	};
 
 
-	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
-	$scope.changeProductAvailablity = function(cb) {
-	dataService.getCart(function(response) {
-	  var cart = response.data.cart.data.cart;
-	  dataService.getProducts(function(response) {
-	    var productCheck = response.data.products;
-	    functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
-	      if (response == true) {
-	        //save inventory
-	        for (var x = 0; x < saveItems.length; x++) {
-	          var lookUp = saveItems[x].urlCode;
-	          var tempQuantity = saveItems[x].quantity;
-	          var tempActive = saveItems[x].active;
-	          dataService.getSingleItem(lookUp, function(item) {
-	          var temp = item.data.products;
-	          temp.quantity = tempQuantity;
-	          temp.active = tempActive;
-	            //save product
-	            dataService.saveItem(temp.id, temp, function(response) {
-	              cb(true)
-	            })
-	          })
-	        }
-	      }
-	      else {
-	        cb(false)
-	      }
-	    });
-	  });
-	});
-	};
-
-
 
 	//Checkout Process
 	$scope.checkout = function() {
 	$scope.isProductAvailable(function(status) {
 	  if (status == true) {
-	    $scope.checkoutStripe(function(data) {
-	      if (data == true) {
-	      $scope.changeProductAvailablity(function(response) {})
-	    }
-	      else if (data == false) {
-	      alert("Error During Transaction")
-	    }
-
-	    });
+	    $scope.checkoutStripe();
 	  }
 	  else {
 	  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
@@ -6229,27 +6197,6 @@ webpackJsonp([0],[
 
 /***/ },
 /* 48 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("cart.confirmationCtrl", function($scope, dataService) {
-	dataService.getCart(function(response) {
-	  var tempObject = response.data.cart.data.orderHistory;
-	  var tempLength = tempObject.length - 1;
-	  var order = tempObject[tempLength].charge.status;
-	  if ( order == "succeeded" ) {
-	    $scope.statusCharge = true;
-	  }
-	  else {
-	    $scope.statusCharge = false;
-	  }
-	});
-	});
-
-
-/***/ },
-/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6374,7 +6321,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6446,6 +6393,28 @@ webpackJsonp([0],[
 	      callback(doSearchThisData, useThisDataToSearch);
 	    }
 	  }
+	});
+
+
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("cart.confirmationCtrl", function($scope, dataService) {
+	dataService.getCart(function(response) {
+	  var tempObject = response.data.cart.data.orderHistory;
+	  var tempLength = tempObject.length - 1;
+	  var order = tempObject[tempLength].charge.status;
+	    console.log(tempObject[tempLength]);
+	  if ( order == "succeeded" ) {
+	    $scope.statusCharge = true;
+	  }
+	  else {
+	    $scope.statusCharge = false;
+	  }
+	});
 	});
 
 

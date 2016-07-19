@@ -16,25 +16,18 @@ Checkout Review
     (Completed)         Style
     (Completed)         Save User
                         Edit User (Angular)
-                        Require Card Info
-
-
 
 
 Checkout Page
     (Completed)         Style
-    (Completed)         Checkout
-    (Completed)         only edit Item if transaction is successful
+                        Checkout
+                        only edit Item if transaction is successful
     (Completed)         Fix Stripe
     (Completed)         Save User
     (Completed)         Save Billing as Shipping
     (Completed)         Check Product Availability
     (Completed)         Set Product Quantity
     (Completed)         Disable Product IF Zero Quantity
-
-
-
-
 Confirmation
                         Style
                         Correct Total Data

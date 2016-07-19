@@ -20,18 +20,12 @@ angular.module("lionHeart")
   //   }
   //   };
 // Checkout With Stripe
-  $scope.checkoutStripe = function(stripeToken, callback) {
+  $scope.checkoutStripe = function(stripeToken) {
     var stripeToken = $scope.stripeToken;
     var tempLength = $scope.stripeToken.stripeToken.number.length;
     // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
     dataService.checkout(stripeToken, function(response) {
       $location.path('/cart/confirmation');
-      if (response.data.charge.paid == true) {
-        callback(true);
-      } else {
-        callback(false);
-      }
-        console.log(response);
     });
     // Reset Token
     $scope.stripeToken =
@@ -53,7 +47,21 @@ $scope.isProductAvailable = function(cb) {
       var productCheck = response.data.products;
       functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
         if (response == true) {
-          cb(true)
+          //save inventory
+          for (var x = 0; x < saveItems.length; x++) {
+            var lookUp = saveItems[x].urlCode;
+            var tempQuantity = saveItems[x].quantity;
+            var tempActive = saveItems[x].active;
+            dataService.getSingleItem(lookUp, function(item) {
+            var temp = item.data.products;
+            temp.quantity = tempQuantity;
+            temp.active = tempActive;
+              //save product
+              dataService.saveItem(temp.id, temp, function(response) {
+                cb(true)
+              })
+            })
+          }
         }
         else {
           cb(false)
@@ -64,53 +72,12 @@ $scope.isProductAvailable = function(cb) {
 };
 
 
-//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
-$scope.changeProductAvailablity = function(cb) {
-dataService.getCart(function(response) {
-  var cart = response.data.cart.data.cart;
-  dataService.getProducts(function(response) {
-    var productCheck = response.data.products;
-    functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
-      if (response == true) {
-        //save inventory
-        for (var x = 0; x < saveItems.length; x++) {
-          var lookUp = saveItems[x].urlCode;
-          var tempQuantity = saveItems[x].quantity;
-          var tempActive = saveItems[x].active;
-          dataService.getSingleItem(lookUp, function(item) {
-          var temp = item.data.products;
-          temp.quantity = tempQuantity;
-          temp.active = tempActive;
-            //save product
-            dataService.saveItem(temp.id, temp, function(response) {
-              cb(true)
-            })
-          })
-        }
-      }
-      else {
-        cb(false)
-      }
-    });
-  });
-});
-};
-
-
 
 //Checkout Process
 $scope.checkout = function() {
 $scope.isProductAvailable(function(status) {
   if (status == true) {
-    $scope.checkoutStripe(function(data) {
-      if (data == true) {
-      $scope.changeProductAvailablity(function(response) {})
-    }
-      else if (data == false) {
-      alert("Error During Transaction")
-    }
-
-    });
+    $scope.checkoutStripe();
   }
   else {
   alert("Some items in your cart are no longer available. Sorry for any inconvenience")
