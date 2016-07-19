@@ -45,7 +45,6 @@ $scope.deleteCartItem = function(abe) {
     // Save User / Cart
     dataService.updateCart(aUser, function(response) {});
     // Pass CC info to next State
-    console.log(stripeToken);
     var token = stripeToken;
     $state.go('cart.checkout', token);
   }

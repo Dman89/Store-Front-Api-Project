@@ -111,6 +111,7 @@
     border: $p 4px solid;
     border-radius: 4px;
     margin: 1.75em auto;
+    background-color: white;
   }
   & .cartRight {
     text-align: right;
@@ -121,5 +122,8 @@
   & .subTotalBox {
     margin-top: 3em;
     margin-bottom: 4em;
+  }
+  &  {
+    font-family: $mainTitle;
   }
 }
