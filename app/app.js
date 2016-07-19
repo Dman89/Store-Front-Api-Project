@@ -7,7 +7,6 @@ require('./scripts/controllers/productCtrl.js');
 require('./scripts/controllers/signUpFormCtrl.js');
 require('./scripts/directives/signup.js');
 require('./scripts/directives/products.js');
-require('./scripts/services/dataService.js');
 require('./scripts/controllers/loginCtrl.js');
 require('./scripts/directives/login.js');
 require('./scripts/controllers/purchaseConfirmationCtrl.js');
@@ -46,3 +45,9 @@ require('./scripts/controllers/admin.postsCtrl.js');
 require('./scripts/controllers/admin.usersCtrl.js');
 require('./scripts/controllers/adminCtrl.js');
 require('./scripts/controllers/portfolioCtrl.js');
+require('./scripts/controllers/cart.confirmationCtrl.js');
+
+
+
+require('./scripts/services/dataService.js');
+require('./scripts/services/functionService.js');

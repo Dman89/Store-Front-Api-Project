@@ -5,6 +5,7 @@ var Category = require('./category');
 var fx = require('./fx');
 var product = {
   name: { type: String},
+  active: {type: Boolean, default: true},
   weight: { type: Number, default: 0.2 },
   size: { type: Number, default: 1 },
   pictures: [{ type: String}],

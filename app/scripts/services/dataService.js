@@ -10,6 +10,10 @@ angular.module("lionHeart")
     $http.get(tempUrl)
     .then(callback)
   }
+  this.saveItem = function(id, product, callback) {
+  $http.put('/api/products/id/' + id, product)
+  .then(callback)
+  };
   this.getCategoryGraphics = function(callback) {
     $http.get("/api/category/Graphic%20Design")
     .then(callback)

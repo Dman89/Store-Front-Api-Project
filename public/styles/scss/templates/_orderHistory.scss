@@ -86,6 +86,7 @@
   }
   & h1.title {
     font-family: $mainTitle;
+    box-shadow: 1.5px 3px 4.5px rgba(0,0,0, .7);
     position: absolute;
     background-color: $h;
     border-radius: 5px;

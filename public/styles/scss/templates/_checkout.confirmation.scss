@@ -1,11 +1,13 @@
 #confirmation {
-  & div div.status {
-    width: 80vh;
+  & div#status {
+    width: 80vw;
+    margin: auto 10%;
     padding: 0.777em 0;
   }
   & .success {
     background-color: green;
     color: white;
+    border-radius: 13px;
   }
   & .failed {
     background-color: red;
@@ -15,4 +17,13 @@
     border: $s 2px solid;
     color: $b;
   }
+}
+.gold {
+  background-color: $h;
+  padding: 0.333em 1em;
+  margin: auto;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  max-width: 225px;
 }

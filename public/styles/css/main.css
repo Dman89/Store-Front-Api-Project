@@ -37,17 +37,8 @@ img {
 
 #confirmationPage h1 {
   margin-top: 1.45em; }
-#confirmationPage div.status {
-  border-radius: 13px;
-  border: #061115 2px solid; }
 #confirmationPage .display {
   padding: 2.5%; }
-#confirmationPage div.status.completed {
-  border-color: green;
-  color: green; }
-#confirmationPage div.status.failed {
-  border-color: red;
-  color: red; }
 #confirmationPage .redirect {
   margin-top: 5em; }
 
@@ -85,9 +76,23 @@ img {
     color: #061115; }
   #cart .cartNoItems h1 {
     font-size: 10vh; }
+#cart .divider {
+  position: relative;
+  display: inline-block;
+  height: 20px;
+  width: 100%;
+  text-align: center;
+  background-color: #a7dada;
+  border-top: #061115 1px solid;
+  border-bottom: #1a3e73 2px solid;
+  margin: 6% auto; }
+  @media (min-width: 1500px) {
+    #cart .divider {
+      margin: 50px auto; } }
 #cart h1.title {
   font-family: "Kaushan Script", cursive;
   position: absolute;
+  box-shadow: 1.5px 3px 4.5px rgba(0, 0, 0, 0.7);
   background-color: #f9be36;
   border-radius: 5px;
   padding: 0em 0.5em; }
@@ -107,9 +112,8 @@ img {
 #cart #stock.outStock::after {
   color: red;
   content: 'Out Of Stock'; }
-@media (max-width: 992px) {
-  #cart .title h2 {
-    text-align: center; } }
+#cart .title h2.alignCenter {
+  text-align: center; }
 #cart .cartSpacer {
   margin: 1.75em auto; }
   @media (max-width: 767px), (max-height: 530px) and (orientation: landscape) {
@@ -127,6 +131,9 @@ img {
   text-align: right; }
 #cart #checkoutBtn {
   margin: 2em auto 5em; }
+#cart .subTotalBox {
+  margin-top: 3em;
+  margin-bottom: 4em; }
 
 #orderHistory .closeOut {
   cursor: pointer;
@@ -193,6 +200,7 @@ img {
       height: 170px; } }
 #orderHistory h1.title {
   font-family: "Kaushan Script", cursive;
+  box-shadow: 1.5px 3px 4.5px rgba(0, 0, 0, 0.7);
   position: absolute;
   background-color: #f9be36;
   border-radius: 5px;
@@ -409,146 +417,149 @@ img {
     .navbar-brand {
       margin: 5px; } }
 
+input {
+  border-radius: 4px; }
+
 #ui-view {
   margin-top: 49px; }
 
 .container-fluid {
   padding: 0; }
 
-#html #body #uiView .row {
+#html #body #ui-view .row {
   margin: auto;
   padding: 0; }
 @media (max-width: 400px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 9px;
     line-height: 15px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 24px;
     line-height: 39px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 15px;
     line-height: 24px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 11px;
     line-height: 18px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 9px;
     line-height: 15px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 7px;
     line-height: 11px; } }
 @media (max-width: 530px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 12px;
     line-height: 19px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 31px;
     line-height: 50px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 19px;
     line-height: 31px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 15px;
     line-height: 24px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 12px;
     line-height: 19px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 9px;
     line-height: 15px; } }
 @media (max-width: 600px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 14px;
     line-height: 23px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 37px;
     line-height: 60px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 23px;
     line-height: 37px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 18px;
     line-height: 29px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 14px;
     line-height: 23px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 11px;
     line-height: 18px; } }
 @media (max-width: 767px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 15px;
     line-height: 24px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 39px;
     line-height: 63px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 24px;
     line-height: 19px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 19px;
     line-height: 31px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 15px;
     line-height: 24px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 12px;
     line-height: 19px; } }
 @media (min-width: 768px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 16px;
     line-height: 26px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 42x;
     line-height: 68px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 26px;
     line-height: 42px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 20px;
     line-height: 32px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 16px;
     line-height: 26px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 13px;
     line-height: 21px; } }
 @media (min-width: 980px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 17px;
     line-height: 28px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 45px;
     line-height: 79px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 28px;
     line-height: 45px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 22px;
     line-height: 36px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 17px;
     line-height: 28px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 13px;
     line-height: 21px; } }
 @media (min-width: 1200px) {
-  #html #body #uiView p, #html #body #uiView, #html #body #uiView label {
+  #html #body #ui-view p, #html #body #ui-view, #html #body #ui-view label {
     font-size: 21px;
     line-height: 34px; }
-  #html #body #uiView h1 {
+  #html #body #ui-view h1 {
     font-size: 55px;
     line-height: 89px; }
-  #html #body #uiView h2 {
+  #html #body #ui-view h2 {
     font-size: 34px;
     line-height: 55px; }
-  #html #body #uiView h3 {
+  #html #body #ui-view h3 {
     font-size: 27px;
     line-height: 44px; }
-  #html #body #uiView h4 {
+  #html #body #ui-view h4 {
     font-size: 21px;
     line-height: 34px; }
-  #html #body #uiView h5 {
+  #html #body #ui-view h5 {
     font-size: 17px;
     line-height: 28px; } }
 
@@ -1116,6 +1127,7 @@ button.btnCart {
       width: 200px; } }
 #ui-view #bio h1.title {
   font-family: "Kaushan Script", cursive;
+  box-shadow: 1.5px 3px 4.5px rgba(0, 0, 0, 0.7);
   position: absolute;
   background-color: #f9be36;
   border-radius: 5px;
@@ -1440,11 +1452,11 @@ body {
 .relative {
   position: relative; }
 
-#bio #cards .space {
+#html #body #ui-view #bio #cards .space {
   margin-top: 100px; }
-#bio #cards a, #bio #cards a:hover, #bio #cards a:active, #bio #cards a:focus {
+#html #body #ui-view #bio #cards a, #html #body #ui-view #bio #cards a:hover, #html #body #ui-view #bio #cards a:active, #html #body #ui-view #bio #cards a:focus {
   color: black; }
-#bio #cards .floatRight {
+#html #body #ui-view #bio #cards .floatRight {
   position: absolute;
   z-index: 1000;
   right: 10px;
@@ -1453,43 +1465,43 @@ body {
   cursor: pointer;
   color: #423e80; }
 @media (max-width: 600px), (max-height: 480px) and (orientation: landscape) {
-  #bio #cards .threeD .flip {
+  #html #body #ui-view #bio #cards .threeD .flip {
     perspective: 300px;
     perspective-orgin: center; }
-  #bio #cards .card-container {
+  #html #body #ui-view #bio #cards .card-container {
     transform-style: preserve-3d;
     transform-orgin: center; }
-  #bio #cards .imgBackground.backside.cobra::after {
+  #html #body #ui-view #bio #cards .imgBackground.backside.cobra::after {
     background: url(http://coolblackppt.com/wp-content/uploads/king-cobra-snake-20150419110955-55338d037e72e-150x150.jpg); }
-  #bio #cards .card, #bio #cards .card-container {
+  #html #body #ui-view #bio #cards .card, #html #body #ui-view #bio #cards .card-container {
     min-width: 180px;
     max-width: 175px;
     margin-bottom: 2em; }
-  #bio #cards .row {
+  #html #body #ui-view #bio #cards .row {
     margin: auto;
     padding: 0; }
-  #bio #cards .card img, #bio #cards .floatSingleItem img {
+  #html #body #ui-view #bio #cards .card img, #html #body #ui-view #bio #cards .floatSingleItem img {
     width: 150px;
     height: 150px;
     margin: 0.5em auto; }
-  #bio #cards button.btnProductDisplay {
+  #html #body #ui-view #bio #cards button.btnProductDisplay {
     margin-bottom: .75em;
     margin-top: .25em;
     font-size: 14px;
     padding: .05em; }
-  #bio #cards .card p.title {
+  #html #body #ui-view #bio #cards .card p.title {
     font-size: 2em;
     left: 15px;
     bottom: 20px; }
-  #bio #cards span.learnMore:after {
+  #html #body #ui-view #bio #cards span.learnMore:after {
     content: ''; }
-  #bio #cards .card p.highlight {
+  #html #body #ui-view #bio #cards .card p.highlight {
     background-color: rgba(255, 255, 255, 0.55);
     padding-right: 10px;
     padding-left: 0px;
     padding-top: 0px;
     padding-bottom: 0px; } }
-#bio #cards .floatSingleItem button {
+#html #body #ui-view #bio #cards .floatSingleItem button {
   position: absolute;
   bottom: 10px;
   right: 10px;
@@ -1511,7 +1523,7 @@ body {
   padding-top: 0px;
   padding-bottom: 0px; }
 
-#bio .card p.title {
+#html #body #ui-view #bio .card p.title {
   font-family: 'Kaushan Script', cursive;
   position: absolute;
   bottom: 30px;
@@ -1838,18 +1850,29 @@ body {
       height: 50vh;
       width: 50vw; } }
 
-#confirmation div div.status {
-  width: 80vh;
+#confirmation div#status {
+  width: 80vw;
+  margin: auto 10%;
   padding: 0.777em 0; }
 #confirmation .success {
   background-color: green;
-  color: white; }
+  color: white;
+  border-radius: 13px; }
 #confirmation .failed {
   background-color: red;
   color: white; }
 #confirmation .waiting {
   border: #4384b7 2px solid;
   color: #061115; }
+
+.gold {
+  background-color: #f9be36;
+  padding: 0.333em 1em;
+  margin: auto;
+  border-radius: 4px;
+  text-align: center;
+  width: 100%;
+  max-width: 225px; }
 
 .home {
   height: 100vh;
@@ -2278,6 +2301,7 @@ body {
     top: -20px;
     left: 20px;
     background-color: #f9be36;
+    box-shadow: 1.5px 3px 4.5px rgba(0, 0, 0, 0.7);
     border-radius: 5px;
     padding: .2em .5em; }
     @media (min-width: 1200px) {
@@ -2323,11 +2347,17 @@ body {
     #html #body #dashboard {
       font-size: 15px;
       line-height: 23px; } }
+  #html #body #dashboard h2.alignCenter {
+    text-align: center; }
+  #html #body #dashboard h4 {
+    font-family: "Kaushan Script", cursive; }
   #html #body #dashboard h3 {
     font-family: "Kaushan Script", cursive;
     font-size: 27px;
     line-height: 41px;
     text-align: left; }
+    #html #body #dashboard h3.alignCenter {
+      text-align: center; }
     @media (min-width: 982px) and (max-width: 1200px) {
       #html #body #dashboard h3 {
         font-size: 24px;
@@ -2416,6 +2446,7 @@ body {
     left: 20px;
     background-color: #f9be36;
     border-radius: 5px;
+    box-shadow: 1.5px 3px 4.5px rgba(0, 0, 0, 0.7);
     padding: .2em .5em; }
     @media (min-width: 1200px) {
       #html #body #edit h1.title {
@@ -2515,9 +2546,9 @@ body {
 #useBill.red:after {
   content: "Do Not Use Billing Address"; }
 
-.next-buttons div {
+#ui-view .next-buttons {
   text-align: center;
-  margin: 2em auto; }
+  margin: 4em auto 5em; }
 
 #reviewUseBilling.greena {
   color: green; }
@@ -2526,6 +2557,8 @@ body {
   color: red; }
 
 .reviewUseBill {
+  text-align: center;
+  margin: auto;
   margin-bottom: 20px;
   margin-top: 20px; }
 

@@ -118,7 +118,8 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
       })
       .state('cart.confirmation', {
       url: '/confirmation',
-      templateUrl: 'templates/checkout/confirmation.html'
+      templateUrl: 'templates/checkout/confirmation.html',
+      controller: 'cart.confirmationCtrl'
       })
     .state('admin', {
     url: '/admin',

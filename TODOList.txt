@@ -8,23 +8,33 @@ Cart
                                 go to product page of random number (get)
     (Completed)         Up/Down Quality for Items
 
+
+
+
+
 Checkout Review
     (Completed)         Style
     (Completed)         Save User
-
+                        Edit User (Angular)
 
 
 Checkout Page
+    (Completed)         Style
                         Checkout
-                        Save User
-                        Save Billing as Shipping
-                        Check Product Availability
-                        Set Product Quantity
+                        only edit Item if transaction is successful
+    (Completed)         Fix Stripe
+    (Completed)         Save User
+    (Completed)         Save Billing as Shipping
+    (Completed)         Check Product Availability
+    (Completed)         Set Product Quantity
+    (Completed)         Disable Product IF Zero Quantity
 Confirmation
                         Style
+                        Correct Total Data
 Add To Cart
                         Edit Inventory
                         Disable
+                        Auto-login if not logged in.
 Admin Panel Posts
                         Save Posts
                         New Posts
@@ -55,3 +65,7 @@ Home Page
 Profile
                         Email Add Button
                         Email remove (not for zero)
+Store
+                        Fix Title on Store Page
+                        Load Category for the menu
+                        Fix Product load to Match Category Selected

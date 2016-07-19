@@ -108,13 +108,13 @@ cartRouter.post('/user/checkout', function (req, res) {
     return res.status(404).json({message: "Not logged in"})
   }
   req.user.populate({ path: 'data.cart.items.product', model: 'Products'}, function (err, user) {
-    var totalCostUSD = 10;
+    var totalCostUSD = user.data.cart.total;
     stripe.charges.create(
         {
-          amount: Math.ceil(totalCostUSD *100),
+          amount: Math.ceil(totalCostUSD * 100),
           currency: 'usd',
           source: req.body.stripeToken,
-          description: 'Example Charge'
+          description: 'Art By Cale'
         },
         function(err, charge) {
           if (err && err.type === 'StripeCardError') {
@@ -124,19 +124,24 @@ cartRouter.post('/user/checkout', function (req, res) {
             console.log(err);
             return res.status(500).json(err);
           }
+          // Order History Set Here Automatic in Api call.
           var newHistory = new OrderHistory();
             newHistory.date = new Date();
+            if (req.user.data.shippingAddress.useBilling == true) {
+              newHistory.shippingAddress = req.user.data.billingAddress;
+            } else {
+              newHistory.shippingAddress = req.user.data.shippingAddress;
+            }
             newHistory.cart = req.user.data.cart;
             newHistory.billingAddress = req.user.data.billingAddress;
-            newHistory.shippingAddress = req.user.data.shippingAddress;
             newHistory.charge = charge;
             req.user.data.orderHistory.push(newHistory);
             var newUser = new NewUser();
             newUser = req.user;
             newUser.data.cart = null;
-          newUser.save(function() {
-            return res.json({charge: charge, user: req.user.data});
-          });
+            newUser.save(function() {
+              return res.json({charge: charge, user: req.user.data});
+            });
         }
       );
     });

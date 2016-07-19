@@ -49,7 +49,12 @@ webpackJsonp([0],[
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
+	__webpack_require__(50);
+
+
+
 	__webpack_require__(48);
+	__webpack_require__(49);
 
 
 /***/ },
@@ -178,7 +183,8 @@ webpackJsonp([0],[
 	      })
 	      .state('cart.confirmation', {
 	      url: '/confirmation',
-	      templateUrl: 'templates/checkout/confirmation.html'
+	      templateUrl: 'templates/checkout/confirmation.html',
+	      controller: 'cart.confirmationCtrl'
 	      })
 	    .state('admin', {
 	    url: '/admin',
@@ -4900,134 +4906,13 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.service("dataService", function($http, $q) {
-	  this.getProducts = function(callback) {
-	    $http.get("/api/products")
-	    .then(callback)
-	  };
-	  this.getSingleItem = function(params, callback) {
-	    var tempUrl = '/api/products/' + params;
-	    $http.get(tempUrl)
-	    .then(callback)
-	  }
-	  this.getCategoryGraphics = function(callback) {
-	    $http.get("/api/category/Graphic%20Design")
-	    .then(callback)
-	  };
-	  this.getCategoryPaintings = function(callback) {
-	    $http.get("/api/category/Paintings")
-	    .then(callback)
-	  };
-	  this.getCategoryPrints = function(callback) {
-	    $http.get("/api/category/Prints")
-	    .then(callback)
-	  };
-	  this.getCategoryUpcycle = function(callback) {
-	    $http.get("/api/category/Upcycle")
-	    .then(callback)
-	  };
-	  this.getCategorySkateboards = function(callback) {
-	    $http.get("/api/category/Skateboard")
-	    .then(callback)
-	  };
-	  this.getCategoryStickers = function(callback) {
-	    $http.get("/api/category/Stickers")
-	    .then(callback)
-	  };
-	    this.getAdmin = function(url, input, callback) {
-	      var tempUrl = '/api/admin/' + url;
-	      $http.post(tempUrl, input)
-	      .then(callback)
-	    };
-	      this.getUser = function(callback) {
-	        $http.get("/api/profile")
-	        .then(callback)
-	      };
-	      this.getUsers = function(callback) {
-	        $http.get("/api/users")
-	        .then(callback)
-	      };
-	  this.newUser = function(user) {
-	    $http.post('/api/users', user)
-	  };
-	  this.saveUser = function(user, callback) {
-	  $http.put('/api/profile', user)
-	  .then(callback)
-	  };
-	    this.getOrderHistory = function(callback) {
-	      $http.get("/api/cart/history")
-	      .then(callback)
-	    };
-	    this.getCategory = function(callback) {
-	      $http.get("/api/category")
-	      .then(callback)
-	    };
-	    this.getCart = function(callback) {
-	      $http.get("/api/cart")
-	      .then(callback)
-	    };
-	    this.updateCart = function(a, b) {
-	      $http.put("/api/user/cart", a)
-	      .then(b)
-	    };
-	  this.checkout = function(token, callback) {
-	    $http.post('/api/user/checkout', token)
-	    .then(callback)
-	  }
-	  this.searchText = function(input, callback) {
-	    var search = "/api/products/search/" + input;
-	    $http.get(search)
-	    .then(callback)
-	  };
-	  this.getBlog = function(callback) {
-	    $http.get("/api/blog")
-	    .then(callback);
-	  }
-	  this.newGoal = function(goal) {
-	    $http.post("/api/goals", goal);
-	  }
-	  this.deleteGoal = function(goal) {
-	  if (!goal._id) {
-	    return $q.resolve();
-	  }
-	  return $http.delete('/api/goals/' + goal._id).then(function () {
-	    console.log('The "' + goal.title + '" goal has been deleted!')
-	  })
-	  };
-	  this.saveGoals = function(goals) {
-	  var que = [];
-	  goals.forEach(function(goal) {
-	    var request;
-	    if(!goal._id) {
-	      request = $http.post('/api/goals', goal);
-	    } else {
-	      request = $http.put('/api/goals/' + goal._id, goal).then(function(result) {
-	        goal = result.data.goal;
-	        return goal;
-	      })
-	    };
-	    que.push(request);
-	  });
-	  return $q.all(que).then(function(results) {
-	    console.log("Saved " + goals.length + ' goals!');
-	  })
-	  };
-	});
-
-
-/***/ },
-/* 11 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
 	.controller("loginCtrl", function($scope, dataService) {
 	  
 	});
 
 
 /***/ },
-/* 12 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5042,7 +4927,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 13 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5057,7 +4942,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 14 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5072,7 +4957,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 15 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5083,7 +4968,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 16 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5098,12 +4983,21 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 17 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("cartCtrl", function($scope, dataService) {
+	.controller("cartCtrl", function($scope, dataService, $timeout, $state) {
+	  // Blank Stripe Card
+	    $scope.stripeToken = {stripeToken: {
+	      number: '',
+	      cvc: '',
+	      exp_month: '',
+	      exp_year: ''
+	      }
+	      };
+	  // Get User/Cart/UserWithCart
 	  dataService.getCart(function(response) {
 	    $scope.cartA = response.data.cart.data.cart;
 	    var cart = $scope.cartA.items;
@@ -5112,86 +5006,73 @@ webpackJsonp([0],[
 	    $scope.user = $scope.UserWithCart;
 	    cartTotal(cart, user)
 	  });
-	$scope.deleteCartItem = function(index) {
-	  setTimeout(function(index) {
-	  $scope.UserWithCart.data.cart.items.splice(index, 1);
-	  var user = $scope.UserWithCart;
-	  dataService.updateCart(user, function(response) {});
-	  dataService.getCart(function(response) {
-	    $scope.cartA = response.data.cart.data.cart;
-	    var cart = $scope.cartA.items;
-	    $scope.UserWithCart = response.data.cart;
+	  // Delete Items out of Cart
+	$scope.deleteCartItem = function(abe) {
+	      var dog = abe;
+	        $timeout(function() {
+	          $scope.deletey(abe);
+	        }, 1001);
+	    }
+	    $scope.deletey = function(abe) {
+	    $scope.UserWithCart.data.cart.items.splice(abe, 1);
 	    var user = $scope.UserWithCart;
-	    cartTotal(cart, user)
-	  })
-	}, 1001);
+	    dataService.updateCart(user, function(response) {});
+	    dataService.getCart(function(response) {
+	      $scope.cartA = response.data.cart.data.cart;
+	      var cart = $scope.cartA.items;
+	      $scope.UserWithCart = response.data.cart;
+	      var user = $scope.UserWithCart;
+	      cartTotal(cart, user)
+	    })
 	}
-	$scope.stripeToken = {stripeToken: {
-	  number: '4242424242424242',
-	  cvc: '123',
-	  exp_month: '12',
-	  exp_year: '2016'
-	}
-	};
+
 	// Review Page: < > Arrow's function to save User Data
-	$scope.saveSetUp = function() {
-	  // Get User / Cart
-	  var aUser = $scope.user;
-	  // Save User / Cart
-	  dataService.updateCart(aUser, function(response) {});
-	}
-	$scope.checkout = function() {
-	  var stripeToken = $scope.stripeToken;
-	  var tempLength = $scope.stripeToken.stripeToken.number.length;
-	  $scope.lastFourDigits = $scope.stripeToken.stripeToken.number.slice(-4, tempLength);
-	  dataService.checkout(stripeToken, function(response) {
-	    if (response.data.charge.status == 'succeeded') {
-	    $scope.statusCharge = response.data.charge.status;
-	  } else {
-	    $scope.statusCharge = false;
+	  $scope.saveSetUp = function(stripeToken) {
+	    // Get User / Cart
+	    var aUser = $scope.user;
+	    // Save User / Cart
+	    dataService.updateCart(aUser, function(response) {});
+	    // Pass CC info to next State
+	    console.log(stripeToken);
+	    var token = stripeToken;
+	    $state.go('cart.checkout', token);
 	  }
-	  });
-	  // Reset Token
-	  $scope.stripeToken = {stripeToken: {
-	    number: '',
-	    cvc: '',
-	    exp_month: '',
-	    exp_year: ''
-	  }}
-	}
-	var sub = function (cart, user, sub) {
-	  var total = 0;
-	  var len = 0;
-	  for (var x = 0; x < cart.length; x++) {
-	          var price = cart[x].product.subTotal;
-	          var quantity = cart[x].quantity;
-	          cart[x].total = price * quantity;
-	          total += price * quantity;
-	          len += quantity;
-	        }
-	  sub(total, user, len);
-	}
-	var cartTotal = function(cart, user) {
-	  var tax = 0;
-	  var total = 0;
-	  var shipping = 0;
-	  sub(cart, user, function(aSubTotal, user, len) {
-	    var newSubtotal = aSubTotal
-	    newSubtotal = Number(newSubtotal.toFixed(2));
-	    var tax = newSubtotal * .1;
-	    tax = Number(tax.toFixed(2));
-	    var total = newSubtotal + tax;
-	    total = Number(total.toFixed(2));
-	    user.data.cart.subTotal = newSubtotal;
-	    user.data.cart.tax = tax;
-	    user.data.cart.total = total;
-	    user.data.cart.shipping = shipping;
-	    user.data.cart.len = len;
-	    dataService.updateCart(user, function(response) {
-	      $scope.cartA.total = response.data.user.data.cart.total;
-	    });
-	  })
-	}
+	// Sub Total Calculation Function for Checkout (pages)
+	  var sub = function (cart, user, sub) {
+	    var total = 0;
+	    var len = 0;
+	    for (var x = 0; x < cart.length; x++) {
+	            var price = cart[x].product.subTotal;
+	            var quantity = cart[x].quantity;
+	            cart[x].total = price * quantity;
+	            total += price * quantity;
+	            len += quantity;
+	          }
+	    sub(total, user, len);
+	  }
+	//Total Calculation Function for Checkout (pages)
+	  var cartTotal = function(cart, user) {
+	    var tax = 0;
+	    var total = 0;
+	    var shipping = 0;
+	    sub(cart, user, function(aSubTotal, user, len) {
+	      var newSubtotal = aSubTotal
+	      newSubtotal = Number(newSubtotal.toFixed(2));
+	      var tax = newSubtotal * .1;
+	      tax = Number(tax.toFixed(2));
+	      var total = newSubtotal + tax;
+	      total = Number(total.toFixed(2));
+	      user.data.cart.subTotal = newSubtotal;
+	      user.data.cart.tax = tax;
+	      user.data.cart.total = total;
+	      user.data.cart.shipping = shipping;
+	      user.data.cart.len = len;
+	      dataService.updateCart(user, function(response) {
+	        $scope.cartA.total = response.data.user.data.cart.total;
+	      });
+	    })
+	  }
+	// Quanity Plus and Minus Functions for Cart Page
 	$scope.quantityTotalAddition = function(index) {
 	  if ($scope.UserWithCart.data.cart.items[index].product.quantity > $scope.UserWithCart.data.cart.items[index].quantity) {
 	    $scope.UserWithCart.data.cart.items[index].quantity += 1;
@@ -5224,7 +5105,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 18 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5239,7 +5120,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5264,7 +5145,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5279,7 +5160,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5354,7 +5235,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5369,7 +5250,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5395,7 +5276,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5410,12 +5291,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
 	  angular.module("lionHeart")
 	    .controller("menuCtrl", function($scope, dataService, $location) {
+
 	      $(function(){
 	      var navMain = $("#myNavbar");
 	      var menuBar = $(".menuBar");
@@ -5482,7 +5364,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5497,7 +5379,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5853,7 +5735,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5868,7 +5750,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5883,7 +5765,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5893,7 +5775,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5908,7 +5790,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5921,7 +5803,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5934,7 +5816,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5947,7 +5829,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5960,7 +5842,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5973,7 +5855,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5986,12 +5868,16 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("indexHomeCtrl", function($scope, dataService) {
+
+
+
+
 	  $("#owl").owlCarousel({
 
 	        navigation : false, // Show next and prev buttons
@@ -6012,7 +5898,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6022,7 +5908,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6032,7 +5918,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6127,7 +6013,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6137,23 +6023,101 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("cart.checkoutCtrl", function($scope, dataService) {
+	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, $location) {
+	  // Get Cart/User/Product
 	  dataService.getCart(function(response) {
-	  $scope.cart = response.data.cart;
+	        $scope.cart = response.data.cart;
+	        });
+	      dataService.getUser(function(response) {
+	        $scope.userCheckout = response.data.user;
+	      });
+	      dataService.getProducts(function(response) {
+	        $scope.productCheck = response.data.products;
+	});
+	// Fake Stripe Card
+	  // $scope.stripeToken = {stripeToken: {
+	  //   number: '4242424242424242',
+	  //   cvc: '123',
+	  //   exp_month: '12',
+	  //   exp_year: '2016'
+	  //   }
+	  //   };
+	// Checkout With Stripe
+	  $scope.checkoutStripe = function(stripeToken) {
+	    var stripeToken = $scope.stripeToken;
+	    var tempLength = $scope.stripeToken.stripeToken.number.length;
+	    // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
+	    dataService.checkout(stripeToken, function(response) {
+	      $location.path('/cart/confirmation');
+	    });
+	    // Reset Token
+	    $scope.stripeToken =
+	    {
+	      stripeToken:
+	        {
+	        number: '',
+	        cvc: '',
+	        exp_month: '',
+	        exp_year: ''
+	        }
+	    }
+	  }
+	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
+	$scope.isProductAvailable = function(cb) {
+	  dataService.getCart(function(response) {
+	    var cart = response.data.cart.data.cart;
+	    dataService.getProducts(function(response) {
+	      var productCheck = response.data.products;
+	      functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
+	        if (response == true) {
+	          //save inventory
+	          for (var x = 0; x < saveItems.length; x++) {
+	            var lookUp = saveItems[x].urlCode;
+	            var tempQuantity = saveItems[x].quantity;
+	            var tempActive = saveItems[x].active;
+	            dataService.getSingleItem(lookUp, function(item) {
+	            var temp = item.data.products;
+	            temp.quantity = tempQuantity;
+	            temp.active = tempActive;
+	              //save product
+	              dataService.saveItem(temp.id, temp, function(response) {
+	                cb(true)
+	              })
+	            })
+	          }
+	        }
+	        else {
+	          cb(false)
+	        }
+	      });
+	    });
 	  });
-	dataService.getUser(function(response) {
-	  $scope.userCheckout = response.data.user;
-	});
-	});
+	};
+
+
+
+	//Checkout Process
+	$scope.checkout = function() {
+	$scope.isProductAvailable(function(status) {
+	  if (status == true) {
+	    $scope.checkoutStripe();
+	  }
+	  else {
+	  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
+	    $location.path('/cart/view')
+	  }
+	}) //isProductAvailable function end
+	}
+	}); // End of Controller
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6166,7 +6130,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6179,7 +6143,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6192,7 +6156,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6203,7 +6167,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6229,6 +6193,229 @@ webpackJsonp([0],[
 	        "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
 	      }]
 	  });
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.service("dataService", function($http, $q) {
+	  this.getProducts = function(callback) {
+	    $http.get("/api/products")
+	    .then(callback)
+	  };
+	  this.getSingleItem = function(params, callback) {
+	    var tempUrl = '/api/products/' + params;
+	    $http.get(tempUrl)
+	    .then(callback)
+	  }
+	  this.saveItem = function(id, product, callback) {
+	  $http.put('/api/products/id/' + id, product)
+	  .then(callback)
+	  };
+	  this.getCategoryGraphics = function(callback) {
+	    $http.get("/api/category/Graphic%20Design")
+	    .then(callback)
+	  };
+	  this.getCategoryPaintings = function(callback) {
+	    $http.get("/api/category/Paintings")
+	    .then(callback)
+	  };
+	  this.getCategoryPrints = function(callback) {
+	    $http.get("/api/category/Prints")
+	    .then(callback)
+	  };
+	  this.getCategoryUpcycle = function(callback) {
+	    $http.get("/api/category/Upcycle")
+	    .then(callback)
+	  };
+	  this.getCategorySkateboards = function(callback) {
+	    $http.get("/api/category/Skateboard")
+	    .then(callback)
+	  };
+	  this.getCategoryStickers = function(callback) {
+	    $http.get("/api/category/Stickers")
+	    .then(callback)
+	  };
+	    this.getAdmin = function(url, input, callback) {
+	      var tempUrl = '/api/admin/' + url;
+	      $http.post(tempUrl, input)
+	      .then(callback)
+	    };
+	      this.getUser = function(callback) {
+	        $http.get("/api/profile")
+	        .then(callback)
+	      };
+	      this.getUsers = function(callback) {
+	        $http.get("/api/users")
+	        .then(callback)
+	      };
+	  this.newUser = function(user) {
+	    $http.post('/api/users', user)
+	  };
+	  this.saveUser = function(user, callback) {
+	  $http.put('/api/profile', user)
+	  .then(callback)
+	  };
+	    this.getOrderHistory = function(callback) {
+	      $http.get("/api/cart/history")
+	      .then(callback)
+	    };
+	    this.getCategory = function(callback) {
+	      $http.get("/api/category")
+	      .then(callback)
+	    };
+	    this.getCart = function(callback) {
+	      $http.get("/api/cart")
+	      .then(callback)
+	    };
+	    this.updateCart = function(a, b) {
+	      $http.put("/api/user/cart", a)
+	      .then(b)
+	    };
+	  this.checkout = function(token, callback) {
+	    $http.post('/api/user/checkout', token)
+	    .then(callback)
+	  }
+	  this.searchText = function(input, callback) {
+	    var search = "/api/products/search/" + input;
+	    $http.get(search)
+	    .then(callback)
+	  };
+	  this.getBlog = function(callback) {
+	    $http.get("/api/blog")
+	    .then(callback);
+	  }
+	  this.newGoal = function(goal) {
+	    $http.post("/api/goals", goal);
+	  }
+	  this.deleteGoal = function(goal) {
+	  if (!goal._id) {
+	    return $q.resolve();
+	  }
+	  return $http.delete('/api/goals/' + goal._id).then(function () {
+	    console.log('The "' + goal.title + '" goal has been deleted!')
+	  })
+	  };
+	  this.saveGoals = function(goals) {
+	  var que = [];
+	  goals.forEach(function(goal) {
+	    var request;
+	    if(!goal._id) {
+	      request = $http.post('/api/goals', goal);
+	    } else {
+	      request = $http.put('/api/goals/' + goal._id, goal).then(function(result) {
+	        goal = result.data.goal;
+	        return goal;
+	      })
+	    };
+	    que.push(request);
+	  });
+	  return $q.all(que).then(function(results) {
+	    console.log("Saved " + goals.length + ' goals!');
+	  })
+	  };
+	});
+
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.service("functionService", function(dataService) {
+	this.isProductAvailable = function(product, cart, callback) {
+	                            // Checking Product Availability
+	// Get Products
+	// Get Users Cart
+	      grabIDAndQuantity(product, cart, function(file, text, saveItems) {
+	        var checkForTrue = "";
+	        var isItTrue = 0;
+	        var saveItems = [];
+	// Make Object of ID and Quantity
+	        for (var x = 0; x < text.length; x++) {
+	          var aQuantity = text[x].quantity;
+	          var id = text[x].id;
+	// Make Object of ID and Quantity
+	          for (var y = 0; y < file.length; y++) {
+	// Search Products with Users Cart
+	            if (file[y].id.search(id) == 0) {
+	              if (file[y].quantity >= text[x].quantity) {
+	                isItTrue += 1;
+	                file[y].quantity = file[y].quantity - text[x].quantity;
+	                //Make Product Inactive
+	                  if (file[y].quantity == 0) {
+	                    file[y].active = false;
+	                  saveItems.push(file[y]);
+	                } else {
+	                saveItems.push(file[y]);
+	                }
+	              }
+	            }
+	          }
+	        }
+	        if (isItTrue == (text.length)) {
+	          checkForTrue = true;
+	        }
+	        else if (isItTrue < (text.length)) {
+	          checkForTrue = false;
+	        }
+	        // Return Truthy or Falsey
+	          callback(file, checkForTrue, saveItems);
+	      })
+	    }
+
+	  var grabIDAndQuantity = function(product, cart, callback) {
+	        var doSearchThisData = [];
+	        var useThisDataToSearch = [];
+	    var waypointOne = false, waypointTwo = false;
+	    for (var x = 0; x < product.length; x++) {
+	      var quantity = product[x].quantity;
+	      var id = product[x].id;
+	      var urlCode = product[x].urlCode;
+	      doSearchThisData.push({"id": id, "quantity": quantity, "urlCode": urlCode});
+	      if (x < product.length) {
+	        waypointOne = true;
+	      }
+	    }
+	    for (var x = 0; x < cart.items.length; x++) {
+	      var quantity = cart.items[x].quantity;
+	      var id2 = cart.items[x].product.id;
+	      useThisDataToSearch.push({"id": id2, "quantity": quantity});
+	      if (x < cart.items.length) {
+	        waypointTwo = true;
+	      }
+	    }
+	    if (waypointOne == true && waypointTwo == true) {
+	      callback(doSearchThisData, useThisDataToSearch);
+	    }
+	  }
+	});
+
+
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("cart.confirmationCtrl", function($scope, dataService) {
+	dataService.getCart(function(response) {
+	  var tempObject = response.data.cart.data.orderHistory;
+	  var tempLength = tempObject.length - 1;
+	  var order = tempObject[tempLength].charge.status;
+	    console.log(tempObject[tempLength]);
+	  if ( order == "succeeded" ) {
+	    $scope.statusCharge = true;
+	  }
+	  else {
+	    $scope.statusCharge = false;
+	  }
+	});
+	});
 
 
 /***/ }
