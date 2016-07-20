@@ -123,6 +123,7 @@ cartRouter.post('/user/checkout', function (req, res) {
           if (err) {
             console.log(err);
             return res.status(500).json(err);
+            alert("GO back and double check your credit card information one more time.")
           }
           // Order History Set Here Automatic in Api call.
           var newHistory = new OrderHistory();
@@ -135,10 +136,11 @@ cartRouter.post('/user/checkout', function (req, res) {
             newHistory.cart = req.user.data.cart;
             newHistory.billingAddress = req.user.data.billingAddress;
             newHistory.charge = charge;
+            newHistory.last4 = charge.source.last4;
+            newHistory.card = charge.source.brand;
             req.user.data.orderHistory.push(newHistory);
             var newUser = new NewUser();
             newUser = req.user;
-            newUser.data.cart = null;
             newUser.save(function() {
               return res.json({charge: charge, user: req.user.data});
             });
@@ -146,6 +148,17 @@ cartRouter.post('/user/checkout', function (req, res) {
       );
     });
 });
+cartRouter.post('/user/cart/erase', function (req, res) {
+  if (!req.user) {
+    return res.status(404).json({message: "Not logged in"})
+  }
+            var newUser = new NewUser();
+            newUser = req.user;
+            newUser.data.cart = null;
+            newUser.save(function() {
+              return res.json({user: req.user.data});
+            });
+        });
 
 //Borrowed from ( MongoDBx: M101x Introduction to MongoDB using the MEAN Stack )
 function handleOne(property, res, error, result) {

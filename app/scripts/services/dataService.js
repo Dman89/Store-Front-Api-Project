@@ -87,33 +87,8 @@ angular.module("lionHeart")
     $http.get("/api/blog")
     .then(callback);
   }
-  this.newGoal = function(goal) {
-    $http.post("/api/goals", goal);
+  this.eraseCart = function(callback) {
+    $http.post("/api/user/cart/erase")
+    .then(callback);
   }
-  this.deleteGoal = function(goal) {
-  if (!goal._id) {
-    return $q.resolve();
-  }
-  return $http.delete('/api/goals/' + goal._id).then(function () {
-    console.log('The "' + goal.title + '" goal has been deleted!')
-  })
-  };
-  this.saveGoals = function(goals) {
-  var que = [];
-  goals.forEach(function(goal) {
-    var request;
-    if(!goal._id) {
-      request = $http.post('/api/goals', goal);
-    } else {
-      request = $http.put('/api/goals/' + goal._id, goal).then(function(result) {
-        goal = result.data.goal;
-        return goal;
-      })
-    };
-    que.push(request);
-  });
-  return $q.all(que).then(function(results) {
-    console.log("Saved " + goals.length + ' goals!');
-  })
-  };
 });

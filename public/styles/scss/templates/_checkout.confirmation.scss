@@ -3,6 +3,7 @@
     width: 80vw;
     margin: auto 10%;
     padding: 0.777em 0;
+    margin-bottom: 2em;
   }
   & .success {
     background-color: green;
@@ -26,4 +27,13 @@
   text-align: center;
   width: 100%;
   max-width: 225px;
+}
+
+#html #body #ui-view #confirmationTotal {
+  padding: .5em 1em;
+  text-align: left;
+  border: $p 4px solid;
+  border-radius: 4px;
+  margin: 1.75em auto;
+  background-color: white;
 }

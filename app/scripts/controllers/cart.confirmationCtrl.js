@@ -11,5 +11,8 @@ dataService.getCart(function(response) {
   else {
     $scope.statusCharge = false;
   }
+
+  //Set Notation for Order History
+  $scope.orderPlaced = tempObject[tempLength];
 });
 });

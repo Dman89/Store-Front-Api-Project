@@ -42,7 +42,6 @@ webpackJsonp([0],[
 	__webpack_require__(38);
 	__webpack_require__(39);
 	__webpack_require__(40);
-	__webpack_require__(41);
 	__webpack_require__(42);
 	__webpack_require__(43);
 	__webpack_require__(44);
@@ -55,6 +54,7 @@ webpackJsonp([0],[
 
 	__webpack_require__(49);
 	__webpack_require__(50);
+	__webpack_require__(51);
 
 
 /***/ },
@@ -173,8 +173,7 @@ webpackJsonp([0],[
 	      })
 	      .state('cart.view', {
 	      url: '/view',
-	      templateUrl: 'templates/checkout/cart.html',
-	      controller: 'cart.cartCtrl'
+	      templateUrl: 'templates/checkout/cart.html'
 	      })
 	      .state('cart.checkout', {
 	      url: '/checkout',
@@ -5041,12 +5040,14 @@ webpackJsonp([0],[
 	    var total = 0;
 	    var len = 0;
 	    for (var x = 0; x < cart.length; x++) {
-	            var price = cart[x].product.subTotal;
-	            var quantity = cart[x].quantity;
+	            var price = Number(cart[x].product.subTotal);
+	            var quantity = Number(cart[x].quantity);
 	            cart[x].total = price * quantity;
 	            total += price * quantity;
 	            len += quantity;
+	            console.log(cart[x]);
 	          }
+	          console.log(len);
 	    sub(total, user, len);
 	  }
 	//Total Calculation Function for Checkout (pages)
@@ -6012,22 +6013,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("cart.cartCtrl", function($scope, dataService) {
-	});
-
-
-/***/ },
+/* 41 */,
 /* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, $location) {
+	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, eraseCartService, $location) {
 	  // Get Cart/User/Product
 	  dataService.getCart(function(response) {
 	        $scope.cart = response.data.cart;
@@ -6038,16 +6030,9 @@ webpackJsonp([0],[
 	      dataService.getProducts(function(response) {
 	        $scope.productCheck = response.data.products;
 	});
-	// Fake Stripe Card
-	  // $scope.stripeToken = {stripeToken: {
-	  //   number: '4242424242424242',
-	  //   cvc: '123',
-	  //   exp_month: '12',
-	  //   exp_year: '2016'
-	  //   }
-	  //   };
+
 	// Checkout With Stripe
-	  $scope.checkoutStripe = function(stripeToken, callback) {
+	  $scope.checkoutStripe = function(callback) {
 	    var stripeToken = $scope.stripeToken;
 	    var tempLength = $scope.stripeToken.stripeToken.number.length;
 	    // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
@@ -6058,7 +6043,6 @@ webpackJsonp([0],[
 	      } else {
 	        callback(false);
 	      }
-	        console.log(response);
 	    });
 	    // Reset Token
 	    $scope.stripeToken =
@@ -6131,7 +6115,10 @@ webpackJsonp([0],[
 	  if (status == true) {
 	    $scope.checkoutStripe(function(data) {
 	      if (data == true) {
-	      $scope.changeProductAvailablity(function(response) {})
+	      $scope.changeProductAvailablity(function(response) {
+	        eraseCartService.eraseCart();
+	        $scope.cartA = null;
+	      })
 	    }
 	      else if (data == false) {
 	      alert("Error During Transaction")
@@ -6244,6 +6231,9 @@ webpackJsonp([0],[
 	  else {
 	    $scope.statusCharge = false;
 	  }
+
+	  //Set Notation for Order History
+	  $scope.orderPlaced = tempObject[tempLength];
 	});
 	});
 
@@ -6341,35 +6331,10 @@ webpackJsonp([0],[
 	    $http.get("/api/blog")
 	    .then(callback);
 	  }
-	  this.newGoal = function(goal) {
-	    $http.post("/api/goals", goal);
+	  this.eraseCart = function(callback) {
+	    $http.post("/api/user/cart/erase")
+	    .then(callback);
 	  }
-	  this.deleteGoal = function(goal) {
-	  if (!goal._id) {
-	    return $q.resolve();
-	  }
-	  return $http.delete('/api/goals/' + goal._id).then(function () {
-	    console.log('The "' + goal.title + '" goal has been deleted!')
-	  })
-	  };
-	  this.saveGoals = function(goals) {
-	  var que = [];
-	  goals.forEach(function(goal) {
-	    var request;
-	    if(!goal._id) {
-	      request = $http.post('/api/goals', goal);
-	    } else {
-	      request = $http.put('/api/goals/' + goal._id, goal).then(function(result) {
-	        goal = result.data.goal;
-	        return goal;
-	      })
-	    };
-	    que.push(request);
-	  });
-	  return $q.all(que).then(function(results) {
-	    console.log("Saved " + goals.length + ' goals!');
-	  })
-	  };
 	});
 
 
@@ -6445,6 +6410,23 @@ webpackJsonp([0],[
 	    if (waypointOne == true && waypointTwo == true) {
 	      callback(doSearchThisData, useThisDataToSearch);
 	    }
+	  }
+	});
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.service("eraseCartService", function(dataService) {
+	  this.eraseCart = function() {
+	    dataService.eraseCart(
+	      function(response) {
+	        console.log(response);
+	      }
+	    )
 	  }
 	});
 

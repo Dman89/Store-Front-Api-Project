@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-.controller("cart.checkoutCtrl", function($scope, dataService, functionService, $location) {
+.controller("cart.checkoutCtrl", function($scope, dataService, functionService, eraseCartService, $location) {
   // Get Cart/User/Product
   dataService.getCart(function(response) {
         $scope.cart = response.data.cart;
@@ -11,16 +11,9 @@ angular.module("lionHeart")
       dataService.getProducts(function(response) {
         $scope.productCheck = response.data.products;
 });
-// Fake Stripe Card
-  // $scope.stripeToken = {stripeToken: {
-  //   number: '4242424242424242',
-  //   cvc: '123',
-  //   exp_month: '12',
-  //   exp_year: '2016'
-  //   }
-  //   };
+
 // Checkout With Stripe
-  $scope.checkoutStripe = function(stripeToken, callback) {
+  $scope.checkoutStripe = function(callback) {
     var stripeToken = $scope.stripeToken;
     var tempLength = $scope.stripeToken.stripeToken.number.length;
     // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
@@ -31,7 +24,6 @@ angular.module("lionHeart")
       } else {
         callback(false);
       }
-        console.log(response);
     });
     // Reset Token
     $scope.stripeToken =
@@ -104,7 +96,10 @@ $scope.isProductAvailable(function(status) {
   if (status == true) {
     $scope.checkoutStripe(function(data) {
       if (data == true) {
-      $scope.changeProductAvailablity(function(response) {})
+      $scope.changeProductAvailablity(function(response) {
+        eraseCartService.eraseCart();
+        $scope.cartA = null;
+      })
     }
       else if (data == false) {
       alert("Error During Transaction")

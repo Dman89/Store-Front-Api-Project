@@ -43,7 +43,9 @@ var order = {
     },
     billingAddress: {name: {type: String}, address: {type: String}, city: {type: String}, state: {type: String}, zip:{type: String}, country:{type: String}},
     shippingAddress: {name: {type: String}, address: {type: String}, city: {type: String}, state: {type: String}, zip:{type: String}, country: {type: String}, useBilling: {type: Boolean}},
-    charge: { type: Object }
+    charge: { type: Object },
+    last4: {type: String},
+    card: {type: String}
 };
 
 var orderHistorySchema = new mongoose.Schema(order);

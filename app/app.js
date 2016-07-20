@@ -38,7 +38,6 @@ require('./scripts/controllers/indexCtrl.js');
 require('./scripts/controllers/profile.dashboardCtrl.js');
 require('./scripts/controllers/profile.dashboard.editCtrl.js');
 require('./scripts/controllers/singleItemCtrl.js');
-require('./scripts/controllers/cart.cartCtrl.js');
 require('./scripts/controllers/cart.checkoutCtrl.js');
 require('./scripts/controllers/admin.productsCtrl.js');
 require('./scripts/controllers/admin.postsCtrl.js');
@@ -51,3 +50,4 @@ require('./scripts/controllers/cart.confirmationCtrl.js');
 
 require('./scripts/services/dataService.js');
 require('./scripts/services/functionService.js');
+require('./scripts/services/eraseCartService.js');

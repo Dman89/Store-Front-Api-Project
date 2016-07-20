@@ -53,12 +53,14 @@ $scope.deleteCartItem = function(abe) {
     var total = 0;
     var len = 0;
     for (var x = 0; x < cart.length; x++) {
-            var price = cart[x].product.subTotal;
-            var quantity = cart[x].quantity;
+            var price = Number(cart[x].product.subTotal);
+            var quantity = Number(cart[x].quantity);
             cart[x].total = price * quantity;
             total += price * quantity;
             len += quantity;
+            console.log(cart[x]);
           }
+          console.log(len);
     sub(total, user, len);
   }
 //Total Calculation Function for Checkout (pages)

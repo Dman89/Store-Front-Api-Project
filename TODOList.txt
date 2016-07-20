@@ -7,6 +7,7 @@ Cart
                                 call random number
                                 go to product page of random number (get)
     (Completed)         Up/Down Quality for Items
+                        Fix Total CSS
 
 
 
@@ -36,8 +37,13 @@ Checkout Page
 
 
 Confirmation
-                        Style
-                        Correct Total Data
+    (Completed)         Style
+    (Completed)         Correct Total Data
+    (Completed)         Fixed Length of Cart
+    (Completed)         Added Last4 of Card to Order History
+    (Completed)         Gave Erase Cart Its Own API Call
+    (Completed)         Created orderPlaced Variable
+
 Add To Cart
                         Edit Inventory
                         Disable
