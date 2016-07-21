@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-.controller("singleItemCtrl", function($scope, dataService, $stateParams) {
+.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
 $scope.urlCode = $stateParams.urlCode;
 var urlCode = $scope.urlCode
 dataService.getSingleItem(urlCode, function(response) {
@@ -12,23 +12,8 @@ dataService.getUser(function(response) {
 dataService.getCart(function(response) {
   $scope.cart = response.data.cart.data.cart;
 })
-var items = [];
-var user = {};
 $scope.addToCart = function(id, quantity) {
-  var itemsOld = [];
-  var item = {"product": id, "quantity": quantity}
-  user = $scope.user;
-  if ($scope.cart !== null) {
-    items = $scope.cart.items;
-    items.push(item);
-  }
-  else {
-    items = item;
-  }
-  user.data.cart = {"items" : items};
-dataService.updateCart(user, function(response) {});
-items = [];
-user = {};
+  functionService.addToCart(id, quantity, $scope.user, $scope.cart);
 }
 
 dataService.getProducts(function(response) {

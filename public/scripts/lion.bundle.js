@@ -42,19 +42,19 @@ webpackJsonp([0],[
 	__webpack_require__(38);
 	__webpack_require__(39);
 	__webpack_require__(40);
+	__webpack_require__(41);
 	__webpack_require__(42);
 	__webpack_require__(43);
 	__webpack_require__(44);
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
+
+
+
 	__webpack_require__(48);
-
-
-
 	__webpack_require__(49);
 	__webpack_require__(50);
-	__webpack_require__(51);
 
 
 /***/ },
@@ -4806,7 +4806,7 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("productCtrl", function($scope, dataService) {
+	.controller("productCtrl", function($scope, dataService, functionService) {
 	  dataService.getProducts(function(response) {
 	    $scope.products = response.data.products
 	  })
@@ -4816,25 +4816,12 @@ webpackJsonp([0],[
 	  dataService.getUser(function(response) {
 	    $scope.user = response.data.user;
 	  })
-	  var items = [];
-	  var user = {};
-	  $scope.addToCart = function(id, quantity) {
-	    var itemsOld = [];
-	    var item = {"product": id, "quantity": quantity}
-	    user = $scope.user;
-	    if ($scope.cart !== null) {
-	      items = $scope.cart.items;
-	      items.push(item);
-	    }
-	    else {
-	      items = item;
-	    }
-	    user.data.cart = {"items" : items};
-	dataService.updateCart(user, function(response) {});
-	items = [];
-	user = {};
-	  }
 
+	    $scope.addToCart = function(id, quantity, product) {
+	      functionService.addToCart(id, quantity, $scope.user, $scope.cart, product, function(response) {
+	        $scope.cart = response;
+	      });
+	    }
 	});
 
 
@@ -5045,9 +5032,7 @@ webpackJsonp([0],[
 	            cart[x].total = price * quantity;
 	            total += price * quantity;
 	            len += quantity;
-	            console.log(cart[x]);
 	          }
-	          console.log(len);
 	    sub(total, user, len);
 	  }
 	//Total Calculation Function for Checkout (pages)
@@ -5923,7 +5908,7 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("singleItemCtrl", function($scope, dataService, $stateParams) {
+	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
 	dataService.getSingleItem(urlCode, function(response) {
@@ -5935,23 +5920,8 @@ webpackJsonp([0],[
 	dataService.getCart(function(response) {
 	  $scope.cart = response.data.cart.data.cart;
 	})
-	var items = [];
-	var user = {};
 	$scope.addToCart = function(id, quantity) {
-	  var itemsOld = [];
-	  var item = {"product": id, "quantity": quantity}
-	  user = $scope.user;
-	  if ($scope.cart !== null) {
-	    items = $scope.cart.items;
-	    items.push(item);
-	  }
-	  else {
-	    items = item;
-	  }
-	  user.data.cart = {"items" : items};
-	dataService.updateCart(user, function(response) {});
-	items = [];
-	user = {};
+	  functionService.addToCart(id, quantity, $scope.user, $scope.cart);
 	}
 
 	dataService.getProducts(function(response) {
@@ -6013,8 +5983,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */,
-/* 42 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6136,7 +6105,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6149,7 +6118,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6162,7 +6131,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6175,7 +6144,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6186,7 +6155,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6215,7 +6184,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6239,7 +6208,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6339,7 +6308,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6411,11 +6380,70 @@ webpackJsonp([0],[
 	      callback(doSearchThisData, useThisDataToSearch);
 	    }
 	  }
+
+	//Add To Cart
+	this.addToCart = function(id, quantity, user, cart, product, cb) {
+	  var item = {"_id": product._id, "id": product._id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
+	if (user == null) {
+	  alert("Please Log In");
+	}
+	else {
+	cartSearch(cart, function(response) {
+	  if (response == false) {
+	  // Run Code or Not
+
+	  }
+	  else {
+	    var items = [];
+	    if (cart !== null) {
+	      items = cart.items;
+	      items.push(item);
+	    }
+	    else {
+	      items = item;
+	    }
+	    user.data.cart = {"items" : items};
+	    dataService.updateCart(user, function(response) {
+	      cb(response.data.user.data.cart);
+	    });
+	    items = [];
+	  }
+	})
+	    }
+	}
+
+
+	  var cartSearch = function(cart, cb) { // Get Cart
+	  // Get ID's
+	  var tempCheck = [];
+	    for (var x = 0; x < cart.items.length; x++) {
+	      if (!cart.items[x].id) {
+	        cart.items[x].id = cart.items[x].product.id;
+	      }
+	      tempCheck.push(cart.items[x].id);
+	    }
+	    // Check ID to Cart
+	    var checkResult = false;
+	    var tempVar = -1;
+	    var tempNumber = tempCheck.length - 1;
+	    for (var x = 0; x < tempCheck.length; x++) {
+	      tempVar = tempCheck[x].search(id);
+	      if (!tempVar == -1) {
+	        checkResult = true;
+	      }
+	      if (tempCheck[x] == tempNumber) {
+	        cb(checkResult);
+	      }
+	    }
+	  }
+
+
+
 	});
 
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';

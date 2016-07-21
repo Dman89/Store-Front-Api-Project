@@ -67,4 +67,63 @@ this.isProductAvailable = function(product, cart, callback) {
       callback(doSearchThisData, useThisDataToSearch);
     }
   }
+
+//Add To Cart
+this.addToCart = function(id, quantity, user, cart, product, cb) {
+  var item = {"_id": product._id, "id": product._id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
+if (user == null) {
+  alert("Please Log In");
+}
+else {
+cartSearch(cart, function(response) {
+  if (response == false) {
+  // Run Code or Not
+
+  }
+  else {
+    var items = [];
+    if (cart !== null) {
+      items = cart.items;
+      items.push(item);
+    }
+    else {
+      items = item;
+    }
+    user.data.cart = {"items" : items};
+    dataService.updateCart(user, function(response) {
+      cb(response.data.user.data.cart);
+    });
+    items = [];
+  }
+})
+    }
+}
+
+
+  var cartSearch = function(cart, cb) { // Get Cart
+  // Get ID's
+  var tempCheck = [];
+    for (var x = 0; x < cart.items.length; x++) {
+      if (!cart.items[x].id) {
+        cart.items[x].id = cart.items[x].product.id;
+      }
+      tempCheck.push(cart.items[x].id);
+    }
+    // Check ID to Cart
+    var checkResult = false;
+    var tempVar = -1;
+    var tempNumber = tempCheck.length - 1;
+    for (var x = 0; x < tempCheck.length; x++) {
+      tempVar = tempCheck[x].search(id);
+      if (!tempVar == -1) {
+        checkResult = true;
+      }
+      if (tempCheck[x] == tempNumber) {
+        cb(checkResult);
+      }
+    }
+  }
+
+
+
 });

@@ -45,9 +45,10 @@ Confirmation
     (Completed)         Created orderPlaced Variable
 
 Add To Cart
-                        Edit Inventory
+    (Completed)         Edit Inventory (is done upon transaction)
                         Disable
-                        Auto-login if not logged in.
+    (Completed)         Auto-login if not logged in. (CHANGED TO ALERTED USER OF NEED TO LOG IN)
+    (Completed)         Make Add To Cart its own Function
 Admin Panel Posts
                         Save Posts
                         New Posts

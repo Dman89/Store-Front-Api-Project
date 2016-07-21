@@ -11,7 +11,8 @@ var cart = {
           default: 1,
           min: 1
         },
-        total: {type: Number}
+        total: {type: Number},
+        id: {type: String}
       }],
   subTotal: {
     type: Number,

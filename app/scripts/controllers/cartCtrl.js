@@ -58,9 +58,7 @@ $scope.deleteCartItem = function(abe) {
             cart[x].total = price * quantity;
             total += price * quantity;
             len += quantity;
-            console.log(cart[x]);
           }
-          console.log(len);
     sub(total, user, len);
   }
 //Total Calculation Function for Checkout (pages)
