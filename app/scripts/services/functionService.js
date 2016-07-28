@@ -69,18 +69,20 @@ this.isProductAvailable = function(product, cart, callback) {
   }
 
 //Add To Cart
-this.addToCart = function(id, quantity, user, cart, product, cb) {
+this.addToCart = function(id, quantity, user, cart, product) {
+  console.log(user);
   var item = {"_id": product._id, "id": product._id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
-if (user == null) {
+if (user == undefined) {
   alert("Please Log In");
 }
 else {
 cartSearch(cart, function(response) {
   if (response == false) {
   // Run Code or Not
-
+console.log("false");
   }
   else {
+console.log("true");
     var items = [];
     if (cart !== null) {
       items = cart.items;
@@ -91,7 +93,7 @@ cartSearch(cart, function(response) {
     }
     user.data.cart = {"items" : items};
     dataService.updateCart(user, function(response) {
-      cb(response.data.user.data.cart);
+      $scope.cart = response.data.user.data.cart;
     });
     items = [];
   }
@@ -119,6 +121,8 @@ cartSearch(cart, function(response) {
         checkResult = true;
       }
       if (tempCheck[x] == tempNumber) {
+        cb(checkResult);
+      } else {
         cb(checkResult);
       }
     }
