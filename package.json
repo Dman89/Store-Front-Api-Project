@@ -2,9 +2,6 @@
   "name": "lionheart",
   "version": "0.0.1",
   "description": "The Heart of a Lion, the Spirit of a Warrior",
-  "engines": {
-    "node": "4.4.4"
-  },
   "scripts": {
     "start": "node src/index.js"
   },
@@ -39,5 +36,8 @@
     "webpack": "^1.13.1"
   },
   "author": "DKC Design",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "4.4.4"
+  }
 }
