@@ -32,7 +32,7 @@
   },
   "scripts": {
     "test": "",
-    "start": "nodemon"
+    "start": "node src/index.js"
   },
   "author": "DKC Design",
   "license": "ISC",
