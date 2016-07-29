@@ -14,6 +14,7 @@ var productRouter = require('./api/products');
 var orderHistoryRouter = require('./api/orderHistory');
 var userRouter = require('./api/user');
 var app = express();
+var portReplace = process.env.port || 3000;
 require('./config/passport.js')(passport);
 require('./database.js');
 // require('./seed.js');
@@ -50,6 +51,6 @@ app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-app.listen(3000, function() {
-  console.log("Express Server is Running on Port 3000")
+app.listen(portReplace, function() {
+  console.log("Express Server is Running on Port" + portReplace)
 });
