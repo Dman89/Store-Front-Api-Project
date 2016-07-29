@@ -14,7 +14,7 @@ var productRouter = require('./api/products');
 var orderHistoryRouter = require('./api/orderHistory');
 var userRouter = require('./api/user');
 var app = express();
-var portReplace = process.env.port || 5000;
+var portReplace = process.env.PORT || 5000;
 require('./config/passport.js')(passport);
 require('./database.js');
 // require('./seed.js');
