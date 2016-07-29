@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "The Heart of a Lion, the Spirit of a Warrior",
   "main": "src/index.js",
+  "engines": {
+    "node": "4.4.4"
+  },
   "dependencies": {
     "angular": "^1.5.6",
     "angular-ui-router": "^0.3.1",
@@ -35,8 +38,5 @@
     "start": "node src/index.js"
   },
   "author": "DKC Design",
-  "license": "ISC",
-  "engines": {
-    "node": "4.1.1"
-  }
+  "license": "ISC"
 }
