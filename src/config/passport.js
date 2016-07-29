@@ -3,6 +3,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
    // load up the user model and auth variables
    var User       = require('../models/user');
+  //  var configAuth = require('./auth');
 
    module.exports = function(passport) {
 
