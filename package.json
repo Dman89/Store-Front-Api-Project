@@ -31,7 +31,8 @@
     "webpack": "^1.13.1"
   },
   "scripts": {
-    "test": ""
+    "test": "",
+    "start": "nodemon"
   },
   "author": "DKC Design",
   "license": "ISC",
