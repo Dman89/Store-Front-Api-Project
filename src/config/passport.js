@@ -19,9 +19,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
        // Facebook Strategy
         passport.use(new FacebookStrategy({
-            clientID        : configAuth.facebookAuth.clientID,
-            clientSecret    : configAuth.facebookAuth.clientSecret,
-            callbackURL     : configAuth.facebookAuth.callbackURL,
+            clientID        : process.env.fbID,
+            clientSecret    : process.env.FBSecret,
+            callbackURL     : process.env.fbCbUrl,
             enableProof: true,
             profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl']
 
