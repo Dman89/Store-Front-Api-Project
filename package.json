@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The Heart of a Lion, the Spirit of a Warrior",
   "engines": {
-    "node": "4.1.1"
+    "node": "4.4.4"
   },
   "scripts": {
     "start": "node src/index.js"
@@ -22,7 +22,6 @@
     "mathsass": "^0.9.5",
     "mongodb": "^2.1.18",
     "mongoose": "^4.4.20",
-    "node": "0.0.0",
     "npm": "^3.10.5",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
