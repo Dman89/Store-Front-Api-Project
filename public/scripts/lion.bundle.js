@@ -4802,25 +4802,39 @@ webpackJsonp([0],[
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("productCtrl", function($scope, dataService, functionService) {
+	  var addToCartReq = __webpack_require__(52);
+	  var cart = $scope.cart
+	  var user = $scope.user;
 	  dataService.getProducts(function(response) {
+	    if (response.data.products[0].id == null) {
+	      var varTemp = response.data.products.length;
+	      for (var x = 0; x < varTemp; x++) {
+	        response.data.products[x].id = response.data.products[x]._id;
+	      }
+	    }
 	    $scope.products = response.data.products
 	  })
 	  dataService.getCart(function(response) {
 	    $scope.cart = response.data.cart.data.cart;
+	    cart = $scope.cart
 	  })
 	  dataService.getUser(function(response) {
 	    $scope.user = response.data.user;
+	    user = $scope.user;
 	  })
-
 	    $scope.addToCart = function(id, quantity, product) {
-	      functionService.addToCart(id, quantity, $scope.user, $scope.cart, product, function(response) {
-	        $scope.cart = response;
+	    var id = id;
+	      addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+	        console.log("Cart Saved");
+	        $scope.cart = res;
+	        cart = $scope.cart
 	      });
+	      console.log("Completed!");
 	    }
 	});
 
@@ -5904,11 +5918,12 @@ webpackJsonp([0],[
 
 /***/ },
 /* 40 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+	var addToCartReq = __webpack_require__(52);
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
 	dataService.getSingleItem(urlCode, function(response) {
@@ -5920,10 +5935,23 @@ webpackJsonp([0],[
 	dataService.getCart(function(response) {
 	  $scope.cart = response.data.cart.data.cart;
 	})
-	$scope.addToCart = function(id, quantity) {
-	  functionService.addToCart(id, quantity, $scope.user, $scope.cart);
-	}
+	  $scope.addToCart = function(id, quantity, product) {
+	    addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+	      console.log("Cart Saved");
+	      $scope.cart = res;
+	    });
+	    console.log("Completed!");
+	  }
 
+	// get products for random display (3)
+	// create array with digits = to array.length
+	// run a random number
+	// get number from array (NOT INDEX)
+	// splice out [x] from array
+	// repeat three times
+	// save related items to $scope
+	// Display in angular
+	// prevent duplicates
 	dataService.getProducts(function(response) {
 	  var productsRes = response.data.products;
 	  var productLength = productsRes.length;
@@ -5967,15 +5995,6 @@ webpackJsonp([0],[
 	  });
 	});
 	});
-	// get products
-	// create array with digits = to array.length
-	// run a random number
-	// get number from array (NOT INDEX)
-	// splice out [x] from array
-	// repeat three times
-	// save related items to $scope
-	// Display in angular
-	// prevent duplicates
 
 
 
@@ -6382,65 +6401,99 @@ webpackJsonp([0],[
 	  }
 
 	//Add To Cart
-	this.addToCart = function(id, quantity, user, cart, product) {
-	  var item = {"_id": product._id, "id": product._id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
-	if (user == undefined) {
-	  alert("Please Log In");
+	this.addToCart = function(id, quantity, user, cart, product, cba) {
+
+	  var id = id, quantity = quantity, user = user, cart = cart, product = product;
+	  var newCart;
+	  var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
+	  cartSearch(cart, id, function(response) {
+	    console.log("***Logging*** ***Response*** ***Below***");
+	    if (response == "true") {
+	      console.log("Already Added! : D");
+	      //False Code Here if needed
+	      cba("nothing");
+	    }
+	    else if (response == "false") {
+	      console.log("Adding.");
+	      var items = [];
+	      if (cart == null || cart.items == 0) {
+	        console.log("Adding..(to a empty cart)");
+	        items = item;
+	      }
+	      else {
+	        console.log("Adding..(to a cart with items)");
+	        items = cart.items;
+	        items.push(item);
+	      }
+	      user.data.cart = {"items" : items};
+	      dataService.updateCart(user, function(response) {
+	        items = [];
+	        console.log("Adding...(saved cart)");
+	        newCart = response.data.user.data.cart;
+	        console.log(newCart);
+	        cba(newCart);
+	      });
+	    }
+	  })
 	}
-	else if (!user == undefined) {
-	cartSearch(cart, function(response) {
-	  if (response == false) {
-	  // Run Code or Not
-	console.log("false");
-	  }
-	  else {
-	console.log("true");
-	    var items = [];
-	    if (cart !== null) {
-	      items = cart.items;
-	      items.push(item);
+
+
+	  var cartSearch = function(cart, id, cbb) { // Get Cart
+
+	    console.log("Cart Found\n\nBegin searching...");
+	    if (!cart.items.length == 0) {
+	      console.log("Checking Cart...");
+	      // Get ID's
+	      cartCheck(cart, id, function(tempCheck) {
+	        // Check ID to Cart
+	        searchResponse(tempCheck, id, function(res) {
+	          if (res == true) {
+	            console.log("Checking Cart...(found ITEM in cart)");
+	            cbb("true");
+	          } else {
+	            console.log("Checking Cart...(ITEM is not in cart)");
+	            cbb("false");
+	          }
+	        })
+	      });
 	    }
 	    else {
-	      items = item;
+	      console.log("(Empty Cart)");
+	      cbb("false");
 	    }
-	    user.data.cart = {"items" : items};
-	    dataService.updateCart(user, function(response) {
-	      $scope.cart = response.data.user.data.cart;
-	    });
-	    items = [];
 	  }
-	})
-	    }
-	}
 
-
-	  var cartSearch = function(cart, cb) { // Get Cart
-	  // Get ID's
-	  var tempCheck = [];
+	  var cartCheck = function(cart, id, cbc) {
+	    // Get ID's
+	    var tempCheck = [];
+	    var tempCheckTwo = cart.items.length - 1;
 	    for (var x = 0; x < cart.items.length; x++) {
-	      if (!cart.items[x].id) {
-	        cart.items[x].id = cart.items[x].product.id;
-	      }
-	      tempCheck.push(cart.items[x].id);
+	        if (!cart.items[x].id) {
+	          cart.items[x].id = cart.items[x].product.id;
+	        }
+	        tempCheck.push(cart.items[x].id);
+	        if (x == tempCheckTwo) {
+	          cbc(tempCheck);
+	        }
 	    }
+	  }
+
+	  var searchResponse = function(tempCheck, id, cbd) {
 	    // Check ID to Cart
-	    var checkResult = false;
+	    var checkResult;
 	    var tempVar = -1;
 	    var tempNumber = tempCheck.length - 1;
 	    for (var x = 0; x < tempCheck.length; x++) {
 	      tempVar = tempCheck[x].search(id);
-	      if (!tempVar == -1) {
+	      if (tempVar > -1) {
 	        checkResult = true;
 	      }
-	      if (tempCheck[x] == tempNumber) {
-	        cb(checkResult);
-	      } else {
-	        cb(checkResult);
+	      if (x == tempNumber) {
+	        console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
+	        cbd(checkResult);
 	      }
 	    }
 	  }
-
-
 
 	});
 
@@ -6460,6 +6513,34 @@ webpackJsonp([0],[
 	    )
 	  }
 	});
+
+
+/***/ },
+/* 51 */,
+/* 52 */
+/***/ function(module, exports) {
+
+	'use strict'
+	var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
+	  console.log("*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*");
+	  var returnVal;
+	  if (!user) {
+	    console.log("Please Log In");
+	  }
+	  else {
+	    functionService.addToCart(id, quantity, user, cart, product, function(response) {
+	      if (response == "nothing") {
+	        console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
+	        returnVal = cart;
+	      } else {
+	        returnVal = response;
+	      }
+	      console.log("Saving Cart...");
+	      finalCB(returnVal);
+	    });
+	  }
+	}
+	module.exports = addToCartReq;
 
 
 /***/ }

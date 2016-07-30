@@ -3,7 +3,25 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
    // load up the user model and auth variables
    var User       = require('../models/user');
-  //  var configAuth = require('./auth'); 
+   var clientID, clientSecret, callbackURL;
+
+
+   // Disable "configAuth" to turn off test mode
+   var configAuth = require('./auth');
+   // If else statment for test mode
+  if (configAuth) {
+      clientID = process.env.fbID || configAuth.facebookAuth.clientID;
+      clientSecret = process.env.FBSecret || configAuth.facebookAuth.clientSecret;
+      callbackURL = process.env.fbCbUrl || configAuth.facebookAuth.callbackURL;
+  } else {
+      clientID = process.env.fbID;
+      clientSecret = process.env.FBSecret;
+      callbackURL = process.env.fbCbUrl;
+  }
+
+
+
+
 
    module.exports = function(passport) {
 
@@ -19,9 +37,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
        // Facebook Strategy
         passport.use(new FacebookStrategy({
-            clientID        : process.env.fbID,
-            clientSecret    : process.env.FBSecret,
-            callbackURL     : process.env.fbCbUrl,
+            clientID        : clientID,
+            clientSecret    : clientSecret,
+            callbackURL     : callbackURL,
             enableProof: true,
             profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl']
 

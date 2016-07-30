@@ -15,7 +15,7 @@ var orderHistoryRouter = require('./api/orderHistory');
 var userRouter = require('./api/user');
 var password = process.env.secret || 'keyboardWarriors'
 var app = express();
-var portReplace = process.env.PORT || 5000;
+var portReplace = process.env.PORT || 3000;
 require('./config/passport.js')(passport);
 require('./database.js');
 // require('./seed.js');

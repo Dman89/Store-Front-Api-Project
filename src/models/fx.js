@@ -1,8 +1,29 @@
+// Disable "configAuth" to turn off test mode
+
+
+var configAuth = require('../config/auth');
+
+
+// If else statment for test mode
+var id;
+if (configAuth) {
+  id = configAuth.openExchangeRates.clientID;
+} else {
+ id = process.env.openExchange;
+}
+
+
+
+
+
+
 // EDX MEAN STACK CLASS BY MONGODB : https://courses.edx.org/courses/course-v1:MongoDBx+M101x+2T2016/courseware/b98ea9e664a6497eade777b9a21b330c/818c678064a141f4ab71522449beb61c/
 var superagent = require('superagent');
 var _ = require('underscore');
-// var configAuth = require('../config/auth'); || configAuth.openExchangeRates.clientID;
-var id = process.env.openExchange;
+
+
+
+
 
 module.exports = function(Config) {
   var url = 'http://openexchangerates.org/api/latest.json?app_id=' +

@@ -1,6 +1,7 @@
 'use strict';
 angular.module("lionHeart")
 .controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+var addToCartReq = require("../functions/addToCartReq");
 $scope.urlCode = $stateParams.urlCode;
 var urlCode = $scope.urlCode
 dataService.getSingleItem(urlCode, function(response) {
@@ -12,10 +13,23 @@ dataService.getUser(function(response) {
 dataService.getCart(function(response) {
   $scope.cart = response.data.cart.data.cart;
 })
-$scope.addToCart = function(id, quantity) {
-  functionService.addToCart(id, quantity, $scope.user, $scope.cart);
-}
+  $scope.addToCart = function(id, quantity, product) {
+    addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+      console.log("Cart Saved");
+      $scope.cart = res;
+    });
+    console.log("Completed!");
+  }
 
+// get products for random display (3)
+// create array with digits = to array.length
+// run a random number
+// get number from array (NOT INDEX)
+// splice out [x] from array
+// repeat three times
+// save related items to $scope
+// Display in angular
+// prevent duplicates
 dataService.getProducts(function(response) {
   var productsRes = response.data.products;
   var productLength = productsRes.length;
@@ -59,15 +73,6 @@ searchForItem(function() {
   });
 });
 });
-// get products
-// create array with digits = to array.length
-// run a random number
-// get number from array (NOT INDEX)
-// splice out [x] from array
-// repeat three times
-// save related items to $scope
-// Display in angular
-// prevent duplicates
 
 
 
