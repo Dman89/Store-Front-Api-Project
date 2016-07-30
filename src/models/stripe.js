@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var configAuth = require('../config/auth');
-var fileClientID = process.env.stripeID || configAuth.stripeAuth.clientID
-var stripe = require('stripe')(configAuth.stripeAuth.clientID);
+// var configAuth = require('../config/auth'); || configAuth.stripeAuth.clientID
+var fileClientID = process.env.stripeID;
+var stripe = require('stripe')(fileClientID);
 module.exports = stripe;

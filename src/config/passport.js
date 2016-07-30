@@ -3,7 +3,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
    // load up the user model and auth variables
    var User       = require('../models/user');
-   var configAuth = require('./auth');
+  //  var configAuth = require('./auth'); 
 
    module.exports = function(passport) {
 
@@ -19,9 +19,9 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
        // Facebook Strategy
         passport.use(new FacebookStrategy({
-            clientID        : process.env.fbID || configAuth.facebookAuth.clientID,
-            clientSecret    : process.env.FBSecret || configAuth.facebookAuth.clientSecret,
-            callbackURL     : process.env.fbCbUrl || configAuth.facebookAuth.callbackURL,
+            clientID        : process.env.fbID,
+            clientSecret    : process.env.FBSecret,
+            callbackURL     : process.env.fbCbUrl,
             enableProof: true,
             profileFields: ['id', 'displayName', 'photos', 'email', 'profileUrl']
 
