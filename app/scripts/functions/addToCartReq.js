@@ -1,6 +1,6 @@
 'use strict'
 var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
-  console.log("*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*");
+  console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
   var returnVal;
   if (!user) {
     console.log("Please Log In");

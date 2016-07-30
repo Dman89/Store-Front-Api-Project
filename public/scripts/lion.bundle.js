@@ -8,7 +8,6 @@ webpackJsonp([0],[
 	__webpack_require__(3);
 	__webpack_require__(5);
 	__webpack_require__(6);
-	__webpack_require__(7);
 	__webpack_require__(8);
 	__webpack_require__(9);
 	__webpack_require__(10);
@@ -49,12 +48,13 @@ webpackJsonp([0],[
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
-
-
-
 	__webpack_require__(48);
+
+
+
 	__webpack_require__(49);
 	__webpack_require__(50);
+	__webpack_require__(51);
 
 
 /***/ },
@@ -4807,7 +4807,7 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("productCtrl", function($scope, dataService, functionService) {
-	  var addToCartReq = __webpack_require__(52);
+	  var addToCartReq = __webpack_require__(7);
 	  var cart = $scope.cart
 	  var user = $scope.user;
 	  dataService.getProducts(function(response) {
@@ -4843,6 +4843,33 @@ webpackJsonp([0],[
 /* 7 */
 /***/ function(module, exports) {
 
+	'use strict'
+	var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
+	  console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
+	  var returnVal;
+	  if (!user) {
+	    console.log("Please Log In");
+	  }
+	  else {
+	    functionService.addToCart(id, quantity, user, cart, product, function(response) {
+	      if (response == "nothing") {
+	        console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
+	        returnVal = cart;
+	      } else {
+	        returnVal = response;
+	      }
+	      console.log("Saving Cart...");
+	      finalCB(returnVal);
+	    });
+	  }
+	}
+	module.exports = addToCartReq;
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
 	'use strict';
 	angular.module("lionHeart")
 	.controller("signUpForm", function($scope, dataService) {
@@ -4871,7 +4898,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4886,7 +4913,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4901,7 +4928,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4912,7 +4939,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4927,7 +4954,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4942,7 +4969,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4957,7 +4984,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4968,7 +4995,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4983,7 +5010,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5104,7 +5131,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5119,7 +5146,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5144,7 +5171,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5159,7 +5186,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5234,7 +5261,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5249,7 +5276,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5275,7 +5302,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5290,7 +5317,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5363,7 +5390,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5378,7 +5405,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5734,7 +5761,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5749,7 +5776,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5764,7 +5791,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5774,7 +5801,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5789,7 +5816,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5802,7 +5829,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5815,7 +5842,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5828,7 +5855,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5841,7 +5868,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5854,7 +5881,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5867,7 +5894,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5897,7 +5924,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5907,7 +5934,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5917,13 +5944,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
-	var addToCartReq = __webpack_require__(52);
+	var addToCartReq = __webpack_require__(7);
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
 	dataService.getSingleItem(urlCode, function(response) {
@@ -5935,13 +5962,15 @@ webpackJsonp([0],[
 	dataService.getCart(function(response) {
 	  $scope.cart = response.data.cart.data.cart;
 	})
-	  $scope.addToCart = function(id, quantity, product) {
-	    addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
-	      console.log("Cart Saved");
-	      $scope.cart = res;
-	    });
-	    console.log("Completed!");
-	  }
+	$scope.addToCart = function(id, quantity, product) {
+	var id = id;
+	  addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+	    console.log("Cart Saved");
+	    $scope.cart = res;
+	    cart = $scope.cart
+	  });
+	  console.log("Completed!");
+	}
 
 	// get products for random display (3)
 	// create array with digits = to array.length
@@ -6002,7 +6031,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6124,7 +6153,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6137,7 +6166,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6150,7 +6179,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6163,7 +6192,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6174,7 +6203,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6203,7 +6232,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6227,7 +6256,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6327,7 +6356,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6499,7 +6528,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6513,34 +6542,6 @@ webpackJsonp([0],[
 	    )
 	  }
 	});
-
-
-/***/ },
-/* 51 */,
-/* 52 */
-/***/ function(module, exports) {
-
-	'use strict'
-	var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
-	  console.log("*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*");
-	  var returnVal;
-	  if (!user) {
-	    console.log("Please Log In");
-	  }
-	  else {
-	    functionService.addToCart(id, quantity, user, cart, product, function(response) {
-	      if (response == "nothing") {
-	        console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
-	        returnVal = cart;
-	      } else {
-	        returnVal = response;
-	      }
-	      console.log("Saving Cart...");
-	      finalCB(returnVal);
-	    });
-	  }
-	}
-	module.exports = addToCartReq;
 
 
 /***/ }

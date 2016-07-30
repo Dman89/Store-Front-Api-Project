@@ -13,13 +13,15 @@ dataService.getUser(function(response) {
 dataService.getCart(function(response) {
   $scope.cart = response.data.cart.data.cart;
 })
-  $scope.addToCart = function(id, quantity, product) {
-    addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
-      console.log("Cart Saved");
-      $scope.cart = res;
-    });
-    console.log("Completed!");
-  }
+$scope.addToCart = function(id, quantity, product) {
+var id = id;
+  addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+    console.log("Cart Saved");
+    $scope.cart = res;
+    cart = $scope.cart
+  });
+  console.log("Completed!");
+}
 
 // get products for random display (3)
 // create array with digits = to array.length
