@@ -13,17 +13,19 @@ var categoryRouter = require('./api/category');
 var productRouter = require('./api/products');
 var orderHistoryRouter = require('./api/orderHistory');
 var userRouter = require('./api/user');
+var password = process.env.secret || 'keyboardWarriors'
 var app = express();
+var portReplace = process.env.PORT || 3000;
 require('./config/passport.js')(passport);
 require('./database.js');
 // require('./seed.js');
 // Creates a new Product in database~: require('./functions/newProduct.js');
 //require('./functions/newUser.js');
 app.use('/', express.static('public'));
-app.use(cookieParser('keyboardWarriors'));
+app.use(cookieParser(password));
 app.use(parser.json());
 app.use(flash());
-app.use(expressSession({ secret: 'keyboardWarriors',
+app.use(expressSession({ secret: password,
   resave: false,
   saveUninitialized: true,
   cookie: { expires: false }
@@ -50,6 +52,6 @@ app.get('/logout', function(req, res) {
     req.logout();
     res.redirect('/');
 });
-app.listen(3000, function() {
-  console.log("Express Server is Running on Port 3000")
+app.listen(portReplace, function() {
+  console.log("Express Server is Running on Port " + portReplace)
 });
