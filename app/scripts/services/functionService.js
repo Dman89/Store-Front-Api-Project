@@ -70,12 +70,11 @@ this.isProductAvailable = function(product, cart, callback) {
 
 //Add To Cart
 this.addToCart = function(id, quantity, user, cart, product) {
-  console.log(product);
   var item = {"_id": product._id, "id": product._id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
 if (user == undefined) {
   alert("Please Log In");
 }
-else {
+else if (!user == undefined) {
 cartSearch(cart, function(response) {
   if (response == false) {
   // Run Code or Not
