@@ -17,7 +17,7 @@ Checkout Review
     (Completed)         Style
     (Completed)         Save User
                         Edit User (Angular)
-                        Require Card Info
+    (Completed)         Require Card Info
 
 
 
@@ -46,7 +46,7 @@ Confirmation
 
 Add To Cart
     (Completed)         Edit Inventory (is done upon transaction)
-                        Disable
+    (Completed)         Disable
     (Completed)         Auto-login if not logged in. (CHANGED TO ALERTED USER OF NEED TO LOG IN)
     (Completed)         Make Add To Cart its own Function
 Admin Panel Posts
@@ -65,10 +65,10 @@ Admin Panel Products
                         New Item
                         Edit Item Page
 Products
-                        In Stock Model
-                        Style “In Stock”
-                        Quantity
-                        Quantity Select
+    (Completed)         In Stock Model
+    (Completed)         Style “In Stock”
+    (Completed)         Quantity
+    (Completed)         Quantity Select
 Portfolio
                         Link to Individual Picture
 Home Page
@@ -79,7 +79,8 @@ Home Page
 Profile
                         Email Add Button
                         Email remove (not for zero)
+                        Style
 Store
-                        Fix Title on Store Page
-                        Load Category for the menu
-                        Fix Product load to Match Category Selected
+    (??No Title??)      Fix Title on Store Page
+    (Completed)         Load Category for the menu
+    (Completed)         Fix Product load to Match Category Selected
