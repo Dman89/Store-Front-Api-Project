@@ -11,16 +11,17 @@
                         <div class="card sideA">
                           <div class="imgBackground">
                             <a ui-sref="store.product({ urlCode: item.product.urlCode })">
-                            <img src="{{item.product.pictures[0]}}" alt="{{item.product.name}}" />
+                              <img src="{{item.product.pictures[0]}}" alt="{{item.product.name}}" />
                             </a>
                           </div>
-                          <p class="title highlight"></p>
                         </div>
                       </div>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-6 title">
-                <h2 class="alignCenter">{{item.product.name}}</h2>
+                <a id="cartItemTitle" ui-sref="store.product({ urlCode: item.product.urlCode })">
+                  <h2 class="alignCenter">{{item.product.name}}</h2>
+                </a>
               </div>
               <div class="col-xs-12 col-sm-4 col-md-2 col-lg-3">
                 <h3 class="alignCenter">{{item.product.displayPrice}}</h3>
@@ -31,10 +32,10 @@
                     <h3 class="alignCenter">{{item.quantity}}</h3>
                   </div>
                   <div class="col-xs-12">
-                          <button type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation': item.quantity == item.product.quantity, 'showAnimation': item.quantity != item.product.quantity}" ng-click="quantityTotalAddition($index)"><i class="fa fa-arrow-up"></i></button>
+                          <button ng-hide="!item.product.quantity" type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation': item.quantity == item.product.quantity, 'showAnimation': item.quantity != item.product.quantity}" ng-click="quantityTotalAddition($index)"><i class="fa fa-arrow-up"></i></button>
                             <button type="button" class="abtn qDown cartButton thumbAnimation" id="downArrow" ng-class="{'hideAnimation': item.quantity == 1, 'showAnimation': item.quantity != 1}" ng-click="quantityTotalMinus($index)"><i class="fa fa-arrow-down"></i></button>
                           <button type="button" class="btna btn-danger cartButton" ng-click="delete.go = true; deleteCartItem($index)"><i class="fa fa-trash"></i></button><br/>
-                        <span id="stock" ng-class="{'inStock': item.stock, 'outStock': !item.stock}"></span>
+                        <h3 id="stock" ng-class="{'inStock': item.product.quantity, 'outStock': !item.product.quantity}"></h3>
                   </div>
                 </div>
               </div>

@@ -6114,7 +6114,6 @@ webpackJsonp([0],[
 	          var tempActive = saveItems[x].active;
 	          dataService.getSingleItem(lookUp, function(item) {
 	          var temp = item.data.products;
-	          console.log(temp);
 	          temp.quantity = tempQuantity;
 	          temp.active = tempActive;
 	            //save product
@@ -6386,7 +6385,10 @@ webpackJsonp([0],[
 	          for (var y = 0; y < file.length; y++) {
 	// Search Products with Users Cart
 	            if (file[y].id.search(id) == 0) {
-	              if (file[y].quantity >= text[x].quantity) {
+	              if (file[y].quantity == 0) {
+	                isItTrue == text.length - 1;
+	              }
+	              else if (file[y].quantity >= text[x].quantity) {
 	                isItTrue += 1;
 	                file[y].quantity = file[y].quantity - text[x].quantity;
 	                //Make Product Inactive
@@ -6443,7 +6445,7 @@ webpackJsonp([0],[
 	  var id = id, quantity = quantity, user = user, cart = cart, product = product;
 	  var newCart;
 	  var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
-	  ;
+
 	  cartSearch(cart, id, function(response) {
 	    console.log("***Logging*** ***Response*** ***Below***");
 	    if (response == "true") {
@@ -6468,7 +6470,6 @@ webpackJsonp([0],[
 	        items = [];
 	        console.log("Adding...(saved cart)");
 	        newCart = response.data.user.data.cart;
-	        console.log(newCart);
 	        cba(newCart);
 	      });
 	    }
@@ -6478,9 +6479,7 @@ webpackJsonp([0],[
 
 	  var cartSearch = function(cart, id, cbb) { // Get Cart
 	    console.log("Cart Found\n\nBegin searching...");
-	    console.log(cart);
-	    console.log(cart.items.length);
-	    if (!cart == null) {
+	    if (cart == null) {
 	      console.log("(Empty Cart)");
 	      cbb("false");
 	    }
@@ -6488,10 +6487,10 @@ webpackJsonp([0],[
 	      console.log("Checking Cart...");
 	      // Get ID's
 	      cartCheck(cart, id, function(tempCheck) {
-	        ;
+
 	        // Check ID to Cart
 	        searchResponse(tempCheck, id, function(res) {
-	          ;
+
 	          if (res == true) {
 	            console.log("Checking Cart...(found ITEM in cart)");
 	            cbb("true");
@@ -6509,7 +6508,7 @@ webpackJsonp([0],[
 	  }
 
 	  var cartCheck = function(cart, id, cbc) {
-	    ;
+
 	    // Get ID's
 	    var tempCheck = [];
 	    var tempCheckTwo = cart.items.length - 1;
@@ -6554,7 +6553,6 @@ webpackJsonp([0],[
 	  this.eraseCart = function() {
 	    dataService.eraseCart(
 	      function(response) {
-	        console.log(response);
 	      }
 	    )
 	  }
