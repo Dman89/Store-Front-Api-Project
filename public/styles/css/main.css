@@ -42,6 +42,8 @@ img {
 #confirmationPage .redirect {
   margin-top: 5em; }
 
+#cart #cartItemTitle {
+  color: black; }
 #cart input.quantity {
   width: 50px; }
 #cart img.thumb {
@@ -107,10 +109,8 @@ img {
 #cart .disableArrow {
   display: none; }
 #cart #stock.inStock::after {
-  color: green;
   content: 'In Stock'; }
 #cart #stock.outStock::after {
-  color: red;
   content: 'Out Of Stock'; }
 #cart .title h2.alignCenter {
   text-align: center; }

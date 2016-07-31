@@ -71,7 +71,6 @@ dataService.getCart(function(response) {
           var tempActive = saveItems[x].active;
           dataService.getSingleItem(lookUp, function(item) {
           var temp = item.data.products;
-          console.log(temp);
           temp.quantity = tempQuantity;
           temp.active = tempActive;
             //save product

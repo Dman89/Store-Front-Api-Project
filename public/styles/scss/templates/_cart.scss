@@ -1,4 +1,7 @@
 #cart {
+  & #cartItemTitle {
+    color: black;
+  }
   & input.quantity {
     width: 50px;
   }
@@ -86,11 +89,9 @@
     display: none;
   }
   & #stock.inStock::after {
-    color: green;
     content: 'In Stock';
   }
   & #stock.outStock::after {
-    color: red;
     content: 'Out Of Stock';
   }
   & .title h2.alignCenter {
