@@ -5055,13 +5055,20 @@ webpackJsonp([0],[
 
 	// Review Page: < > Arrow's function to save User Data
 	  $scope.saveSetUp = function(stripeToken) {
+	    $scope.errPayment = false;
 	    // Get User / Cart
 	    var aUser = $scope.user;
 	    // Save User / Cart
 	    dataService.updateCart(aUser, function(response) {});
 	    // Pass CC info to next State
-	    var token = stripeToken;
-	    $state.go('cart.checkout', token);
+	    if (stripeToken) {
+	      if (stripeToken.stripeToken.number.length == 16 && stripeToken.stripeToken.cvc.length == 3 && stripeToken.stripeToken.exp_month.length == 2 && stripeToken.stripeToken.exp_year.length == 4) {
+	        var token = stripeToken;
+	        $state.go('cart.checkout', token);
+	      } else {
+	        $scope.errPayment = true;
+	      }
+	    }
 	  }
 	// Sub Total Calculation Function for Checkout (pages)
 	  var sub = function (cart, user, sub) {
