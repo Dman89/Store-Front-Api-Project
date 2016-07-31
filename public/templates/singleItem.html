@@ -26,11 +26,12 @@
                   <h6 ng-hide="singleItem.sku">sku-sku-sku-number</h6>
                 </div>
               <div class="col-xs-12">
-                <h3>{{singleItem.displayPrice}}</h3>
+                <h3 ng-hide="!singleItem.active">{{singleItem.displayPrice}}</h3>
+                <h3 ng-show="!singleItem.active" class="redSold">SOLD!</h3>
               </div>
             </div>
             <button id="blockBtn" type="button" class="abtn btn-success btn-block hidden-sm hidden-md hidden-lg" ng-click="addToCart(singleItem._id, 1)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-            <button type="button" id="nonblockBtn" class="abtn btn-success hidden-xs" ng-click="addToCart(singleItem._id, 1, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+            <button ng-hide="!singleItem.active" type="button" id="nonblockBtn" class="abtn btn-success hidden-xs" ng-click="addToCart(singleItem._id, 1, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
           </div>
           </div>
         </div>
