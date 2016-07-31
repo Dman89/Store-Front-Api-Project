@@ -6409,7 +6409,7 @@ webpackJsonp([0],[
 	          checkForTrue = false;
 	        }
 	        // Return Truthy or Falsey
-	          callback(file, checkForTrue, saveItems);
+	          callback(checkForTrue);
 	      })
 	    }
 
