@@ -6114,10 +6114,11 @@ webpackJsonp([0],[
 	          var tempActive = saveItems[x].active;
 	          dataService.getSingleItem(lookUp, function(item) {
 	          var temp = item.data.products;
+	          console.log(temp);
 	          temp.quantity = tempQuantity;
 	          temp.active = tempActive;
 	            //save product
-	            dataService.saveItem(temp.id, temp, function(response) {
+	            dataService.saveItem(temp._id, temp, function(response) {
 	              cb(true)
 	            })
 	          })
