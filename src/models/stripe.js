@@ -1,7 +1,7 @@
 // Disable "configAuth" to turn off test mode
 
 
-var configAuth = require('../config/auth');
+// var configAuth = require('../config/auth');
 
 
 // If else statment for test mode

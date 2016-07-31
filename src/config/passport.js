@@ -7,7 +7,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 
 
    // Disable "configAuth" to turn off test mode
-   var configAuth = require('./auth');
+  //  var configAuth = require('./auth');
    // If else statment for test mode
   if (configAuth) {
       clientID = process.env.fbID || configAuth.facebookAuth.clientID;
