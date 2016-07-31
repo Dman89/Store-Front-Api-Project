@@ -5957,6 +5957,7 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+	var user, cart;
 	var addToCartReq = __webpack_require__(7);
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
@@ -5965,9 +5966,11 @@ webpackJsonp([0],[
 	});
 	dataService.getUser(function(response) {
 	  $scope.user = response.data.user;
+	  user = $scope.user
 	})
 	dataService.getCart(function(response) {
 	  $scope.cart = response.data.cart.data.cart;
+	  cart = $scope.cart
 	})
 	$scope.addToCart = function(id, quantity, product) {
 	var id = id;
@@ -5978,6 +5981,36 @@ webpackJsonp([0],[
 	  });
 	  console.log("Completed!");
 	}
+	$scope.quantity = {val: 1};
+
+	//Check Quantity
+	$scope.quantityCheck = function(val) {
+	  // < 20 <
+	  if (val >= 20) {
+	  // Return Truthy
+	    return true;
+	  } else {
+	  // Return Truthy
+	    return false;
+	  }
+	}
+
+	$scope.quantityChange = function(val) {
+	  if (val == 1) {
+	    $scope.quantity.val += 1;
+	  } else {
+	    $scope.quantity.val -= 1;
+	  }
+	}
+	$scope.checkValForMax = function() {
+	  if ($scope.quantity.val > $scope.singleItem.quantity) {
+	    $scope.quantity.val = $scope.singleItem.quantity;
+	  } else if ($scope.quantity.val < 1) {
+	    $scope.quantity.val = 1;
+	  }
+	  $scope.edit = false;
+	}
+
 
 	// get products for random display (3)
 	// create array with digits = to array.length

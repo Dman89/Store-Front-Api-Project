@@ -26,12 +26,21 @@
                   <h6 ng-hide="singleItem.sku">sku-sku-sku-number</h6>
                 </div>
               <div class="col-xs-12">
-                <h3 ng-hide="!singleItem.active">{{singleItem.displayPrice}}</h3>
-                <h3 ng-show="!singleItem.active" class="redSold">SOLD!</h3>
+                <label ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || edit || !quantityCheck(singleItem.quantity)" ng-click="edit = !edit">{{quantity.val}}<span class="tooltiptexttop">Click to Change</span></label>
+                <label ng-show="!quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || quantityCheck(singleItem.quantity)">{{quantity.val}}</label>
+                <input ng-show="edit" type="number" maxlength="3" size="1" ng-blur="checkValForMax();" ng-model="quantity.val" class="text-center" />
               </div>
+            <div class="col-xs-12">
+                    <button ng-hide="!singleItem.quantity" type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation disabledBTN': quantity.val == singleItem.quantity, 'showAnimation': quantity.val != singleItem.quantity}" ng-click="quantityChange(1)"><i class="fa fa-arrow-up"></i></button>
+                      <button ng-hide="!singleItem.quantity" type="button" class="abtn qDown cartButton thumbAnimation" id="downArrow" ng-class="{'hideAnimation disabledBTN': quantity.val == 1, 'showAnimation': quantity.val != 1}" ng-click="quantityChange(0)"><i class="fa fa-arrow-down"></i></button>
             </div>
-            <button id="blockBtn" type="button" class="abtn btn-success btn-block hidden-sm hidden-md hidden-lg" ng-click="addToCart(singleItem._id, 1)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
-            <button ng-hide="!singleItem.active" type="button" id="nonblockBtn" class="abtn btn-success hidden-xs" ng-click="addToCart(singleItem._id, 1, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+            <div class="col-xs-12">
+              <h3 ng-hide="!singleItem.quantity">{{singleItem.displayPrice}}</h3>
+              <h3 ng-show="!singleItem.quantity" id="redSold">SOLD!</h3>
+            </div>
+            </div>
+            <button id="blockBtn" type="button" class="abtn btn-success btn-block hidden-sm hidden-md hidden-lg" ng-click="addToCart(singleItem._id, quantity.val, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+            <button ng-hide="!singleItem.active" type="button" id="nonblockBtn" class="abtn btn-success hidden-xs" ng-click="addToCart(singleItem._id, quantity.val, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
           </div>
           </div>
         </div>

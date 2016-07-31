@@ -1,3 +1,10 @@
+#redSold {
+  color: red;
+}
+.disabledBTN {
+  cursor: none;
+  pointer-events: none;
+}
 #body #singleItem #blockBtn {
   font-family: $price;
   @media (max-width: 480px), (max-height: 480px) and (orientation: landscape) {

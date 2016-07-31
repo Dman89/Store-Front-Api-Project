@@ -1,6 +1,7 @@
 'use strict';
 angular.module("lionHeart")
 .controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+var user, cart;
 var addToCartReq = require("../functions/addToCartReq");
 $scope.urlCode = $stateParams.urlCode;
 var urlCode = $scope.urlCode
@@ -9,9 +10,11 @@ dataService.getSingleItem(urlCode, function(response) {
 });
 dataService.getUser(function(response) {
   $scope.user = response.data.user;
+  user = $scope.user
 })
 dataService.getCart(function(response) {
   $scope.cart = response.data.cart.data.cart;
+  cart = $scope.cart
 })
 $scope.addToCart = function(id, quantity, product) {
 var id = id;
@@ -22,6 +25,36 @@ var id = id;
   });
   console.log("Completed!");
 }
+$scope.quantity = {val: 1};
+
+//Check Quantity
+$scope.quantityCheck = function(val) {
+  // < 20 <
+  if (val >= 20) {
+  // Return Truthy
+    return true;
+  } else {
+  // Return Truthy
+    return false;
+  }
+}
+
+$scope.quantityChange = function(val) {
+  if (val == 1) {
+    $scope.quantity.val += 1;
+  } else {
+    $scope.quantity.val -= 1;
+  }
+}
+$scope.checkValForMax = function() {
+  if ($scope.quantity.val > $scope.singleItem.quantity) {
+    $scope.quantity.val = $scope.singleItem.quantity;
+  } else if ($scope.quantity.val < 1) {
+    $scope.quantity.val = 1;
+  }
+  $scope.edit = false;
+}
+
 
 // get products for random display (3)
 // create array with digits = to array.length
