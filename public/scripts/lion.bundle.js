@@ -6114,10 +6114,11 @@ webpackJsonp([0],[
 	          var tempActive = saveItems[x].active;
 	          dataService.getSingleItem(lookUp, function(item) {
 	          var temp = item.data.products;
+	          console.log(temp);
 	          temp.quantity = tempQuantity;
 	          temp.active = tempActive;
 	            //save product
-	            dataService.saveItem(temp.id, temp, function(response) {
+	            dataService.saveItem(temp._id, temp, function(response) {
 	              cb(true)
 	            })
 	          })
@@ -6373,7 +6374,7 @@ webpackJsonp([0],[
 	                            // Checking Product Availability
 	// Get Products
 	// Get Users Cart
-	      grabIDAndQuantity(product, cart, function(file, text, saveItems) {
+	      grabIDAndQuantity(product, cart, function(file, text) {
 	        var checkForTrue = "";
 	        var isItTrue = 0;
 	        var saveItems = [];
@@ -6416,7 +6417,7 @@ webpackJsonp([0],[
 	    var waypointOne = false, waypointTwo = false;
 	    for (var x = 0; x < product.length; x++) {
 	      var quantity = product[x].quantity;
-	      var id = product[x].id;
+	      var id = product[x]._id;
 	      var urlCode = product[x].urlCode;
 	      doSearchThisData.push({"id": id, "quantity": quantity, "urlCode": urlCode});
 	      if (x < product.length) {
