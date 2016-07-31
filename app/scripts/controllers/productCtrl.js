@@ -2,8 +2,8 @@
 angular.module("lionHeart")
 .controller("productCtrl", function($scope, dataService, functionService) {
   var addToCartReq = require("../functions/addToCartReq");
-  var cart = $scope.cart
-  var user = $scope.user;
+  var cart;
+  var user;
   dataService.getProducts(function(response) {
     if (response.data.products[0].id == null) {
       var varTemp = response.data.products.length;
@@ -27,7 +27,7 @@ angular.module("lionHeart")
         console.log("Cart Saved");
         $scope.cart = res;
         cart = $scope.cart
+        console.log("Completed!");
       });
-      console.log("Completed!");
     }
 });

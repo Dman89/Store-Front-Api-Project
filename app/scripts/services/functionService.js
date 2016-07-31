@@ -74,6 +74,7 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
   var id = id, quantity = quantity, user = user, cart = cart, product = product;
   var newCart;
   var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
+  ;
   cartSearch(cart, id, function(response) {
     console.log("***Logging*** ***Response*** ***Below***");
     if (response == "true") {
@@ -107,14 +108,21 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
 
 
   var cartSearch = function(cart, id, cbb) { // Get Cart
-
     console.log("Cart Found\n\nBegin searching...");
-    if (!cart.items.length == 0) {
+    console.log(cart);
+    console.log(cart.items.length);
+    if (!cart == null) {
+      console.log("(Empty Cart)");
+      cbb("false");
+    }
+    else if (!cart.items.length == 0) {
       console.log("Checking Cart...");
       // Get ID's
       cartCheck(cart, id, function(tempCheck) {
+        ;
         // Check ID to Cart
         searchResponse(tempCheck, id, function(res) {
+          ;
           if (res == true) {
             console.log("Checking Cart...(found ITEM in cart)");
             cbb("true");
@@ -132,6 +140,7 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
   }
 
   var cartCheck = function(cart, id, cbc) {
+    ;
     // Get ID's
     var tempCheck = [];
     var tempCheckTwo = cart.items.length - 1;
