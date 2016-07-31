@@ -1,6 +1,7 @@
 'use strict';
 angular.module("lionHeart")
 .controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+var inputToggle = require("../functions/inputToggle");
 var user, cart;
 var addToCartReq = require("../functions/addToCartReq");
 $scope.urlCode = $stateParams.urlCode;
@@ -29,14 +30,13 @@ $scope.quantity = {val: 1};
 
 //Check Quantity
 $scope.quantityCheck = function(val) {
-  // < 20 <
-  if (val >= 20) {
-  // Return Truthy
-    return true;
-  } else {
-  // Return Truthy
-    return false;
-  }
+  inputToggle(val, function(res) {
+    if (res == true) {
+      return true;
+    } else {
+      return false;
+    }
+  })
 }
 
 $scope.quantityChange = function(val) {

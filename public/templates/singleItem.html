@@ -26,8 +26,8 @@
                   <h6 ng-hide="singleItem.sku">sku-sku-sku-number</h6>
                 </div>
               <div class="col-xs-12">
-                <label ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || edit || !quantityCheck(singleItem.quantity)" ng-click="edit = !edit">{{quantity.val}}<span class="tooltiptexttop">Click to Change</span></label>
-                <label ng-show="!quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || quantityCheck(singleItem.quantity)">{{quantity.val}}</label>
+                <label ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || edit || quantityCheck(singleItem.quantity)" ng-click="edit = !edit">{{quantity.val}}<span class="tooltiptexttop">Click to Change</span></label>
+                <label ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || !quantityCheck(singleItem.quantity)">{{quantity.val}}</label>
                 <input ng-show="edit" type="number" maxlength="3" size="1" ng-blur="checkValForMax();" ng-model="quantity.val" class="text-center" />
               </div>
             <div class="col-xs-12">
