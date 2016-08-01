@@ -48,8 +48,8 @@ Admin Panel Products
 Admin Panel Posts
                         Save Posts
                         New Posts
-                        Style
                         Delete Posts
+                        Style
 Admin Panel Users
                         Save User (Admin Status)
                         Style
@@ -64,3 +64,5 @@ Home Page
                         CTA
                         Photos
                         Upcoming Events
+Database
+                        Set up Post DB
