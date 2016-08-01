@@ -18,7 +18,6 @@ webpackJsonp([0],[
 	__webpack_require__(15);
 	__webpack_require__(16);
 	__webpack_require__(17);
-	__webpack_require__(18);
 	__webpack_require__(19);
 	__webpack_require__(20);
 	__webpack_require__(21);
@@ -49,13 +48,14 @@ webpackJsonp([0],[
 	__webpack_require__(46);
 	__webpack_require__(47);
 	__webpack_require__(48);
-	__webpack_require__(53);
-
-
-
 	__webpack_require__(49);
+	__webpack_require__(18);
+
+
+
 	__webpack_require__(50);
 	__webpack_require__(51);
+	__webpack_require__(52);
 
 
 /***/ },
@@ -5049,7 +5049,7 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("cartCtrl", function($scope, dataService, $timeout, $state) {
-	  var inputToggle = __webpack_require__(53);
+	  var inputToggle = __webpack_require__(18);
 	  $scope.edit = {};
 	  // Blank Stripe Card
 	    $scope.stripeToken = {stripeToken: {
@@ -5195,6 +5195,22 @@ webpackJsonp([0],[
 /* 18 */
 /***/ function(module, exports) {
 
+	'use strict'
+	var inputToggle = function(val, callback) {
+	  var maxVal = 20;
+	      if (val < maxVal) {
+	        callback(true);
+	      } else {
+	        callback(false);
+	      }
+	    }
+	module.exports = inputToggle;
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports) {
+
 	'use strict';
 	angular.module('lionHeart')
 	.directive("cart", function() {
@@ -5207,7 +5223,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5232,7 +5248,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5247,7 +5263,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5322,7 +5338,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5337,7 +5353,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5363,7 +5379,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5378,7 +5394,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5451,7 +5467,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5466,7 +5482,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5822,7 +5838,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5837,7 +5853,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5852,7 +5868,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5862,7 +5878,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5877,7 +5893,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5890,7 +5906,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5903,7 +5919,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5916,7 +5932,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5929,7 +5945,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5942,7 +5958,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5955,7 +5971,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5985,7 +6001,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5995,7 +6011,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6005,13 +6021,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
-	var inputToggle = __webpack_require__(53);
+	var inputToggle = __webpack_require__(18);
 	var user, cart;
 	var addToCartReq = __webpack_require__(7);
 	$scope.urlCode = $stateParams.urlCode;
@@ -6125,7 +6141,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6247,7 +6263,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6260,7 +6276,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6273,7 +6289,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6286,7 +6302,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6297,7 +6313,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6326,7 +6342,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6350,7 +6366,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6450,7 +6466,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6631,7 +6647,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6644,23 +6660,6 @@ webpackJsonp([0],[
 	    )
 	  }
 	});
-
-
-/***/ },
-/* 52 */,
-/* 53 */
-/***/ function(module, exports) {
-
-	'use strict'
-	var inputToggle = function(val, callback) {
-	  var maxVal = 20;
-	      if (val < maxVal) {
-	        callback(true);
-	      } else {
-	        callback(false);
-	      }
-	    }
-	module.exports = inputToggle;
 
 
 /***/ }
