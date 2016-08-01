@@ -49,6 +49,7 @@ webpackJsonp([0],[
 	__webpack_require__(46);
 	__webpack_require__(47);
 	__webpack_require__(48);
+	__webpack_require__(53);
 
 
 
@@ -5043,11 +5044,13 @@ webpackJsonp([0],[
 
 /***/ },
 /* 17 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("cartCtrl", function($scope, dataService, $timeout, $state) {
+	  var inputToggle = __webpack_require__(53);
+	  $scope.edit = {};
 	  // Blank Stripe Card
 	    $scope.stripeToken = {stripeToken: {
 	      number: '',
@@ -5165,6 +5168,25 @@ webpackJsonp([0],[
 	      cartTotal(cart, user)
 	    });
 	  }
+	}
+
+	$scope.checkValForMaxInCart = function(index) {
+	  if ($scope.cartA.items[index].quantity > $scope.cartA.items[index].product.quantity) {
+	    $scope.cartA.items[index].quantity = $scope.cartA.items[index].product.quantity;
+	  } else if ($scope.cartA.items[index].quantity < 1) {
+	    $scope.cartA.items[index].quantity = 1;
+	  }
+	  $scope.edit[index] = false;
+	}
+	//Check Quantity
+	$scope.quantityCheck = function(val) {
+	  inputToggle(val, function(res) {
+	    if (res == true) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  })
 	}
 	});
 
@@ -5989,6 +6011,8 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+	var inputToggle = __webpack_require__(53);
+	var user, cart;
 	var addToCartReq = __webpack_require__(7);
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
@@ -5997,9 +6021,11 @@ webpackJsonp([0],[
 	});
 	dataService.getUser(function(response) {
 	  $scope.user = response.data.user;
+	  user = $scope.user
 	})
 	dataService.getCart(function(response) {
 	  $scope.cart = response.data.cart.data.cart;
+	  cart = $scope.cart
 	})
 	$scope.addToCart = function(id, quantity, product) {
 	var id = id;
@@ -6010,6 +6036,35 @@ webpackJsonp([0],[
 	  });
 	  console.log("Completed!");
 	}
+	$scope.quantity = {val: 1};
+
+	//Check Quantity
+	$scope.quantityCheck = function(val) {
+	  inputToggle(val, function(res) {
+	    if (res == true) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  })
+	}
+
+	$scope.quantityChange = function(val) {
+	  if (val == 1) {
+	    $scope.quantity.val += 1;
+	  } else {
+	    $scope.quantity.val -= 1;
+	  }
+	}
+	$scope.checkValForMax = function() {
+	  if ($scope.quantity.val > $scope.singleItem.quantity) {
+	    $scope.quantity.val = $scope.singleItem.quantity;
+	  } else if ($scope.quantity.val < 1) {
+	    $scope.quantity.val = 1;
+	  }
+	  $scope.edit = false;
+	}
+
 
 	// get products for random display (3)
 	// create array with digits = to array.length
@@ -6441,7 +6496,7 @@ webpackJsonp([0],[
 	          checkForTrue = false;
 	        }
 	        // Return Truthy or Falsey
-	          callback(file, checkForTrue, saveItems);
+	          callback(checkForTrue);
 	      })
 	    }
 
@@ -6589,6 +6644,23 @@ webpackJsonp([0],[
 	    )
 	  }
 	});
+
+
+/***/ },
+/* 52 */,
+/* 53 */
+/***/ function(module, exports) {
+
+	'use strict'
+	var inputToggle = function(val, callback) {
+	  var maxVal = 20;
+	      if (val < maxVal) {
+	        callback(true);
+	      } else {
+	        callback(false);
+	      }
+	    }
+	module.exports = inputToggle;
 
 
 /***/ }

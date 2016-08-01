@@ -1,6 +1,8 @@
 'use strict';
 angular.module("lionHeart")
 .controller("cartCtrl", function($scope, dataService, $timeout, $state) {
+  var inputToggle = require("../functions/inputToggle");
+  $scope.edit = {};
   // Blank Stripe Card
     $scope.stripeToken = {stripeToken: {
       number: '',
@@ -118,5 +120,24 @@ $scope.quantityTotalMinus = function(index) {
       cartTotal(cart, user)
     });
   }
+}
+
+$scope.checkValForMaxInCart = function(index) {
+  if ($scope.cartA.items[index].quantity > $scope.cartA.items[index].product.quantity) {
+    $scope.cartA.items[index].quantity = $scope.cartA.items[index].product.quantity;
+  } else if ($scope.cartA.items[index].quantity < 1) {
+    $scope.cartA.items[index].quantity = 1;
+  }
+  $scope.edit[index] = false;
+}
+//Check Quantity
+$scope.quantityCheck = function(val) {
+  inputToggle(val, function(res) {
+    if (res == true) {
+      return true;
+    } else {
+      return false;
+    }
+  })
 }
 });
