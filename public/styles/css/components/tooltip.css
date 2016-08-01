@@ -27,7 +27,7 @@
   border-style: solid;
   border-color: black transparent transparent transparent; }
 
-label:hover .tooltiptexttop {
+label:hover .tooltiptexttop, .tooltips:hover .tooltiptexttop {
   visibility: visible; }
 
 /*# sourceMappingURL=tooltip.css.map */

@@ -14,6 +14,11 @@ angular.module("lionHeart")
   $http.put('/api/products/id/' + id, product)
   .then(callback)
   };
+  this.deleteItem = function(id, callback) {
+    var tempUrl = '/api/products/id/' + id;
+    $http.delete(tempUrl)
+    .then(callback);
+  }
   this.getCategoryGraphics = function(callback) {
     $http.get("/api/category/Graphic%20Design")
     .then(callback)

@@ -1,144 +1,93 @@
-<div class="row" id='products'>
-      <div class="col-xs-12 col-sm-6 col-lg-4 editSpace" ng-repeat="product in products">
-        <a ui-sref="store.product({ urlCode: product.urlCode })">
-        <div class="row center">
-          <div class="col-xs-12">
-            <img data-ng-src="{{product.pictures[0]}}" alt="" />
-          </div>
-          <div class="col-xs-12">
-            {{product.name}}
-          </div>
+<div class="row" id='products' ng-hide="editProduct.show">
+  <div class="col-xs-12 col-md-6 col-lg-4 editSpace" ng-repeat="product in products">
+    <div class="row center">
+      <div ng-click="productEdit(product, $index)">
+        <div class="col-xs-12">
+              <img data-ng-src="{{product.pictures[0]}}" alt="" class="editImgRnd"/>
         </div>
-        </a>
+        <div class="col-xs-12">
+              {{product.name}}
+        </div>
       </div>
     </div>
+  </div>
+</div>
+<div class="row" id='products' ng-show="editProduct.show">
+  <div class="goGreen col-xs-12" ng-class="{'hidden' : !successMessageDisplayTop}">
+    <div class="inner">
 
-<!-- <div class="row">
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        <img ng-src="{{user.profile.picture}}" alt="" style="height: 50px; width: 50px;"/>
-      </div>
-      <div class="col-xs-12">
-        <h3>{{user.profile.displayName}}</h3>
-      </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-      Display Name:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.profile.displayName}}</label><input type="text" ng-model="user.profile.displayName" ng-blur="editing = false;" ng-show="editing"/>
+  <div class="col-xs-12 editSpace displayEdit">
+    <div class="row center">
+        <div class="col-xs-12">
+              <img data-ng-src="{{productDisplayEdit.pictures[0]}}" alt="" class="editImgRnd"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Name:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay1 = !editDisplay1" ng-hide="editDisplay1">
+              {{productDisplayEdit.name}}<span class="tooltiptexttop">Edit Name</span></label>
+          <input type="text" ng-model="productDisplayEdit.name" ng-show="editDisplay1" ng-blur="editDisplay1 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Quantity:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay2 = !editDisplay2" ng-hide="editDisplay2">
+              {{productDisplayEdit.quantity}}<span class="tooltiptexttop">Edit Quantity</span></label>
+          <input type="text" ng-model="productDisplayEdit.quantity" ng-show="editDisplay2" ng-blur="editDisplay2 = false;"/>
+        </div>
+        <div class="col-xs-12">
+          Product URL:
+        </div>
+        <div class="col-xs-12">
+          <label ng-click="editDisplay3 = !editDisplay3" ng-hide="editDisplay3">
+              {{productDisplayEdit.urlCode}}<span class="tooltiptexttop">Edit URL</span></label>
+          <input type="text" ng-model="productDisplayEdit.urlCode" ng-show="editDisplay3" ng-blur="editDisplay3 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Category:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay4 = !editDisplay4" ng-hide="editDisplay4">
+              {{productDisplayEdit.category.parent}}<span class="tooltiptexttop">Edit Category</span></label>
+          <input type="text" ng-model="productDisplayEdit.category.parent" ng-show="editDisplay4" ng-blur="editDisplay4 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Amount:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay5 = !editDisplay5" ng-hide="editDisplay5">
+              {{productDisplayEdit.price.amount}}<span class="tooltiptexttop">Edit Amount</span></label>
+          <input type="text" ng-model="productDisplayEdit.price.amount" ng-show="editDisplay5" ng-blur="editDisplay5 = false;"/>
+        </div>
+        <div class="col-xs-12">
+          Picture URL:
+        </div>
+        <div class="col-xs-12">
+          <label ng-click="editDisplay6 = !editDisplay6" ng-hide="editDisplay6">
+              {{productDisplayEdit.pictures[0]}}<span class="tooltiptexttop">Edit Picture URL</span></label>
+          <input type="text" ng-model="productDisplayEdit.pictures[0]" ng-show="editDisplay6" ng-blur="editDisplay6 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Display Product:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay7 = !editDisplay7" ng-hide="editDisplay7">
+              {{productDisplayEdit.active}}<span class="tooltiptexttop">Display Product?</span></label>
+          <input type="text" ng-model="productDisplayEdit.active" ng-show="editDisplay7" ng-blur="editDisplay7 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block btn-warning" ng-click="editProduct = !editProduct">Back</button>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block btn-danger" ng-click="deleteItem(productDisplayEdit._id)">Delete</button>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block btn-success" ng-click="saveItem(productDisplayEdit._id, productDisplayEdit)">Save</button>
+        </div>
       </div>
-      <div class="col-xs-12 col-sm-4">
-      Username:<br/><label class="profileUserName">{{user.profile.username}}</label><input type="text" ng-model="user.profile.username" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Picture:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.profile.picture}}</label><input type="text" ng-model="user.profile.picture" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-    </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-    <div class="col-xs-12 col-sm-4">
-    First Name:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.data.firstName}}</label><input type="text" ng-model="user.data.firstName" ng-blur="editing = false;" ng-show="editing"/>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-    Last Name:<br/><label ng-click="editing = !editing" ng-hide="editing">{{user.data.lastName}}</label><input type="text" ng-model="user.data.lastName" ng-blur="editing = false;" ng-show="editing"/>
-    </div>
-    <div class="col-xs-12 col-sm-4">
-    Email:<br/><label class="profileUserName">{{user.data.email[0]}}</label><input type="text" ng-model="user.data.username" ng-blur="editing = false;" ng-show="editing"/>
-    </div>
-    </div>
-  </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        Billing Address:
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.name}}</label><input type="text" ng-model="user.data.billingAddress.name" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.address}}</label><input type="text" ng-model="user.data.billingAddress.address" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.city}}</label><input type="text" ng-model="user.data.billingAddress.city" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.state}}</label><input type="text" ng-model="user.data.billingAddress.state" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.zip}}</label><input type="text" ng-model="user.data.billingAddress.zip" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.country}}</label>
-        <input type="text" ng-model="user.data.billingAddress.country" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-    </div>
-  </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        Shipping Address:
-      </div>
-      <div class="row" ng-class="{'hidden': user.data.shippingAddress.useBilling == true}">
-        <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.name}}</label><input type="text" ng-model="user.data.shippingAddress.name" ng-blur="editing = false;" ng-show="editing"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.address}}</label><input type="text" ng-model="user.data.shippingAddress.address" ng-blur="editing = false;" ng-show="editing"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.city}}</label><input type="text" ng-model="user.data.shippingAddress.city" ng-blur="editing = false;" ng-show="editing"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.state}}</label><input type="text" ng-model="user.data.shippingAddress.state" ng-blur="editing = false;" ng-show="editing"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.zip}}</label><input type="text" ng-model="user.data.shippingAddress.zip" ng-blur="editing = false;" ng-show="editing"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.country}}</label><input type="text" ng-model="user.data.shippingAddress.country" ng-blur="editing = false;" ng-show="editing"/>
-        </div>
-      </div>
-      <div class="row"  ng-class="{'hidden': user.data.shippingAddress.useBilling == false, 'profileUserName': user.data.shippingAddress.useBilling == true}">
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.name}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.address}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.city}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.state}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.zip}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.country}}</label>
-          </div>
-        </div>
-      <div class="col-xs-12">
-        Use Billing Address:<br/><input type="checkbox" ng-model="user.data.shippingAddress.useBilling"/>
-      </div>
-    </div>
-  </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-    <div class="col-xs-12 col-sm-6">
-    emailMailingList:<br/><input type="checkbox" ng-model="user.data.emailMailingList"/>
-    </div>
-    <div class="col-xs-12 col-sm-6">
-    researchAndDevelopment:<br/><input type="checkbox" ng-model="user.data.researchAndDevelopment" />
-    </div>
-    </div>
-  </div>
-</div> -->
+</div>
