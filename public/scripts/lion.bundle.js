@@ -6311,7 +6311,7 @@ webpackJsonp([0],[
 	    var newProduct = {
 	      "name": "New Item",
 	      "active": true,
-	      "pictures": ["https://"],
+	      "pictures": ["http://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"],
 	      "price": {
 	        "amount": 100,
 	        "currency": 'USD'
