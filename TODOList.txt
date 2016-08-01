@@ -53,6 +53,8 @@ Admin Panel Posts
 Admin Panel Users
                         Save User (Admin Status)
                         Style
+Database
+                        Set up Post DB
 Profile
                         Email Add Button
                         Email remove (not for zero)
@@ -64,5 +66,3 @@ Home Page
                         CTA
                         Photos
                         Upcoming Events
-Database
-                        Set up Post DB

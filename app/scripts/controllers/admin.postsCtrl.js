@@ -4,5 +4,4 @@ angular.module("lionHeart")
   dataService.getBlog(function(response) {
     $scope.blog = response.data.posts;
   })
-  
 });

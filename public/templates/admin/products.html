@@ -78,9 +78,11 @@
           Display Product:
         </div>
         <div class="col-xs-12 col-sm-6">
-          <label ng-click="editDisplay7 = !editDisplay7" ng-hide="editDisplay7">
-              {{productDisplayEdit.active}}<span class="tooltiptexttop">Display Product?</span></label>
-          <input type="text" ng-model="productDisplayEdit.active" ng-show="editDisplay7" ng-blur="editDisplay7 = false;"/>
+          {{productDisplayEdit.active}}
+              <select ng-model="productDisplayEdit.active">
+                <option value="true">True</option>
+                <option value="false">False</option>
+              </select>
         </div>
         <div class="col-xs-12 col-sm-4">
               <button type="button" class="btn btn-block btn-warning" ng-click="editProduct = !editProduct">Back</button>

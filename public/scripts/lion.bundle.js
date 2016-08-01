@@ -6347,7 +6347,6 @@ webpackJsonp([0],[
 	  dataService.getBlog(function(response) {
 	    $scope.blog = response.data.posts;
 	  })
-	  
 	});
 
 
