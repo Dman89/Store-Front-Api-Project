@@ -4,7 +4,7 @@
   </div>
   <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" ng-hide="!cartA.items[0]">
     <div class="row itemDelete">
-      <div class="col-xs-12 cartSpacer" ng-class="{ 'item' : delete.go }" ng-repeat="item in cartA.items" id="orderHistory">
+      <div class="col-xs-12 cartSpacer" ng-class="{ 'item' : delete.go }" ng-repeat="item in cartA.items" id="orderHistory" ng-init="edit[$index] = false">
               <div class="col-xs-12 col-sm-7 col-md-6" id="cards">
                     <div class="" id="singleCards">
                       <div class="card-container">
@@ -28,9 +28,11 @@
               </div>
               <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3 col-lg-offset-0 col-lg-3">
                 <div class="row">
-                  <div class="col-xs-12">
-                    <h3 class="alignCenter">{{item.quantity}}</h3>
-                  </div>
+                <div class="col-xs-12">
+                  <label ng-show="" ng-hide="!item.product.quantity || edit[$index] || quantityCheck(singleItem.quantity)" ng-click="edit[$index] = !edit[$index]">{{item.quantity}}<span class="tooltiptexttop">Click to Change</span></label>
+                  <label ng-show="" ng-hide="!item.product.quantity || edit[$index] || !quantityCheck(singleItem.quantity)">{{item.quantity}}</label>
+                  <input ng-show="edit[$index]" type="number" maxlength="3" size="1" ng-blur="checkValForMaxInCart($index);" ng-model="item.quantity" class="text-center" />
+                </div>
                   <div class="col-xs-12">
                           <button ng-hide="!item.product.quantity" type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation': item.quantity == item.product.quantity, 'showAnimation': item.quantity != item.product.quantity}" ng-click="quantityTotalAddition($index)"><i class="fa fa-arrow-up"></i></button>
                             <button type="button" class="abtn qDown cartButton thumbAnimation" id="downArrow" ng-class="{'hideAnimation': item.quantity == 1, 'showAnimation': item.quantity != 1}" ng-click="quantityTotalMinus($index)"><i class="fa fa-arrow-down"></i></button>
@@ -46,8 +48,8 @@
               <div class="row innerShipping">
                 <div class="col-xs-12">
                   <h3>Postal Code: </h3>
-                  <div class="zipcode" ng-hide="user.data.shippingAddress.useBilling"><label ng-click="zipEdit = !zipEdit" ng-hide="zipEdit">{{user.data.shippingAddress.zip}}</label><input ng-show="zipEdit" ng-blur="zipEdit = false;" type="text" class="zipcode" ng-model="user.data.shippingAddress.zip"> </div>
-                  <div class="zipcode" ng-show="user.data.shippingAddress.useBilling"><label ng-click="zipEdit = !zipEdit" ng-hide="zipEdit">{{user.data.billingAddress.zip}}</label><input ng-show="zipEdit" ng-blur="zipEdit = false;" type="text" class="zipcode" ng-model="user.data.billingAddress.zip"> </div>
+                  <div class="zipcode" ng-hide="user.data.shippingAddress.useBilling"><label ng-click="zipedit[$index] = !zipedit[$index]" ng-hide="zipedit[$index]">{{user.data.shippingAddress.zip}}</label><input ng-show="zipedit[$index]" ng-blur="zipedit[$index] = false;" type="text" class="zipcode" ng-model="user.data.shippingAddress.zip"> </div>
+                  <div class="zipcode" ng-show="user.data.shippingAddress.useBilling"><label ng-click="zipedit[$index] = !zipedit[$index]" ng-hide="zipedit[$index]">{{user.data.billingAddress.zip}}</label><input ng-show="zipedit[$index]" ng-blur="zipedit[$index] = false;" type="text" class="zipcode" ng-model="user.data.billingAddress.zip"> </div>
                   </div>
                 </div>
               </div> -->
