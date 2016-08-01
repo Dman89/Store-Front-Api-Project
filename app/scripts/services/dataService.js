@@ -56,6 +56,9 @@ angular.module("lionHeart")
         $http.get("/api/users")
         .then(callback)
       };
+  this.newItem = function(item, callback) {
+    $http.post('/api/products', item).then(callback)
+  };
   this.newUser = function(user) {
     $http.post('/api/users', user)
   };

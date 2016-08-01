@@ -2636,6 +2636,12 @@ body {
     -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); } }
+#body #ui-view #products .newitemStart {
+  text-align: center;
+  margin: 1em auto; }
+  @media (min-width: 992px) {
+    #body #ui-view #products .newitemStart {
+      text-align: right; } }
 #body #ui-view #products .goGreen {
   width: 100%;
   height: 100%; }

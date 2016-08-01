@@ -6307,6 +6307,33 @@ webpackJsonp([0],[
 	      }
 	    })
 	  }
+	  $scope.newItemStart = function() {
+	    var newProduct = {
+	      "name": "New Item",
+	      "active": true,
+	      "pictures": ["https://"],
+	      "price": {
+	        "amount": 100,
+	        "currency": 'USD'
+	      },
+	      "category": {"parent": "Paintings"},
+	      "urlCode": new Date().getTime(),
+	      "sku": new Date().getTime(),
+	      "quantity": 1
+	    };
+	      dataService.newItem(newProduct, function(res) {
+	        if (res.status == 200) {
+	          $scope.editProduct.show = true;
+	          $scope.products.push(newProduct);
+	          $scope.productDisplayEdit = newProduct;
+	          $scope.productDisplayEdit.id = res.data.products._id;
+	          $scope.productDisplayEdit._id = res.data.products._id;
+	        } else {
+	          alert("Error Creating Product")
+	        }
+	      });
+
+	  }
 	});
 
 
@@ -6462,6 +6489,9 @@ webpackJsonp([0],[
 	        $http.get("/api/users")
 	        .then(callback)
 	      };
+	  this.newItem = function(item, callback) {
+	    $http.post('/api/products', item).then(callback)
+	  };
 	  this.newUser = function(user) {
 	    $http.post('/api/users', user)
 	  };

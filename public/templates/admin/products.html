@@ -1,4 +1,7 @@
 <div class="row" id='products' ng-hide="editProduct.show">
+  <div class="col-xs-12 newitemStart">
+    <button type="button" class="btn btn-success" ng-click="newItemStart()">New Item</button>
+  </div>
   <div class="col-xs-12 col-md-6 col-lg-4 editSpace" ng-repeat="product in products">
     <div class="row center">
       <div ng-click="productEdit(product, $index)">
