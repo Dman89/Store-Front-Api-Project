@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-.controller("admin.productsCtrl", function($scope, dataService, $location) {
+.controller("admin.productsCtrl", function($scope, dataService, $location, $timeout) {
   dataService.getProducts(function(response) {
     $scope.products = response.data.products
   })
@@ -20,8 +20,23 @@ angular.module("lionHeart")
       $scope.products.splice(productBeingEditedIndex, 1);
       $scope.editProduct.show = false;
     } else {
+      console.log('Error Deleteing Item?');
       alert('Error Deleteing Item?');
     }
+    })
+  }
+    $scope.successMessageDisplayTop = false;
+  $scope.saveItem = function(id, product) {
+    dataService.saveItem(id, product, function(res) {
+      if (res.status == 200) {
+        $scope.successMessageDisplayTop = true;
+        $timeout(function() {
+          $scope.successMessageDisplayTop = false;
+        }, 4275)
+      } else {
+        console.log('Error Saving Item?');
+        alert('Error Saving Item?');
+      }
     })
   }
 });

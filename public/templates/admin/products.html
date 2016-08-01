@@ -13,6 +13,11 @@
   </div>
 </div>
 <div class="row" id='products' ng-show="editProduct.show">
+  <div class="goGreen col-xs-12" ng-class="{'hidden' : !successMessageDisplayTop}">
+    <div class="inner">
+
+    </div>
+  </div>
   <div class="col-xs-12 editSpace displayEdit">
     <div class="row center">
         <div class="col-xs-12">
@@ -81,7 +86,7 @@
               <button type="button" class="btn btn-block btn-danger" ng-click="deleteItem(productDisplayEdit._id)">Delete</button>
         </div>
         <div class="col-xs-12 col-sm-4">
-              <button type="button" class="btn btn-block btn-success">Save</button>
+              <button type="button" class="btn btn-block btn-success" ng-click="saveItem(productDisplayEdit._id, productDisplayEdit)">Save</button>
         </div>
       </div>
   </div>

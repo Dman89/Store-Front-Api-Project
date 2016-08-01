@@ -2636,6 +2636,21 @@ body {
     -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); } }
+#body #ui-view #products .goGreen {
+  width: 100%;
+  height: 100%; }
+  #body #ui-view #products .goGreen .inner {
+    background-color: #1a3e73;
+    margin: auto;
+    width: 75%;
+    height: 75%;
+    border: 5px #061115 solid;
+    border-radius: 4px;
+    padding-top: 4em;
+    padding-bottom: 4em; }
+    #body #ui-view #products .goGreen .inner::after {
+      color: white;
+      content: 'Item Successfully Edited.'; }
 #body #ui-view #products #info231 {
   background-color: black;
   width: 100vw;
