@@ -6273,14 +6273,25 @@ webpackJsonp([0],[
 	    $scope.products = response.data.products
 	  })
 	  $scope.editProduct = {show: false};
-	  $scope.productEdit = function(product) {
+	  var productBeingEditedIndex;
+	  $scope.productEdit = function(product, index) {
+	    productBeingEditedIndex = index;
 	    if (!product.quantity) {
 	      product.quantity = 0;
 	    }
 	    $scope.productDisplayEdit = product;
 	    $scope.editProduct = {show: true};
 	  }
-	  
+	  $scope.deleteItem = function(id) {
+	    dataService.deleteItem(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.products.splice(productBeingEditedIndex, 1);
+	      $scope.editProduct.show = false;
+	    } else {
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
 	});
 
 
@@ -6394,6 +6405,11 @@ webpackJsonp([0],[
 	  $http.put('/api/products/id/' + id, product)
 	  .then(callback)
 	  };
+	  this.deleteItem = function(id, callback) {
+	    var tempUrl = '/api/products/id/' + id;
+	    $http.delete(tempUrl)
+	    .then(callback);
+	  }
 	  this.getCategoryGraphics = function(callback) {
 	    $http.get("/api/category/Graphic%20Design")
 	    .then(callback)

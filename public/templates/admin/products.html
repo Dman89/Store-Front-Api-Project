@@ -1,7 +1,7 @@
 <div class="row" id='products' ng-hide="editProduct.show">
   <div class="col-xs-12 col-md-6 col-lg-4 editSpace" ng-repeat="product in products">
     <div class="row center">
-      <div ng-click="productEdit(product)">
+      <div ng-click="productEdit(product, $index)">
         <div class="col-xs-12">
               <img data-ng-src="{{product.pictures[0]}}" alt="" class="editImgRnd"/>
         </div>
@@ -78,7 +78,7 @@
               <button type="button" class="btn btn-block btn-warning" ng-click="editProduct = !editProduct">Back</button>
         </div>
         <div class="col-xs-12 col-sm-4">
-              <button type="button" class="btn btn-block btn-danger">Delete</button>
+              <button type="button" class="btn btn-block btn-danger" ng-click="deleteItem(productDisplayEdit._id)">Delete</button>
         </div>
         <div class="col-xs-12 col-sm-4">
               <button type="button" class="btn btn-block btn-success">Save</button>
