@@ -140,5 +140,10 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
       templateUrl: 'templates/admin/products.html',
       controller: 'admin.productsCtrl'
       })
+      .state('admin.displayProduct', {
+      url: '/displayProduct',
+      templateUrl: 'templates/admin/displayProduct.html',
+      controller: 'admin.productsCtrl'
+      })
 }])
 lionHeart.run(['$state', function($state){}]);

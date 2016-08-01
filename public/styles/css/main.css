@@ -2636,6 +2636,12 @@ body {
     -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); } }
+#body #ui-view #products #info231 {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100; }
+
 .hexagon {
   position: relative;
   width: 300px;

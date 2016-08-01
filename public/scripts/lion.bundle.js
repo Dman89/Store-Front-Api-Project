@@ -206,6 +206,11 @@ webpackJsonp([0],[
 	      templateUrl: 'templates/admin/products.html',
 	      controller: 'admin.productsCtrl'
 	      })
+	      .state('admin.displayProduct', {
+	      url: '/displayProduct',
+	      templateUrl: 'templates/admin/displayProduct.html',
+	      controller: 'admin.productsCtrl'
+	      })
 	}])
 	lionHeart.run(['$state', function($state){}]);
 
@@ -6268,10 +6273,15 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("admin.productsCtrl", function($scope, dataService) {
+	.controller("admin.productsCtrl", function($scope, dataService, $location) {
 	  dataService.getProducts(function(response) {
 	    $scope.products = response.data.products
 	  })
+	  $scope.editProduct = {show: false};
+	  $scope.productEdit = function(product) {
+	    $scope.productDisplayEdit = product;
+	    $scope.editProduct = {show: true};
+	  }
 	});
 
 
