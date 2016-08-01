@@ -33,12 +33,12 @@ Cart
     (Completed)         Style
     (Completed)         Disable Checkout
     (Completed)         Up/Down Quality for Items
-                        Fix Total CSS
+    (Completed)         Fix Total CSS
 Checkout Review
     (Completed)         Style
     (Completed)         Save User
     (Completed)         Require Card Info
-                        Edit User (Angular)
+    (Completed)         Edit User (Angular)
 Admin Panel Products
                         Style
                         Edit
