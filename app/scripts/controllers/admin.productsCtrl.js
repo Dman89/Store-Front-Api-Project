@@ -6,7 +6,11 @@ angular.module("lionHeart")
   })
   $scope.editProduct = {show: false};
   $scope.productEdit = function(product) {
+    if (!product.quantity) {
+      product.quantity = 0;
+    }
     $scope.productDisplayEdit = product;
     $scope.editProduct = {show: true};
   }
+  
 });

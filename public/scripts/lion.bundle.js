@@ -206,11 +206,6 @@ webpackJsonp([0],[
 	      templateUrl: 'templates/admin/products.html',
 	      controller: 'admin.productsCtrl'
 	      })
-	      .state('admin.displayProduct', {
-	      url: '/displayProduct',
-	      templateUrl: 'templates/admin/displayProduct.html',
-	      controller: 'admin.productsCtrl'
-	      })
 	}])
 	lionHeart.run(['$state', function($state){}]);
 
@@ -6279,9 +6274,13 @@ webpackJsonp([0],[
 	  })
 	  $scope.editProduct = {show: false};
 	  $scope.productEdit = function(product) {
+	    if (!product.quantity) {
+	      product.quantity = 0;
+	    }
 	    $scope.productDisplayEdit = product;
 	    $scope.editProduct = {show: true};
 	  }
+	  
 	});
 
 

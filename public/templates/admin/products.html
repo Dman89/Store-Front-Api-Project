@@ -1,9 +1,9 @@
 <div class="row" id='products' ng-hide="editProduct.show">
-  <div class="col-xs-12 col-sm-6 col-lg-4 editSpace" ng-repeat="product in products">
+  <div class="col-xs-12 col-md-6 col-lg-4 editSpace" ng-repeat="product in products">
     <div class="row center">
       <div ng-click="productEdit(product)">
         <div class="col-xs-12">
-              <img data-ng-src="{{product.pictures[0]}}" alt="" />
+              <img data-ng-src="{{product.pictures[0]}}" alt="" class="editImgRnd"/>
         </div>
         <div class="col-xs-12">
               {{product.name}}
@@ -13,28 +13,75 @@
   </div>
 </div>
 <div class="row" id='products' ng-show="editProduct.show">
-  <div class="col-xs-12 editSpace">
+  <div class="col-xs-12 editSpace displayEdit">
     <div class="row center">
         <div class="col-xs-12">
-              <img data-ng-src="{{productDisplayEdit.pictures[0]}}" alt="" />
+              <img data-ng-src="{{productDisplayEdit.pictures[0]}}" alt="" class="editImgRnd"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Name:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay1 = !editDisplay1" ng-hide="editDisplay1">
+              {{productDisplayEdit.name}}<span class="tooltiptexttop">Edit Name</span></label>
+          <input type="text" ng-model="productDisplayEdit.name" ng-show="editDisplay1" ng-blur="editDisplay1 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Quantity:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay2 = !editDisplay2" ng-hide="editDisplay2">
+              {{productDisplayEdit.quantity}}<span class="tooltiptexttop">Edit Quantity</span></label>
+          <input type="text" ng-model="productDisplayEdit.quantity" ng-show="editDisplay2" ng-blur="editDisplay2 = false;"/>
         </div>
         <div class="col-xs-12">
-              {{productDisplayEdit.name}}
+          Product URL:
         </div>
         <div class="col-xs-12">
-              {{productDisplayEdit.urlCode}}
+          <label ng-click="editDisplay3 = !editDisplay3" ng-hide="editDisplay3">
+              {{productDisplayEdit.urlCode}}<span class="tooltiptexttop">Edit URL</span></label>
+          <input type="text" ng-model="productDisplayEdit.urlCode" ng-show="editDisplay3" ng-blur="editDisplay3 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Category:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay4 = !editDisplay4" ng-hide="editDisplay4">
+              {{productDisplayEdit.category.parent}}<span class="tooltiptexttop">Edit Category</span></label>
+          <input type="text" ng-model="productDisplayEdit.category.parent" ng-show="editDisplay4" ng-blur="editDisplay4 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          Amount:
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay5 = !editDisplay5" ng-hide="editDisplay5">
+              {{productDisplayEdit.price.amount}}<span class="tooltiptexttop">Edit Amount</span></label>
+          <input type="text" ng-model="productDisplayEdit.price.amount" ng-show="editDisplay5" ng-blur="editDisplay5 = false;"/>
         </div>
         <div class="col-xs-12">
-              {{productDisplayEdit.category.parent}}
+          Picture URL:
         </div>
         <div class="col-xs-12">
-              {{productDisplayEdit.price.amount}}
+          <label ng-click="editDisplay6 = !editDisplay6" ng-hide="editDisplay6">
+              {{productDisplayEdit.pictures[0]}}<span class="tooltiptexttop">Edit Picture URL</span></label>
+          <input type="text" ng-model="productDisplayEdit.pictures[0]" ng-show="editDisplay6" ng-blur="editDisplay6 = false;"/>
         </div>
-        <div class="col-xs-12">
-              {{productDisplayEdit.pictures[0]}}
+        <div class="col-xs-12 col-sm-6">
+          Display Product:
         </div>
-        <div class="col-xs-12">
-              {{productDisplayEdit.active}}
+        <div class="col-xs-12 col-sm-6">
+          <label ng-click="editDisplay7 = !editDisplay7" ng-hide="editDisplay7">
+              {{productDisplayEdit.active}}<span class="tooltiptexttop">Display Product?</span></label>
+          <input type="text" ng-model="productDisplayEdit.active" ng-show="editDisplay7" ng-blur="editDisplay7 = false;"/>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block btn-warning" ng-click="editProduct = !editProduct">Back</button>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block btn-danger">Delete</button>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block btn-success">Save</button>
         </div>
       </div>
   </div>

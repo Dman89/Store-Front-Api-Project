@@ -5,4 +5,16 @@
     height: 100vh;
     z-index: 100;
   }
+  & .editImgRnd {
+    border-radius: 4px;
+  }
+  & .editSpace.displayEdit div div {
+    margin: .1em auto;
+    @media (min-width: 1200px) {
+      margin: .75em auto;
+    }
+    & button {
+      margin: .3em auto;
+    }
+  }
 }
