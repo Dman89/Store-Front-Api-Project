@@ -40,11 +40,11 @@ Checkout Review
     (Completed)         Require Card Info
     (Completed)         Edit User (Angular)
 Admin Panel Products
-                        Style
-                        Edit
-                        Save Item
-                        New Item
-                        Edit Item Page
+    (Completed)         Style
+    (Completed)         Edit
+    (Completed)         Save Item
+    (Completed)         New Item
+    (Completed)         Edit Item Page
 Admin Panel Posts
                         Save Posts
                         New Posts
