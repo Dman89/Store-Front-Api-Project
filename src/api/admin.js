@@ -31,7 +31,6 @@ adminRouter.put('/admin/user/id/:id', function (req, res) {
     }
     //TODO: Remove or only return profile
       console.log(req.body.profile.username + ' profile has been edited!')
-      console.log(req.body.admin.status);
       return res.status(200).json({'user': user, 'message':'Profile Updated'});
   })
 })
