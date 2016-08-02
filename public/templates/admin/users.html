@@ -1,4 +1,9 @@
-<div class="row">
+<div class="row" id="adminPanelUser">
+  <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopUser}">
+    <div class="inner">
+
+    </div>
+  </div>
   <div class="col-xs-12 toggleBar" ng-repeat="user in users">
     <div class="row">
       <div class="col-xs-12">
@@ -6,8 +11,13 @@
       </div>
       <div class="col-xs-12" ng-show="revealUserAdminPanel">
         <label ng-hide='user.admin.status == "777"'>Admin:  </label>
-        <input ng-model="user.admin.status" ng-hide='user.admin.status == "777"' type="checkbox" class="btn btn-primary"/>
+        <select ng-model="user.admin.status" ng-hide='user.admin.status == "777"' type="checkbox" class="btn btn-primary">
+          <option value="true">True</option>
+          <option value="false">False</option>
+        </select>
         <label ng-class="{'profileUserName': user.admin.status == '777'}" ng-show='user.admin.status == "777"'>Full Access User</label>
+        <br/>
+        <button type="button" class="btn btn-success" ng-click="saveUserAdmin(user._id, user)">Save User</button>
       </div>
     </div>
   </div>

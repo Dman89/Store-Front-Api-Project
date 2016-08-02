@@ -32,7 +32,7 @@ angular.module("lionHeart")
         $scope.successMessageDisplayTop = true;
         $timeout(function() {
           $scope.successMessageDisplayTop = false;
-        }, 4275)
+        }, 3075)
       } else {
         console.log('Error Saving Item?');
         alert('Error Saving Item?');

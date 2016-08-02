@@ -75,6 +75,10 @@ angular.module("lionHeart")
   $http.put('/api/profile', user)
   .then(callback)
   };
+  this.saveUserAdmin = function(id, user, callback) {
+  $http.put('/api/admin/user/id/'+id, user)
+  .then(callback)
+  };
     this.getOrderHistory = function(callback) {
       $http.get("/api/cart/history")
       .then(callback)

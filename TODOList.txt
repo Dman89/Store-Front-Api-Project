@@ -53,6 +53,11 @@ Admin Panel Posts
 Admin Panel Users
                         Save User (Admin Status)
                         Style
+Admin Panel Product
+                        Look at ProductAdminPanelCode
+                        add back button to the top
+Admin Panel
+                        Style
 Database
                         Set up Post DB
 Profile
