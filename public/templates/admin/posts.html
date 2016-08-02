@@ -1,74 +1,88 @@
-<div class="row">
-  <div class="col-xs-12 newitemStart">
-    <button type="button" class="btn btn-success" ng-click="newPost()">New Post</button>
-  </div>
+<div class="" id="blogPosts">
+  <div class="row">
+    <div class="col-xs-12 newitemStart">
+      <button type="button" class="btn btn-success" ng-click="newPost()">New Post</button>
+    </div>
 
-  </div>
-<div class="row toggleBar posts" ng-repeat="post in blog">
-  <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopPost}">
-  <div class="inner">
+    </div>
+  <div class="row toggleBar posts" ng-repeat="post in blog">
+    <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopPost}">
+    <div class="inner">
 
-  </div>
-</div>
-  <div class="col-xs-12 newitemStart">
-    <button type="button" class="btn btn-success" ng-click="savePost(post._id, post, $index)">Save Post</button>
-    <button type="button" class="btn btn-danger" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
-  </div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12">
-        <img ng-src="{{post.img}}" alt="" style="height: 50px; width: 50px;"/>
-      </div>
-      <div class="col-xs-12">
-        <h3>{{post.title}}</h3>
-      </div>
     </div>
   </div>
-  <div class="divider col-xs-12"></div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-      Title:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.title}}</label><input type="text" ng-model="post.title" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Description:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.description}}</label><input type="text" ng-model="post.description" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Body:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.body}}</label><input type="text" ng-model="post.body" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      urlCode:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.urlCode}}</label><input type="text" ng-model="post.urlCode" ng-blur="editing = false;" ng-show="editing"/>
+    <div class="col-xs-12" ng-click="openBlog = !openBlog">
+      <div class="row">
+        <div class="col-xs-12">
+          <img ng-src="{{post.img}}" alt="" style="height: 50px; width: 50px;"/>
+        </div>
+        <div class="col-xs-12">
+          <h3>{{post.title}}</h3>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-xs-12">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-      Live:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.live}}</label><input type="text" ng-model="post.live" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Description:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.description}}</label><input type="text" ng-model="post.title" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Month/Day/Year/Time:
-      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.month}}</label><input type="text" ng-model="post.date.month" ng-blur="editing = false;" ng-show="editing"/>
-      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.day}}</label><input type="text" ng-model="post.date.day" ng-blur="editing = false;" ng-show="editing"/>
-      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.year}}</label><input type="text" ng-model="post.date.year" ng-blur="editing = false;" ng-show="editing"/>
-      <br/><label ng-click="editing = !editing" ng-hide="editing">{{post.date.time}}</label><input type="text" ng-model="post.date.time" ng-blur="editing = false;" ng-show="editing"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      Location:<br/><label ng-click="editing = !editing" ng-hide="editing">{{post.loc}}</label><select type="text" ng-model="post.loc" ng-blur="editing = false;" ng-show="editing">
-          <option value="main">
-          </option>
-          <option value="subA">
-          </option>
-          <option value="subB">
-          </option>
-          <option value="subC">
-          </option>
+    <div class="col-xs-12 giveSpaceInAdminPanelForPostEdit" ng-show="openBlog">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>Title:</h2>
+        <label ng-click="editing1 = !editing1" ng-hide="editing1">{{post.title}}</label><input type="text" ng-model="post.title" ng-blur="editing1 = false;" ng-show="editing1"/>
+        </div>
+        <div class="col-xs-12">
+          <h2>Description:</h2>
+          <label ng-click="editing2 = !editing2" ng-hide="editing2">{{post.description}}</label><textarea ROWS=3 class="textbox" ng-model="post.description" ng-blur="editing2 = false;" ng-show="editing2"/>
+        </div>
+        <div class="col-xs-12">
+          <h2>Body:</h2>
+          <label ng-click="editing3 = !editing3" ng-hide="editing3">{{post.body}}</label><textarea ROWS=7 class="textbox" ng-model="post.body" ng-blur="editing3 = false;" ng-show="editing3"/>
+        </div>
+        <div class="col-xs-12">
+          <h2>URL:</h2>
+          <label ng-click="editing4 = !editing4" ng-hide="editing4">{{post.urlCode}}</label><input type="text" ng-model="post.urlCode" ng-blur="editing4 = false;" ng-show="editing4"/>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+        Live:<br/><label ng-click="editing5 = !editing5" ng-hide="editing5">{{post.live}}</label>
+        <select class="" type="text" ng-model="post.live" ng-blur="editing5 = false;" ng-show="editing5">
+          <option value="true">True</option>
+          <option value="false">False</option>
         </select>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+        Category:<br/><label ng-click="editing6 = !editing6" ng-hide="editing6">{{post.category.parent}}</label><input type="text" ng-model="post.category.parent" ng-blur="editing6 = false;" ng-show="editing6"/>
+        </div>
+        <div class="col-xs-12">
+        Month/Day/Year/Time:
+        </div>
+        <div class="col-xs-12">
+          <label ng-click="editing7 = !editing7" ng-hide="editing7">{{post.date.month}}</label>
+          <input type="text" ng-model="post.date.month" ng-blur="editing7 = false;" ng-show="editing7"/>/
+          <label ng-click="editing8 = !editing8" ng-hide="editing8">{{post.date.day}}</label>
+          <input type="text" ng-model="post.date.day" ng-blur="editing8 = false;" ng-show="editing8"/>/
+          <label ng-click="editing9 = !editing9" ng-hide="editing9">{{post.date.year}}</label>
+          <input type="text" ng-model="post.date.year" ng-blur="editing9 = false;" ng-show="editing9"/>
+          <br/>
+          <label ng-click="editing10 = !editing10" ng-hide="editing10">{{post.date.time}}</label>
+          <input type="text" ng-model="post.date.time" ng-blur="editing10 = false;" ng-show="editing10"/>
+        </div>
+        <div class="col-xs-12">
+        Location:<br/><label ng-click="editing11 = !editing11" ng-hide="editing11">{{post.loc}}</label><select type="text" ng-model="post.loc" ng-blur="editing11 = false;" ng-show="editing11">
+            <option value="main">Main
+            </option>
+            <option value="subA">Sub-A
+            </option>
+            <option value="subB">Sub-B
+            </option>
+            <option value="subC">Sub-C
+            </option>
+          </select>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <button type="button" class="btn btn-danger buttonSpaceForPostEditAndDelete" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <button type="button" class="btn btn-success buttonSpaceForPostEditAndDelete" ng-click="savePost(post._id, post, $index)">Save Post</button>
+        </div>
       </div>
     </div>
-  </div>
 
+  </div>
 </div>
