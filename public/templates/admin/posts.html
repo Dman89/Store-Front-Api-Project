@@ -1,4 +1,9 @@
 <div class="" id="blogPosts">
+  <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopPost}">
+  <div class="inner">
+
+  </div>
+</div>
   <div class="row">
     <div class="col-xs-12 newitemStart">
       <button type="button" class="btn btn-success" ng-click="newPost()">New Post</button>
@@ -6,12 +11,8 @@
 
     </div>
   <div class="row toggleBar posts" ng-repeat="post in blog">
-    <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopPost}">
-    <div class="inner">
-
-    </div>
-  </div>
-    <div class="col-xs-12" ng-click="openBlog = !openBlog">
+    <label class="col-xs-12" ng-click="openBlog = !openBlog">
+        <span class="tooltiptexttop">Click To Toggle Display</span>
       <div class="row">
         <div class="col-xs-12">
           <img ng-src="{{post.img}}" alt="" style="height: 50px; width: 50px;"/>
@@ -20,7 +21,7 @@
           <h3>{{post.title}}</h3>
         </div>
       </div>
-    </div>
+    </label>
     <div class="col-xs-12 giveSpaceInAdminPanelForPostEdit" ng-show="openBlog">
       <div class="row">
         <div class="col-xs-12">
@@ -75,11 +76,11 @@
             </option>
           </select>
         </div>
-        <div class="col-xs-12 col-sm-6">
-          <button type="button" class="btn btn-danger buttonSpaceForPostEditAndDelete" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
+        <div class="col-xs-12 col-sm-6 buttonSpaceForPostEditAndDelete">
+          <button type="button" class="btn btn-danger" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
         </div>
-        <div class="col-xs-12 col-sm-6">
-          <button type="button" class="btn btn-success buttonSpaceForPostEditAndDelete" ng-click="savePost(post._id, post, $index)">Save Post</button>
+        <div class="col-xs-12 col-sm-6 buttonSpaceForPostEditAndDelete">
+          <button type="button" class="btn btn-success" ng-click="savePost(post._id, post, $index)">Save Post</button>
         </div>
       </div>
     </div>

@@ -9,14 +9,14 @@
 #html #body #ui-view {
   & #blogPosts {
       .toggleBar {
-        margin: 5% auto;
+        margin: 2% auto 5% auto;
         padding: 1% 1%;
       }
-      #giveSpaceInAdminPanelForPostEdit div.col-xs-12 {
+      .giveSpaceInAdminPanelForPostEdit div.col-xs-12 {
         margin: 1% auto;
       }
-      #buttonSpaceForPostEditAndDelete {
-        margin-top: 1% auto;
+      .buttonSpaceForPostEditAndDelete {
+        margin: 2.5% auto;
       }
   }
   & .textbox {
@@ -36,6 +36,10 @@
       border-radius: 4px;
       padding-top: 2em;
       padding-bottom: 2em;
+      @media (max-width: 600px) {
+      width: 90%;
+      height: 90%;
+      }
       &::after {
         color: white;
         content: 'Item Successfully Edited.';
