@@ -66,6 +66,11 @@ angular.module("lionHeart")
     $http.post('/api/blog', post)
     .then(callback);
   };
+  this.deletePost = function(id, post, callback) {
+    var tempUrl = '/api/blog/post/id/' + id;
+    $http.delete(tempUrl, post)
+    .then(callback);
+  };
   this.saveUser = function(user, callback) {
   $http.put('/api/profile', user)
   .then(callback)

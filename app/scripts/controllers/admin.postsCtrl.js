@@ -3,7 +3,6 @@ angular.module("lionHeart")
 .controller("admin.postsCtrl", function($scope, dataService) {
   dataService.getBlog(function(response) {
     $scope.blog = response.data.posts;
-    console.log($scope.blog);
   })
   $scope.newPost = function() {
     var date = new Date;
@@ -29,10 +28,21 @@ angular.module("lionHeart")
     };
     dataService.newPost(newPost, function(res) {
       if (res.status == 200) {
+        newPost._id = res.data.post._id;
+        newPost.id = res.data.post._id;
       $scope.blog.push(newPost);
     } else {
       return res.status(500).json(res)
     }
+    })
+  }
+  $scope.deletePost = function(id, post, index) {
+    dataService.deletePost(id, post, function(res) {
+        if (res.status == 200) {
+          $scope.blog.splice(index, 1);
+      } else {
+        return res.status(500).json(res)
+      }
     })
   }
 });

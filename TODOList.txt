@@ -47,8 +47,8 @@ Admin Panel Products
     (Completed)         Edit Item Page
 Admin Panel Posts
                         Save Posts
-                        New Posts
-                        Delete Posts
+    (Completed)         New Posts
+    (Completed)         Delete Posts
                         Style
 Admin Panel Users
                         Save User (Admin Status)

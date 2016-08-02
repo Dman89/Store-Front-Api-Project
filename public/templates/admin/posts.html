@@ -5,6 +5,10 @@
 
   </div>
 <div class="row toggleBar posts" ng-repeat="post in blog">
+  <div class="col-xs-12 newitemStart">
+    <button type="button" class="btn btn-danger" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
+  </div>
+    {{post}}
   <div class="col-xs-12">
     <div class="row">
       <div class="col-xs-12">
