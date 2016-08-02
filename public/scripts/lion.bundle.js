@@ -6346,7 +6346,38 @@ webpackJsonp([0],[
 	.controller("admin.postsCtrl", function($scope, dataService) {
 	  dataService.getBlog(function(response) {
 	    $scope.blog = response.data.posts;
+	    console.log($scope.blog);
 	  })
+	  $scope.newPost = function() {
+	    var date = new Date;
+	        var month = (date.getUTCMonth()+1);
+	        var day = date.getDate();
+	        var year = date.getFullYear();
+	        var hour = date.getHours();
+	        if (hour >= 13) {
+	          hour -= 12;
+	        }
+	        var minutes = date.getMinutes();
+	        var time = hour+":"+minutes;
+	    var newPost = {
+	      "title": "Add Title",
+	      "description": "Add Description",
+	      "body": "Add Body",
+	      "urlCode": new Date().getTime(),
+	      "img": "https://tctechcrunch2011.files.wordpress.com/2015/08/clouds.jpg",
+	      "live": 'false',
+	      "date": {"month": month, "day": day, "year": year, "time": time},
+	      "loc": "main",
+	      "category": {"parent": "Homepage"}
+	    };
+	    dataService.newPost(newPost, function(res) {
+	      if (res.status == 200) {
+	      $scope.blog.push(newPost);
+	    } else {
+	      return res.status(500).json(res)
+	    }
+	    })
+	  }
 	});
 
 
@@ -6494,6 +6525,10 @@ webpackJsonp([0],[
 	  };
 	  this.newUser = function(user) {
 	    $http.post('/api/users', user)
+	  };
+	  this.newPost = function(post, callback) {
+	    $http.post('/api/blog', post)
+	    .then(callback);
 	  };
 	  this.saveUser = function(user, callback) {
 	  $http.put('/api/profile', user)

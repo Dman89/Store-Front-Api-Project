@@ -62,6 +62,10 @@ angular.module("lionHeart")
   this.newUser = function(user) {
     $http.post('/api/users', user)
   };
+  this.newPost = function(post, callback) {
+    $http.post('/api/blog', post)
+    .then(callback);
+  };
   this.saveUser = function(user, callback) {
   $http.put('/api/profile', user)
   .then(callback)
