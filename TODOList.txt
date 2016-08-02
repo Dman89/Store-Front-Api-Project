@@ -1,27 +1,3 @@
-Cart
-    (Completed)         Style
-    (Completed)         Disable Checkout
-  Optional/Later Date   View a Random Item
-                                Pull product lists
-                                (for) save the id's to an array
-                                call random number
-                                go to product page of random number (get)
-    (Completed)         Up/Down Quality for Items
-                        Fix Total CSS
-
-
-
-
-
-Checkout Review
-    (Completed)         Style
-    (Completed)         Save User
-                        Edit User (Angular)
-    (Completed)         Require Card Info
-
-
-
-
 Checkout Page
     (Completed)         Style
     (Completed)         Checkout
@@ -32,10 +8,6 @@ Checkout Page
     (Completed)         Check Product Availability
     (Completed)         Set Product Quantity
     (Completed)         Disable Product IF Zero Quantity
-
-
-
-
 Confirmation
     (Completed)         Style
     (Completed)         Correct Total Data
@@ -43,32 +15,55 @@ Confirmation
     (Completed)         Added Last4 of Card to Order History
     (Completed)         Gave Erase Cart Its Own API Call
     (Completed)         Created orderPlaced Variable
-
 Add To Cart
     (Completed)         Edit Inventory (is done upon transaction)
     (Completed)         Disable
     (Completed)         Auto-login if not logged in. (CHANGED TO ALERTED USER OF NEED TO LOG IN)
     (Completed)         Make Add To Cart its own Function
-Admin Panel Posts
-                        Save Posts
-                        New Posts
-                        Style
-                        Delete Posts
-Admin Panel Users
-                        Save User (Admin Status)
-                        Delete User (Temporary)
-                        Style
-Admin Panel Products
-                        Style
-                        Edit
-                        Save Item
-                        New Item
-                        Edit Item Page
 Products
     (Completed)         In Stock Model
     (Completed)         Style “In Stock”
     (Completed)         Quantity
     (Completed)         Quantity Select
+Store
+    (??No Title??)      Fix Title on Store Page
+    (Completed)         Load Category for the menu
+    (Completed)         Fix Product load to Match Category Selected
+Cart
+    (Completed)         Style
+    (Completed)         Disable Checkout
+    (Completed)         Up/Down Quality for Items
+    (Completed)         Fix Total CSS
+Checkout Review
+    (Completed)         Style
+    (Completed)         Save User
+    (Completed)         Require Card Info
+    (Completed)         Edit User (Angular)
+Admin Panel Products
+    (Completed)         Style
+    (Completed)         Edit
+    (Completed)         Save Item
+    (Completed)         New Item
+    (Completed)         Edit Item Page
+Admin Panel Posts
+    (Completed)         Save Posts
+    (Completed)         New Posts
+    (Completed)         Delete Posts
+    (Completed)         Style
+Admin Panel Users
+                        Save User (Admin Status)
+                        Style
+Admin Panel Product
+                        Look at ProductAdminPanelCode
+                        add back button to the top
+Admin Panel
+                        Style
+Database
+                        Set up Post DB
+Profile
+                        Email Add Button
+                        Email remove (not for zero)
+                        Style
 Portfolio
                         Link to Individual Picture
 Home Page
@@ -76,11 +71,3 @@ Home Page
                         CTA
                         Photos
                         Upcoming Events
-Profile
-                        Email Add Button
-                        Email remove (not for zero)
-                        Style
-Store
-    (??No Title??)      Fix Title on Store Page
-    (Completed)         Load Category for the menu
-    (Completed)         Fix Product load to Match Category Selected

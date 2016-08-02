@@ -1,0 +1,6 @@
+#html #body #ui-view {
+  & .clicker {
+    pointer-events: auto;
+    cursor: pointer;
+  }
+}

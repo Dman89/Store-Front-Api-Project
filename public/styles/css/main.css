@@ -1891,6 +1891,13 @@ body {
   border: #061115 3px solid;
   border-bottom: #4384b7 2px solid; }
 
+#redSold {
+  color: red; }
+
+.disabledBTN {
+  cursor: none;
+  pointer-events: none; }
+
 #body #singleItem #blockBtn {
   font-family: "Work Sans", sans-serif; }
   @media (max-width: 480px), (max-height: 480px) and (orientation: landscape) {
@@ -2562,6 +2569,9 @@ body {
   text-align: center;
   margin: 4em auto 5em; }
 
+#profile #dashboard.review label {
+  pointer-events: auto; }
+
 #html #body #ui-view .errPayment {
   background-color: #7c5c80;
   background-color: rgba(255, 0, 0, 0.2);
@@ -2626,6 +2636,104 @@ body {
     -webkit-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -o-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg);
     -ms-transform: scaleX(0) scaleY(0) scaleZ(0) rotateX(225deg) rotateY(0deg) rotateZ(0deg); } }
+.newitemStart {
+  text-align: center;
+  margin: 1em auto; }
+  @media (min-width: 992px) {
+    .newitemStart {
+      text-align: right; } }
+
+#body #ui-view #backButtonTop {
+  margin: 3% auto; }
+#body #ui-view #products .goGreen {
+  width: 100%;
+  height: 100%; }
+  #body #ui-view #products .goGreen .inner {
+    background-color: #1a3e73;
+    margin: auto;
+    width: 75%;
+    height: 75%;
+    border: 5px #061115 solid;
+    border-radius: 4px;
+    padding-top: 4em;
+    padding-bottom: 4em; }
+    #body #ui-view #products .goGreen .inner::after {
+      color: white;
+      content: 'Item Successfully Edited.'; }
+#body #ui-view #products #info231 {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100; }
+#body #ui-view #products .editImgRnd {
+  border-radius: 4px; }
+#body #ui-view #products .editSpace.displayEdit div div {
+  margin: .1em auto; }
+  @media (min-width: 1200px) {
+    #body #ui-view #products .editSpace.displayEdit div div {
+      margin: .75em auto; } }
+  #body #ui-view #products .editSpace.displayEdit div div button {
+    margin: .3em auto; }
+
+.newitemStart {
+  text-align: center;
+  margin: 1em auto;
+  line-height: 1em; }
+  @media (min-width: 992px) {
+    .newitemStart {
+      text-align: right; } }
+
+#html #body #ui-view #blogPosts .toggleBar {
+  margin: 2% auto 5% auto;
+  padding: 1% 1%; }
+#html #body #ui-view #blogPosts .giveSpaceInAdminPanelForPostEdit div.col-xs-12 {
+  margin: 1% auto; }
+#html #body #ui-view #blogPosts .buttonSpaceForPostEditAndDelete {
+  margin: 2.5% auto; }
+#html #body #ui-view .textbox {
+  width: 100%;
+  height: 15em; }
+#html #body #ui-view .goGreen2 {
+  width: 100%;
+  height: 100%;
+  margin: 2em auto; }
+  #html #body #ui-view .goGreen2 .inner {
+    background-color: green;
+    margin: auto;
+    width: 25%;
+    height: 25%;
+    border: 5px white solid;
+    border-radius: 4px;
+    padding-top: 2em;
+    padding-bottom: 2em; }
+    @media (max-width: 600px) {
+      #html #body #ui-view .goGreen2 .inner {
+        width: 90%;
+        height: 90%; } }
+    #html #body #ui-view .goGreen2 .inner::after {
+      color: white;
+      content: 'Item Successfully Edited.'; }
+#html #body #ui-view #info231 {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100; }
+#html #body #ui-view .editImgRnd {
+  border-radius: 4px; }
+#html #body #ui-view .editSpace.displayEdit div div {
+  margin: .1em auto; }
+  @media (min-width: 1200px) {
+    #html #body #ui-view .editSpace.displayEdit div div {
+      margin: .75em auto; } }
+  #html #body #ui-view .editSpace.displayEdit div div button {
+    margin: .3em auto; }
+
+#html #body #ui-view #adminPanelUser .revealAdminUserPanel {
+  width: 100%;
+  min-height: 50px; }
+#html #body #ui-view #adminPanelUser .spaceForAdminPanelUserEdit {
+  margin: 1.2345% auto; }
+
 .hexagon {
   position: relative;
   width: 300px;
@@ -2695,5 +2803,41 @@ body {
 .loginThumbnail {
   height: 50px;
   width: 50px; }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; }
+
+.tooltiptexttop {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px; }
+
+.tooltiptexttop::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent; }
+
+label:hover .tooltiptexttop, .tooltips:hover .tooltiptexttop {
+  visibility: visible; }
+
+#html #body #ui-view .clicker {
+  pointer-events: auto;
+  cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */

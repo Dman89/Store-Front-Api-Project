@@ -1,49 +1,49 @@
 <div class="row" id="profile">
-  <div class="" id="dashboard">
+  <div class="review" id="dashboard">
   <div class="divider"><h1 class="title highlight">Billing Address</h1></div>
   <div class="col-xs-12 footing">
-    <div class="row">
+    <div class="row tooltips"><span class="tooltiptexttop">Click to Edit</span>
       <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.name}}</label><input type="text" ng-model="user.data.billingAddress.name" ng-blur="editing = false;" ng-show="editing"/>
+        <label ng-click="editingA = !editingA" ng-hide="editingA">{{user.data.billingAddress.name}}</label><input type="text" ng-model="user.data.billingAddress.name" ng-blur="editingA = false;" ng-show="editingA"/>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.address}}</label><input type="text" ng-model="user.data.billingAddress.address" ng-blur="editing = false;" ng-show="editing"/>
+        <label ng-click="editingB = !editingB" ng-hide="editingB">{{user.data.billingAddress.address}}</label><input type="text" ng-model="user.data.billingAddress.address" ng-blur="editingB = false;" ng-show="editingB"/>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.city}}</label><input type="text" ng-model="user.data.billingAddress.city" ng-blur="editing = false;" ng-show="editing"/>
+        <label ng-click="editingC = !editingC" ng-hide="editingC">{{user.data.billingAddress.city}}</label><input type="text" ng-model="user.data.billingAddress.city" ng-blur="editingC = false;" ng-show="editingC"/>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.state}}</label><input type="text" ng-model="user.data.billingAddress.state" ng-blur="editing = false;" ng-show="editing"/>
+        <label ng-click="editingD = !editingD" ng-hide="editingD">{{user.data.billingAddress.state}}</label><input type="text" ng-model="user.data.billingAddress.state" ng-blur="editingD = false;" ng-show="editingD"/>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.zip}}</label><input type="text" ng-model="user.data.billingAddress.zip" ng-blur="editing = false;" ng-show="editing"/>
+        <label ng-click="editingE = !editingE" ng-hide="editingE">{{user.data.billingAddress.zip}}</label><input type="text" ng-model="user.data.billingAddress.zip" ng-blur="editingE = false;" ng-show="editingE"/>
       </div>
       <div class="col-xs-12 col-sm-4">
-        <label ng-click="editing = !editing" ng-hide="editing">{{user.data.billingAddress.country}}</label>
-        <input type="text" ng-model="user.data.billingAddress.country" ng-blur="editing = false;" ng-show="editing"/>
+        <label ng-click="editingF = !editingF" ng-hide="editingF">{{user.data.billingAddress.country}}</label>
+        <input type="text" ng-model="user.data.billingAddress.country" ng-blur="editingF = false;" ng-show="editingF"/>
       </div>
     </div>
   </div>
   <div class="divider"><h1 class="title highlight">Shipping Address</h1></div>
   <div class="col-xs-12 footingP">
-      <div class="row" ng-class="{'hidden': user.data.shippingAddress.useBilling == true}">
+      <div class="row tooltips" ng-class="{'hidden': user.data.shippingAddress.useBilling == true}"><span class="tooltiptexttop">Click to Edit</span>
         <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.name}}</label><input type="text" ng-model="user.data.shippingAddress.name" ng-blur="editing = false;" ng-show="editing"/>
+          <label ng-click="editingG = !editingG" ng-hide="editingG">{{user.data.shippingAddress.name}}</label><input type="text" ng-model="user.data.shippingAddress.name" ng-blur="editingG = false;" ng-show="editingG"/>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.address}}</label><input type="text" ng-model="user.data.shippingAddress.address" ng-blur="editing = false;" ng-show="editing"/>
+          <label ng-click="editingH = !editingH" ng-hide="editingH">{{user.data.shippingAddress.address}}</label><input type="text" ng-model="user.data.shippingAddress.address" ng-blur="editingH = false;" ng-show="editingH"/>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.city}}</label><input type="text" ng-model="user.data.shippingAddress.city" ng-blur="editing = false;" ng-show="editing"/>
+          <label ng-click="editingI = !editingI" ng-hide="editingI">{{user.data.shippingAddress.city}}</label><input type="text" ng-model="user.data.shippingAddress.city" ng-blur="editingI = false;" ng-show="editingI"/>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.state}}</label><input type="text" ng-model="user.data.shippingAddress.state" ng-blur="editing = false;" ng-show="editing"/>
+          <label ng-click="editingJ = !editingJ" ng-hide="editingJ">{{user.data.shippingAddress.state}}</label><input type="text" ng-model="user.data.shippingAddress.state" ng-blur="editingJ = false;" ng-show="editingJ"/>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.zip}}</label><input type="text" ng-model="user.data.shippingAddress.zip" ng-blur="editing = false;" ng-show="editing"/>
+          <label ng-click="editingK = !editingK" ng-hide="editingK">{{user.data.shippingAddress.zip}}</label><input type="text" ng-model="user.data.shippingAddress.zip" ng-blur="editingK = false;" ng-show="editingK"/>
         </div>
         <div class="col-xs-12 col-sm-4">
-          <label ng-click="editing = !editing" ng-hide="editing">{{user.data.shippingAddress.country}}</label><input type="text" ng-model="user.data.shippingAddress.country" ng-blur="editing = false;" ng-show="editing"/>
+          <label ng-click="editingL = !editingL" ng-hide="editingL">{{user.data.shippingAddress.country}}</label><input type="text" ng-model="user.data.shippingAddress.country" ng-blur="editingL = false;" ng-show="editingL"/>
         </div>
       </div>
       <div class="row"  ng-class="{'hidden': user.data.shippingAddress.useBilling == false, 'profileUserName': user.data.shippingAddress.useBilling == true}">
@@ -81,7 +81,7 @@
       <h3 ng-class="{'errPayment': errPayment}">CVC:</h3><input type="text" ng-model="stripeToken.stripeToken.cvc" maxlength="3" size="1" class="text-center"  placeholder="123"/><br/>
     </div>
     <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2 col-lg-2 col-lg-offset-4">
-      <h3 ng-class="{'errPayment': errPayment}">Exp Month/Year:</h3><input type="text" ng-model="stripeToken.stripeToken.exp_month" maxlength="2" size="1" class="text-center" placeholder="02"/> <i class="fa fa-division"></i> <input type="text" ng-model="stripeToken.stripeToken.exp_year" maxlength="4" size="1"  class="text-center" placeholder="2020"/>
+      <h3 ng-class="{'errPayment': errPayment}">Exp Month/Year:</h3><input type="text" ng-model="stripeToken.stripeToken.exp_month" maxlength="2" size="1" class="text-center" placeholder="12"/> <i class="fa fa-division"></i> <input type="text" ng-model="stripeToken.stripeToken.exp_year" maxlength="4" size="1"  class="text-center" placeholder="2016"/>
     </div>
     </div>
   </div>

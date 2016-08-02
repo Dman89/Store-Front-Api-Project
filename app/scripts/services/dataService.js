@@ -14,6 +14,11 @@ angular.module("lionHeart")
   $http.put('/api/products/id/' + id, product)
   .then(callback)
   };
+  this.deleteItem = function(id, callback) {
+    var tempUrl = '/api/products/id/' + id;
+    $http.delete(tempUrl)
+    .then(callback);
+  }
   this.getCategoryGraphics = function(callback) {
     $http.get("/api/category/Graphic%20Design")
     .then(callback)
@@ -51,11 +56,27 @@ angular.module("lionHeart")
         $http.get("/api/users")
         .then(callback)
       };
+  this.newItem = function(item, callback) {
+    $http.post('/api/products', item).then(callback)
+  };
   this.newUser = function(user) {
     $http.post('/api/users', user)
   };
+  this.newPost = function(post, callback) {
+    $http.post('/api/blog', post)
+    .then(callback);
+  };
+  this.deletePost = function(id, post, callback) {
+    var tempUrl = '/api/blog/post/id/' + id;
+    $http.delete(tempUrl, post)
+    .then(callback);
+  };
   this.saveUser = function(user, callback) {
   $http.put('/api/profile', user)
+  .then(callback)
+  };
+  this.saveUserAdmin = function(id, user, callback) {
+  $http.put('/api/admin/user/id/'+id, user)
   .then(callback)
   };
     this.getOrderHistory = function(callback) {
@@ -87,6 +108,10 @@ angular.module("lionHeart")
     $http.get("/api/blog")
     .then(callback);
   }
+  this.savePost = function(id, product, callback) {
+  $http.put('/api/blog/post/id/' + id, product)
+  .then(callback)
+  };
   this.eraseCart = function(callback) {
     $http.post("/api/user/cart/erase")
     .then(callback);

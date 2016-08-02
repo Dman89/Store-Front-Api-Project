@@ -84,7 +84,6 @@ blogRouter.put('/blog/post/id/:id', function (req, res) {
       return res.status(500).json({err: err.message});
     }
     res.send({'blog': response});
-    console.log(response)
   })
 })
 blogRouter.post('/blog', function(req, res) {
