@@ -5,41 +5,46 @@
     text-align: right;
   }
 }
-#body #ui-view #products {
-  & .goGreen {
-    width: 100%;
-    height: 100%;
-    & .inner {
-      background-color: $p;
-      margin: auto;
-      width: 75%;
-      height: 75%;
-      border: 5px $b solid;
-      border-radius: 4px;
-      padding-top: 4em;
-      padding-bottom: 4em;
-      &::after {
-        color: white;
-        content: 'Item Successfully Edited.';
+#body #ui-view {
+  & #backButtonTop {
+    margin: 3% auto;
+  }
+  & #products {
+    & .goGreen {
+      width: 100%;
+      height: 100%;
+      & .inner {
+        background-color: $p;
+        margin: auto;
+        width: 75%;
+        height: 75%;
+        border: 5px $b solid;
+        border-radius: 4px;
+        padding-top: 4em;
+        padding-bottom: 4em;
+        &::after {
+          color: white;
+          content: 'Item Successfully Edited.';
+        }
       }
     }
-  }
-  & #info231 {
-    background-color: black;
-    width: 100vw;
-    height: 100vh;
-    z-index: 100;
-  }
-  & .editImgRnd {
-    border-radius: 4px;
-  }
-  & .editSpace.displayEdit div div {
-    margin: .1em auto;
-    @media (min-width: 1200px) {
-      margin: .75em auto;
+    & #info231 {
+      background-color: black;
+      width: 100vw;
+      height: 100vh;
+      z-index: 100;
     }
-    & button {
-      margin: .3em auto;
+    & .editImgRnd {
+      border-radius: 4px;
+    }
+    & .editSpace.displayEdit div div {
+      margin: .1em auto;
+      @media (min-width: 1200px) {
+        margin: .75em auto;
+      }
+      & button {
+        margin: .3em auto;
+      }
     }
   }
 }
