@@ -6343,7 +6343,7 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("admin.postsCtrl", function($scope, dataService) {
+	.controller("admin.postsCtrl", function($scope, dataService, $timeout) {
 	  dataService.getBlog(function(response) {
 	    $scope.blog = response.data.posts;
 	  })
@@ -6384,6 +6384,21 @@ webpackJsonp([0],[
 	        if (res.status == 200) {
 	          $scope.blog.splice(index, 1);
 	      } else {
+	        return res.status(500).json(res)
+	      }
+	    })
+	  }
+	    $scope.successMessageDisplayTopPost = false;
+	  $scope.savePost = function(id, post) {
+	    dataService.savePost(id, post, function(res) {
+	        if (res.status == 200) {
+	          $scope.successMessageDisplayTopPost = true;
+	          $timeout(function() {
+	            $scope.successMessageDisplayTopPost = false;
+	          }, 3075)
+	      } else {
+	        console.log('Error Saving Post?');
+	        alert('Error Saving Post?');
 	        return res.status(500).json(res)
 	      }
 	    })
@@ -6578,6 +6593,10 @@ webpackJsonp([0],[
 	    $http.get("/api/blog")
 	    .then(callback);
 	  }
+	  this.savePost = function(id, product, callback) {
+	  $http.put('/api/blog/post/id/' + id, product)
+	  .then(callback)
+	  };
 	  this.eraseCart = function(callback) {
 	    $http.post("/api/user/cart/erase")
 	    .then(callback);

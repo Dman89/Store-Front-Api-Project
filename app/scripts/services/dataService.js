@@ -104,6 +104,10 @@ angular.module("lionHeart")
     $http.get("/api/blog")
     .then(callback);
   }
+  this.savePost = function(id, product, callback) {
+  $http.put('/api/blog/post/id/' + id, product)
+  .then(callback)
+  };
   this.eraseCart = function(callback) {
     $http.post("/api/user/cart/erase")
     .then(callback);

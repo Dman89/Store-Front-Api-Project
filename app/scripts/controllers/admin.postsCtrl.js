@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-.controller("admin.postsCtrl", function($scope, dataService) {
+.controller("admin.postsCtrl", function($scope, dataService, $timeout) {
   dataService.getBlog(function(response) {
     $scope.blog = response.data.posts;
   })
@@ -41,6 +41,21 @@ angular.module("lionHeart")
         if (res.status == 200) {
           $scope.blog.splice(index, 1);
       } else {
+        return res.status(500).json(res)
+      }
+    })
+  }
+    $scope.successMessageDisplayTopPost = false;
+  $scope.savePost = function(id, post) {
+    dataService.savePost(id, post, function(res) {
+        if (res.status == 200) {
+          $scope.successMessageDisplayTopPost = true;
+          $timeout(function() {
+            $scope.successMessageDisplayTopPost = false;
+          }, 3075)
+      } else {
+        console.log('Error Saving Post?');
+        alert('Error Saving Post?');
         return res.status(500).json(res)
       }
     })
