@@ -2726,6 +2726,59 @@ body {
   #html #body #ui-view .editSpace.displayEdit div div button {
     margin: .3em auto; }
 
+.newitemStart {
+  text-align: center;
+  margin: 1em auto;
+  line-height: 1em; }
+  @media (min-width: 992px) {
+    .newitemStart {
+      text-align: right; } }
+
+#html #body #ui-view #blogPosts .toggleBar {
+  margin: 2% auto 5% auto;
+  padding: 1% 1%; }
+#html #body #ui-view #blogPosts .giveSpaceInAdminPanelForPostEdit div.col-xs-12 {
+  margin: 1% auto; }
+#html #body #ui-view #blogPosts .buttonSpaceForPostEditAndDelete {
+  margin: 2.5% auto; }
+#html #body #ui-view .textbox {
+  width: 100%;
+  height: 15em; }
+#html #body #ui-view .goGreen2 {
+  width: 100%;
+  height: 100%;
+  margin: 2em auto; }
+  #html #body #ui-view .goGreen2 .inner {
+    background-color: green;
+    margin: auto;
+    width: 25%;
+    height: 25%;
+    border: 5px white solid;
+    border-radius: 4px;
+    padding-top: 2em;
+    padding-bottom: 2em; }
+    @media (max-width: 600px) {
+      #html #body #ui-view .goGreen2 .inner {
+        width: 90%;
+        height: 90%; } }
+    #html #body #ui-view .goGreen2 .inner::after {
+      color: white;
+      content: 'Item Successfully Edited.'; }
+#html #body #ui-view #info231 {
+  background-color: black;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100; }
+#html #body #ui-view .editImgRnd {
+  border-radius: 4px; }
+#html #body #ui-view .editSpace.displayEdit div div {
+  margin: .1em auto; }
+  @media (min-width: 1200px) {
+    #html #body #ui-view .editSpace.displayEdit div div {
+      margin: .75em auto; } }
+  #html #body #ui-view .editSpace.displayEdit div div button {
+    margin: .3em auto; }
+
 .hexagon {
   position: relative;
   width: 300px;
