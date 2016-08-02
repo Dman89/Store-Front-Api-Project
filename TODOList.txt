@@ -51,13 +51,14 @@ Admin Panel Posts
     (Completed)         Delete Posts
     (Completed)         Style
 Admin Panel Users
-                        Save User (Admin Status)
-                        Style
+    (Completed)         Save User (Admin Status)
+    (Completed)         Style
 Admin Panel Product
-                        Look at ProductAdminPanelCode
-                        add back button to the top
+    (Completed)         Look at ProductAdminPanelCode
+    (Completed)         add back button to the top
 Admin Panel
                         Style
+                        Save Post Should Close Post Edit (Toggle)
 Database
                         Set up Post DB
 Profile
