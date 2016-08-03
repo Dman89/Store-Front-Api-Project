@@ -60,7 +60,7 @@ Admin Panel
     (Completed)         Style
     (Completed)         Save Post Should Close Post Edit (Toggle)
 Database
-                        Set up Post DB
+    (Completed)         Set up Post DB
 Profile
                         Email Add Button
                         Email remove (not for zero)
