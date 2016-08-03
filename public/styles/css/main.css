@@ -2176,6 +2176,15 @@ body {
     width: 150px;
     height: 150px; } }
 
+.adminPanelLinks {
+  color: #061115;
+  margin-top: 2em; }
+  .adminPanelLinks:hover {
+    text-decoration: none; }
+
+.lilSpaceDawg {
+  margin-bottom: 2%; }
+
 #related {
   width: 100%;
   display: block;

@@ -57,7 +57,7 @@ Admin Panel Product
     (Completed)         Look at ProductAdminPanelCode
     (Completed)         add back button to the top
 Admin Panel
-                        Style
+    (Completed)         Style
                         Save Post Should Close Post Edit (Toggle)
 Database
                         Set up Post DB
@@ -72,3 +72,6 @@ Home Page
                         CTA
                         Photos
                         Upcoming Events
+Google Calendar
+                        Set Up API
+                        Load On Main Page
