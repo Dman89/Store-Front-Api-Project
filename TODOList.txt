@@ -64,12 +64,12 @@ Database
 Profile
     (TO BE DONE LATER)  Email Add Button
     (TO BE DONE LATER)  Email remove (not for zero)
-                        Style
+    (Completed)         Style
 Change API Keys
-                        FB
-                        Open Exchange
-                        Stripe
-                        MongoDB Admin
+    (Completed)         FB
+    (Completed)         Open Exchange
+    (Completed)         Stripe
+    (Completed)         MongoDB Admin
 Google Calendar
                         Set Up API
                         Load On Main Page
