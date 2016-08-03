@@ -2,6 +2,8 @@
   padding-top: 2em;
     margin-bottom: 2.5%;
       & .btnbar {
+        margin-top: 5%;
+        margin-bottom: 3%;
         & .active {
           pointer-events: none;
           cursor: none;
@@ -12,6 +14,12 @@
     @media (max-width: 767px) {
       margin-bottom: 5%;
     }
+  }
+  & .topBtnSaveProfile {
+    margin-bottom: 3%;
+  }
+  & .bottomBtnSaveProfile {
+    margin-bottom: 10%;
   }
   & .profileUserName {
     color: #999;

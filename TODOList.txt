@@ -62,21 +62,22 @@ Admin Panel
 Database
     (Completed)         Set up Post DB
 Profile
-                        Email Add Button
-                        Email remove (not for zero)
+    (TO BE DONE LATER)  Email Add Button
+    (TO BE DONE LATER)  Email remove (not for zero)
                         Style
-Portfolio
-                        Link to Individual Picture
-Home Page
-                        Carousel
-                        CTA
-                        Photos
-                        Upcoming Events
-Google Calendar
-                        Set Up API
-                        Load On Main Page
 Change API Keys
                         FB
                         Open Exchange
                         Stripe
                         MongoDB Admin
+Google Calendar
+                        Set Up API
+                        Load On Main Page
+Portfolio
+                        Link to Individual Picture
+                        Portfolio Database
+Home Page
+                        Carousel
+                        CTA
+                        Photos
+                        Upcoming Events

@@ -5239,7 +5239,7 @@ webpackJsonp([0],[
 	    })
 	  }
 	  $scope.isActiveProfile = function (viewLocation) {
-	        if (viewLocation === $location.path()) {
+	        if (viewLocation == $location.path()) {
 	        return viewLocation === $location.path();
 	      }
 	    };
