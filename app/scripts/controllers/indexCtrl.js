@@ -1,10 +1,9 @@
 'use strict';
 angular.module("lionHeart")
-.controller("indexHomeCtrl", function($scope, dataService) {
-
-
-
-
+.controller("indexHomeCtrl", function($scope, dataService, $http, googleCalendarGetRequest) {
+  googleCalendarGetRequest.calendar(function(arr) {
+    // console.log(arr);
+  });
   $("#owl").owlCarousel({
 
         navigation : false, // Show next and prev buttons
@@ -21,4 +20,5 @@ angular.module("lionHeart")
         // itemsMobile : false
 
     });
+
 });

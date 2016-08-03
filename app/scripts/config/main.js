@@ -8,6 +8,10 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
       templateUrl: 'templates/index.html',
       controller: 'indexHomeCtrl'
     })
+      .state('quickstart', {
+        url: '/quickstart',
+        templateUrl: 'templates/quickstart.html'
+      })
     .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',

@@ -46,6 +46,7 @@ require('./scripts/controllers/adminCtrl.js');
 require('./scripts/controllers/portfolioCtrl.js');
 require('./scripts/controllers/cart.confirmationCtrl.js');
 require('./scripts/functions/inputToggle.js');
+require('./scripts/functions/googleCalendarGetRequest.js');
 
 
 

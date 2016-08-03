@@ -50,6 +50,7 @@ webpackJsonp([0],[
 	__webpack_require__(48);
 	__webpack_require__(49);
 	__webpack_require__(18);
+	__webpack_require__(55);
 
 
 
@@ -74,6 +75,10 @@ webpackJsonp([0],[
 	      templateUrl: 'templates/index.html',
 	      controller: 'indexHomeCtrl'
 	    })
+	      .state('quickstart', {
+	        url: '/quickstart',
+	        templateUrl: 'templates/quickstart.html'
+	      })
 	    .state('login', {
 	    url: '/login',
 	    templateUrl: 'templates/login.html',
@@ -5976,11 +5981,10 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("indexHomeCtrl", function($scope, dataService) {
-
-
-
-
+	.controller("indexHomeCtrl", function($scope, dataService, $http, googleCalendarGetRequest) {
+	  googleCalendarGetRequest.calendar(function(arr) {
+	    // console.log(arr);
+	  });
 	  $("#owl").owlCarousel({
 
 	        navigation : false, // Show next and prev buttons
@@ -5997,6 +6001,7 @@ webpackJsonp([0],[
 	        // itemsMobile : false
 
 	    });
+
 	});
 
 
@@ -6822,6 +6827,181 @@ webpackJsonp([0],[
 	  }
 	});
 
+
+/***/ },
+/* 53 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    cachedClearTimeout.call(null, timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        cachedSetTimeout.call(null, drainQueue, 0);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 54 */,
+/* 55 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+	angular.module("lionHeart")
+	.service("googleCalendarGetRequest", function($http) {
+	  // Google API Info
+	  var apiKey = 'xxx' || process.env.googleCalApiAPIKEY;
+	  var userEmail = "artbycalexxx@gmail.com";
+	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+apiKey;
+	  // $Get REQUEST
+	this.calendar = function(callback) {
+	      $http.get(url)
+	      .then(function(res) {
+	      // Call of FUNCTION ($GET REQUEST)
+	        var res = res.data.items;
+	        for (var x = 0; x < res.length; x++) {
+	        dateConversionForComputerCodePurposes(res[x].start.dateTime, res[x].end.dateTime, function(start, end) {
+	          dateConversionForHumanBrainPurposes(start, end, function(start, end) {
+	          var arr = [start, end]
+	          callback(arr);
+	          })
+	        })
+	        }
+	      // Date Conversion
+	      })
+	};
+
+	var dateConversionForComputerCodePurposes = function(start, end, callback) {
+	    // Split the Code from Time and Date
+	    start = start.split("T");
+	    end = end.split("T");
+	    //Remove the Timezone at the end and resave it as an array
+	    var start2 = start[1].split("-");
+	    start[1] = start2.splice(0, 1);
+	    start[1] = start[1][0];
+	    var end2 = end[1].split("-");
+	    end[1] = end2.splice(0, 1);
+	    end[1] = end[1][0];
+	    callback(start, end);
+	  };
+	  var dateConversionForHumanBrainPurposes = function(start, end, callback) {
+
+	  }
+	})
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53)))
 
 /***/ }
 ]);
