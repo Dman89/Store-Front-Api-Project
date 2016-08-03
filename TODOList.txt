@@ -58,7 +58,7 @@ Admin Panel Product
     (Completed)         add back button to the top
 Admin Panel
     (Completed)         Style
-                        Save Post Should Close Post Edit (Toggle)
+    (Completed)         Save Post Should Close Post Edit (Toggle)
 Database
                         Set up Post DB
 Profile
@@ -75,3 +75,8 @@ Home Page
 Google Calendar
                         Set Up API
                         Load On Main Page
+Change API Keys
+                        FB
+                        Open Exchange
+                        Stripe
+                        MongoDB Admin
