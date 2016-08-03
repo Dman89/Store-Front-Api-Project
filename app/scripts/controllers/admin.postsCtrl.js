@@ -45,10 +45,12 @@ angular.module("lionHeart")
       }
     })
   }
+  $scope.openBlog = {show : false};
     $scope.successMessageDisplayTopPost = false;
   $scope.savePost = function(id, post) {
     dataService.savePost(id, post, function(res) {
         if (res.status == 200) {
+        $scope.openBlog.show = false;
           $scope.successMessageDisplayTopPost = true;
           $timeout(function() {
             $scope.successMessageDisplayTopPost = false;

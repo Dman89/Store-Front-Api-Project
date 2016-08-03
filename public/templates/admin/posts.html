@@ -10,7 +10,7 @@
     </div>
     </div>
   <div class="row toggleBar posts" ng-repeat="post in blog">
-    <label class="col-xs-12" ng-click="openBlog = !openBlog">
+    <label class="col-xs-12" ng-click="openBlog.show = !openBlog.show">
         <span class="tooltiptexttop">Click To Toggle Display</span>
       <div class="row">
         <div class="col-xs-12">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </label>
-    <div class="col-xs-12 giveSpaceInAdminPanelForPostEdit" ng-show="openBlog">
+    <div class="col-xs-12 giveSpaceInAdminPanelForPostEdit" ng-show="openBlog.show">
       <div class="row">
         <div class="col-xs-12">
           <h2>Title:</h2>
