@@ -1,3 +1,4 @@
+<div class="row">
 <div class="home col-xs-12 text-center" id="owl">
   <div><img src="" alt="" /></div>
   <div><img src="" alt="" /></div>
@@ -7,8 +8,18 @@
   <div><img src="" alt="" /></div>
   <div><img src="" alt="" /></div>
 </div>
-
-<div id="event">absd</div>
+<div class="col-xs-12 text-center">
+  <h1>Upcoming Art Shows</h1>
+</div>
+<div class="col-xs-12 col-md-6 col-lg-4 text-center" ng-repeat="event in googleEvents">
+  <div class="text-left" style="padding: .5em;">
+    <h2>{{event.summary}}</h2>
+    <p>{{event.description}}</p>
+    <h4>{{event.location}}</h4>
+    <h5>{{event.range}}</h5>
+  </div>
+</div>
+</div>
 <!-- <div class="row">
   <div class="col-xs-12">
     <img class="mySlides" src="\img\actionshots\actionshot0.jpg" />
