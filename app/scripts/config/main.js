@@ -101,6 +101,11 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
   templateUrl: 'templates/portfolio.html',
   controller: 'portfolioCtrl'
   })
+.state('portfolio.singlePiece', {
+url: '/id/:id',
+templateUrl: 'templates/singlePiece.html',
+controller: 'portfolioCtrl'
+})
     .state('cart', {
     url: '/cart',
     templateUrl: 'templates/cart.html',

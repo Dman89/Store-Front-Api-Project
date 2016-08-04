@@ -77,14 +77,19 @@ Portfolio
     (Completed)         Portfolio Database
     (Completed)         Write Backend API
     (Completed)         Write Frontend API
-                        Connect Angular To Frontend
+    (Completed)         Connect Angular To Frontend
                         Link to Individual Picture
 Home Page
     (Completed)         Carousel
                         Make a Carousel Database (MongoDB)
+                        Write Backend API
+                        Write Frontend API
+                        Connect Angular To Frontend
                         CTA
                         Photos
     (Completed)         Upcoming Events
 Misc
                         Quantity-Cart-Update needs to update scope via response
                         Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
+                        Admin Upload Image
+                        Calendar Only Loads New Events (future)
