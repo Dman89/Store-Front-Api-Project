@@ -81,7 +81,8 @@ Portfolio
     (Completed)         Link to Individual Picture
     (Completed)         Style
     (Completed)         Write Frontend API
-                        Connect Angular To Frontend
+    (Completed)         Connect Angular To Frontend
+                        Style
 Home Page
     (Completed)         Carousel
                         Make a Carousel Database (MongoDB)
