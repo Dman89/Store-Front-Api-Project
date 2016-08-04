@@ -18,7 +18,7 @@ angular.module("lionHeart")
    userEmail = process.env.googleCalApiUSEREMAIL;
   }
   // Google API Info
-  // var apiKey = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
+  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
   // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
   var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
   // $Get REQUEST

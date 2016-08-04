@@ -80,8 +80,10 @@ Portfolio
                         Link to Individual Picture
 Home Page
     (Completed)         Carousel
+                        Make a Carousel Database (MongoDB)
                         CTA
                         Photos
     (Completed)         Upcoming Events
 Misc
                         QuantityCartUpdate needs to update scope via response
+                        Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
