@@ -69,7 +69,7 @@ webpackJsonp([0],[
 	'use strict';
 	var lionHeart = angular.module("lionHeart", [__webpack_require__(4)])
 	lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').otherwise('/');
+	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').when('/portfolio', '/portfolio/gallery').otherwise('/');
 	  $stateProvider
 	    .state('home', {
 	      url: '/',
@@ -169,6 +169,11 @@ webpackJsonp([0],[
 	  templateUrl: 'templates/portfolio.html',
 	  controller: 'portfolioCtrl'
 	  })
+	.state('portfolio.gallery', {
+	url: '/gallery',
+	templateUrl: 'templates/portfolioGallery.html',
+	controller: 'portfolioCtrl'
+	})
 	.state('portfolio.singlePiece', {
 	url: '/id/:id',
 	templateUrl: 'templates/singlePiece.html',
@@ -6469,7 +6474,7 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	  .controller("portfolioCtrl", function($scope, portfolioDataService) {
+	  .controller("portfolioCtrl", function($scope, portfolioDataService, $location) {
 	      portfolioDataService.getPortfolio(function(res) {
 	        if (res.data.portfolios.length == 0) {
 	          $scope.portfolioImages = [{
@@ -6495,6 +6500,19 @@ webpackJsonp([0],[
 	          $scope.portfolioImages = res.data.portfolios;
 	        }
 	      });
+	      var tempSearchItem = $location.path();
+	      if (tempSearchItem.search("/portfolio/id/") >= 0) {
+	        var tempItem = tempSearchItem.split("/");
+	        var tempID = tempItem[3];
+	        if (tempItem[3] != "") {
+	          portfolioDataService.getSinglePiece(tempID, function(res) {
+	            $scope.singlePiece = res.data.portfolios;
+	          })
+	        } else {
+	          console.log("Blank ID");
+	          $scope.singlePiece = {"urlBig": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"}
+	        }
+	      }
 
 	  });
 

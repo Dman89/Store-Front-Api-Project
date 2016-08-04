@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-  .controller("portfolioCtrl", function($scope, portfolioDataService) {
+  .controller("portfolioCtrl", function($scope, portfolioDataService, $location) {
       portfolioDataService.getPortfolio(function(res) {
         if (res.data.portfolios.length == 0) {
           $scope.portfolioImages = [{
@@ -26,5 +26,18 @@ angular.module("lionHeart")
           $scope.portfolioImages = res.data.portfolios;
         }
       });
+      var tempSearchItem = $location.path();
+      if (tempSearchItem.search("/portfolio/id/") >= 0) {
+        var tempItem = tempSearchItem.split("/");
+        var tempID = tempItem[3];
+        if (tempItem[3] != "") {
+          portfolioDataService.getSinglePiece(tempID, function(res) {
+            $scope.singlePiece = res.data.portfolios;
+          })
+        } else {
+          console.log("Blank ID");
+          $scope.singlePiece = {"urlBig": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"}
+        }
+      }
 
   });

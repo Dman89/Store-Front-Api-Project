@@ -78,7 +78,8 @@ Portfolio
     (Completed)         Write Backend API
     (Completed)         Write Frontend API
     (Completed)         Connect Angular To Frontend
-                        Link to Individual Picture
+    (Completed)         Link to Individual Picture
+                        Style
 Home Page
     (Completed)         Carousel
                         Make a Carousel Database (MongoDB)
@@ -93,3 +94,4 @@ Misc
                         Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
                         Admin Upload Image
                         Calendar Only Loads New Events (future)
+                        Cart Delete IS deleting Wrong Item
