@@ -89,13 +89,7 @@ Home Page
     (Completed)             Write Backend API
     (Completed)             Write Frontend API
     (Completed)             Connect Angular To Frontend
-    (Completed)             Admin Panel
-                        Owl Carousel
-                            Make a Carousel Database (MongoDB)
-                            Write Backend API
-                            Write Frontend API
-                            Connect Angular To Frontend
-                        CTA
+    (Completed)         CTA
                         Photos
     (Completed)         Upcoming Events
 Misc
