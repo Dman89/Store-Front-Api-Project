@@ -74,12 +74,14 @@ Google Calendar
     (Completed)         Set Up API
     (Completed)         Load On Main Page
 Portfolio
-                        Link to Individual Picture
+    (Completed)         Portfolio Database
                         Write Backend API
                         Write Frontend API
-                        Portfolio Database
+                        Link to Individual Picture
 Home Page
     (Completed)         Carousel
                         CTA
                         Photos
     (Completed)         Upcoming Events
+Misc
+                        QuantityCartUpdate needs to update scope via response
