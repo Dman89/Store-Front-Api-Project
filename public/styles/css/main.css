@@ -1893,10 +1893,9 @@ body {
   margin: 1.75em auto;
   background-color: white; }
 
-.home {
-  height: 100vh;
-  border: #061115 3px solid;
-  border-bottom: #4384b7 2px solid; }
+@media (min-width: 992px) {
+  .home {
+    margin-top: 2.5%; } }
 
 #redSold {
   color: red; }
