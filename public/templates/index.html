@@ -1,12 +1,6 @@
 <div class="row">
 <div class="home col-xs-12 text-center" id="owl">
-  <div><img src="" alt="" /></div>
-  <div><img src="" alt="" /></div>
-  <div><img src="" alt="" /></div>
-  <div><img src="" alt="" /></div>
-  <div><img src="" alt="" /></div>
-  <div><img src="" alt="" /></div>
-  <div><img src="" alt="" /></div>
+  <div ng-repeat="img in carouselImages"><img ng-src="{{img.url}}" alt=""/></div>
 </div>
 <div class="col-xs-12 text-center">
   <h1>Upcoming Art Shows</h1>

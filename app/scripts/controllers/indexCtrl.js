@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-.controller("indexHomeCtrl", function($scope, dataService, $http, googleCalendarGetRequest) {
+.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest) {
   googleCalendarGetRequest.calendar(function(events) {
     if (events.length > 3) {
       var temp = events.length - 3;
@@ -8,6 +8,14 @@ angular.module("lionHeart")
     }
     $scope.googleEvents = events;
   });
+
+
+    carouselDataService.getCarousel(function(res) {
+      $scope.carouselImages = res.data.carousel;
+    })
+
+
+
   $("#owl").owlCarousel({
 
         navigation : false, // Show next and prev buttons

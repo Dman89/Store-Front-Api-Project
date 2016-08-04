@@ -51,12 +51,12 @@ carouselRouter.delete('/carousel/id/:id', function (req, res) {
 // // Get Carousel By ID
 carouselRouter.get('/carousel/id/:id', function(req, res) {
   var id = req.params.id;
-  Carousel.find({_id: id}, function(err, carousels) {
+  Carousel.find({_id: id}, function(err, carousel) {
     if (err) {
       console.log('Oh Shucks!');
       return res.status(500).json({message: err.message});
     }
-    if (carousels == undefined) {
+    if (carousel == undefined) {
       res.status(404).json({"message": "Not a Carousel Item"})
     } else {
       //TODO: return only profiles
@@ -67,7 +67,7 @@ carouselRouter.get('/carousel/id/:id', function(req, res) {
 //List Carousels
 var tempUsers = {};
 carouselRouter.get('/carousel', function(req, res) {
-  Carousel.find({}, function(err, carousels) {
+  Carousel.find({}, function(err, carousel) {
     if (err) {
       console.error('Oh Shucks!');
       return res.status(500).json({message: err.message});

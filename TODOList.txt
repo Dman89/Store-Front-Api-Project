@@ -88,7 +88,7 @@ Home Page
     (Completed)         Make a Carousel Database (MongoDB)
     (Completed)         Write Backend API
     (Completed)         Write Frontend API
-                        Connect Angular To Frontend
+    (Completed)         Connect Angular To Frontend
                         CTA
                         Photos
     (Completed)         Upcoming Events
@@ -99,3 +99,4 @@ Misc
                         Calendar Only Loads New Events (future)
                         Cart Delete IS deleting Wrong Item
                         Fix Font on the Store
+                        prompt for delete of items
