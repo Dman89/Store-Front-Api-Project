@@ -1,7 +1,7 @@
 'use strict';
 var lionHeart = angular.module("lionHeart", [require('angular-ui-router')])
 lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').when('/portfolio', '/portfolio/gallery').otherwise('/');
+  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').otherwise('/');
   $stateProvider
     .state('home', {
       url: '/',
