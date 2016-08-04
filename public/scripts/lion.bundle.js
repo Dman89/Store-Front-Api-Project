@@ -46,17 +46,17 @@ webpackJsonp([0],[
 	__webpack_require__(44);
 	__webpack_require__(45);
 	__webpack_require__(46);
-	__webpack_require__(57);
 	__webpack_require__(47);
 	__webpack_require__(48);
 	__webpack_require__(49);
-	__webpack_require__(18);
 	__webpack_require__(50);
-	__webpack_require__(58);
-	__webpack_require__(56);
+	__webpack_require__(18);
 	__webpack_require__(51);
-	__webpack_require__(52);
-	__webpack_require__(53);
+	__webpack_require__(54);
+	__webpack_require__(55);
+	__webpack_require__(56);
+	__webpack_require__(57);
+	__webpack_require__(58);
 
 
 /***/ },
@@ -5996,7 +5996,7 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("indexHomeCtrl", function($scope, dataService, $http, googleCalendarGetRequest) {
+	.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest) {
 	  googleCalendarGetRequest.calendar(function(events) {
 	    if (events.length > 3) {
 	      var temp = events.length - 3;
@@ -6004,6 +6004,14 @@ webpackJsonp([0],[
 	    }
 	    $scope.googleEvents = events;
 	  });
+
+
+	    carouselDataService.getCarousel(function(res) {
+	      $scope.carouselImages = res.data.carousel;
+	    })
+
+
+
 	  $("#owl").owlCarousel({
 
 	        navigation : false, // Show next and prev buttons
@@ -6467,13 +6475,88 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
+	.controller("admin.portfolioCtrl", function($scope, portfolioDataService, $location, $timeout) {
+	  portfolioDataService.getPortfolio(function(res) {
+	    $scope.portfolioImages = res.data.portfolios;
+	  })
+	  $scope.deleteIndex = 0;
+	  $scope.saveIndex = 0;
+	  $scope.editPortfolio = {show: false};
+	  $scope.portfolioEdit = function(portfolio, index) {
+	    $scope.deleteIndex = index;
+	    $scope.saveIndex = index;
+	    if (portfolio.url == "") {
+	      portfolio.url = "http://";
+	    }
+	    if (portfolio.urlBig == "") {
+	      portfolio.urlBig = "http://";
+	    }
+	    $scope.portfolioDisplayEdit = portfolio;
+	    $scope.editPortfolio = {show: true};
+	  }
+	  $scope.deletePortfolio = function(id, index) {
+	  $scope.deleteIndex;
+	    $scope.portfolioImages.splice(index, 1);
+	    portfolioDataService.deletePortfolio(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.editPortfolio.show = false;
+	    } else {
+	      console.log('Error Deleteing Item?');
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
+	    $scope.successMessageDisplayTopPortfolio = false;
+	  $scope.savePortfolio = function(id, portfolio, index) {
+	  $scope.saveIndex = 0;
+	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTopPortfolio = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTopPortfolio = false;
+	        }, 3075)
+	      } else {
+	        console.log('Error Saving Portfolio?');
+	        alert('Error Saving Portfolio?');
+	      }
+	    })
+	  }
+	  $scope.newPiece = function() {
+	    var newPortfolio = {
+	      "url": "https://",
+	      "urlBig": "https://"
+	    };
+	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
+	        if (res.status == 200) {
+	          newPortfolio._id = res.data.portfolio._id;
+	          newPortfolio.id = res.data.portfolio._id;
+	          $scope.editPortfolio.show = true;
+	          $scope.portfolioImages.push(newPortfolio);
+	          $scope.portfolioDisplayEdit = newPortfolio;
+	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
+	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
+	        } else {
+	          alert("Error Creating Portfolio")
+	        }
+	      });
+
+	  }
+	});
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
 	.controller("adminCtrl", function($scope, dataService) {
 
 	});
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6522,7 +6605,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6546,7 +6629,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -6556,7 +6639,7 @@ webpackJsonp([0],[
 
 	  var key, userEmail, configAuth;
 
-	  var configAuth = __webpack_require__(55);
+	  var configAuth = __webpack_require__(53);
 
 
 
@@ -6752,10 +6835,210 @@ webpackJsonp([0],[
 	  }
 	})
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(54)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)))
 
 /***/ },
-/* 51 */
+/* 52 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    cachedClearTimeout.call(null, timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        cachedSetTimeout.call(null, drainQueue, 0);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    'googleCalApi' : {
+	      'clientID' : '154684505002-fqll12rte5oisps3dq596vsprc9phdmc.apps.googleusercontent.com',
+	      'clientSecret'  : 'qtYuA73IiWrgMNt24byUD3j9',
+	      "apiKey": 'AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE',
+	      "userEmail": 'artbycale619@gmail.com'
+	    }
+	};
+
+
+/***/ },
+/* 54 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("carouselDataService", function($http) {
+	    this.getCarousel = function(callback) {
+	      $http.get("/api/carousel")
+	      .then(callback)
+	    };
+	    this.saveCarousel = function(id, carousel, callback) {
+	    $http.put('/api/carousel/id/' + id, carousel)
+	    .then(callback)
+	    };
+	    this.deleteCarousel = function(id, callback) {
+	      var tempUrl = '/api/carousel/id/' + id;
+	      $http.delete(tempUrl)
+	      .then(callback);
+	    }
+	    this.newCarousel = function(carousel, callback) {
+	      var tempUrl = '/api/carousel';
+	      $http.post(tempUrl, carousel)
+	      .then(callback);
+	    }
+	  }); // FIN
+
+
+/***/ },
+/* 55 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("portfolioDataService", function($http) {
+	    this.getPortfolio = function(callback) {
+	      $http.get("/api/portfolio")
+	      .then(callback)
+	    };
+	    this.getSinglePiece = function(id, callback) {
+	      var tempUrl = '/api/portfolio/id/' + id;
+	      $http.get(tempUrl)
+	      .then(callback)
+	    }
+	    this.savePortfolio = function(id, portfolio, callback) {
+	    $http.put('/api/portfolio/id/' + id, portfolio)
+	    .then(callback)
+	    };
+	    this.deletePortfolio = function(id, callback) {
+	      var tempUrl = '/api/portfolio/id/' + id;
+	      $http.delete(tempUrl)
+	      .then(callback);
+	    }
+	    this.newPortfolio = function(portfolio, callback) {
+	      var tempUrl = '/api/portfolio';
+	      $http.post(tempUrl, portfolio)
+	      .then(callback);
+	    }
+	  }); // FIN
+
+
+/***/ },
+/* 56 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6880,7 +7163,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 52 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7061,7 +7344,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 53 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7074,281 +7357,6 @@ webpackJsonp([0],[
 	    )
 	  }
 	});
-
-
-/***/ },
-/* 54 */
-/***/ function(module, exports) {
-
-	// shim for using process in browser
-
-	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
-	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
-	  }
-	} ())
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
-
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
-	    draining = true;
-
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    cachedClearTimeout.call(null, timeout);
-	}
-
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout.call(null, drainQueue, 0);
-	    }
-	};
-
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
-
-
-/***/ },
-/* 55 */
-/***/ function(module, exports) {
-
-	module.exports = {
-	    'googleCalApi' : {
-	      'clientID' : '154684505002-fqll12rte5oisps3dq596vsprc9phdmc.apps.googleusercontent.com',
-	      'clientSecret'  : 'qtYuA73IiWrgMNt24byUD3j9',
-	      "apiKey": 'AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE',
-	      "userEmail": 'artbycale619@gmail.com'
-	    }
-	};
-
-
-/***/ },
-/* 56 */
-/***/ function(module, exports) {
-
-	"use strict";
-	angular.module("lionHeart")
-	  .service("portfolioDataService", function($http) {
-	    this.getPortfolio = function(callback) {
-	      $http.get("/api/portfolio")
-	      .then(callback)
-	    };
-	    this.getSinglePiece = function(id, callback) {
-	      var tempUrl = '/api/portfolio/id/' + id;
-	      $http.get(tempUrl)
-	      .then(callback)
-	    }
-	    this.savePortfolio = function(id, portfolio, callback) {
-	    $http.put('/api/portfolio/id/' + id, portfolio)
-	    .then(callback)
-	    };
-	    this.deletePortfolio = function(id, callback) {
-	      var tempUrl = '/api/portfolio/id/' + id;
-	      $http.delete(tempUrl)
-	      .then(callback);
-	    }
-	    this.newPortfolio = function(portfolio, callback) {
-	      var tempUrl = '/api/portfolio';
-	      $http.post(tempUrl, portfolio)
-	      .then(callback);
-	    }
-	  }); // FIN
-
-
-/***/ },
-/* 57 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.portfolioCtrl", function($scope, portfolioDataService, $location, $timeout) {
-	  portfolioDataService.getPortfolio(function(res) {
-	    $scope.portfolioImages = res.data.portfolios;
-	  })
-	  $scope.deleteIndex = 0;
-	  $scope.saveIndex = 0;
-	  $scope.editPortfolio = {show: false};
-	  $scope.portfolioEdit = function(portfolio, index) {
-	    $scope.deleteIndex = index;
-	    $scope.saveIndex = index;
-	    if (portfolio.url == "") {
-	      portfolio.url = "http://";
-	    }
-	    if (portfolio.urlBig == "") {
-	      portfolio.urlBig = "http://";
-	    }
-	    $scope.portfolioDisplayEdit = portfolio;
-	    $scope.editPortfolio = {show: true};
-	  }
-	  $scope.deletePortfolio = function(id, index) {
-	  $scope.deleteIndex;
-	    $scope.portfolioImages.splice(index, 1);
-	    portfolioDataService.deletePortfolio(id, function(response) {
-	      if (response.status == 200) {
-	      $scope.editPortfolio.show = false;
-	    } else {
-	      console.log('Error Deleteing Item?');
-	      alert('Error Deleteing Item?');
-	    }
-	    })
-	  }
-	    $scope.successMessageDisplayTopPortfolio = false;
-	  $scope.savePortfolio = function(id, portfolio, index) {
-	  $scope.saveIndex = 0;
-	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
-	      if (res.status == 200) {
-	        $scope.successMessageDisplayTopPortfolio = true;
-	        $timeout(function() {
-	          $scope.successMessageDisplayTopPortfolio = false;
-	        }, 3075)
-	      } else {
-	        console.log('Error Saving Portfolio?');
-	        alert('Error Saving Portfolio?');
-	      }
-	    })
-	  }
-	  $scope.newPiece = function() {
-	    var newPortfolio = {
-	      "url": "https://",
-	      "urlBig": "https://"
-	    };
-	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
-	        if (res.status == 200) {
-	          newPortfolio._id = res.data.portfolio._id;
-	          newPortfolio.id = res.data.portfolio._id;
-	          $scope.editPortfolio.show = true;
-	          $scope.portfolioImages.push(newPortfolio);
-	          $scope.portfolioDisplayEdit = newPortfolio;
-	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
-	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
-	        } else {
-	          alert("Error Creating Portfolio")
-	        }
-	      });
-
-	  }
-	});
-
-
-/***/ },
-/* 58 */
-/***/ function(module, exports) {
-
-	"use strict";
-	angular.module("lionHeart")
-	  .service("carouselDataService", function($http) {
-	    this.getCarousel = function(callback) {
-	      $http.get("/api/carousel")
-	      .then(callback)
-	    };
-	    this.saveCarousel = function(id, carousel, callback) {
-	    $http.put('/api/carousel/id/' + id, carousel)
-	    .then(callback)
-	    };
-	    this.deleteCarousel = function(id, callback) {
-	      var tempUrl = '/api/carousel/id/' + id;
-	      $http.delete(tempUrl)
-	      .then(callback);
-	    }
-	    this.newCarousel = function(carousel, callback) {
-	      var tempUrl = '/api/carousel';
-	      $http.post(tempUrl, carousel)
-	      .then(callback);
-	    }
-	  }); // FIN
 
 
 /***/ }
