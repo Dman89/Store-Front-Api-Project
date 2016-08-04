@@ -6519,23 +6519,24 @@ webpackJsonp([0],[
 	.service("googleCalendarGetRequest", function($http) {
 	  // Disable "configAuth" to turn off test mode
 
+	  var key, userEmail, configAuth;
 
-	  var configAuth = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../config/auth\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	  var configAuth = __webpack_require__(55);
+
 
 
 	  // If else statment for test mode or normal mode
-	  var key, user;
 	  if (configAuth) {
 	    key = configAuth.googleCalApi.apiKey;
-	    user = configAuth.googleCalApi.userEmail;
+	    userEmail = configAuth.googleCalApi.userEmail;
 	  } else {
 	   key = process.env.googleCalApiAPIKEY;
-	   user = process.env.googleCalApiUSEREMAIL;
+	   userEmail = process.env.googleCalApiUSEREMAIL;
 	  }
 	  // Google API Info
-	  var apiKey = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
-	  var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
-	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+apiKey;
+	  // var apiKey = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
+	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
+	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
 	  // $Get REQUEST
 	this.calendar = function(callback) {
 	      $http.get(url)
@@ -7163,6 +7164,20 @@ webpackJsonp([0],[
 	    throw new Error('process.chdir is not supported');
 	};
 	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 55 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    'googleCalApi' : {
+	      'clientID' : '154684505002-fqll12rte5oisps3dq596vsprc9phdmc.apps.googleusercontent.com',
+	      'clientSecret'  : 'qtYuA73IiWrgMNt24byUD3j9',
+	      "apiKey": 'AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE',
+	      "userEmail": 'artbycale619@gmail.com'
+	    }
+	};
 
 
 /***/ }
