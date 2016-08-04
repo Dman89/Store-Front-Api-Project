@@ -86,7 +86,7 @@ Portfolio
 Home Page
     (Completed)         Carousel
     (Completed)         Make a Carousel Database (MongoDB)
-                        Write Backend API
+    (Completed)         Write Backend API
                         Write Frontend API
                         Connect Angular To Frontend
                         CTA

@@ -14,6 +14,7 @@ var productRouter = require('./api/products');
 var orderHistoryRouter = require('./api/orderHistory');
 var userRouter = require('./api/user');
 var portfolioRouter = require('./api/portfolio');
+var carouselRouter = require('./api/carousel');
 var password = process.env.secret || 'keyboardWarriors'
 var app = express();
 var portReplace = process.env.PORT || 3000;
@@ -41,6 +42,7 @@ app.use('/api', categoryRouter);
 app.use('/api', cartRouter);
 app.use('/api', orderHistoryRouter);
 app.use('/api', portfolioRouter);
+app.use('/api', carouselRouter);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
