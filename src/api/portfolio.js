@@ -15,7 +15,7 @@ portfolioRouter.post('/portfolio', function(req, res) {
       if (err) {
         return res.status(500).json({err: err.message});
       }
-      res.send({message: 'Portfolio Created'})
+      res.send({'portfolio': portfolio, message: 'Portfolio Created'})
       console.log('Portfolio Created!')
     })
   }

@@ -7309,11 +7309,13 @@ webpackJsonp([0],[
 	    };
 	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
 	        if (res.status == 200) {
+	          newPortfolio._id = res.data.portfolio._id;
+	          newPortfolio.id = res.data.portfolio._id;
 	          $scope.editPortfolio.show = true;
 	          $scope.portfolioImages.push(newPortfolio);
 	          $scope.portfolioDisplayEdit = newPortfolio;
-	          $scope.portfolioDisplayEdit.id = res.data.portfolios._id;
-	          $scope.portfolioDisplayEdit._id = res.data.portfolios._id;
+	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
+	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
 	        } else {
 	          alert("Error Creating Portfolio")
 	        }
