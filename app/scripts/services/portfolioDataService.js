@@ -19,4 +19,9 @@ angular.module("lionHeart")
       $http.delete(tempUrl)
       .then(callback);
     }
+    this.newPortfolio = function(portfolio, callback) {
+      var tempUrl = '/api/portfolio';
+      $http.post(tempUrl, portfolio)
+      .then(callback);
+    }
   }); // FIN

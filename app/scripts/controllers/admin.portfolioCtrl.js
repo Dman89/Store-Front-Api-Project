@@ -4,21 +4,26 @@ angular.module("lionHeart")
   portfolioDataService.getPortfolio(function(res) {
     $scope.portfolioImages = res.data.portfolios;
   })
-
+  $scope.deleteIndex = 0;
+  $scope.saveIndex = 0;
   $scope.editPortfolio = {show: false};
-  var portfolioBeingEditedIndex;
   $scope.portfolioEdit = function(portfolio, index) {
-    portfolioBeingEditedIndex = index;
-    if (!portfolio.quantity) {
-      portfolio.quantity = 0;
+    $scope.deleteIndex = index;
+    $scope.saveIndex = index;
+    if (portfolio.url == "") {
+      portfolio.url = "http://";
+    }
+    if (portfolio.urlBig == "") {
+      portfolio.urlBig = "http://";
     }
     $scope.portfolioDisplayEdit = portfolio;
     $scope.editPortfolio = {show: true};
   }
-  $scope.deleteItem = function(id) {
-    portfolioDataService.deleteItem(id, function(response) {
+  $scope.deletePortfolio = function(id, index) {
+  $scope.deleteIndex;
+    $scope.portfolioImages.splice(index, 1);
+    portfolioDataService.deletePortfolio(id, function(response) {
       if (response.status == 200) {
-      $scope.portfolios.splice(portfolioBeingEditedIndex, 1);
       $scope.editPortfolio.show = false;
     } else {
       console.log('Error Deleteing Item?');
@@ -27,7 +32,8 @@ angular.module("lionHeart")
     })
   }
     $scope.successMessageDisplayTopPortfolio = false;
-  $scope.savePortfolio = function(id, portfolio) {
+  $scope.savePortfolio = function(id, portfolio, index) {
+  $scope.saveIndex = 0;
     portfolioDataService.savePortfolio(id, portfolio, function(res) {
       if (res.status == 200) {
         $scope.successMessageDisplayTopPortfolio = true;
@@ -40,15 +46,15 @@ angular.module("lionHeart")
       }
     })
   }
-  $scope.newItemStart = function() {
+  $scope.newPiece = function() {
     var newPortfolio = {
       "url": "https://",
       "urlBig": "https://"
     };
-      portfolioDataService.newItem(newPortfolio, function(res) {
+      portfolioDataService.newPortfolio(newPortfolio, function(res) {
         if (res.status == 200) {
           $scope.editPortfolio.show = true;
-          $scope.portfolios.push(newPortfolio);
+          $scope.portfolioImages.push(newPortfolio);
           $scope.portfolioDisplayEdit = newPortfolio;
           $scope.portfolioDisplayEdit.id = res.data.portfolios._id;
           $scope.portfolioDisplayEdit._id = res.data.portfolios._id;

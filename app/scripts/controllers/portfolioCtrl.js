@@ -4,7 +4,7 @@ angular.module("lionHeart")
       portfolioDataService.getPortfolio(function(res) {
         if (res.data.portfolios.length == 0) {
           $scope.portfolioImages = [{
-            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
+            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg", "urlBig": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
           }, {
             "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
           }, {

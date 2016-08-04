@@ -144,6 +144,11 @@ controller: 'portfolioCtrl'
       templateUrl: 'templates/admin/posts.html',
       controller: 'admin.postsCtrl'
       })
+        .state('admin.portfolio', {
+        url: '/portfolio',
+        templateUrl: 'templates/admin/portfolio.html',
+        controller: 'admin.portfolioCtrl'
+        })
       .state('admin.users', {
       url: '/users',
       templateUrl: 'templates/admin/users.html',

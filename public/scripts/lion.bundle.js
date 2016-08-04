@@ -213,6 +213,11 @@ webpackJsonp([0],[
 	      templateUrl: 'templates/admin/posts.html',
 	      controller: 'admin.postsCtrl'
 	      })
+	        .state('admin.portfolio', {
+	        url: '/portfolio',
+	        templateUrl: 'templates/admin/portfolio.html',
+	        controller: 'admin.portfolioCtrl'
+	        })
 	      .state('admin.users', {
 	      url: '/users',
 	      templateUrl: 'templates/admin/users.html',
@@ -6479,7 +6484,7 @@ webpackJsonp([0],[
 	      portfolioDataService.getPortfolio(function(res) {
 	        if (res.data.portfolios.length == 0) {
 	          $scope.portfolioImages = [{
-	            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
+	            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg", "urlBig": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
 	          }, {
 	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
 	          }, {
@@ -7237,6 +7242,11 @@ webpackJsonp([0],[
 	      $http.delete(tempUrl)
 	      .then(callback);
 	    }
+	    this.newPortfolio = function(portfolio, callback) {
+	      var tempUrl = '/api/portfolio';
+	      $http.post(tempUrl, portfolio)
+	      .then(callback);
+	    }
 	  }); // FIN
 
 
@@ -7250,21 +7260,26 @@ webpackJsonp([0],[
 	  portfolioDataService.getPortfolio(function(res) {
 	    $scope.portfolioImages = res.data.portfolios;
 	  })
-
+	  $scope.deleteIndex = 0;
+	  $scope.saveIndex = 0;
 	  $scope.editPortfolio = {show: false};
-	  var portfolioBeingEditedIndex;
 	  $scope.portfolioEdit = function(portfolio, index) {
-	    portfolioBeingEditedIndex = index;
-	    if (!portfolio.quantity) {
-	      portfolio.quantity = 0;
+	    $scope.deleteIndex = index;
+	    $scope.saveIndex = index;
+	    if (portfolio.url == "") {
+	      portfolio.url = "http://";
+	    }
+	    if (portfolio.urlBig == "") {
+	      portfolio.urlBig = "http://";
 	    }
 	    $scope.portfolioDisplayEdit = portfolio;
 	    $scope.editPortfolio = {show: true};
 	  }
-	  $scope.deleteItem = function(id) {
-	    portfolioDataService.deleteItem(id, function(response) {
+	  $scope.deletePortfolio = function(id, index) {
+	  $scope.deleteIndex;
+	    $scope.portfolioImages.splice(index, 1);
+	    portfolioDataService.deletePortfolio(id, function(response) {
 	      if (response.status == 200) {
-	      $scope.portfolios.splice(portfolioBeingEditedIndex, 1);
 	      $scope.editPortfolio.show = false;
 	    } else {
 	      console.log('Error Deleteing Item?');
@@ -7273,7 +7288,8 @@ webpackJsonp([0],[
 	    })
 	  }
 	    $scope.successMessageDisplayTopPortfolio = false;
-	  $scope.savePortfolio = function(id, portfolio) {
+	  $scope.savePortfolio = function(id, portfolio, index) {
+	  $scope.saveIndex = 0;
 	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
 	      if (res.status == 200) {
 	        $scope.successMessageDisplayTopPortfolio = true;
@@ -7286,15 +7302,15 @@ webpackJsonp([0],[
 	      }
 	    })
 	  }
-	  $scope.newItemStart = function() {
+	  $scope.newPiece = function() {
 	    var newPortfolio = {
 	      "url": "https://",
 	      "urlBig": "https://"
 	    };
-	      portfolioDataService.newItem(newPortfolio, function(res) {
+	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
 	        if (res.status == 200) {
 	          $scope.editPortfolio.show = true;
-	          $scope.portfolios.push(newPortfolio);
+	          $scope.portfolioImages.push(newPortfolio);
 	          $scope.portfolioDisplayEdit = newPortfolio;
 	          $scope.portfolioDisplayEdit.id = res.data.portfolios._id;
 	          $scope.portfolioDisplayEdit._id = res.data.portfolios._id;

@@ -6,13 +6,19 @@ var portfolioRouter = express.Router();
 //Create Portfolio
 portfolioRouter.post('/portfolio', function(req, res) {
   var portfolio = req.body;
-  Portfolio.create(portfolio, function(err, portfolio) {
-    if (err) {
-      return res.status(500).json({err: err.message});
-    }
-    res.send({message: 'Portfolio Created'})
-    console.log('Portfolio Created!')
-  })
+  if (!req.body) {
+    res.send({message: 'Nothing Sent to Server'})
+    console.log('Nothing Sent to Server')
+  }
+  else {
+    Portfolio.create(portfolio, function(err, portfolio) {
+      if (err) {
+        return res.status(500).json({err: err.message});
+      }
+      res.send({message: 'Portfolio Created'})
+      console.log('Portfolio Created!')
+    })
+  }
 })
 // // Update Portfolio
 portfolioRouter.put('/portfolio/id/:id', function (req, res) {
