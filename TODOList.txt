@@ -71,13 +71,15 @@ Change API Keys
     (Completed)         Stripe
     (Completed)         MongoDB Admin
 Google Calendar
-                        Set Up API
-                        Load On Main Page
+    (Completed)         Set Up API
+    (Completed)         Load On Main Page
 Portfolio
                         Link to Individual Picture
+                        Write Backend API
+                        Write Frontend API
                         Portfolio Database
 Home Page
-                        Carousel
+    (Completed)         Carousel
                         CTA
                         Photos
-                        Upcoming Events
+    (Completed)         Upcoming Events
