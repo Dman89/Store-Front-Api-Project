@@ -1,6 +1,21 @@
 "use strict";
 angular.module("lionHeart")
 .service("googleCalendarGetRequest", function($http) {
+  // Disable "configAuth" to turn off test mode
+
+
+  var configAuth = require('../config/auth');
+
+
+  // If else statment for test mode or normal mode
+  var key, user;
+  if (configAuth) {
+    key = configAuth.googleCalApi.apiKey;
+    user = configAuth.googleCalApi.userEmail;
+  } else {
+   key = process.env.googleCalApiAPIKEY;
+   user = process.env.googleCalApiUSEREMAIL;
+  }
   // Google API Info
   var apiKey = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
   var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;

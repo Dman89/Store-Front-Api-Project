@@ -3,7 +3,7 @@ var express = require('express');
 var Portfolio = require('../models/portfolio');
 var portfolioRouter = express.Router();
 //Users
-// //Create User
+//Create User
 // userRouter.post('/user', function(req, res) {
 //   var user = req.body;
 //   User.create(user, function(err, user) {
@@ -133,6 +133,6 @@ var portfolioRouter = express.Router();
 //   json[property] = result;
 //   res.json(json);
 // }
-
-
+//
+//
 module.exports = portfolioRouter;

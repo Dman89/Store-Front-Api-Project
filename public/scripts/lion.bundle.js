@@ -6517,6 +6517,21 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
 	angular.module("lionHeart")
 	.service("googleCalendarGetRequest", function($http) {
+	  // Disable "configAuth" to turn off test mode
+
+
+	  var configAuth = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../config/auth\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+
+	  // If else statment for test mode or normal mode
+	  var key, user;
+	  if (configAuth) {
+	    key = configAuth.googleCalApi.apiKey;
+	    user = configAuth.googleCalApi.userEmail;
+	  } else {
+	   key = process.env.googleCalApiAPIKEY;
+	   user = process.env.googleCalApiUSEREMAIL;
+	  }
 	  // Google API Info
 	  var apiKey = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
 	  var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
