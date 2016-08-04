@@ -87,7 +87,7 @@ Home Page
     (Completed)         Carousel
     (Completed)         Make a Carousel Database (MongoDB)
     (Completed)         Write Backend API
-                        Write Frontend API
+    (Completed)         Write Frontend API
                         Connect Angular To Frontend
                         CTA
                         Photos
