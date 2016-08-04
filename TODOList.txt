@@ -79,7 +79,8 @@ Portfolio
     (Completed)         Write Frontend API
     (Completed)         Connect Angular To Frontend
     (Completed)         Link to Individual Picture
-                        Style
+    (Completed)         Style
+                        Add to Admin Panel
 Home Page
     (Completed)         Carousel
                         Make a Carousel Database (MongoDB)
@@ -95,3 +96,4 @@ Misc
                         Admin Upload Image
                         Calendar Only Loads New Events (future)
                         Cart Delete IS deleting Wrong Item
+                        Fix Font on the Store
