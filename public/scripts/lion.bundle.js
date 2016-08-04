@@ -52,9 +52,7 @@ webpackJsonp([0],[
 	__webpack_require__(49);
 	__webpack_require__(18);
 	__webpack_require__(50);
-
-
-
+	__webpack_require__(58);
 	__webpack_require__(56);
 	__webpack_require__(51);
 	__webpack_require__(52);
@@ -7323,6 +7321,34 @@ webpackJsonp([0],[
 
 	  }
 	});
+
+
+/***/ },
+/* 58 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("carouselDataService", function($http) {
+	    this.getCarousel = function(callback) {
+	      $http.get("/api/carousel")
+	      .then(callback)
+	    };
+	    this.saveCarousel = function(id, carousel, callback) {
+	    $http.put('/api/carousel/id/' + id, carousel)
+	    .then(callback)
+	    };
+	    this.deleteCarousel = function(id, callback) {
+	      var tempUrl = '/api/carousel/id/' + id;
+	      $http.delete(tempUrl)
+	      .then(callback);
+	    }
+	    this.newCarousel = function(carousel, callback) {
+	      var tempUrl = '/api/carousel';
+	      $http.post(tempUrl, carousel)
+	      .then(callback);
+	    }
+	  }); // FIN
 
 
 /***/ }

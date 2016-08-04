@@ -48,9 +48,7 @@ require('./scripts/controllers/portfolioCtrl.js');
 require('./scripts/controllers/cart.confirmationCtrl.js');
 require('./scripts/functions/inputToggle.js');
 require('./scripts/functions/googleCalendarGetRequest.js');
-
-
-
+require('./scripts/services/carouselDataService.js');
 require('./scripts/services/portfolioDataService.js');
 require('./scripts/services/dataService.js');
 require('./scripts/services/functionService.js');
