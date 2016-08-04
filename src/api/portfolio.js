@@ -4,7 +4,7 @@ var Portfolio = require('../models/portfolio');
 var portfolioRouter = express.Router();
 //Portfolios
 //Create Portfolio
-userRouter.post('/portfolio', function(req, res) {
+portfolioRouter.post('/portfolio', function(req, res) {
   var portfolio = req.body;
   Portfolio.create(portfolio, function(err, portfolio) {
     if (err) {
@@ -15,7 +15,7 @@ userRouter.post('/portfolio', function(req, res) {
   })
 })
 // // Update Portfolio
-userRouter.put('/portfolio/id/:id', function (req, res) {
+portfolioRouter.put('/portfolio/id/:id', function (req, res) {
   var id = req.params.id;
   var portfolio = req.body;
   if (portfolio && portfolio._id !== id) {
@@ -31,7 +31,7 @@ userRouter.put('/portfolio/id/:id', function (req, res) {
   })
 })
 // Delete Portfolio
-userRouter.delete('/portfolio/id/:id', function (req, res) {
+portfolioRouter.delete('/portfolio/id/:id', function (req, res) {
   var id = req.params.id
   Portfolio.findByIdAndRemove(id, function(err, result) {
     if (err) {
@@ -43,7 +43,7 @@ userRouter.delete('/portfolio/id/:id', function (req, res) {
   })
 })
 // // Get Portfolio By ID
-userRouter.get('/portfolio/id/:id', function(req, res) {
+portfolioRouter.get('/portfolio/id/:id', function(req, res) {
   var id = req.params.id;
   Portfolio.find({_id: id}, function(err, portfolios) {
     if (err) {
@@ -60,7 +60,7 @@ userRouter.get('/portfolio/id/:id', function(req, res) {
 });
 //List Portfolios
 var tempUsers = {};
-userRouter.get('/portfolio', function(req, res) {
+portfolioRouter.get('/portfolio', function(req, res) {
   Portfolio.find({}, function(err, portfolios) {
     if (err) {
       console.error('Oh Shucks!');

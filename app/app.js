@@ -50,6 +50,7 @@ require('./scripts/functions/googleCalendarGetRequest.js');
 
 
 
+require('./scripts/services/portfolioDataService.js');
 require('./scripts/services/dataService.js');
 require('./scripts/services/functionService.js');
 require('./scripts/services/eraseCartService.js');

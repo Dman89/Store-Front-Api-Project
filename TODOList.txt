@@ -75,8 +75,9 @@ Google Calendar
     (Completed)         Load On Main Page
 Portfolio
     (Completed)         Portfolio Database
-                        Write Backend API
-                        Write Frontend API
+    (Completed)         Write Backend API
+    (Completed)         Write Frontend API
+                        Connect Angular To Frontend
                         Link to Individual Picture
 Home Page
     (Completed)         Carousel
@@ -85,5 +86,5 @@ Home Page
                         Photos
     (Completed)         Upcoming Events
 Misc
-                        QuantityCartUpdate needs to update scope via response
+                        Quantity-Cart-Update needs to update scope via response
                         Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
