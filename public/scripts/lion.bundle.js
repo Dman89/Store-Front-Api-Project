@@ -46,6 +46,7 @@ webpackJsonp([0],[
 	__webpack_require__(44);
 	__webpack_require__(45);
 	__webpack_require__(46);
+	__webpack_require__(57);
 	__webpack_require__(47);
 	__webpack_require__(48);
 	__webpack_require__(49);
@@ -54,6 +55,7 @@ webpackJsonp([0],[
 
 
 
+	__webpack_require__(56);
 	__webpack_require__(51);
 	__webpack_require__(52);
 	__webpack_require__(53);
@@ -68,7 +70,7 @@ webpackJsonp([0],[
 	'use strict';
 	var lionHeart = angular.module("lionHeart", [__webpack_require__(4)])
 	lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').otherwise('/');
+	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').when('/portfolio', '/portfolio/gallery').otherwise('/');
 	  $stateProvider
 	    .state('home', {
 	      url: '/',
@@ -168,6 +170,16 @@ webpackJsonp([0],[
 	  templateUrl: 'templates/portfolio.html',
 	  controller: 'portfolioCtrl'
 	  })
+	.state('portfolio.gallery', {
+	url: '/gallery',
+	templateUrl: 'templates/portfolioGallery.html',
+	controller: 'portfolioCtrl'
+	})
+	.state('portfolio.singlePiece', {
+	url: '/id/:id',
+	templateUrl: 'templates/singlePiece.html',
+	controller: 'portfolioCtrl'
+	})
 	    .state('cart', {
 	    url: '/cart',
 	    templateUrl: 'templates/cart.html',
@@ -201,6 +213,11 @@ webpackJsonp([0],[
 	      templateUrl: 'templates/admin/posts.html',
 	      controller: 'admin.postsCtrl'
 	      })
+	        .state('admin.portfolio', {
+	        url: '/portfolio',
+	        templateUrl: 'templates/admin/portfolio.html',
+	        controller: 'admin.portfolioCtrl'
+	        })
 	      .state('admin.users', {
 	      url: '/users',
 	      templateUrl: 'templates/admin/users.html',
@@ -6463,26 +6480,46 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	  .controller("portfolioCtrl", function($scope, dataService) {
-	      $scope.portfolioImages = [{
-	        "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-wallpaper-HD-desktop-620x349.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Abstract-rainbows-vortex-colorful-wallpaper-HD-620x388.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-HD-Pictures-620x388.jpg"
-	      }, {
-	        "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTc_qWblhfr11zCkbxdZycggUaotcT4yMyYqHtDZnW7M2BYHsyPaw"
-	      }, {
-	        "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOlbBCB_NXkXQtty0VS0OugvCEMBWpSNdn72S7-LyRqtH570LWcA"
-	      }, {
-	        "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSfCwSkXBZjqLb2kApOYM0r8RjPqjGQTQZZDRMhSkOd5KLpoDvdTg"
-	      }, {
-	        "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
-	      }]
+	  .controller("portfolioCtrl", function($scope, portfolioDataService, $location) {
+	      portfolioDataService.getPortfolio(function(res) {
+	        if (res.data.portfolios.length == 0) {
+	          $scope.portfolioImages = [{
+	            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg", "urlBig": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-wallpaper-HD-desktop-620x349.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Abstract-rainbows-vortex-colorful-wallpaper-HD-620x388.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-HD-Pictures-620x388.jpg"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTc_qWblhfr11zCkbxdZycggUaotcT4yMyYqHtDZnW7M2BYHsyPaw"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOlbBCB_NXkXQtty0VS0OugvCEMBWpSNdn72S7-LyRqtH570LWcA"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSfCwSkXBZjqLb2kApOYM0r8RjPqjGQTQZZDRMhSkOd5KLpoDvdTg"
+	          }, {
+	            "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
+	          }]
+	        } else {
+	          $scope.portfolioImages = res.data.portfolios;
+	        }
+	      });
+	      var tempSearchItem = $location.path();
+	      if (tempSearchItem.search("/portfolio/id/") >= 0) {
+	        var tempItem = tempSearchItem.split("/");
+	        var tempID = tempItem[3];
+	        if (tempItem[3] != "") {
+	          portfolioDataService.getSinglePiece(tempID, function(res) {
+	            $scope.singlePiece = res.data.portfolios;
+	          })
+	        } else {
+	          console.log("Blank ID");
+	          $scope.singlePiece = {"urlBig": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"}
+	        }
+	      }
+
 	  });
 
 
@@ -6517,10 +6554,26 @@ webpackJsonp([0],[
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
 	angular.module("lionHeart")
 	.service("googleCalendarGetRequest", function($http) {
+	  // Disable "configAuth" to turn off test mode
+
+	  var key, userEmail, configAuth;
+
+	  var configAuth = __webpack_require__(55);
+
+
+
+	  // If else statment for test mode or normal mode
+	  if (configAuth) {
+	    key = configAuth.googleCalApi.apiKey;
+	    userEmail = configAuth.googleCalApi.userEmail;
+	  } else {
+	   key = process.env.googleCalApiAPIKEY;
+	   userEmail = process.env.googleCalApiUSEREMAIL;
+	  }
 	  // Google API Info
-	  var apiKey = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
-	  var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
-	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+apiKey;
+	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
+	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
+	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
 	  // $Get REQUEST
 	this.calendar = function(callback) {
 	      $http.get(url)
@@ -7148,6 +7201,128 @@ webpackJsonp([0],[
 	    throw new Error('process.chdir is not supported');
 	};
 	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 55 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    'googleCalApi' : {
+	      'clientID' : '154684505002-fqll12rte5oisps3dq596vsprc9phdmc.apps.googleusercontent.com',
+	      'clientSecret'  : 'qtYuA73IiWrgMNt24byUD3j9',
+	      "apiKey": 'AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE',
+	      "userEmail": 'artbycale619@gmail.com'
+	    }
+	};
+
+
+/***/ },
+/* 56 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("portfolioDataService", function($http) {
+	    this.getPortfolio = function(callback) {
+	      $http.get("/api/portfolio")
+	      .then(callback)
+	    };
+	    this.getSinglePiece = function(id, callback) {
+	      var tempUrl = '/api/portfolio/id/' + id;
+	      $http.get(tempUrl)
+	      .then(callback)
+	    }
+	    this.savePortfolio = function(id, portfolio, callback) {
+	    $http.put('/api/portfolio/id/' + id, portfolio)
+	    .then(callback)
+	    };
+	    this.deletePortfolio = function(id, callback) {
+	      var tempUrl = '/api/portfolio/id/' + id;
+	      $http.delete(tempUrl)
+	      .then(callback);
+	    }
+	    this.newPortfolio = function(portfolio, callback) {
+	      var tempUrl = '/api/portfolio';
+	      $http.post(tempUrl, portfolio)
+	      .then(callback);
+	    }
+	  }); // FIN
+
+
+/***/ },
+/* 57 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.portfolioCtrl", function($scope, portfolioDataService, $location, $timeout) {
+	  portfolioDataService.getPortfolio(function(res) {
+	    $scope.portfolioImages = res.data.portfolios;
+	  })
+	  $scope.deleteIndex = 0;
+	  $scope.saveIndex = 0;
+	  $scope.editPortfolio = {show: false};
+	  $scope.portfolioEdit = function(portfolio, index) {
+	    $scope.deleteIndex = index;
+	    $scope.saveIndex = index;
+	    if (portfolio.url == "") {
+	      portfolio.url = "http://";
+	    }
+	    if (portfolio.urlBig == "") {
+	      portfolio.urlBig = "http://";
+	    }
+	    $scope.portfolioDisplayEdit = portfolio;
+	    $scope.editPortfolio = {show: true};
+	  }
+	  $scope.deletePortfolio = function(id, index) {
+	  $scope.deleteIndex;
+	    $scope.portfolioImages.splice(index, 1);
+	    portfolioDataService.deletePortfolio(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.editPortfolio.show = false;
+	    } else {
+	      console.log('Error Deleteing Item?');
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
+	    $scope.successMessageDisplayTopPortfolio = false;
+	  $scope.savePortfolio = function(id, portfolio, index) {
+	  $scope.saveIndex = 0;
+	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTopPortfolio = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTopPortfolio = false;
+	        }, 3075)
+	      } else {
+	        console.log('Error Saving Portfolio?');
+	        alert('Error Saving Portfolio?');
+	      }
+	    })
+	  }
+	  $scope.newPiece = function() {
+	    var newPortfolio = {
+	      "url": "https://",
+	      "urlBig": "https://"
+	    };
+	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
+	        if (res.status == 200) {
+	          newPortfolio._id = res.data.portfolio._id;
+	          newPortfolio.id = res.data.portfolio._id;
+	          $scope.editPortfolio.show = true;
+	          $scope.portfolioImages.push(newPortfolio);
+	          $scope.portfolioDisplayEdit = newPortfolio;
+	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
+	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
+	        } else {
+	          alert("Error Creating Portfolio")
+	        }
+	      });
+
+	  }
+	});
 
 
 /***/ }

@@ -71,13 +71,31 @@ Change API Keys
     (Completed)         Stripe
     (Completed)         MongoDB Admin
 Google Calendar
-                        Set Up API
-                        Load On Main Page
+    (Completed)         Set Up API
+    (Completed)         Load On Main Page
 Portfolio
-                        Link to Individual Picture
-                        Portfolio Database
+    (Completed)         Portfolio Database
+    (Completed)         Write Backend API
+    (Completed)         Write Frontend API
+    (Completed)         Connect Angular To Frontend
+    (Completed)         Link to Individual Picture
+    (Completed)         Style
+    (Completed)         Write Frontend API
+    (Completed)         Connect Angular To Frontend
+    (Completed)         Style
 Home Page
-                        Carousel
+    (Completed)         Carousel
+                        Make a Carousel Database (MongoDB)
+                        Write Backend API
+                        Write Frontend API
+                        Connect Angular To Frontend
                         CTA
                         Photos
-                        Upcoming Events
+    (Completed)         Upcoming Events
+Misc
+                        Quantity-Cart-Update needs to update scope via response
+                        Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
+                        Admin Upload Image
+                        Calendar Only Loads New Events (future)
+                        Cart Delete IS deleting Wrong Item
+                        Fix Font on the Store

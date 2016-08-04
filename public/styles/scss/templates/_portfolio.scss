@@ -1,3 +1,60 @@
+#html #body #ui-view {
+  & #portfolio {
+    & .singlePieceDisplay {
+      margin-top: 10%;
+      @media (min-width: 768px) {
+        margin-top: 5%;
+      }
+      @media (min-width: 992px) {
+        margin-top: 2.5%;
+      }
+    }
+    .singlePieceImg {
+      width: 600px;
+      height: 600px;
+      margin: auto;
+      text-align: center;
+      float: none;
+      clear: both;
+      @media (max-width: 768px) {
+        width: 300px;
+        height: 300px;
+      }
+      @media (max-width: 992px) {
+        width: 450px;
+        height: 450px;
+      }
+      @media (max-width: 480px), (max-height: 480px) {
+        width: 200px;
+        height: 200px;
+      }
+      & img {
+        margin: 0 auto;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        margin-top: 5%;
+        @media (min-width: 992px) {
+          margin-top: 2.5%;
+        }
+        @media (max-width: 480px), (max-height: 480px) {
+          margin-top: 10%;
+        }
+      }
+    }
+    & .portfolioDisplay {
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
 .portfolioDisplay img{
   width: 300px;
     height: 300px;

@@ -42,6 +42,7 @@ require('./scripts/controllers/cart.checkoutCtrl.js');
 require('./scripts/controllers/admin.productsCtrl.js');
 require('./scripts/controllers/admin.postsCtrl.js');
 require('./scripts/controllers/admin.usersCtrl.js');
+require('./scripts/controllers/admin.portfolioCtrl.js');
 require('./scripts/controllers/adminCtrl.js');
 require('./scripts/controllers/portfolioCtrl.js');
 require('./scripts/controllers/cart.confirmationCtrl.js');
@@ -50,6 +51,7 @@ require('./scripts/functions/googleCalendarGetRequest.js');
 
 
 
+require('./scripts/services/portfolioDataService.js');
 require('./scripts/services/dataService.js');
 require('./scripts/services/functionService.js');
 require('./scripts/services/eraseCartService.js');
