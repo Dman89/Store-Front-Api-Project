@@ -90,13 +90,15 @@ Home Page
     (Completed)             Write Frontend API
     (Completed)             Connect Angular To Frontend
     (Completed)         CTA
-                        Photos
+    (Completed)         Photos
     (Completed)         Upcoming Events
 Misc
-                        Quantity-Cart-Update needs to update scope via response
+(Completed)             Quantity-Cart-Update needs to update scope via response
                         Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
                         Admin Upload Image
                         Calendar Only Loads New Events (future)
                         Cart Delete IS deleting Wrong Item
                         Fix Font on the Store
                         prompt for delete of items
+                        displays posts
+                        single page takes u to cart after click

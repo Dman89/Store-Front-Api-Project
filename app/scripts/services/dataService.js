@@ -95,6 +95,10 @@ angular.module("lionHeart")
       $http.put("/api/user/cart", a)
       .then(b)
     };
+    this.updateCart2 = function(a, b) {
+      $http.put("/api/user/cart2", a)
+      .then(b)
+    };
   this.checkout = function(token, callback) {
     $http.post('/api/user/checkout', token)
     .then(callback)
