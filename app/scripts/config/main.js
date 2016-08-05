@@ -1,13 +1,17 @@
 'use strict';
 var lionHeart = angular.module("lionHeart", [require('angular-ui-router')])
 lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').otherwise('/');
+  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').otherwise('/');
   $stateProvider
     .state('home', {
       url: '/',
       templateUrl: 'templates/index.html',
       controller: 'indexHomeCtrl'
     })
+      .state('quickstart', {
+        url: '/quickstart',
+        templateUrl: 'templates/quickstart.html'
+      })
     .state('login', {
     url: '/login',
     templateUrl: 'templates/login.html',
@@ -97,6 +101,16 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
   templateUrl: 'templates/portfolio.html',
   controller: 'portfolioCtrl'
   })
+.state('portfolio.gallery', {
+url: '/gallery',
+templateUrl: 'templates/portfolioGallery.html',
+controller: 'portfolioCtrl'
+})
+.state('portfolio.singlePiece', {
+url: '/id/:id',
+templateUrl: 'templates/singlePiece.html',
+controller: 'portfolioCtrl'
+})
     .state('cart', {
     url: '/cart',
     templateUrl: 'templates/cart.html',
@@ -130,6 +144,11 @@ lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterPro
       templateUrl: 'templates/admin/posts.html',
       controller: 'admin.postsCtrl'
       })
+        .state('admin.portfolio', {
+        url: '/portfolio',
+        templateUrl: 'templates/admin/portfolio.html',
+        controller: 'admin.portfolioCtrl'
+        })
       .state('admin.users', {
       url: '/users',
       templateUrl: 'templates/admin/users.html',

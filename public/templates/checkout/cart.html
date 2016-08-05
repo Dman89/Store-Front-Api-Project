@@ -4,37 +4,41 @@
   </div>
   <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-10 col-lg-offset-1" ng-hide="!cartA.items[0]">
     <div class="row itemDelete">
-      <div class="col-xs-12 cartSpacer" ng-class="{ 'item' : delete.go }" ng-repeat="item in cartA.items" id="orderHistory">
+      <div class="col-xs-12 cartSpacer" ng-class="{ 'item' : delete.go }" ng-repeat="item in cartA.items" id="orderHistory" ng-init="edit[$index] = false">
               <div class="col-xs-12 col-sm-7 col-md-6" id="cards">
                     <div class="" id="singleCards">
                       <div class="card-container">
                         <div class="card sideA">
                           <div class="imgBackground">
                             <a ui-sref="store.product({ urlCode: item.product.urlCode })">
-                            <img src="{{item.product.pictures[0]}}" alt="{{item.product.name}}" />
+                              <img src="{{item.product.pictures[0]}}" alt="{{item.product.name}}" />
                             </a>
                           </div>
-                          <p class="title highlight"></p>
                         </div>
                       </div>
                 </div>
               </div>
               <div class="col-xs-12 col-sm-4 col-md-4 col-lg-6 title">
-                <h2 class="alignCenter">{{item.product.name}}</h2>
+                <a id="cartItemTitle" ui-sref="store.product({ urlCode: item.product.urlCode })">
+                  <h2 class="alignCenter">{{item.product.name}}</h2>
+                </a>
               </div>
               <div class="col-xs-12 col-sm-4 col-md-2 col-lg-3">
                 <h3 class="alignCenter">{{item.product.displayPrice}}</h3>
               </div>
               <div class="col-xs-12 col-sm-4 col-md-3 col-md-offset-3 col-lg-offset-0 col-lg-3">
                 <div class="row">
+                <div class="col-xs-12">
+                  <label ng-show="" ng-hide="!item.product.quantity || edit[$index] || quantityCheck(singleItem.quantity) || justGot(item.product.quantity)" ng-click="edit[$index] = !edit[$index]">{{item.quantity}}<span class="tooltiptexttop">Click to Change</span></label>
+                  <label ng-show="" ng-hide="!item.product.quantity || edit[$index] || !quantityCheck(singleItem.quantity) || justGot(item.product.quantity)">{{item.quantity}}</label>
+                  <label ng-show="justGot(item.product.quantity)">1</label>
+                  <input ng-show="edit[$index]" type="number" maxlength="3" size="1" ng-blur="checkValForMaxInCart($index);" ng-model="item.quantity" class="text-center" />
+                </div>
                   <div class="col-xs-12">
-                    <h3 class="alignCenter">{{item.quantity}}</h3>
-                  </div>
-                  <div class="col-xs-12">
-                          <button type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation': item.quantity == item.product.quantity, 'showAnimation': item.quantity != item.product.quantity}" ng-click="quantityTotalAddition($index)"><i class="fa fa-arrow-up"></i></button>
+                          <button ng-hide="!item.product.quantity" type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation': item.quantity == item.product.quantity, 'showAnimation': item.quantity != item.product.quantity}" ng-click="quantityTotalAddition($index)"><i class="fa fa-arrow-up"></i></button>
                             <button type="button" class="abtn qDown cartButton thumbAnimation" id="downArrow" ng-class="{'hideAnimation': item.quantity == 1, 'showAnimation': item.quantity != 1}" ng-click="quantityTotalMinus($index)"><i class="fa fa-arrow-down"></i></button>
                           <button type="button" class="btna btn-danger cartButton" ng-click="delete.go = true; deleteCartItem($index)"><i class="fa fa-trash"></i></button><br/>
-                        <span id="stock" ng-class="{'inStock': item.stock, 'outStock': !item.stock}"></span>
+                        <h3 id="stock" ng-class="{'inStock': item.product.quantity, 'outStock': !item.product.quantity}"></h3>
                   </div>
                 </div>
               </div>
@@ -45,12 +49,12 @@
               <div class="row innerShipping">
                 <div class="col-xs-12">
                   <h3>Postal Code: </h3>
-                  <div class="zipcode" ng-hide="user.data.shippingAddress.useBilling"><label ng-click="zipEdit = !zipEdit" ng-hide="zipEdit">{{user.data.shippingAddress.zip}}</label><input ng-show="zipEdit" ng-blur="zipEdit = false;" type="text" class="zipcode" ng-model="user.data.shippingAddress.zip"> </div>
-                  <div class="zipcode" ng-show="user.data.shippingAddress.useBilling"><label ng-click="zipEdit = !zipEdit" ng-hide="zipEdit">{{user.data.billingAddress.zip}}</label><input ng-show="zipEdit" ng-blur="zipEdit = false;" type="text" class="zipcode" ng-model="user.data.billingAddress.zip"> </div>
+                  <div class="zipcode" ng-hide="user.data.shippingAddress.useBilling"><label ng-click="zipedit[$index] = !zipedit[$index]" ng-hide="zipedit[$index]">{{user.data.shippingAddress.zip}}</label><input ng-show="zipedit[$index]" ng-blur="zipedit[$index] = false;" type="text" class="zipcode" ng-model="user.data.shippingAddress.zip"> </div>
+                  <div class="zipcode" ng-show="user.data.shippingAddress.useBilling"><label ng-click="zipedit[$index] = !zipedit[$index]" ng-hide="zipedit[$index]">{{user.data.billingAddress.zip}}</label><input ng-show="zipedit[$index]" ng-blur="zipedit[$index] = false;" type="text" class="zipcode" ng-model="user.data.billingAddress.zip"> </div>
                   </div>
                 </div>
               </div> -->
-            <div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-5 col-md-offset-7 col-lg-4 col-lg-offset-8 subTotalBox">
+            <div class="col-xs-12 col-sm-6 col-sm-offset-6 col-md-5 col-md-offset-7 col-lg-5 col-lg-offset-7 subTotalBox">
               <div class="row innerShipping">
                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8">
                   Subtotal:

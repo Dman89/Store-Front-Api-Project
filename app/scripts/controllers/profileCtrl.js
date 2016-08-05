@@ -11,7 +11,7 @@ angular.module("lionHeart")
     })
   }
   $scope.isActiveProfile = function (viewLocation) {
-        if (viewLocation === $location.path()) {
+        if (viewLocation == $location.path()) {
         return viewLocation === $location.path();
       }
     };

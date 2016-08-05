@@ -1,27 +1,3 @@
-Cart
-    (Completed)         Style
-    (Completed)         Disable Checkout
-  Optional/Later Date   View a Random Item
-                                Pull product lists
-                                (for) save the id's to an array
-                                call random number
-                                go to product page of random number (get)
-    (Completed)         Up/Down Quality for Items
-                        Fix Total CSS
-
-
-
-
-
-Checkout Review
-    (Completed)         Style
-    (Completed)         Save User
-                        Edit User (Angular)
-                        Require Card Info
-
-
-
-
 Checkout Page
     (Completed)         Style
     (Completed)         Checkout
@@ -32,10 +8,6 @@ Checkout Page
     (Completed)         Check Product Availability
     (Completed)         Set Product Quantity
     (Completed)         Disable Product IF Zero Quantity
-
-
-
-
 Confirmation
     (Completed)         Style
     (Completed)         Correct Total Data
@@ -43,43 +15,91 @@ Confirmation
     (Completed)         Added Last4 of Card to Order History
     (Completed)         Gave Erase Cart Its Own API Call
     (Completed)         Created orderPlaced Variable
-
 Add To Cart
     (Completed)         Edit Inventory (is done upon transaction)
-                        Disable
+    (Completed)         Disable
     (Completed)         Auto-login if not logged in. (CHANGED TO ALERTED USER OF NEED TO LOG IN)
     (Completed)         Make Add To Cart its own Function
-Admin Panel Posts
-                        Save Posts
-                        New Posts
-                        Style
-                        Delete Posts
-Admin Panel Users
-                        Save User (Admin Status)
-                        Delete User (Temporary)
-                        Style
-Admin Panel Products
-                        Style
-                        Edit
-                        Save Item
-                        New Item
-                        Edit Item Page
 Products
-                        In Stock Model
-                        Style “In Stock”
-                        Quantity
-                        Quantity Select
-Portfolio
-                        Link to Individual Picture
-Home Page
-                        Carousel
-                        CTA
-                        Photos
-                        Upcoming Events
-Profile
-                        Email Add Button
-                        Email remove (not for zero)
+    (Completed)         In Stock Model
+    (Completed)         Style “In Stock”
+    (Completed)         Quantity
+    (Completed)         Quantity Select
 Store
-                        Fix Title on Store Page
-                        Load Category for the menu
-                        Fix Product load to Match Category Selected
+    (??No Title??)      Fix Title on Store Page
+    (Completed)         Load Category for the menu
+    (Completed)         Fix Product load to Match Category Selected
+Cart
+    (Completed)         Style
+    (Completed)         Disable Checkout
+    (Completed)         Up/Down Quality for Items
+    (Completed)         Fix Total CSS
+Checkout Review
+    (Completed)         Style
+    (Completed)         Save User
+    (Completed)         Require Card Info
+    (Completed)         Edit User (Angular)
+Admin Panel Products
+    (Completed)         Style
+    (Completed)         Edit
+    (Completed)         Save Item
+    (Completed)         New Item
+    (Completed)         Edit Item Page
+Admin Panel Posts
+    (Completed)         Save Posts
+    (Completed)         New Posts
+    (Completed)         Delete Posts
+    (Completed)         Style
+Admin Panel Users
+    (Completed)         Save User (Admin Status)
+    (Completed)         Style
+Admin Panel Product
+    (Completed)         Look at ProductAdminPanelCode
+    (Completed)         add back button to the top
+Admin Panel
+    (Completed)         Style
+    (Completed)         Save Post Should Close Post Edit (Toggle)
+Database
+    (Completed)         Set up Post DB
+Profile
+    (TO BE DONE LATER)  Email Add Button
+    (TO BE DONE LATER)  Email remove (not for zero)
+    (Completed)         Style
+Change API Keys
+    (Completed)         FB
+    (Completed)         Open Exchange
+    (Completed)         Stripe
+    (Completed)         MongoDB Admin
+Google Calendar
+    (Completed)         Set Up API
+    (Completed)         Load On Main Page
+Portfolio
+    (Completed)         Portfolio Database
+    (Completed)         Write Backend API
+    (Completed)         Write Frontend API
+    (Completed)         Connect Angular To Frontend
+    (Completed)         Link to Individual Picture
+    (Completed)         Style
+    (Completed)         Write Frontend API
+    (Completed)         Connect Angular To Frontend
+    (Completed)         Style
+Home Page
+    (Completed)         Carousel
+    (Completed)             Make a Carousel Database (MongoDB)
+    (Completed)             Write Backend API
+    (Completed)             Write Frontend API
+    (Completed)             Connect Angular To Frontend
+    (Completed)         CTA
+    (Completed)         Photos
+    (Completed)         Upcoming Events
+Misc
+(Completed)             Quantity-Cart-Update needs to update scope via response
+                        Single Page and Cart Quantity edit needs to be turned off with 1 quantity product max
+                        Admin Upload Image
+                        Calendar Only Loads New Events (future)
+                        Cart Delete IS deleting Wrong Item
+                        Fix Font on the Store
+                        prompt for delete of items
+                        displays posts
+                        single page takes u to cart after click
+                        admin delete post should close

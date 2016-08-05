@@ -10,3 +10,13 @@
     height: 150px;
   }
 }
+.adminPanelLinks {
+  color: $b;
+  margin-top: 2em;
+  &:hover {
+    text-decoration: none;
+  }
+}
+.lilSpaceDawg {
+  margin-bottom: 2%;
+}

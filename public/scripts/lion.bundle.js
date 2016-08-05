@@ -8,7 +8,6 @@ webpackJsonp([0],[
 	__webpack_require__(3);
 	__webpack_require__(5);
 	__webpack_require__(6);
-	__webpack_require__(7);
 	__webpack_require__(8);
 	__webpack_require__(9);
 	__webpack_require__(10);
@@ -19,7 +18,6 @@ webpackJsonp([0],[
 	__webpack_require__(15);
 	__webpack_require__(16);
 	__webpack_require__(17);
-	__webpack_require__(18);
 	__webpack_require__(19);
 	__webpack_require__(20);
 	__webpack_require__(21);
@@ -49,12 +47,16 @@ webpackJsonp([0],[
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
-
-
-
 	__webpack_require__(48);
 	__webpack_require__(49);
 	__webpack_require__(50);
+	__webpack_require__(18);
+	__webpack_require__(51);
+	__webpack_require__(54);
+	__webpack_require__(55);
+	__webpack_require__(56);
+	__webpack_require__(57);
+	__webpack_require__(58);
 
 
 /***/ },
@@ -66,13 +68,17 @@ webpackJsonp([0],[
 	'use strict';
 	var lionHeart = angular.module("lionHeart", [__webpack_require__(4)])
 	lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/posts').otherwise('/');
+	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').otherwise('/');
 	  $stateProvider
 	    .state('home', {
 	      url: '/',
 	      templateUrl: 'templates/index.html',
 	      controller: 'indexHomeCtrl'
 	    })
+	      .state('quickstart', {
+	        url: '/quickstart',
+	        templateUrl: 'templates/quickstart.html'
+	      })
 	    .state('login', {
 	    url: '/login',
 	    templateUrl: 'templates/login.html',
@@ -162,6 +168,16 @@ webpackJsonp([0],[
 	  templateUrl: 'templates/portfolio.html',
 	  controller: 'portfolioCtrl'
 	  })
+	.state('portfolio.gallery', {
+	url: '/gallery',
+	templateUrl: 'templates/portfolioGallery.html',
+	controller: 'portfolioCtrl'
+	})
+	.state('portfolio.singlePiece', {
+	url: '/id/:id',
+	templateUrl: 'templates/singlePiece.html',
+	controller: 'portfolioCtrl'
+	})
 	    .state('cart', {
 	    url: '/cart',
 	    templateUrl: 'templates/cart.html',
@@ -195,6 +211,11 @@ webpackJsonp([0],[
 	      templateUrl: 'templates/admin/posts.html',
 	      controller: 'admin.postsCtrl'
 	      })
+	        .state('admin.portfolio', {
+	        url: '/portfolio',
+	        templateUrl: 'templates/admin/portfolio.html',
+	        controller: 'admin.portfolioCtrl'
+	        })
 	      .state('admin.users', {
 	      url: '/users',
 	      templateUrl: 'templates/admin/users.html',
@@ -4802,24 +4823,70 @@ webpackJsonp([0],[
 
 /***/ },
 /* 6 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("productCtrl", function($scope, dataService, functionService) {
+	.controller("productCtrl", function($scope, dataService, functionService, $location) {
+	  var addToCartReq = __webpack_require__(7);
+	  var cart;
+	  var user;
+	  var list = [];
+	  var tempEdit = $location.path();
 	  dataService.getProducts(function(response) {
-	    $scope.products = response.data.products
+	  var varTemp = response.data.products.length;
+	  if (response.data.products[0].id == null) {
+	      for (var x = 0; x < varTemp; x++) {
+	        response.data.products[x].id = response.data.products[x]._id;
+	      }
+	  }
+	    if (tempEdit.search("/store/") > -1 && tempEdit.search("all") == -1) {
+	      var check;
+	      tempEdit = tempEdit.slice(7, tempEdit.length);
+	      for (var x = 0; x < varTemp; x++) {
+	        if (response.data.products[x].category["parent"]) {
+	          check = response.data.products[x].category["parent"];
+	          check = check.toLowerCase();
+	            if (check == "graphic design") {
+	              check = "graphics";
+	            }
+	          console.log(check + tempEdit);
+	          if (check.search(tempEdit) > -1) {
+	            list.push(response.data.products[x]);
+	            console.log(list);
+	          }
+	          if (x == varTemp - 1) {
+	          $scope.products = list;
+	          }
+	          if (check.search("tempEdit") > -1) {
+	            list.push(response.data.products[x]);
+	            console.log(list);
+	          }
+	          if (x == varTemp - 1) {
+	            $scope.products = list;
+	          }
+	        }
+	        }
+	      }
+	    else {
+	    $scope.products = response.data.products;
+	    }
 	  })
 	  dataService.getCart(function(response) {
 	    $scope.cart = response.data.cart.data.cart;
+	    cart = $scope.cart
 	  })
 	  dataService.getUser(function(response) {
 	    $scope.user = response.data.user;
+	    user = $scope.user;
 	  })
-
 	    $scope.addToCart = function(id, quantity, product) {
-	      functionService.addToCart(id, quantity, $scope.user, $scope.cart, product, function(response) {
-	        $scope.cart = response;
+	    var id = id;
+	      addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+	        console.log("Cart Saved");
+	        $scope.cart = res;
+	        cart = $scope.cart
+	        console.log("Completed!");
 	      });
 	    }
 	});
@@ -4827,6 +4894,33 @@ webpackJsonp([0],[
 
 /***/ },
 /* 7 */
+/***/ function(module, exports) {
+
+	'use strict'
+	var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
+	  console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
+	  var returnVal;
+	  if (!user) {
+	    console.log("Please Log In");
+	  }
+	  else {
+	    functionService.addToCart(id, quantity, user, cart, product, function(response) {
+	      if (response == "nothing") {
+	        console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
+	        returnVal = cart;
+	      } else {
+	        returnVal = response;
+	      }
+	      console.log("Saving Cart...");
+	      finalCB(returnVal);
+	    });
+	  }
+	}
+	module.exports = addToCartReq;
+
+
+/***/ },
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4857,7 +4951,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4872,7 +4966,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4887,7 +4981,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4898,7 +4992,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4913,7 +5007,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4928,7 +5022,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4943,7 +5037,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4954,7 +5048,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4969,12 +5063,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 16 */
-/***/ function(module, exports) {
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("cartCtrl", function($scope, dataService, $timeout, $state) {
+	  var inputToggle = __webpack_require__(18);
+	  $scope.edit = {};
 	  // Blank Stripe Card
 	    $scope.stripeToken = {stripeToken: {
 	      number: '',
@@ -5014,13 +5110,20 @@ webpackJsonp([0],[
 
 	// Review Page: < > Arrow's function to save User Data
 	  $scope.saveSetUp = function(stripeToken) {
+	    $scope.errPayment = false;
 	    // Get User / Cart
 	    var aUser = $scope.user;
 	    // Save User / Cart
 	    dataService.updateCart(aUser, function(response) {});
 	    // Pass CC info to next State
-	    var token = stripeToken;
-	    $state.go('cart.checkout', token);
+	    if (stripeToken) {
+	      if (stripeToken.stripeToken.number.length == 16 && stripeToken.stripeToken.cvc.length == 3 && stripeToken.stripeToken.exp_month.length == 2 && stripeToken.stripeToken.exp_year.length == 4) {
+	        var token = stripeToken;
+	        $state.go('cart.checkout', token);
+	      } else {
+	        $scope.errPayment = true;
+	      }
+	    }
 	  }
 	// Sub Total Calculation Function for Checkout (pages)
 	  var sub = function (cart, user, sub) {
@@ -5062,35 +5165,83 @@ webpackJsonp([0],[
 	  if ($scope.UserWithCart.data.cart.items[index].product.quantity > $scope.UserWithCart.data.cart.items[index].quantity) {
 	    $scope.UserWithCart.data.cart.items[index].quantity += 1;
 	    var userWithCart = $scope.UserWithCart
-	    dataService.updateCart(userWithCart, function(response) {});
+	    dataService.updateCart2(userWithCart, function(response) {
+	        $scope.cartA = response.data.user.data.cart;
+	        var cart = $scope.cartA.items;
+	        $scope.UserWithCart = response.data.user;
+	        var user = $scope.UserWithCart;
+	        cartTotal(cart, user)
 	    dataService.getCart(function(response) {
-	      $scope.cartA = response.data.cart.data.cart;
-	      var cart = $scope.cartA.items;
-	      $scope.UserWithCart = response.data.cart;
-	      var user = $scope.UserWithCart;
-	      cartTotal(cart, user)
+	      // $scope.cartA = response.data.cart.data.cart;
+	      // var cart = $scope.cartA.items;
+	      // $scope.UserWithCart = response.data.cart;
+	      // var user = $scope.UserWithCart;
+	      // cartTotal(cart, user)
 	    });
+	  });
 	  }
 	}
 	$scope.quantityTotalMinus = function(index) {
 	  if ($scope.UserWithCart.data.cart.items[index].quantity > 1) {
 	    $scope.UserWithCart.data.cart.items[index].quantity -= 1;
 	    var userWithCart = $scope.UserWithCart;
-	    dataService.updateCart(userWithCart, function(response) {});
-	    dataService.getCart(function(response) {
-	      $scope.cartA = response.data.cart.data.cart;
-	      var cart = $scope.cartA.items;
-	      $scope.UserWithCart = response.data.cart;
-	      var user = $scope.UserWithCart;
-	      cartTotal(cart, user)
-	    });
+	    dataService.updateCart2(userWithCart, function(response) {
+	        $scope.cartA = response.data.user.data.cart;
+	        var cart = $scope.cartA.items;
+	        $scope.UserWithCart = response.data.user;
+	        var user = $scope.UserWithCart;
+	        cartTotal(cart, user)
+	  });
 	  }
+	}
+
+	$scope.checkValForMaxInCart = function(index) {
+	  if ($scope.cartA.items[index].quantity > $scope.cartA.items[index].product.quantity) {
+	    $scope.cartA.items[index].quantity = $scope.cartA.items[index].product.quantity;
+	  } else if ($scope.cartA.items[index].quantity < 1) {
+	    $scope.cartA.items[index].quantity = 1;
+	  }
+	  $scope.edit[index] = false;
+	}
+	$scope.justGot = function(val) {
+	    if (val == 1) {
+	      console.log(1);
+	      return true;
+	    } else {
+	      return false
+	    }
+	}
+	//Check Quantity
+	$scope.quantityCheck = function(val) {
+	  inputToggle(val, function(res) {
+	    if (res == true) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  })
 	}
 	});
 
 
 /***/ },
-/* 17 */
+/* 18 */
+/***/ function(module, exports) {
+
+	'use strict'
+	var inputToggle = function(val, callback) {
+	  var maxVal = 20;
+	      if (val < maxVal) {
+	        callback(true);
+	      } else {
+	        callback(false);
+	      }
+	    }
+	module.exports = inputToggle;
+
+
+/***/ },
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5105,7 +5256,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 18 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5121,7 +5272,7 @@ webpackJsonp([0],[
 	    })
 	  }
 	  $scope.isActiveProfile = function (viewLocation) {
-	        if (viewLocation === $location.path()) {
+	        if (viewLocation == $location.path()) {
 	        return viewLocation === $location.path();
 	      }
 	    };
@@ -5130,7 +5281,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5145,7 +5296,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5220,7 +5371,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5235,7 +5386,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5261,7 +5412,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5276,7 +5427,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5349,7 +5500,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5364,7 +5515,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5720,7 +5871,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5735,7 +5886,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5750,7 +5901,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5760,7 +5911,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5775,7 +5926,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5788,7 +5939,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5801,7 +5952,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 33 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5814,7 +5965,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 34 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5827,7 +5978,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 35 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5840,7 +5991,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 36 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5853,13 +6004,24 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 37 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("indexHomeCtrl", function($scope, dataService) {
+	.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest) {
+	  googleCalendarGetRequest.calendar(function(events) {
+	    if (events.length > 3) {
+	      var temp = events.length - 3;
+	      events.splice(3, temp)
+	    }
+	    $scope.googleEvents = events;
+	  });
 
+
+	    carouselDataService.getCarousel(function(res) {
+	      $scope.carouselImages = res.data.carousel;
+	    })
 
 
 
@@ -5879,26 +6041,7 @@ webpackJsonp([0],[
 	        // itemsMobile : false
 
 	    });
-	});
 
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("profile.dashboardCtrl", function($scope, dataService) {
-	});
-
-
-/***/ },
-/* 39 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("profile.dashboard.editCtrl", function($scope, dataService) {
 	});
 
 
@@ -5908,7 +6051,30 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
+	.controller("profile.dashboardCtrl", function($scope, dataService) {
+	});
+
+
+/***/ },
+/* 41 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("profile.dashboard.editCtrl", function($scope, dataService) {
+	});
+
+
+/***/ },
+/* 42 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+	var inputToggle = __webpack_require__(18);
+	var user, cart;
+	var addToCartReq = __webpack_require__(7);
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
 	dataService.getSingleItem(urlCode, function(response) {
@@ -5916,14 +6082,60 @@ webpackJsonp([0],[
 	});
 	dataService.getUser(function(response) {
 	  $scope.user = response.data.user;
+	  user = $scope.user
 	})
 	dataService.getCart(function(response) {
 	  $scope.cart = response.data.cart.data.cart;
+	  cart = $scope.cart
 	})
-	$scope.addToCart = function(id, quantity) {
-	  functionService.addToCart(id, quantity, $scope.user, $scope.cart);
+	$scope.addToCart = function(id, quantity, product) {
+	var id = id;
+	  addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+	    console.log("Cart Saved");
+	    $scope.cart = res;
+	    cart = $scope.cart
+	  });
+	  console.log("Completed!");
+	}
+	$scope.quantity = {val: 1};
+
+	//Check Quantity
+	$scope.quantityCheck = function(val) {
+	  inputToggle(val, function(res) {
+	    if (res == true) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  })
 	}
 
+	$scope.quantityChange = function(val) {
+	  if (val == 1) {
+	    $scope.quantity.val += 1;
+	  } else {
+	    $scope.quantity.val -= 1;
+	  }
+	}
+	$scope.checkValForMax = function() {
+	  if ($scope.quantity.val > $scope.singleItem.quantity) {
+	    $scope.quantity.val = $scope.singleItem.quantity;
+	  } else if ($scope.quantity.val < 1) {
+	    $scope.quantity.val = 1;
+	  }
+	  $scope.edit = false;
+	}
+
+
+	// get products for random display (3)
+	// create array with digits = to array.length
+	// run a random number
+	// get number from array (NOT INDEX)
+	// splice out [x] from array
+	// repeat three times
+	// save related items to $scope
+	// Display in angular
+	// prevent duplicates
 	dataService.getProducts(function(response) {
 	  var productsRes = response.data.products;
 	  var productLength = productsRes.length;
@@ -5967,15 +6179,6 @@ webpackJsonp([0],[
 	  });
 	});
 	});
-	// get products
-	// create array with digits = to array.length
-	// run a random number
-	// get number from array (NOT INDEX)
-	// splice out [x] from array
-	// repeat three times
-	// save related items to $scope
-	// Display in angular
-	// prevent duplicates
 
 
 
@@ -5983,7 +6186,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6062,7 +6265,7 @@ webpackJsonp([0],[
 	          temp.quantity = tempQuantity;
 	          temp.active = tempActive;
 	            //save product
-	            dataService.saveItem(temp.id, temp, function(response) {
+	            dataService.saveItem(temp._id, temp, function(response) {
 	              cb(true)
 	            })
 	          })
@@ -6105,46 +6308,257 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.productsCtrl", function($scope, dataService) {
-	  dataService.getProducts(function(response) {
-	    $scope.products = response.data.products
-	  })
-	});
-
-
-/***/ },
-/* 43 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.postsCtrl", function($scope, dataService) {
-	dataService.getBlog(function(response) {
-	$scope.blog = response.data.posts;
-	})
-	});
-
-
-/***/ },
 /* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("admin.usersCtrl", function($scope, dataService) {
-	dataService.getUsers(function(response) {
-	$scope.users = response.data.users;
-	});
+	.controller("admin.productsCtrl", function($scope, dataService, $location, $timeout) {
+	  dataService.getProducts(function(response) {
+	    $scope.products = response.data.products
+	  })
+	  $scope.editProduct = {show: false};
+	  var productBeingEditedIndex;
+	  $scope.productEdit = function(product, index) {
+	    productBeingEditedIndex = index;
+	    if (!product.quantity) {
+	      product.quantity = 0;
+	    }
+	    $scope.productDisplayEdit = product;
+	    $scope.editProduct = {show: true};
+	  }
+	  $scope.deleteItem = function(id) {
+	    dataService.deleteItem(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.products.splice(productBeingEditedIndex, 1);
+	      $scope.editProduct.show = false;
+	    } else {
+	      console.log('Error Deleteing Item?');
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
+	    $scope.successMessageDisplayTop = false;
+	  $scope.saveItem = function(id, product) {
+	    dataService.saveItem(id, product, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTop = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTop = false;
+	        }, 3075)
+	      } else {
+	        console.log('Error Saving Item?');
+	        alert('Error Saving Item?');
+	      }
+	    })
+	  }
+	  $scope.newItemStart = function() {
+	    var newProduct = {
+	      "name": "New Item",
+	      "active": true,
+	      "pictures": ["http://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"],
+	      "price": {
+	        "amount": 100,
+	        "currency": 'USD'
+	      },
+	      "category": {"parent": "Paintings"},
+	      "urlCode": new Date().getTime(),
+	      "sku": new Date().getTime(),
+	      "quantity": 1
+	    };
+	      dataService.newItem(newProduct, function(res) {
+	        if (res.status == 200) {
+	          $scope.editProduct.show = true;
+	          $scope.products.push(newProduct);
+	          $scope.productDisplayEdit = newProduct;
+	          $scope.productDisplayEdit.id = res.data.products._id;
+	          $scope.productDisplayEdit._id = res.data.products._id;
+	        } else {
+	          alert("Error Creating Product")
+	        }
+	      });
+
+	  }
 	});
 
 
 /***/ },
 /* 45 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.postsCtrl", function($scope, dataService, $timeout) {
+	  dataService.getBlog(function(response) {
+	    $scope.blog = response.data.posts;
+	  })
+	  $scope.newPost = function() {
+	    var date = new Date;
+	        var month = (date.getUTCMonth()+1);
+	        var day = date.getDate();
+	        var year = date.getFullYear();
+	        var hour = date.getHours();
+	        if (hour >= 13) {
+	          hour -= 12;
+	        }
+	        var minutes = date.getMinutes();
+	        var time = hour+":"+minutes;
+	    var newPost = {
+	      "title": "Add Title",
+	      "description": "Add Description",
+	      "body": "Add Body",
+	      "urlCode": new Date().getTime(),
+	      "img": "https://tctechcrunch2011.files.wordpress.com/2015/08/clouds.jpg",
+	      "live": 'false',
+	      "date": {"month": month, "day": day, "year": year, "time": time},
+	      "loc": "main",
+	      "category": {"parent": "Homepage"}
+	    };
+	    dataService.newPost(newPost, function(res) {
+	      if (res.status == 200) {
+	        newPost._id = res.data.post._id;
+	        newPost.id = res.data.post._id;
+	      $scope.blog.push(newPost);
+	    } else {
+	      return res.status(500).json(res)
+	    }
+	    })
+	  }
+	  $scope.deletePost = function(id, post, index) {
+	    dataService.deletePost(id, post, function(res) {
+	        if (res.status == 200) {
+	          $scope.blog.splice(index, 1);
+	      } else {
+	        return res.status(500).json(res)
+	      }
+	    })
+	  }
+	  $scope.openBlog = {show : false};
+	    $scope.successMessageDisplayTopPost = false;
+	  $scope.savePost = function(id, post) {
+	    dataService.savePost(id, post, function(res) {
+	        if (res.status == 200) {
+	        $scope.openBlog.show = false;
+	          $scope.successMessageDisplayTopPost = true;
+	          $timeout(function() {
+	            $scope.successMessageDisplayTopPost = false;
+	          }, 3075)
+	      } else {
+	        console.log('Error Saving Post?');
+	        alert('Error Saving Post?');
+	        return res.status(500).json(res)
+	      }
+	    })
+	  }
+	});
+
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.usersCtrl", function($scope, dataService, $timeout) {
+	  dataService.getUsers(function(response) {
+	    $scope.users = response.data.users;
+	  });
+	  //Save User Function
+	  $scope.successMessageDisplayTopUser = false;
+	  $scope.saveUserAdmin = function(id, user) {
+	    dataService.saveUserAdmin(id, user, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTopUser = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTopUser = false;
+	        }, 3000)
+	      }
+	      else {
+	        console.log('Error Saving User?');
+	        alert('Error Saving User?');
+	      }
+	    })
+	  }
+	});
+
+
+/***/ },
+/* 47 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.portfolioCtrl", function($scope, portfolioDataService, $location, $timeout) {
+	  portfolioDataService.getPortfolio(function(res) {
+	    $scope.portfolioImages = res.data.portfolios;
+	  })
+	  $scope.deleteIndex = 0;
+	  $scope.saveIndex = 0;
+	  $scope.editPortfolio = {show: false};
+	  $scope.portfolioEdit = function(portfolio, index) {
+	    $scope.deleteIndex = index;
+	    $scope.saveIndex = index;
+	    if (portfolio.url == "") {
+	      portfolio.url = "http://";
+	    }
+	    if (portfolio.urlBig == "") {
+	      portfolio.urlBig = "http://";
+	    }
+	    $scope.portfolioDisplayEdit = portfolio;
+	    $scope.editPortfolio = {show: true};
+	  }
+	  $scope.deletePortfolio = function(id, index) {
+	  $scope.deleteIndex;
+	    $scope.portfolioImages.splice(index, 1);
+	    portfolioDataService.deletePortfolio(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.editPortfolio.show = false;
+	    } else {
+	      console.log('Error Deleteing Item?');
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
+	    $scope.successMessageDisplayTopPortfolio = false;
+	  $scope.savePortfolio = function(id, portfolio, index) {
+	  $scope.saveIndex = 0;
+	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTopPortfolio = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTopPortfolio = false;
+	        }, 3075)
+	      } else {
+	        console.log('Error Saving Portfolio?');
+	        alert('Error Saving Portfolio?');
+	      }
+	    })
+	  }
+	  $scope.newPiece = function() {
+	    var newPortfolio = {
+	      "url": "https://",
+	      "urlBig": "https://"
+	    };
+	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
+	        if (res.status == 200) {
+	          newPortfolio._id = res.data.portfolio._id;
+	          newPortfolio.id = res.data.portfolio._id;
+	          $scope.editPortfolio.show = true;
+	          $scope.portfolioImages.push(newPortfolio);
+	          $scope.portfolioDisplayEdit = newPortfolio;
+	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
+	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
+	        } else {
+	          alert("Error Creating Portfolio")
+	        }
+	      });
+
+	  }
+	});
+
+
+/***/ },
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6155,36 +6569,56 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
-	  .controller("portfolioCtrl", function($scope, dataService) {
-	      $scope.portfolioImages = [{
-	        "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-wallpaper-HD-desktop-620x349.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Abstract-rainbows-vortex-colorful-wallpaper-HD-620x388.jpg"
-	      }, {
-	        "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-HD-Pictures-620x388.jpg"
-	      }, {
-	        "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTc_qWblhfr11zCkbxdZycggUaotcT4yMyYqHtDZnW7M2BYHsyPaw"
-	      }, {
-	        "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOlbBCB_NXkXQtty0VS0OugvCEMBWpSNdn72S7-LyRqtH570LWcA"
-	      }, {
-	        "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSfCwSkXBZjqLb2kApOYM0r8RjPqjGQTQZZDRMhSkOd5KLpoDvdTg"
-	      }, {
-	        "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
-	      }]
+	  .controller("portfolioCtrl", function($scope, portfolioDataService, $location) {
+	      portfolioDataService.getPortfolio(function(res) {
+	        if (res.data.portfolios.length == 0) {
+	          $scope.portfolioImages = [{
+	            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg", "urlBig": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-wallpaper-HD-desktop-620x349.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Abstract-rainbows-vortex-colorful-wallpaper-HD-620x388.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-HD-Pictures-620x388.jpg"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTc_qWblhfr11zCkbxdZycggUaotcT4yMyYqHtDZnW7M2BYHsyPaw"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOlbBCB_NXkXQtty0VS0OugvCEMBWpSNdn72S7-LyRqtH570LWcA"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSfCwSkXBZjqLb2kApOYM0r8RjPqjGQTQZZDRMhSkOd5KLpoDvdTg"
+	          }, {
+	            "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
+	          }]
+	        } else {
+	          $scope.portfolioImages = res.data.portfolios;
+	        }
+	      });
+	      var tempSearchItem = $location.path();
+	      if (tempSearchItem.search("/portfolio/id/") >= 0) {
+	        var tempItem = tempSearchItem.split("/");
+	        var tempID = tempItem[3];
+	        if (tempItem[3] != "") {
+	          portfolioDataService.getSinglePiece(tempID, function(res) {
+	            $scope.singlePiece = res.data.portfolios;
+	          })
+	        } else {
+	          console.log("Blank ID");
+	          $scope.singlePiece = {"urlBig": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"}
+	        }
+	      }
+
 	  });
 
 
 /***/ },
-/* 47 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6208,7 +6642,416 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 51 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+	angular.module("lionHeart")
+	.service("googleCalendarGetRequest", function($http) {
+	  // Disable "configAuth" to turn off test mode
+
+	  var key, userEmail, configAuth;
+
+	  var configAuth = __webpack_require__(53);
+
+
+
+	  // If else statment for test mode or normal mode
+	  if (configAuth) {
+	    key = configAuth.googleCalApi.apiKey;
+	    userEmail = configAuth.googleCalApi.userEmail;
+	  } else {
+	   key = process.env.googleCalApiAPIKEY;
+	   userEmail = process.env.googleCalApiUSEREMAIL;
+	  }
+	  // Google API Info
+	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
+	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
+	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
+	  // $Get REQUEST
+	this.calendar = function(callback) {
+	      $http.get(url)
+	      .then(function(res) {
+	        var events = []
+	      // Call of FUNCTION ($GET REQUEST)
+	        var res = res.data.items;
+	        for (var x = 0; x < res.length; x++) {
+	          var eventItem = {};
+	          if (res[x].status == "confirmed") {
+	          var summary = res[x].summary;
+	          if (!res[x].description) {
+	          var description = "No Description Available";
+	          } else {
+	          var description = res[x].description;
+	          }
+	          if (!res[x].location) {
+	          var location = "To Be Decided";
+	          } else {
+	          var location = res[x].location;
+	          }
+	      // Date Conversion
+	            dateConversionForComputerCodePurposes(res[x].start.dateTime, res[x].end.dateTime, function(start, end) {
+	              dateConversionForHumanBrainPurposes(start, end, function(start, end) {
+	                if (x == 0) {
+	                  events = [{"summary": "", "start": "", "end": ""}]
+	                }
+	              events[x] = {"summary": summary,"description": description, "location": location, "start": start, "end": end};
+
+	                dateConversionForWebsite(events[x], function(eventOutput) {
+	                  events[x] = eventOutput;
+	                })
+	              })
+	            })
+	            }
+	          }
+	          callback(events);
+	      })
+	};
+
+	var dateConversionForWebsite = function(events, callback) {
+	  events.end[3] = events.end[3].split(":").splice(0,2).join(":");
+	  events.start[3] = events.start[3].split(":").splice(0,2).join(":");
+	  if (events.start[2] == events.end[2]) {
+	    events.sameDay = true;
+	    events.range = events.start[1] + " " + events.start[2] + " " + events.start[0] + " at " + events.start[3] + " to " + events.end[3];
+	  } else {
+	  events.range = events.start[1] + " " + events.start[2] + " " + events.start[0] + " at " + events.start[3] + " to " + events.end[3] + " (" + events.end[1] + " " + events.end[2]+")";
+	  }
+	  callback(events);
+	}
+	var dateConversionForComputerCodePurposes = function(start, end, callback) {
+	    // Split the Code from Time and Date
+	    start = start.split("T");
+	    end = end.split("T");
+	    //Remove the Timezone at the end and resave it as an array
+	    var start2 = start[1].split("-");
+	    start[1] = start2.splice(0, 1);
+	    start[1] = start[1][0];
+	    var end2 = end[1].split("-");
+	    end[1] = end2.splice(0, 1);
+	    end[1] = end[1][0];
+	    callback(start, end);
+	  };
+	  var dateConversionForHumanBrainPurposes = function(start, end, callback) {
+	    // Convert Time
+	    var startTime;
+	    var endTime;
+	    var saveStartTemp = start[1];
+	    var saveEndTemp = end[1];
+	    var startArrRange = saveStartTemp.split(":");
+	    var endArrRange = saveEndTemp.split(":");
+	    var dateArrStart = start[0].split("-");
+	    var dateArrEnd = end[0].split("-");
+	    startArrRange.splice(2, 1);
+	    endArrRange.splice(2, 1);
+	    timeConvertFunction(startArrRange, function(res) {
+	      startArrRange = res[0]+":"+res[1]+" "+res[2];
+	      timeConvertFunction(endArrRange, function(res) {
+	        endArrRange = res[0]+":"+res[1]+" "+res[2];
+	          //Convert To Legable Days
+	        dateArrStart.push(startArrRange);
+	        dateArrEnd.push(endArrRange);
+	        conversionHappensHere(dateArrStart, function(res) {
+	          dateArrStart = res;
+	          conversionHappensHere(dateArrEnd, function(res) {
+	            dateArrEnd = res;
+	          });
+	        });
+	      });
+	    });
+	callback(dateArrStart, dateArrEnd);
+	  }
+	  var timeConvertFunction = function (input, output) {
+	    if (input[0] == 0) {
+	      input[0] = 12;
+	        input.push("am");
+	    }
+	    else if (input[0] >= 13) {
+	      input[0] -= 12;
+	        input.push("pm");
+	    }
+	    else if (input[0] === "12") {
+	      input.push("pm");
+	    } else {
+	      input.push("am");
+	    }
+	    output(input);
+	  }
+	  var conversionHappensHere = function(dateArray, callback) {
+	    switch (dateArray[1]) {
+	      case "01":
+	          dateArray[1] = "January"
+	        break;
+	        case "02":
+	            dateArray[1] = "February"
+	          break;
+	          case "03":
+	              dateArray[1] = "March"
+	            break;
+	            case "04":
+	                dateArray[1] = "April"
+	              break;
+	              case "05":
+	                  dateArray[1] = "May"
+	                break;
+	                case "06":
+	                    dateArray[1] = "June"
+	                  break;
+	                  case "07":
+	                      dateArray[1] = "July"
+	                    break;
+	                    case "08":
+	                        dateArray[1] = "August"
+	                      break;
+	                      case "09":
+	                          dateArray[1] = "September"
+	                        break;
+	                        case "10":
+	                            dateArray[1] = "October"
+	                          break;
+	                          case "11":
+	                              dateArray[1] = "November"
+	                            break;
+	                            case "12":
+	                                dateArray[1] = "December"
+	                              break;
+	    }
+
+	    if (dateArray[2] == "01" || dateArray[2] == "21" || dateArray[2] == "31") {
+	      if (dateArray[2] == "01") {
+	        dateArray[2] = "1";
+	      }
+	      dateArray[2] = dateArray[2] +"st"
+	    }
+	    else if (dateArray[2] == "02" || dateArray[2] == "22") {
+	      if (dateArray[2] == "02") {
+	        dateArray[2] = "2";
+	      }
+	      dateArray[2] = dateArray[2] +"nd"
+	    }
+	    else if (dateArray[2] == "03" || dateArray[2] == "23") {
+	      if (dateArray[2] == "03") {
+	        dateArray[2] = "3";
+	      }
+	      dateArray[2] = dateArray[2] +"rd"
+	    }
+	    else if (dateArray[2] >= 4 && dateArray[2] <= 30) {
+	      if (dateArray[2] >= 4 && dateArray[2] <= 9) {
+	        dateArray[2] = dateArray[2].split("");
+	        dateArray[2] = dateArray[2][1];
+	      }
+	      dateArray[2] = dateArray[2] +"th"
+	    }
+
+
+	    callback(dateArray);
+	  }
+	})
+
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)))
+
+/***/ },
+/* 52 */
+/***/ function(module, exports) {
+
+	// shim for using process in browser
+
+	var process = module.exports = {};
+
+	// cached from whatever global is present so that test runners that stub it
+	// don't break things.  But we need to wrap it in a try catch in case it is
+	// wrapped in strict mode code which doesn't define any globals.  It's inside a
+	// function because try/catches deoptimize in certain engines.
+
+	var cachedSetTimeout;
+	var cachedClearTimeout;
+
+	(function () {
+	  try {
+	    cachedSetTimeout = setTimeout;
+	  } catch (e) {
+	    cachedSetTimeout = function () {
+	      throw new Error('setTimeout is not defined');
+	    }
+	  }
+	  try {
+	    cachedClearTimeout = clearTimeout;
+	  } catch (e) {
+	    cachedClearTimeout = function () {
+	      throw new Error('clearTimeout is not defined');
+	    }
+	  }
+	} ())
+	var queue = [];
+	var draining = false;
+	var currentQueue;
+	var queueIndex = -1;
+
+	function cleanUpNextTick() {
+	    if (!draining || !currentQueue) {
+	        return;
+	    }
+	    draining = false;
+	    if (currentQueue.length) {
+	        queue = currentQueue.concat(queue);
+	    } else {
+	        queueIndex = -1;
+	    }
+	    if (queue.length) {
+	        drainQueue();
+	    }
+	}
+
+	function drainQueue() {
+	    if (draining) {
+	        return;
+	    }
+	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
+	    draining = true;
+
+	    var len = queue.length;
+	    while(len) {
+	        currentQueue = queue;
+	        queue = [];
+	        while (++queueIndex < len) {
+	            if (currentQueue) {
+	                currentQueue[queueIndex].run();
+	            }
+	        }
+	        queueIndex = -1;
+	        len = queue.length;
+	    }
+	    currentQueue = null;
+	    draining = false;
+	    cachedClearTimeout.call(null, timeout);
+	}
+
+	process.nextTick = function (fun) {
+	    var args = new Array(arguments.length - 1);
+	    if (arguments.length > 1) {
+	        for (var i = 1; i < arguments.length; i++) {
+	            args[i - 1] = arguments[i];
+	        }
+	    }
+	    queue.push(new Item(fun, args));
+	    if (queue.length === 1 && !draining) {
+	        cachedSetTimeout.call(null, drainQueue, 0);
+	    }
+	};
+
+	// v8 likes predictible objects
+	function Item(fun, array) {
+	    this.fun = fun;
+	    this.array = array;
+	}
+	Item.prototype.run = function () {
+	    this.fun.apply(null, this.array);
+	};
+	process.title = 'browser';
+	process.browser = true;
+	process.env = {};
+	process.argv = [];
+	process.version = ''; // empty string to avoid regexp issues
+	process.versions = {};
+
+	function noop() {}
+
+	process.on = noop;
+	process.addListener = noop;
+	process.once = noop;
+	process.off = noop;
+	process.removeListener = noop;
+	process.removeAllListeners = noop;
+	process.emit = noop;
+
+	process.binding = function (name) {
+	    throw new Error('process.binding is not supported');
+	};
+
+	process.cwd = function () { return '/' };
+	process.chdir = function (dir) {
+	    throw new Error('process.chdir is not supported');
+	};
+	process.umask = function() { return 0; };
+
+
+/***/ },
+/* 53 */
+/***/ function(module, exports) {
+
+	module.exports = {
+	    'googleCalApi' : {
+	      'clientID' : '154684505002-fqll12rte5oisps3dq596vsprc9phdmc.apps.googleusercontent.com',
+	      'clientSecret'  : 'qtYuA73IiWrgMNt24byUD3j9',
+	      "apiKey": 'AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE',
+	      "userEmail": 'artbycale619@gmail.com'
+	    }
+	};
+
+
+/***/ },
+/* 54 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("carouselDataService", function($http) {
+	    this.getCarousel = function(callback) {
+	      $http.get("/api/carousel")
+	      .then(callback)
+	    };
+	    this.saveCarousel = function(id, carousel, callback) {
+	    $http.put('/api/carousel/id/' + id, carousel)
+	    .then(callback)
+	    };
+	    this.deleteCarousel = function(id, callback) {
+	      var tempUrl = '/api/carousel/id/' + id;
+	      $http.delete(tempUrl)
+	      .then(callback);
+	    }
+	    this.newCarousel = function(carousel, callback) {
+	      var tempUrl = '/api/carousel';
+	      $http.post(tempUrl, carousel)
+	      .then(callback);
+	    }
+	  }); // FIN
+
+
+/***/ },
+/* 55 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("portfolioDataService", function($http) {
+	    this.getPortfolio = function(callback) {
+	      $http.get("/api/portfolio")
+	      .then(callback)
+	    };
+	    this.getSinglePiece = function(id, callback) {
+	      var tempUrl = '/api/portfolio/id/' + id;
+	      $http.get(tempUrl)
+	      .then(callback)
+	    }
+	    this.savePortfolio = function(id, portfolio, callback) {
+	    $http.put('/api/portfolio/id/' + id, portfolio)
+	    .then(callback)
+	    };
+	    this.deletePortfolio = function(id, callback) {
+	      var tempUrl = '/api/portfolio/id/' + id;
+	      $http.delete(tempUrl)
+	      .then(callback);
+	    }
+	    this.newPortfolio = function(portfolio, callback) {
+	      var tempUrl = '/api/portfolio';
+	      $http.post(tempUrl, portfolio)
+	      .then(callback);
+	    }
+	  }); // FIN
+
+
+/***/ },
+/* 56 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6227,6 +7070,11 @@ webpackJsonp([0],[
 	  $http.put('/api/products/id/' + id, product)
 	  .then(callback)
 	  };
+	  this.deleteItem = function(id, callback) {
+	    var tempUrl = '/api/products/id/' + id;
+	    $http.delete(tempUrl)
+	    .then(callback);
+	  }
 	  this.getCategoryGraphics = function(callback) {
 	    $http.get("/api/category/Graphic%20Design")
 	    .then(callback)
@@ -6264,11 +7112,27 @@ webpackJsonp([0],[
 	        $http.get("/api/users")
 	        .then(callback)
 	      };
+	  this.newItem = function(item, callback) {
+	    $http.post('/api/products', item).then(callback)
+	  };
 	  this.newUser = function(user) {
 	    $http.post('/api/users', user)
 	  };
+	  this.newPost = function(post, callback) {
+	    $http.post('/api/blog', post)
+	    .then(callback);
+	  };
+	  this.deletePost = function(id, post, callback) {
+	    var tempUrl = '/api/blog/post/id/' + id;
+	    $http.delete(tempUrl, post)
+	    .then(callback);
+	  };
 	  this.saveUser = function(user, callback) {
 	  $http.put('/api/profile', user)
+	  .then(callback)
+	  };
+	  this.saveUserAdmin = function(id, user, callback) {
+	  $http.put('/api/admin/user/id/'+id, user)
 	  .then(callback)
 	  };
 	    this.getOrderHistory = function(callback) {
@@ -6287,6 +7151,10 @@ webpackJsonp([0],[
 	      $http.put("/api/user/cart", a)
 	      .then(b)
 	    };
+	    this.updateCart2 = function(a, b) {
+	      $http.put("/api/user/cart2", a)
+	      .then(b)
+	    };
 	  this.checkout = function(token, callback) {
 	    $http.post('/api/user/checkout', token)
 	    .then(callback)
@@ -6300,6 +7168,10 @@ webpackJsonp([0],[
 	    $http.get("/api/blog")
 	    .then(callback);
 	  }
+	  this.savePost = function(id, product, callback) {
+	  $http.put('/api/blog/post/id/' + id, product)
+	  .then(callback)
+	  };
 	  this.eraseCart = function(callback) {
 	    $http.post("/api/user/cart/erase")
 	    .then(callback);
@@ -6308,7 +7180,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6318,7 +7190,7 @@ webpackJsonp([0],[
 	                            // Checking Product Availability
 	// Get Products
 	// Get Users Cart
-	      grabIDAndQuantity(product, cart, function(file, text, saveItems) {
+	      grabIDAndQuantity(product, cart, function(file, text) {
 	        var checkForTrue = "";
 	        var isItTrue = 0;
 	        var saveItems = [];
@@ -6330,7 +7202,10 @@ webpackJsonp([0],[
 	          for (var y = 0; y < file.length; y++) {
 	// Search Products with Users Cart
 	            if (file[y].id.search(id) == 0) {
-	              if (file[y].quantity >= text[x].quantity) {
+	              if (file[y].quantity == 0) {
+	                isItTrue == text.length - 1;
+	              }
+	              else if (file[y].quantity >= text[x].quantity) {
 	                isItTrue += 1;
 	                file[y].quantity = file[y].quantity - text[x].quantity;
 	                //Make Product Inactive
@@ -6351,7 +7226,7 @@ webpackJsonp([0],[
 	          checkForTrue = false;
 	        }
 	        // Return Truthy or Falsey
-	          callback(file, checkForTrue, saveItems);
+	          callback(checkForTrue);
 	      })
 	    }
 
@@ -6361,7 +7236,7 @@ webpackJsonp([0],[
 	    var waypointOne = false, waypointTwo = false;
 	    for (var x = 0; x < product.length; x++) {
 	      var quantity = product[x].quantity;
-	      var id = product[x].id;
+	      var id = product[x]._id;
 	      var urlCode = product[x].urlCode;
 	      doSearchThisData.push({"id": id, "quantity": quantity, "urlCode": urlCode});
 	      if (x < product.length) {
@@ -6382,68 +7257,111 @@ webpackJsonp([0],[
 	  }
 
 	//Add To Cart
-	this.addToCart = function(id, quantity, user, cart, product, cb) {
-	  var item = {"_id": product._id, "id": product._id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
-	if (user == null) {
-	  alert("Please Log In");
-	}
-	else {
-	cartSearch(cart, function(response) {
-	  if (response == false) {
-	  // Run Code or Not
+	this.addToCart = function(id, quantity, user, cart, product, cba) {
 
-	  }
-	  else {
-	    var items = [];
-	    if (cart !== null) {
-	      items = cart.items;
-	      items.push(item);
+	  var id = id, quantity = quantity, user = user, cart = cart, product = product;
+	  var newCart;
+	  var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
+
+	  cartSearch(cart, id, function(response) {
+	    console.log("***Logging*** ***Response*** ***Below***");
+	    if (response == "true") {
+	      console.log("Already Added! : D");
+	      //False Code Here if needed
+	      cba("nothing");
+	    }
+	    else if (response == "false") {
+	      console.log("Adding.");
+	      var items = [];
+	      if (cart == null || cart.items == 0) {
+	        console.log("Adding..(to a empty cart)");
+	        items = item;
+	      }
+	      else {
+	        console.log("Adding..(to a cart with items)");
+	        items = cart.items;
+	        items.push(item);
+	      }
+	      user.data.cart = {"items" : items};
+	      dataService.updateCart(user, function(response) {
+	        items = [];
+	        console.log("Adding...(saved cart)");
+	        newCart = response.data.user.data.cart;
+	        cba(newCart);
+	      });
+	    }
+	  })
+	}
+
+
+	  var cartSearch = function(cart, id, cbb) { // Get Cart
+	    console.log("Cart Found\n\nBegin searching...");
+	    if (cart == null) {
+	      console.log("(Empty Cart)");
+	      cbb("false");
+	    }
+	    else if (!cart.items.length == 0) {
+	      console.log("Checking Cart...");
+	      // Get ID's
+	      cartCheck(cart, id, function(tempCheck) {
+
+	        // Check ID to Cart
+	        searchResponse(tempCheck, id, function(res) {
+
+	          if (res == true) {
+	            console.log("Checking Cart...(found ITEM in cart)");
+	            cbb("true");
+	          } else {
+	            console.log("Checking Cart...(ITEM is not in cart)");
+	            cbb("false");
+	          }
+	        })
+	      });
 	    }
 	    else {
-	      items = item;
+	      console.log("(Empty Cart)");
+	      cbb("false");
 	    }
-	    user.data.cart = {"items" : items};
-	    dataService.updateCart(user, function(response) {
-	      cb(response.data.user.data.cart);
-	    });
-	    items = [];
 	  }
-	})
-	    }
-	}
 
+	  var cartCheck = function(cart, id, cbc) {
 
-	  var cartSearch = function(cart, cb) { // Get Cart
-	  // Get ID's
-	  var tempCheck = [];
+	    // Get ID's
+	    var tempCheck = [];
+	    var tempCheckTwo = cart.items.length - 1;
 	    for (var x = 0; x < cart.items.length; x++) {
-	      if (!cart.items[x].id) {
-	        cart.items[x].id = cart.items[x].product.id;
-	      }
-	      tempCheck.push(cart.items[x].id);
+	        if (!cart.items[x].id) {
+	          cart.items[x].id = cart.items[x].product.id;
+	        }
+	        tempCheck.push(cart.items[x].id);
+	        if (x == tempCheckTwo) {
+	          cbc(tempCheck);
+	        }
 	    }
+	  }
+
+	  var searchResponse = function(tempCheck, id, cbd) {
 	    // Check ID to Cart
-	    var checkResult = false;
+	    var checkResult;
 	    var tempVar = -1;
 	    var tempNumber = tempCheck.length - 1;
 	    for (var x = 0; x < tempCheck.length; x++) {
 	      tempVar = tempCheck[x].search(id);
-	      if (!tempVar == -1) {
+	      if (tempVar > -1) {
 	        checkResult = true;
 	      }
-	      if (tempCheck[x] == tempNumber) {
-	        cb(checkResult);
+	      if (x == tempNumber) {
+	        console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
+	        cbd(checkResult);
 	      }
 	    }
 	  }
-
-
 
 	});
 
 
 /***/ },
-/* 50 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6452,7 +7370,6 @@ webpackJsonp([0],[
 	  this.eraseCart = function() {
 	    dataService.eraseCart(
 	      function(response) {
-	        console.log(response);
 	      }
 	    )
 	  }

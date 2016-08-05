@@ -1,6 +1,8 @@
 'use strict';
 angular.module("lionHeart")
 .controller("cartCtrl", function($scope, dataService, $timeout, $state) {
+  var inputToggle = require("../functions/inputToggle");
+  $scope.edit = {};
   // Blank Stripe Card
     $scope.stripeToken = {stripeToken: {
       number: '',
@@ -40,13 +42,20 @@ $scope.deleteCartItem = function(abe) {
 
 // Review Page: < > Arrow's function to save User Data
   $scope.saveSetUp = function(stripeToken) {
+    $scope.errPayment = false;
     // Get User / Cart
     var aUser = $scope.user;
     // Save User / Cart
     dataService.updateCart(aUser, function(response) {});
     // Pass CC info to next State
-    var token = stripeToken;
-    $state.go('cart.checkout', token);
+    if (stripeToken) {
+      if (stripeToken.stripeToken.number.length == 16 && stripeToken.stripeToken.cvc.length == 3 && stripeToken.stripeToken.exp_month.length == 2 && stripeToken.stripeToken.exp_year.length == 4) {
+        var token = stripeToken;
+        $state.go('cart.checkout', token);
+      } else {
+        $scope.errPayment = true;
+      }
+    }
   }
 // Sub Total Calculation Function for Checkout (pages)
   var sub = function (cart, user, sub) {
@@ -88,28 +97,60 @@ $scope.quantityTotalAddition = function(index) {
   if ($scope.UserWithCart.data.cart.items[index].product.quantity > $scope.UserWithCart.data.cart.items[index].quantity) {
     $scope.UserWithCart.data.cart.items[index].quantity += 1;
     var userWithCart = $scope.UserWithCart
-    dataService.updateCart(userWithCart, function(response) {});
+    dataService.updateCart2(userWithCart, function(response) {
+        $scope.cartA = response.data.user.data.cart;
+        var cart = $scope.cartA.items;
+        $scope.UserWithCart = response.data.user;
+        var user = $scope.UserWithCart;
+        cartTotal(cart, user)
     dataService.getCart(function(response) {
-      $scope.cartA = response.data.cart.data.cart;
-      var cart = $scope.cartA.items;
-      $scope.UserWithCart = response.data.cart;
-      var user = $scope.UserWithCart;
-      cartTotal(cart, user)
+      // $scope.cartA = response.data.cart.data.cart;
+      // var cart = $scope.cartA.items;
+      // $scope.UserWithCart = response.data.cart;
+      // var user = $scope.UserWithCart;
+      // cartTotal(cart, user)
     });
+  });
   }
 }
 $scope.quantityTotalMinus = function(index) {
   if ($scope.UserWithCart.data.cart.items[index].quantity > 1) {
     $scope.UserWithCart.data.cart.items[index].quantity -= 1;
     var userWithCart = $scope.UserWithCart;
-    dataService.updateCart(userWithCart, function(response) {});
-    dataService.getCart(function(response) {
-      $scope.cartA = response.data.cart.data.cart;
-      var cart = $scope.cartA.items;
-      $scope.UserWithCart = response.data.cart;
-      var user = $scope.UserWithCart;
-      cartTotal(cart, user)
-    });
+    dataService.updateCart2(userWithCart, function(response) {
+        $scope.cartA = response.data.user.data.cart;
+        var cart = $scope.cartA.items;
+        $scope.UserWithCart = response.data.user;
+        var user = $scope.UserWithCart;
+        cartTotal(cart, user)
+  });
   }
+}
+
+$scope.checkValForMaxInCart = function(index) {
+  if ($scope.cartA.items[index].quantity > $scope.cartA.items[index].product.quantity) {
+    $scope.cartA.items[index].quantity = $scope.cartA.items[index].product.quantity;
+  } else if ($scope.cartA.items[index].quantity < 1) {
+    $scope.cartA.items[index].quantity = 1;
+  }
+  $scope.edit[index] = false;
+}
+$scope.justGot = function(val) {
+    if (val == 1) {
+      console.log(1);
+      return true;
+    } else {
+      return false
+    }
+}
+//Check Quantity
+$scope.quantityCheck = function(val) {
+  inputToggle(val, function(res) {
+    if (res == true) {
+      return true;
+    } else {
+      return false;
+    }
+  })
 }
 });

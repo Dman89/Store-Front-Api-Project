@@ -141,13 +141,13 @@
   <div class="col-xs-12">
     <div class="row">
     <div class="col-xs-12 col-sm-4 col-sm-offset-2 col-md-3 col-md-offset-2 col-lg-2">
-      <h3>Number:</h3><label size="16" class="text-center">{{stripeToken.stripeToken.number}}</label>
+      <h3>Number:</h3><label size="16" class="text-center" required>{{stripeToken.stripeToken.number}}</label>
     </div>
     <div class="col-xs-12 col-sm-1 col-md-1 col-lg-1">
-      <h3>CVC:</h3><label ng-model="stripeToken.stripeToken.cvc" maxlength="3" size="1" class="text-center">{{stripeToken.stripeToken.cvc}}</label>
+      <h3>CVC:</h3><label ng-model="stripeToken.stripeToken.cvc" maxlength="3" size="1" class="text-center" required>{{stripeToken.stripeToken.cvc}}</label>
     </div>
     <div class="col-xs-12 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-2 col-lg-2 col-lg-offset-4">
-      <h3>Exp Month/Year:</h3><label maxlength="2" size="1" class="text-center">{{stripeToken.stripeToken.exp_month}}</label>/<label maxlength="4" size="1"  class="text-center">{{stripeToken.stripeToken.exp_year}}</label>
+      <h3>Exp Month/Year:</h3><label maxlength="2" size="1" class="text-center" required>{{stripeToken.stripeToken.exp_month}}</label>/<label maxlength="4" size="1"  class="text-center" required>{{stripeToken.stripeToken.exp_year}}</label>
     </div>
     </div>
   </div>
@@ -159,7 +159,7 @@
         <button ui-sref="cart.review" type="button" class="abtn btn-danger"><i class="fa fa-arrow-left"></i> Review</button>
       </div>
       <div class="col-xs-6">
-        <button  ng-click="checkout(stripeToken)" type="button" class="abtn btn-success"><i class="fa fa-shopping-cart"></i> Checkout</button>
+        <button  ng-click="checkout(stripeToken)" type="button" class="abtn btn-success" value="submit"><i class="fa fa-shopping-cart"></i> Checkout</button>
       </div>
     </div>
   </div>

@@ -4,7 +4,6 @@ angular.module("lionHeart")
   this.eraseCart = function() {
     dataService.eraseCart(
       function(response) {
-        console.log(response);
       }
     )
   }

@@ -1,22 +1,20 @@
 <div class="row text-center" id="profile">
-  <div class="col-xs-12">
-    <h1 class="text-left">Admin Panel</h1>
-    <div class="row">
-      <div class="col-xs-12 col-sm-4 col-md-3 col-lg-2">
+      <div class="col-xs-12 lilSpaceDawg">
         <div class="row">
-          <div class="col-xs-12">
-          <a ui-sref="admin.posts"><h2>Posts</h2></a>
+          <div class="col-xs-12 col-sm-6 col-lg-3">
+            <button ui-sref="admin.posts" class="adminPanelLinks abtn btn-block btn-success"><h2>Posts</h2></button>
           </div>
-          <div class="col-xs-12">
-          <a ui-sref="admin.users"><h2>Users</h2></a>
+          <div class="col-xs-12 col-sm-6 col-lg-3">
+            <button ui-sref="admin.users" class="adminPanelLinks abtn btn-block btn-success"><h2>Users</h2></button>
           </div>
-          <div class="col-xs-12">
-          <a ui-sref="admin.products"><h2>Products</h2></a>
+          <div class="col-xs-12 col-sm-6 col-lg-3">
+            <button ui-sref="admin.products" class="adminPanelLinks abtn btn-block btn-success"><h2>Products</h2></button>
+          </div>
+          <div class="col-xs-12 col-sm-6 col-lg-3">
+            <button ui-sref="admin.portfolio" class="adminPanelLinks abtn btn-block btn-success"><h2>Portfolio</h2></button>
           </div>
         </div>
       </div>
-      <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10" ui-view>
-      </div>
-    </div>
+      <div class="col-xs-12" ui-view>
   </div>
 </div>

@@ -1,4 +1,4 @@
-#orderHistory {
+#html #body #ui-view #orderHistory {
   & .closeOut {
     cursor: pointer;
     text-align: right;
@@ -72,16 +72,17 @@
       }
   }
   & .titleOH {
-    margin-top: 100px;
   }
   & .topOH {
     height: 150px;
-    margin-bottom: 20px;
+    margin: 5% auto;
     @media (min-width: 1200px) {
       height: 190px;
+      margin: 5% auto;
       }
-    @media (min-width: 982px) and (max-width: 1200px) {
+    @media (min-width: 992px) and (max-width: 1199px) {
       height: 170px;
+      margin: 6% auto;
       }
   }
   & h1.title {
@@ -92,16 +93,16 @@
     border-radius: 5px;
     padding: 0em 0.5em;
     @media (min-width: 1200px) {
+      left: 35px;
+      top: 225px;
+      }
+    @media (min-width: 992px) and (max-width: 1200px) {
+      left: 25px;
+      top: 215px;
+      }
+    @media (min-width: 768px) and (max-width: 991px) {
       left: 20px;
-      top: 150px;
-      }
-    @media (min-width: 982px) and (max-width: 1200px) {
-      left: 15px;
-      top: 150px;
-      }
-    @media (min-width: 768px) and (max-width: 981px) {
-      left: 10px;
-      top: 150px;
+      top: 175px;
       }
   }
   & h1.highlight {

@@ -1,0 +1,58 @@
+<div class="" id="blogPosts">
+  <div class="row">
+    <div class="col-xs-12 newitemStart">
+      <button type="button" class="btn btn-success" ng-click="newPiece()">New Piece</button>
+    </div>
+    </div>
+  <div class="row toggleBar posts" ng-repeat="post in portfolioImages" ng-hide="editPortfolio.show">
+    <label class="col-xs-12" ng-click="portfolioEdit(post, $index)">
+        <span class="tooltiptexttop">Click To Toggle Display</span>
+      <div class="row">
+        <div class="col-xs-12">
+          <img ng-src="{{post.url}}" alt="" style="height: 50px; width: 50px;"/>
+        </div>
+        <div class="col-xs-12">
+          <h3>{{post.url}}</h3>
+        </div>
+      </div>
+    </label>
+      </div>
+      <div class="col-xs-12" id='products' ng-show="editPortfolio.show">
+      <div class="col-xs-12 col-sm-4  col-md-3 col-lg-2" id="backButtonTop">
+            <button type="button" class="btn btn-block btn-warning" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
+      </div>
+        <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopPortfolio}">
+          <div class="inner">
+          </div>
+        </div>
+      <div class="col-xs-12 editSpace displayEdit">
+        <div class="row center">
+            <div class="col-xs-12">
+                  <img data-ng-src="{{portfolioDisplayEdit.url}}" alt="" class="editImgRnd"/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              Url:
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <label ng-click="editDisplay1 = !editDisplay1" ng-hide="editDisplay1">
+                  {{portfolioDisplayEdit.url}}<span class="tooltiptexttop">Edit Url</span></label>
+              <input type="text" ng-model="portfolioDisplayEdit.url" ng-show="editDisplay1" ng-blur="editDisplay1 = false;"/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              Url:
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <label ng-click="editDisplay2 = !editDisplay2" ng-hide="editDisplay2">
+                  {{portfolioDisplayEdit.urlBig}}<span class="tooltiptexttop">Edit Url (BIG)</span></label>
+              <input type="text" ng-model="portfolioDisplayEdit.urlBig" ng-show="editDisplay2" ng-blur="editDisplay2 = false;"/>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                  <button type="button" class="btn btn-block btn-warning" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                  <button type="button" class="btn btn-block btn-danger" ng-click="deletePortfolio(portfolioDisplayEdit._id, deleteIndex)">Delete</button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+                  <button type="button" class="btn btn-block btn-success" ng-click="savePortfolio(portfolioDisplayEdit._id, portfolioDisplayEdit, deleteIndex)">Save</button>
+            </div>
+    </div>

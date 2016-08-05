@@ -37,7 +37,8 @@ var product = {
   },
   urlCode: {type: String, required: true, lowercase: true, unique: true},
   sku: {type: String, required: true, lowercase: true, unique: true},
-  quantity: {type: Number, required: true}
+  quantity: {type: Number, required: true},
+  id: String
 };
 
 var productSchema = new mongoose.Schema(product);

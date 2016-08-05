@@ -74,7 +74,7 @@ dataService.getCart(function(response) {
           temp.quantity = tempQuantity;
           temp.active = tempActive;
             //save product
-            dataService.saveItem(temp.id, temp, function(response) {
+            dataService.saveItem(temp._id, temp, function(response) {
               cb(true)
             })
           })

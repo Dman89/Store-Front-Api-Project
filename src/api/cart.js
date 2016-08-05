@@ -75,6 +75,35 @@ cartRouter.put('/user/cart/', function (req, res) {
   })
 
 })
+
+cartRouter.put('/user/cart2/', function (req, res) {
+  var id = req.user._id
+  if (!req.user) {
+    return res.status(404).json({'error': 'Not logged in'});
+    console.log('Not logged in');
+  }
+  if (!req.body) {
+    return res.status(404).json({'error': 'Cart not found'});
+  console.log('No cart specified');
+  }
+  var cart = req.body
+  User.findByIdAndUpdate(id, cart, {new: true}, function(err, response) {
+    if(err) {
+      return res.status(500).json(err);
+    }
+    else if (response == undefined) {
+    return res.status(500).json({message: "Not Found?!"});
+    }
+    else {
+
+     console.log('Shopping cart has been edited!');
+     response.populate({ path: 'data.cart.items.product', model: 'Products' },
+     handleOne.bind(null, 'user', res));
+      }
+
+  })
+
+})
 cartRouter.put('/user/cart/byCart', function (req, res) {
   var id = req.user.data.cart.id
   console.log(id);
