@@ -5203,6 +5203,14 @@ webpackJsonp([0],[
 	  }
 	  $scope.edit[index] = false;
 	}
+	$scope.justGot = function(val) {
+	    if (val == 1) {
+	      console.log(1);
+	      return true;
+	    } else {
+	      return false
+	    }
+	}
 	//Check Quantity
 	$scope.quantityCheck = function(val) {
 	  inputToggle(val, function(res) {

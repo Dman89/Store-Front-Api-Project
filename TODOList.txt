@@ -102,3 +102,4 @@ Misc
                         prompt for delete of items
                         displays posts
                         single page takes u to cart after click
+                        admin delete post should close
