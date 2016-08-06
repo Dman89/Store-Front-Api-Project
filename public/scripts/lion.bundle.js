@@ -52,11 +52,11 @@ webpackJsonp([0],[
 	__webpack_require__(50);
 	__webpack_require__(18);
 	__webpack_require__(51);
+	__webpack_require__(53);
 	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
-	__webpack_require__(58);
 
 
 /***/ },
@@ -6651,19 +6651,19 @@ webpackJsonp([0],[
 	  // Disable "configAuth" to turn off test mode
 
 	  var key, userEmail, configAuth;
-
-	  var configAuth = __webpack_require__(53);
-
-
-
-	  // If else statment for test mode or normal mode
-	  if (configAuth) {
-	    key = configAuth.googleCalApi.apiKey;
-	    userEmail = configAuth.googleCalApi.userEmail;
-	  } else {
+	  // 
+	  // var configAuth = require('../config/auth');
+	  //
+	  //
+	  //
+	  // // If else statment for test mode or normal mode
+	  // if (configAuth) {
+	  //   key = configAuth.googleCalApi.apiKey;
+	  //   userEmail = configAuth.googleCalApi.userEmail;
+	  // } else {
 	   key = process.env.googleCalApiAPIKEY;
 	   userEmail = process.env.googleCalApiUSEREMAIL;
-	  }
+	  // }
 	  // Google API Info
 	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
 	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
@@ -6979,20 +6979,6 @@ webpackJsonp([0],[
 /* 53 */
 /***/ function(module, exports) {
 
-	module.exports = {
-	    'googleCalApi' : {
-	      'clientID' : '154684505002-fqll12rte5oisps3dq596vsprc9phdmc.apps.googleusercontent.com',
-	      'clientSecret'  : 'qtYuA73IiWrgMNt24byUD3j9',
-	      "apiKey": 'AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE',
-	      "userEmail": 'artbycale619@gmail.com'
-	    }
-	};
-
-
-/***/ },
-/* 54 */
-/***/ function(module, exports) {
-
 	"use strict";
 	angular.module("lionHeart")
 	  .service("carouselDataService", function($http) {
@@ -7018,7 +7004,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7051,7 +7037,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7180,7 +7166,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7361,7 +7347,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
