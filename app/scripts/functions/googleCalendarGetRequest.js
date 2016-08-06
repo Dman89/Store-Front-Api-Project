@@ -4,19 +4,19 @@ angular.module("lionHeart")
   // Disable "configAuth" to turn off test mode
 
   var key, userEmail, configAuth;
-
-  var configAuth = require('../config/auth');
-
-
-
-  // If else statment for test mode or normal mode
-  if (configAuth) {
-    key = configAuth.googleCalApi.apiKey;
-    userEmail = configAuth.googleCalApi.userEmail;
-  } else {
+  // 
+  // var configAuth = require('../config/auth');
+  //
+  //
+  //
+  // // If else statment for test mode or normal mode
+  // if (configAuth) {
+  //   key = configAuth.googleCalApi.apiKey;
+  //   userEmail = configAuth.googleCalApi.userEmail;
+  // } else {
    key = process.env.googleCalApiAPIKEY;
    userEmail = process.env.googleCalApiUSEREMAIL;
-  }
+  // }
   // Google API Info
   // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
   // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;

@@ -5,19 +5,19 @@ var FacebookStrategy = require('passport-facebook').Strategy;
    var User       = require('../models/user');
    var clientID, clientSecret, callbackURL;
 
-
-   // Disable "configAuth" to turn off test mode
-   var configAuth = require('./auth');
-   // If else statment for test mode
-  if (configAuth) {
-      clientID = process.env.fbID || configAuth.facebookAuth.clientID;
-      clientSecret = process.env.FBSecret || configAuth.facebookAuth.clientSecret;
-      callbackURL = process.env.fbCbUrl || configAuth.facebookAuth.callbackURL;
-  } else {
+  // 
+  //  // Disable "configAuth" to turn off test mode
+  //  var configAuth = require('./auth');
+  //  // If else statment for test mode
+  // if (configAuth) {
+  //     clientID = process.env.fbID || configAuth.facebookAuth.clientID;
+  //     clientSecret = process.env.FBSecret || configAuth.facebookAuth.clientSecret;
+  //     callbackURL = process.env.fbCbUrl || configAuth.facebookAuth.callbackURL;
+  // } else {
       clientID = process.env.fbID;
       clientSecret = process.env.FBSecret;
       callbackURL = process.env.fbCbUrl;
-  }
+  // }
 
 
 
