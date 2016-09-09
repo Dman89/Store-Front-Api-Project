@@ -1,16 +1,16 @@
 // Disable "configAuth" to turn off test mode
 
 
-var configAuth = require('../config/auth');
+// var configAuth = require('../config/auth');
 
 
 // If else statment for test mode
 var id;
-if (configAuth) {
-  id = configAuth.openExchangeRates.clientID;
-} else {
- id = process.env.openExchange;
-}
+// if (configAuth) {
+//   id = configAuth.openExchangeRates.clientID;
+// } else {
+//  id = process.env.openExchange;
+// }
 
 
 
