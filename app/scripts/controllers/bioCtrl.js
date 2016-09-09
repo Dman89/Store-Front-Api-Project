@@ -1,6 +1,7 @@
 'use strict';
 angular.module("lionHeart")
 .controller("bioCtrl", function($scope, dataService) {
+  
 function pushOut(card) {
   if (card == 1) {
     var card = one;
