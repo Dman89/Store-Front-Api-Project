@@ -9,3 +9,17 @@
     margin-top: 2.5%;
   }
 }
+
+#html #body #ui-view {
+
+  & .mainPost {
+    margin: 2.5% auto;
+  }
+  & .blogWhole {
+    margin: 5% auto;
+
+  }
+  & .spaceBtm {
+    margin-bottom: 5%;
+  }
+}
