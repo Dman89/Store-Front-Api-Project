@@ -410,8 +410,7 @@ img {
 #menu .end {
   padding-right: 10px; }
 #menu .navbar-brand {
-  margin-left: 10px;
-  color: #f9be36; }
+  margin-left: 10px; }
   @media (max-width: 480px) {
     #menu .navbar-brand {
       margin: 5px; } }
