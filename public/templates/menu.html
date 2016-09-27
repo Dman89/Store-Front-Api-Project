@@ -35,7 +35,7 @@
                   <li class="menuBar" ng-class="{ active: isActive('/profile')}">
                      <a ui-sref="profile" class="" ng-show="user.profile"><i class="fa fa-profile"></i> Profile</a>
                   </li>
-                  <li class="menuBar" ng-hide="user.profile">
+                  <li class="menuBar end" ng-hide="user.profile">
                      <a href="/auth/facebook" class=""><i class="fa fa-sign-in"></i> Login</a>
                   </li>
                   <li class="menuBar" ng-class="{ active: isActive('/cart')}" ng-show="user.profile">

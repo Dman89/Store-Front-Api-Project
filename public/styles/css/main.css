@@ -408,14 +408,14 @@ img {
 #menu .clickMe {
   cursor: pointer; }
 #menu .end {
-  margin-right: 10px; }
+  padding-right: 10px; }
 
 .stop {
   cursor: none;
   pointer-events: none; }
 
 .navbar-brand {
-  text-indent: 10px;
+  padding-left: 10px;
   color: #f9be36; }
   @media (max-width: 480px) {
     .navbar-brand {

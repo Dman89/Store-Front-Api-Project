@@ -4,7 +4,7 @@
     cursor: pointer;
   }
   & .end {
-    margin-right: 10px;
+    padding-right: 10px;
   }
 }
 .stop {
@@ -12,7 +12,7 @@
   pointer-events: none;
 }
 .navbar-brand {
-  text-indent: 10px;
+  padding-left: 10px;
   color: $h;
   @media (max-width: 480px) {
     margin:  5px;

@@ -3,7 +3,7 @@ angular.module("lionHeart")
 .service("googleCalendarGetRequest", function($http) {
   // Disable "configAuth" to turn off test mode
 
-  var key, userEmail, configAuth;
+
   //
   // var configAuth = require('../config/auth');
   //
@@ -14,8 +14,8 @@ angular.module("lionHeart")
   //   key = configAuth.googleCalApi.apiKey;
   //   userEmail = configAuth.googleCalApi.userEmail;
   // } else {
-   key = process.env.googleCalApiAPIKEY;
-   userEmail = process.env.googleCalApiUSEREMAIL;
+   var key = process.env.googleCalApiAPIKEY;
+   var userEmail = process.env.googleCalApiUSEREMAIL;
   // }
   // Google API Info
   // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
