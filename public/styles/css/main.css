@@ -407,15 +407,16 @@ img {
 
 #menu .clickMe {
   cursor: pointer; }
+#menu .end {
+  margin-right: 10px; }
 
 .stop {
   cursor: none;
   pointer-events: none; }
 
 .navbar-brand {
-  color: #f9be36;
-  border-radius: 100%;
-  border: #423e80 1px solid; }
+  text-indent: 10px;
+  color: #f9be36; }
   @media (max-width: 480px) {
     .navbar-brand {
       margin: 5px; } }

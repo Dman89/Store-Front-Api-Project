@@ -3,15 +3,17 @@
   & .clickMe {
     cursor: pointer;
   }
+  & .end {
+    margin-right: 10px;
+  }
 }
 .stop {
   cursor: none;
   pointer-events: none;
 }
 .navbar-brand {
+  text-indent: 10px;
   color: $h;
-  border-radius: 100%;
-  border: $ha 1px solid;
   @media (max-width: 480px) {
     margin:  5px;
   }
