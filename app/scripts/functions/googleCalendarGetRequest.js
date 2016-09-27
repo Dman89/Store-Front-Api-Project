@@ -20,7 +20,7 @@ angular.module("lionHeart")
   // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
    var key = process.env.googleCalApiAPIKEY;
    var userEmail = process.env.googleCalApiUSEREMAIL;
-   console.log(key, userEmail);
+   console.log(key, process.env.googleCalApiUSEREMAIL);
   var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
   // $Get REQUEST
   function dateCheck(data, success) {
