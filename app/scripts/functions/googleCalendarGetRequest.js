@@ -14,8 +14,8 @@ angular.module("lionHeart")
   //   key = configAuth.googleCalApi.apiKey;
   //   userEmail = configAuth.googleCalApi.userEmail;
   // } else {
-   key = process.env.googleCalApiAPIKEY || "AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE";
-   userEmail = process.env.googleCalApiUSEREMAIL || "artbycale619@gmail.com";
+   key = process.env.googleCalApiAPIKEY;
+   userEmail = process.env.googleCalApiUSEREMAIL;
   // }
   // Google API Info
   // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;

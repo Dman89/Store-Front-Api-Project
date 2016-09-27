@@ -6,10 +6,9 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 	angular.module("lionHeart", []);
 	__webpack_require__(3);
-	__webpack_require__(58);
 	__webpack_require__(5);
 	__webpack_require__(6);
-	__webpack_require__(8);
+	__webpack_require__(7);
 	__webpack_require__(9);
 	__webpack_require__(10);
 	__webpack_require__(11);
@@ -19,7 +18,7 @@ webpackJsonp([0],[
 	__webpack_require__(15);
 	__webpack_require__(16);
 	__webpack_require__(17);
-	__webpack_require__(19);
+	__webpack_require__(18);
 	__webpack_require__(20);
 	__webpack_require__(21);
 	__webpack_require__(22);
@@ -51,13 +50,14 @@ webpackJsonp([0],[
 	__webpack_require__(48);
 	__webpack_require__(49);
 	__webpack_require__(50);
-	__webpack_require__(18);
 	__webpack_require__(51);
-	__webpack_require__(53);
+	__webpack_require__(19);
+	__webpack_require__(52);
 	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
+	__webpack_require__(58);
 
 
 /***/ },
@@ -4832,18 +4832,46 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("mainCtrl", function($scope, dataService) {
+	.controller("blogCtrl", function($scope, dataService, $location) {
+	  dataService.getBlog(function(res) {
+	    $scope.blogItemsToDisplay = res.data.posts;
+	  })
+
+	  let tempSearchItem = $location.path();
+	  if (tempSearchItem.search("/blog/id/") >= 0) {
+	    let tempItem = tempSearchItem.split("/");
+	    let tempID = tempItem[3];
+	    if (tempItem[3] != "") {
+	      dataService.getBlogById(tempID, function(res) {
+	        console.log(res.data.posts._id);
+	        $scope.blogItem = res.data.posts;
+	      })
+	    }
+	  }
+
+
+
 	});
 
 
 /***/ },
 /* 6 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("mainCtrl", function($scope, dataService) {
+	});
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("productCtrl", function($scope, dataService, functionService, $location) {
-	  var addToCartReq = __webpack_require__(7);
+	  var addToCartReq = __webpack_require__(8);
 	  var cart;
 	  var user;
 	  var list = [];
@@ -4908,7 +4936,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -4935,7 +4963,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4966,7 +4994,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4981,7 +5009,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -4996,7 +5024,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5007,7 +5035,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5022,7 +5050,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5037,7 +5065,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5052,7 +5080,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5063,7 +5091,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5078,13 +5106,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("cartCtrl", function($scope, dataService, $timeout, $state) {
-	  var inputToggle = __webpack_require__(18);
+	  var inputToggle = __webpack_require__(19);
 	  $scope.edit = {};
 	  // Blank Stripe Card
 	    $scope.stripeToken = {stripeToken: {
@@ -5240,7 +5268,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict'
@@ -5256,7 +5284,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5271,7 +5299,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5296,7 +5324,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5311,7 +5339,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5386,7 +5414,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5401,7 +5429,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5427,7 +5455,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5442,7 +5470,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5522,7 +5550,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5537,7 +5565,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5893,7 +5921,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5908,7 +5936,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5923,7 +5951,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5933,7 +5961,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5948,7 +5976,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 33 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5961,7 +5989,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 34 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5974,7 +6002,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 35 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5987,7 +6015,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 36 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6000,7 +6028,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 37 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6013,7 +6041,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 38 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6026,7 +6054,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 39 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6103,7 +6131,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 40 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6113,7 +6141,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6123,15 +6151,15 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
-	var inputToggle = __webpack_require__(18);
+	var inputToggle = __webpack_require__(19);
 	var user, cart;
-	var addToCartReq = __webpack_require__(7);
+	var addToCartReq = __webpack_require__(8);
 	$scope.urlCode = $stateParams.urlCode;
 	var urlCode = $scope.urlCode
 	dataService.getSingleItem(urlCode, function(response) {
@@ -6243,7 +6271,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6365,7 +6393,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6440,7 +6468,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6511,7 +6539,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6540,7 +6568,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6615,7 +6643,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6626,7 +6654,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6675,7 +6703,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 51 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6699,7 +6727,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 51 */
+/* 52 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
@@ -6718,8 +6746,8 @@ webpackJsonp([0],[
 	  //   key = configAuth.googleCalApi.apiKey;
 	  //   userEmail = configAuth.googleCalApi.userEmail;
 	  // } else {
-	   key = process.env.googleCalApiAPIKEY || "AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE";
-	   userEmail = process.env.googleCalApiUSEREMAIL || "artbycale619@gmail.com";
+	   key = process.env.googleCalApiAPIKEY;
+	   userEmail = process.env.googleCalApiUSEREMAIL;
 	  // }
 	  // Google API Info
 	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
@@ -6942,10 +6970,10 @@ webpackJsonp([0],[
 	  }
 	})
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(52)))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53)))
 
 /***/ },
-/* 52 */
+/* 53 */
 /***/ function(module, exports) {
 
 	// shim for using process in browser
@@ -7070,7 +7098,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 53 */
+/* 54 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7098,7 +7126,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 54 */
+/* 55 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7131,7 +7159,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 55 */
+/* 56 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7264,7 +7292,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 56 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7445,7 +7473,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 57 */
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7457,34 +7485,6 @@ webpackJsonp([0],[
 	      }
 	    )
 	  }
-	});
-
-
-/***/ },
-/* 58 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("blogCtrl", function($scope, dataService, $location) {
-	  dataService.getBlog(function(res) {
-	    $scope.blogItemsToDisplay = res.data.posts;
-	  })
-
-	  let tempSearchItem = $location.path();
-	  if (tempSearchItem.search("/blog/id/") >= 0) {
-	    let tempItem = tempSearchItem.split("/");
-	    let tempID = tempItem[3];
-	    if (tempItem[3] != "") {
-	      dataService.getBlogById(tempID, function(res) {
-	        console.log(res.data.posts._id);
-	        $scope.blogItem = res.data.posts;
-	      })
-	    }
-	  }
-
-
-
 	});
 
 
