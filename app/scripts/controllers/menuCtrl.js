@@ -32,9 +32,6 @@
           else if (viewLocation == '/bio') {
             return false;
           }
-          else if (viewLocation == '/portfolio') {
-            return false;
-          }
           else {
             var temp = $location.path();
             var x = viewLocation;
@@ -46,6 +43,10 @@
             var cart = temp.search('/cart');
             var adminCheck = x.search('/admin');
             var admin = temp.search('/admin');
+            var blogCheck = x.search('/blog');
+            var blog = temp.search('/blog');
+            var portfolioCheck = x.search('/portfolio');
+            var portfolio = temp.search('/portfolio');
              if (store > -1 && storeCheck > -1) {
               return true;
             }
@@ -56,6 +57,12 @@
               return true;
             }
              else if (admin > -1 && adminCheck > -1) {
+              return true;
+            }
+             else if (blog > -1 && blogCheck > -1) {
+              return true;
+            }
+             else if (portfolio > -1 && portfolioCheck > -1) {
               return true;
             }
           }

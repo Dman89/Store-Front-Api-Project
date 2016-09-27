@@ -2,6 +2,7 @@
 var angular = require('angular');
 angular.module("lionHeart", []);
 require('./scripts/config/main.js');
+require('./scripts/controllers/blogCtrl.js');
 require('./scripts/controllers/mainCtrl.js');
 require('./scripts/controllers/productCtrl.js');
 require('./scripts/controllers/signUpFormCtrl.js');

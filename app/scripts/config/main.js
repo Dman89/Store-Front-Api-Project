@@ -1,7 +1,7 @@
 'use strict';
 var lionHeart = angular.module("lionHeart", [require('angular-ui-router')])
 lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').otherwise('/');
+  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').when('/blog', '/blog/').otherwise('/');
   $stateProvider
     .state('home', {
       url: '/',
@@ -158,6 +158,20 @@ controller: 'portfolioCtrl'
       url: '/products',
       templateUrl: 'templates/admin/products.html',
       controller: 'admin.productsCtrl'
+      })
+      .state('blog', {
+      url: '/blog',
+      templateUrl: 'templates/blog.html',
+      controller: 'blogCtrl'
+      })
+      .state('blog.blog', {
+      url: '/',
+      templateUrl: 'templates/blog/blog.html'
+      })
+      .state('blog.item', {
+      url: '/id/:id',
+      templateUrl: 'templates/blog/item.html',
+      controller: 'blogCtrl'
       })
 }])
 lionHeart.run(['$state', function($state){}]);

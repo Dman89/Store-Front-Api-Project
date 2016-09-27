@@ -18,7 +18,7 @@ blogRouter.get('/blog/:id', function(req, res) {
     if (err) {
       console.error("Oh Shucks!");
     }
-    if (products == undefined) {
+    if (posts == undefined) {
       res.status(404).json({"message": "Not a Post"})
     } else {
       res.json({posts: posts});

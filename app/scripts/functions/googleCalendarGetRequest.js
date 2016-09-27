@@ -4,7 +4,7 @@ angular.module("lionHeart")
   // Disable "configAuth" to turn off test mode
 
   var key, userEmail, configAuth;
-  // 
+  //
   // var configAuth = require('../config/auth');
   //
   //
@@ -14,33 +14,67 @@ angular.module("lionHeart")
   //   key = configAuth.googleCalApi.apiKey;
   //   userEmail = configAuth.googleCalApi.userEmail;
   // } else {
-   key = process.env.googleCalApiAPIKEY;
-   userEmail = process.env.googleCalApiUSEREMAIL;
+   key = process.env.googleCalApiAPIKEY || "AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE";
+   userEmail = process.env.googleCalApiUSEREMAIL || "artbycale619@gmail.com";
   // }
   // Google API Info
   // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
   // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
   var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
   // $Get REQUEST
+  function dateCheck(data, success) {
+    let todaysDate = new Date();
+    let m = (Math.round(todaysDate.getMonth().toString()) + 1);
+    let yearB = todaysDate.getYear().toString();
+    let y = yearB.slice(1,3);
+    let d = todaysDate.getDate().toString();
+    var list = data.data.items;
+    for (var x = 0; x < list.length; x++) {
+      let dateToCheck = list[x].end.dateTime;
+      let year = dateToCheck.slice(2, 4);
+      let month = Math.round(dateToCheck.slice(5, 7));
+      let day = dateToCheck.slice(8, 10);
+      if (y >= year) {
+        if (year == y && m > month) {
+          // No need to do anythin
+        }
+        else if (year == y && m == month && d >= day) {
+          // No need to do anythin
+        }
+        else if (y > year) {
+          // No need to do anythin
+        }
+        else {
+          list = list.splice(x, y);
+        }
+      }
+      else {
+        list = list.splice(x, y);
+      }
+    }
+    data.data.items = list;
+    success(data)
+  }
+var events = []
 this.calendar = function(callback) {
       $http.get(url)
-      .then(function(res) {
-        var events = []
+      .then(function(sendData) {
+        dateCheck(sendData, function(res) {
       // Call of FUNCTION ($GET REQUEST)
         var res = res.data.items;
         for (var x = 0; x < res.length; x++) {
-          var eventItem = {};
+          let eventItem = {};
           if (res[x].status == "confirmed") {
-          var summary = res[x].summary;
+            var summary = res[x].summary;
           if (!res[x].description) {
-          var description = "No Description Available";
+            var description = "No Description Available";
           } else {
-          var description = res[x].description;
+            var description = res[x].description;
           }
           if (!res[x].location) {
-          var location = "To Be Decided";
+            var location = "To Be Decided";
           } else {
-          var location = res[x].location;
+            var location = res[x].location;
           }
       // Date Conversion
             dateConversionForComputerCodePurposes(res[x].start.dateTime, res[x].end.dateTime, function(start, end) {
@@ -58,8 +92,11 @@ this.calendar = function(callback) {
             }
           }
           callback(events);
+
+        })
       })
 };
+
 
 var dateConversionForWebsite = function(events, callback) {
   events.end[3] = events.end[3].split(":").splice(0,2).join(":");
