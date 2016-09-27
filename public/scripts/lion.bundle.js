@@ -39,9 +39,7 @@ webpackJsonp([0],[
 	__webpack_require__(37);
 	__webpack_require__(38);
 	__webpack_require__(39);
-	__webpack_require__(52);
 	__webpack_require__(40);
-	__webpack_require__(41);
 	__webpack_require__(42);
 	__webpack_require__(43);
 	__webpack_require__(44);
@@ -52,6 +50,8 @@ webpackJsonp([0],[
 	__webpack_require__(49);
 	__webpack_require__(50);
 	__webpack_require__(51);
+	__webpack_require__(52);
+	__webpack_require__(53);
 	__webpack_require__(19);
 	__webpack_require__(54);
 	__webpack_require__(55);
@@ -6057,680 +6057,7 @@ webpackJsonp([0],[
 /* 40 */
 /***/ function(module, exports) {
 
-	'use strict';
-	angular.module("lionHeart")
-	.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest, dataService) {
-	  googleCalendarGetRequest.calendar(function(events) {
-	    $scope.threeEvents = false;
-	    $scope.twoEvents = false;
-	    if (events.length > 3) {
-	      var temp = events.length - 3;
-	      events.splice(3, temp)
-	      $scope.threeEvents = true;
-	    }
-	    else if (events.length == 2) {
-	      $scope.twoEvents = true;
-	    }
-	    $scope.googleEvents = events;
-	  });
-
-
-	    carouselDataService.getCarousel(function(res) {
-	      $scope.carouselImages = res.data.carousel;
-	    })
-
-
-
-	  $("#owl").owlCarousel({
-
-	        navigation : false, // Show next and prev buttons
-	        slideSpeed : 200,
-	        paginationSpeed : 800,
-	        singleItem:true,
-	        autoPlay: true
-
-	        // "singleItem:true" is a shortcut for:
-	        // items : 1,
-	        // itemsDesktop : false,
-	        // itemsDesktopSmall : false,
-	        // itemsTablet: false,
-	        // itemsMobile : false
-
-	    });
-
-	    dataService.getBlog(function(res) {
-	      sortPosts(res, 'main', function(res) {
-	        $scope.posts = res;
-	      })
-	      sortPosts(res, 'subA', function(res) {
-	        $scope.postsA = res;
-	      })
-	      sortPosts(res, 'subB', function(res) {
-	        $scope.postsB = res;
-	      })
-	      sortPosts(res, 'subC', function(res) {
-	        $scope.postsC = res;
-	      })
-	    })
-
-	    var sortPosts = function(input, filter, success) {
-	      let posts = [];
-	      let mainPost = input.data.posts;
-	      for (var x = 0; x < mainPost.length; x++) {
-	        if (mainPost[x].loc == filter) {
-	          posts.push(mainPost[x])
-	        }
-	      }
-	      if (posts.length > 1) {
-	        let minusNum = (posts.length - 1)
-	        posts.splice(1, minusNum)
-	      }
-	      success(posts);
-	    }
-	});
-
-
-/***/ },
-/* 41 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("profile.dashboardCtrl", function($scope, dataService) {
-	});
-
-
-/***/ },
-/* 42 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("profile.dashboard.editCtrl", function($scope, dataService) {
-	});
-
-
-/***/ },
-/* 43 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
-	var inputToggle = __webpack_require__(19);
-	var user, cart;
-	var addToCartReq = __webpack_require__(8);
-	$scope.urlCode = $stateParams.urlCode;
-	var urlCode = $scope.urlCode
-	dataService.getSingleItem(urlCode, function(response) {
-	  $scope.singleItem = response.data.products;
-	});
-	dataService.getUser(function(response) {
-	  $scope.user = response.data.user;
-	  user = $scope.user
-	})
-	dataService.getCart(function(response) {
-	  $scope.cart = response.data.cart.data.cart;
-	  cart = $scope.cart
-	})
-	$scope.addToCart = function(id, quantity, product) {
-	var id = id;
-	  addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
-	    console.log("Cart Saved");
-	    $scope.cart = res;
-	    cart = $scope.cart
-	  });
-	  console.log("Completed!");
-	}
-	$scope.quantity = {val: 1};
-
-	//Check Quantity
-	$scope.quantityCheck = function(val) {
-	  inputToggle(val, function(res) {
-	    if (res == true) {
-	      return true;
-	    } else {
-	      return false;
-	    }
-	  })
-	}
-
-	$scope.quantityChange = function(val) {
-	  if (val == 1) {
-	    $scope.quantity.val += 1;
-	  } else {
-	    $scope.quantity.val -= 1;
-	  }
-	}
-	$scope.checkValForMax = function() {
-	  if ($scope.quantity.val > $scope.singleItem.quantity) {
-	    $scope.quantity.val = $scope.singleItem.quantity;
-	  } else if ($scope.quantity.val < 1) {
-	    $scope.quantity.val = 1;
-	  }
-	  $scope.edit = false;
-	}
-
-
-	// get products for random display (3)
-	// create array with digits = to array.length
-	// run a random number
-	// get number from array (NOT INDEX)
-	// splice out [x] from array
-	// repeat three times
-	// save related items to $scope
-	// Display in angular
-	// prevent duplicates
-	dataService.getProducts(function(response) {
-	  var productsRes = response.data.products;
-	  var productLength = productsRes.length;
-	  var tempArr = []
-	  var items = [];
-
-	  var searchForItem = function(callback) {
-	  var removeItem = []
-	    for (var x = 0; x < productLength; x++) {
-	      removeItem.push(productsRes[x].urlCode);
-	    }
-	    var removeNum = removeItem.indexOf(urlCode);
-	    var templength = urlCode.length;
-	    productsRes.splice(removeNum, 1);
-	    callback();
-	  }
-
-	  var lengthBuild = function(productLength, callback) {
-	    for (var x = 0; x < productLength; x++) {
-	      tempArr.push(x);
-	      productLength = productLength - 1;
-	    }
-	    callback();
-	  }
-
-	  var rnd = function (tempArr, callback) {
-	    var tempNum = Math.floor(Math.random() * tempArr.length);
-	    callback(tempNum);
-	  }
-	searchForItem(function() {
-	  lengthBuild(productLength, function() {
-	    for (var x = 0; x < 3; x++) {
-	      rnd(tempArr, function (rndNum) {
-	        var tempItem = productsRes[rndNum];
-	        productsRes.splice(rndNum, 1);
-	        items.push(tempItem);
-	      });
-	    }
-	    var submit = {"related": items};
-	    $scope.relatedItems = submit;
-	  });
-	});
-	});
-
-
-
-	});
-
-
-/***/ },
-/* 44 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, eraseCartService, $location) {
-	  // Get Cart/User/Product
-	  dataService.getCart(function(response) {
-	        $scope.cart = response.data.cart;
-	        });
-	      dataService.getUser(function(response) {
-	        $scope.userCheckout = response.data.user;
-	      });
-	      dataService.getProducts(function(response) {
-	        $scope.productCheck = response.data.products;
-	});
-
-	// Checkout With Stripe
-	  $scope.checkoutStripe = function(callback) {
-	    var stripeToken = $scope.stripeToken;
-	    var tempLength = $scope.stripeToken.stripeToken.number.length;
-	    // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
-	    dataService.checkout(stripeToken, function(response) {
-	      $location.path('/cart/confirmation');
-	      if (response.data.charge.paid == true) {
-	        callback(true);
-	      } else {
-	        callback(false);
-	      }
-	    });
-	    // Reset Token
-	    $scope.stripeToken =
-	    {
-	      stripeToken:
-	        {
-	        number: '',
-	        cvc: '',
-	        exp_month: '',
-	        exp_year: ''
-	        }
-	    }
-	  }
-	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
-	$scope.isProductAvailable = function(cb) {
-	  dataService.getCart(function(response) {
-	    var cart = response.data.cart.data.cart;
-	    dataService.getProducts(function(response) {
-	      var productCheck = response.data.products;
-	      functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
-	        if (response == true) {
-	          cb(true)
-	        }
-	        else {
-	          cb(false)
-	        }
-	      });
-	    });
-	  });
-	};
-
-
-	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
-	$scope.changeProductAvailablity = function(cb) {
-	dataService.getCart(function(response) {
-	  var cart = response.data.cart.data.cart;
-	  dataService.getProducts(function(response) {
-	    var productCheck = response.data.products;
-	    functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
-	      if (response == true) {
-	        //save inventory
-	        for (var x = 0; x < saveItems.length; x++) {
-	          var lookUp = saveItems[x].urlCode;
-	          var tempQuantity = saveItems[x].quantity;
-	          var tempActive = saveItems[x].active;
-	          dataService.getSingleItem(lookUp, function(item) {
-	          var temp = item.data.products;
-	          temp.quantity = tempQuantity;
-	          temp.active = tempActive;
-	            //save product
-	            dataService.saveItem(temp._id, temp, function(response) {
-	              cb(true)
-	            })
-	          })
-	        }
-	      }
-	      else {
-	        cb(false)
-	      }
-	    });
-	  });
-	});
-	};
-
-
-
-	//Checkout Process
-	$scope.checkout = function() {
-	$scope.isProductAvailable(function(status) {
-	  if (status == true) {
-	    $scope.checkoutStripe(function(data) {
-	      if (data == true) {
-	      $scope.changeProductAvailablity(function(response) {
-	        eraseCartService.eraseCart();
-	        $scope.cartA = null;
-	      })
-	    }
-	      else if (data == false) {
-	      alert("Error During Transaction")
-	    }
-
-	    });
-	  }
-	  else {
-	  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
-	    $location.path('/cart/view')
-	  }
-	}) //isProductAvailable function end
-	}
-	}); // End of Controller
-
-
-/***/ },
-/* 45 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.productsCtrl", function($scope, dataService, $location, $timeout) {
-	  dataService.getProducts(function(response) {
-	    $scope.products = response.data.products
-	  })
-	  $scope.editProduct = {show: false};
-	  var productBeingEditedIndex;
-	  $scope.productEdit = function(product, index) {
-	    productBeingEditedIndex = index;
-	    if (!product.quantity) {
-	      product.quantity = 0;
-	    }
-	    $scope.productDisplayEdit = product;
-	    $scope.editProduct = {show: true};
-	  }
-	  $scope.deleteItem = function(id) {
-	    dataService.deleteItem(id, function(response) {
-	      if (response.status == 200) {
-	      $scope.products.splice(productBeingEditedIndex, 1);
-	      $scope.editProduct.show = false;
-	    } else {
-	      console.log('Error Deleteing Item?');
-	      alert('Error Deleteing Item?');
-	    }
-	    })
-	  }
-	    $scope.successMessageDisplayTop = false;
-	  $scope.saveItem = function(id, product) {
-	    dataService.saveItem(id, product, function(res) {
-	      if (res.status == 200) {
-	        $scope.successMessageDisplayTop = true;
-	        $timeout(function() {
-	          $scope.successMessageDisplayTop = false;
-	        }, 3075)
-	      } else {
-	        console.log('Error Saving Item?');
-	        alert('Error Saving Item?');
-	      }
-	    })
-	  }
-	  $scope.newItemStart = function() {
-	    var newProduct = {
-	      "name": "New Item",
-	      "active": true,
-	      "pictures": ["http://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"],
-	      "price": {
-	        "amount": 100,
-	        "currency": 'USD'
-	      },
-	      "category": {"parent": "Paintings"},
-	      "urlCode": new Date().getTime(),
-	      "sku": new Date().getTime(),
-	      "quantity": 1
-	    };
-	      dataService.newItem(newProduct, function(res) {
-	        if (res.status == 200) {
-	          $scope.editProduct.show = true;
-	          $scope.products.push(newProduct);
-	          $scope.productDisplayEdit = newProduct;
-	          $scope.productDisplayEdit.id = res.data.products._id;
-	          $scope.productDisplayEdit._id = res.data.products._id;
-	        } else {
-	          alert("Error Creating Product")
-	        }
-	      });
-
-	  }
-	});
-
-
-/***/ },
-/* 46 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.postsCtrl", function($scope, dataService, $timeout) {
-	  dataService.getBlog(function(response) {
-	    $scope.blog = response.data.posts;
-	  })
-	  $scope.newPost = function() {
-	    var date = new Date;
-	        var month = (date.getUTCMonth()+1);
-	        var day = date.getDate();
-	        var year = date.getFullYear();
-	        var hour = date.getHours();
-	        if (hour >= 13) {
-	          hour -= 12;
-	        }
-	        var minutes = date.getMinutes();
-	        var time = hour+":"+minutes;
-	    var newPost = {
-	      "title": "Add Title",
-	      "description": "Add Description",
-	      "body": "Add Body",
-	      "urlCode": new Date().getTime(),
-	      "img": "https://tctechcrunch2011.files.wordpress.com/2015/08/clouds.jpg",
-	      "live": 'false',
-	      "date": {"month": month, "day": day, "year": year, "time": time},
-	      "loc": "main",
-	      "category": {"parent": "Homepage"}
-	    };
-	    dataService.newPost(newPost, function(res) {
-	      if (res.status == 200) {
-	        newPost._id = res.data.post._id;
-	        newPost.id = res.data.post._id;
-	      $scope.blog.push(newPost);
-	    } else {
-	      return res.status(500).json(res)
-	    }
-	    })
-	  }
-	  $scope.deletePost = function(id, post, index) {
-	    dataService.deletePost(id, post, function(res) {
-	        if (res.status == 200) {
-	          $scope.blog.splice(index, 1);
-	      } else {
-	        return res.status(500).json(res)
-	      }
-	    })
-	  }
-	  $scope.openBlog = {show : false};
-	    $scope.successMessageDisplayTopPost = false;
-	  $scope.savePost = function(id, post) {
-	    dataService.savePost(id, post, function(res) {
-	        if (res.status == 200) {
-	        $scope.openBlog.show = false;
-	          $scope.successMessageDisplayTopPost = true;
-	          $timeout(function() {
-	            $scope.successMessageDisplayTopPost = false;
-	          }, 3075)
-	      } else {
-	        console.log('Error Saving Post?');
-	        alert('Error Saving Post?');
-	        return res.status(500).json(res)
-	      }
-	    })
-	  }
-	});
-
-
-/***/ },
-/* 47 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.usersCtrl", function($scope, dataService, $timeout) {
-	  dataService.getUsers(function(response) {
-	    $scope.users = response.data.users;
-	  });
-	  //Save User Function
-	  $scope.successMessageDisplayTopUser = false;
-	  $scope.saveUserAdmin = function(id, user) {
-	    dataService.saveUserAdmin(id, user, function(res) {
-	      if (res.status == 200) {
-	        $scope.successMessageDisplayTopUser = true;
-	        $timeout(function() {
-	          $scope.successMessageDisplayTopUser = false;
-	        }, 3000)
-	      }
-	      else {
-	        console.log('Error Saving User?');
-	        alert('Error Saving User?');
-	      }
-	    })
-	  }
-	});
-
-
-/***/ },
-/* 48 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("admin.portfolioCtrl", function($scope, portfolioDataService, $location, $timeout) {
-	  portfolioDataService.getPortfolio(function(res) {
-	    $scope.portfolioImages = res.data.portfolios;
-	  })
-	  $scope.deleteIndex = 0;
-	  $scope.saveIndex = 0;
-	  $scope.editPortfolio = {show: false};
-	  $scope.portfolioEdit = function(portfolio, index) {
-	    $scope.deleteIndex = index;
-	    $scope.saveIndex = index;
-	    if (portfolio.url == "") {
-	      portfolio.url = "http://";
-	    }
-	    if (portfolio.urlBig == "") {
-	      portfolio.urlBig = "http://";
-	    }
-	    $scope.portfolioDisplayEdit = portfolio;
-	    $scope.editPortfolio = {show: true};
-	  }
-	  $scope.deletePortfolio = function(id, index) {
-	  $scope.deleteIndex;
-	    $scope.portfolioImages.splice(index, 1);
-	    portfolioDataService.deletePortfolio(id, function(response) {
-	      if (response.status == 200) {
-	      $scope.editPortfolio.show = false;
-	    } else {
-	      console.log('Error Deleteing Item?');
-	      alert('Error Deleteing Item?');
-	    }
-	    })
-	  }
-	    $scope.successMessageDisplayTopPortfolio = false;
-	  $scope.savePortfolio = function(id, portfolio, index) {
-	  $scope.saveIndex = 0;
-	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
-	      if (res.status == 200) {
-	        $scope.successMessageDisplayTopPortfolio = true;
-	        $timeout(function() {
-	          $scope.successMessageDisplayTopPortfolio = false;
-	        }, 3075)
-	      } else {
-	        console.log('Error Saving Portfolio?');
-	        alert('Error Saving Portfolio?');
-	      }
-	    })
-	  }
-	  $scope.newPiece = function() {
-	    var newPortfolio = {
-	      "url": "https://",
-	      "urlBig": "https://"
-	    };
-	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
-	        if (res.status == 200) {
-	          newPortfolio._id = res.data.portfolio._id;
-	          newPortfolio.id = res.data.portfolio._id;
-	          $scope.editPortfolio.show = true;
-	          $scope.portfolioImages.push(newPortfolio);
-	          $scope.portfolioDisplayEdit = newPortfolio;
-	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
-	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
-	        } else {
-	          alert("Error Creating Portfolio")
-	        }
-	      });
-
-	  }
-	});
-
-
-/***/ },
-/* 49 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("adminCtrl", function($scope, dataService) {
-
-	});
-
-
-/***/ },
-/* 50 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	  .controller("portfolioCtrl", function($scope, portfolioDataService, $location) {
-	      portfolioDataService.getPortfolio(function(res) {
-	        if (res.data.portfolios.length == 0) {
-	          $scope.portfolioImages = [{
-	            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg", "urlBig": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
-	          }, {
-	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
-	          }, {
-	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-wallpaper-HD-desktop-620x349.jpg"
-	          }, {
-	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Abstract-rainbows-vortex-colorful-wallpaper-HD-620x388.jpg"
-	          }, {
-	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-HD-Pictures-620x388.jpg"
-	          }, {
-	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTc_qWblhfr11zCkbxdZycggUaotcT4yMyYqHtDZnW7M2BYHsyPaw"
-	          }, {
-	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOlbBCB_NXkXQtty0VS0OugvCEMBWpSNdn72S7-LyRqtH570LWcA"
-	          }, {
-	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSfCwSkXBZjqLb2kApOYM0r8RjPqjGQTQZZDRMhSkOd5KLpoDvdTg"
-	          }, {
-	            "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
-	          }]
-	        } else {
-	          $scope.portfolioImages = res.data.portfolios;
-	        }
-	      });
-	      var tempSearchItem = $location.path();
-	      if (tempSearchItem.search("/portfolio/id/") >= 0) {
-	        var tempItem = tempSearchItem.split("/");
-	        var tempID = tempItem[3];
-	        if (tempItem[3] != "") {
-	          portfolioDataService.getSinglePiece(tempID, function(res) {
-	            $scope.singlePiece = res.data.portfolios[0];
-	          })
-	        } else {
-	          console.log("Blank ID");
-	          $scope.singlePiece = {"urlBig": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"}
-	        }
-	      }
-
-	  });
-
-
-/***/ },
-/* 51 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("cart.confirmationCtrl", function($scope, dataService) {
-	dataService.getCart(function(response) {
-	  var tempObject = response.data.cart.data.orderHistory;
-	  var tempLength = tempObject.length - 1;
-	  var order = tempObject[tempLength].charge.status;
-	  if ( order == "succeeded" ) {
-	    $scope.statusCharge = true;
-	  }
-	  else {
-	    $scope.statusCharge = false;
-	  }
-
-	  //Set Notation for Order History
-	  $scope.orderPlaced = tempObject[tempLength];
-	});
-	});
-
-
-/***/ },
-/* 52 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {"use strict";
+	"use strict";
 	angular.module("lionHeart")
 	.service("googleCalendarGetRequest", function($http) {
 	  // Disable "configAuth" to turn off test mode
@@ -6750,10 +6077,6 @@ webpackJsonp([0],[
 	  // Google API Info
 	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
 	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
-	   var key = process.env.googleCalApiAPIKEY;
-	   var userEmail = process.env.googleCalApiUSEREMAIL;
-	   console.log(key, process.env);
-	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
 	  // $Get REQUEST
 	  function dateCheck(data, success) {
 	    let todaysDate = new Date();
@@ -6790,7 +6113,7 @@ webpackJsonp([0],[
 	  }
 	var events = []
 	this.calendar = function(callback) {
-	      $http.get(url)
+	      $http.get(env.API_URL)
 	      .then(function(sendData) {
 	        dateCheck(sendData, function(res) {
 	      // Call of FUNCTION ($GET REQUEST)
@@ -6971,131 +6294,679 @@ webpackJsonp([0],[
 	  }
 	})
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(53)))
+
+/***/ },
+/* 41 */,
+/* 42 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest, dataService) {
+	  googleCalendarGetRequest.calendar(function(events) {
+	    $scope.threeEvents = false;
+	    $scope.twoEvents = false;
+	    if (events.length > 3) {
+	      var temp = events.length - 3;
+	      events.splice(3, temp)
+	      $scope.threeEvents = true;
+	    }
+	    else if (events.length == 2) {
+	      $scope.twoEvents = true;
+	    }
+	    $scope.googleEvents = events;
+	  });
+
+
+	    carouselDataService.getCarousel(function(res) {
+	      $scope.carouselImages = res.data.carousel;
+	    })
+
+
+
+	  $("#owl").owlCarousel({
+
+	        navigation : false, // Show next and prev buttons
+	        slideSpeed : 200,
+	        paginationSpeed : 800,
+	        singleItem:true,
+	        autoPlay: true
+
+	        // "singleItem:true" is a shortcut for:
+	        // items : 1,
+	        // itemsDesktop : false,
+	        // itemsDesktopSmall : false,
+	        // itemsTablet: false,
+	        // itemsMobile : false
+
+	    });
+
+	    dataService.getBlog(function(res) {
+	      sortPosts(res, 'main', function(res) {
+	        $scope.posts = res;
+	      })
+	      sortPosts(res, 'subA', function(res) {
+	        $scope.postsA = res;
+	      })
+	      sortPosts(res, 'subB', function(res) {
+	        $scope.postsB = res;
+	      })
+	      sortPosts(res, 'subC', function(res) {
+	        $scope.postsC = res;
+	      })
+	    })
+
+	    var sortPosts = function(input, filter, success) {
+	      let posts = [];
+	      let mainPost = input.data.posts;
+	      for (var x = 0; x < mainPost.length; x++) {
+	        if (mainPost[x].loc == filter) {
+	          posts.push(mainPost[x])
+	        }
+	      }
+	      if (posts.length > 1) {
+	        let minusNum = (posts.length - 1)
+	        posts.splice(1, minusNum)
+	      }
+	      success(posts);
+	    }
+	});
+
+
+/***/ },
+/* 43 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("profile.dashboardCtrl", function($scope, dataService) {
+	});
+
+
+/***/ },
+/* 44 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("profile.dashboard.editCtrl", function($scope, dataService) {
+	});
+
+
+/***/ },
+/* 45 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
+	var inputToggle = __webpack_require__(19);
+	var user, cart;
+	var addToCartReq = __webpack_require__(8);
+	$scope.urlCode = $stateParams.urlCode;
+	var urlCode = $scope.urlCode
+	dataService.getSingleItem(urlCode, function(response) {
+	  $scope.singleItem = response.data.products;
+	});
+	dataService.getUser(function(response) {
+	  $scope.user = response.data.user;
+	  user = $scope.user
+	})
+	dataService.getCart(function(response) {
+	  $scope.cart = response.data.cart.data.cart;
+	  cart = $scope.cart
+	})
+	$scope.addToCart = function(id, quantity, product) {
+	var id = id;
+	  addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
+	    console.log("Cart Saved");
+	    $scope.cart = res;
+	    cart = $scope.cart
+	  });
+	  console.log("Completed!");
+	}
+	$scope.quantity = {val: 1};
+
+	//Check Quantity
+	$scope.quantityCheck = function(val) {
+	  inputToggle(val, function(res) {
+	    if (res == true) {
+	      return true;
+	    } else {
+	      return false;
+	    }
+	  })
+	}
+
+	$scope.quantityChange = function(val) {
+	  if (val == 1) {
+	    $scope.quantity.val += 1;
+	  } else {
+	    $scope.quantity.val -= 1;
+	  }
+	}
+	$scope.checkValForMax = function() {
+	  if ($scope.quantity.val > $scope.singleItem.quantity) {
+	    $scope.quantity.val = $scope.singleItem.quantity;
+	  } else if ($scope.quantity.val < 1) {
+	    $scope.quantity.val = 1;
+	  }
+	  $scope.edit = false;
+	}
+
+
+	// get products for random display (3)
+	// create array with digits = to array.length
+	// run a random number
+	// get number from array (NOT INDEX)
+	// splice out [x] from array
+	// repeat three times
+	// save related items to $scope
+	// Display in angular
+	// prevent duplicates
+	dataService.getProducts(function(response) {
+	  var productsRes = response.data.products;
+	  var productLength = productsRes.length;
+	  var tempArr = []
+	  var items = [];
+
+	  var searchForItem = function(callback) {
+	  var removeItem = []
+	    for (var x = 0; x < productLength; x++) {
+	      removeItem.push(productsRes[x].urlCode);
+	    }
+	    var removeNum = removeItem.indexOf(urlCode);
+	    var templength = urlCode.length;
+	    productsRes.splice(removeNum, 1);
+	    callback();
+	  }
+
+	  var lengthBuild = function(productLength, callback) {
+	    for (var x = 0; x < productLength; x++) {
+	      tempArr.push(x);
+	      productLength = productLength - 1;
+	    }
+	    callback();
+	  }
+
+	  var rnd = function (tempArr, callback) {
+	    var tempNum = Math.floor(Math.random() * tempArr.length);
+	    callback(tempNum);
+	  }
+	searchForItem(function() {
+	  lengthBuild(productLength, function() {
+	    for (var x = 0; x < 3; x++) {
+	      rnd(tempArr, function (rndNum) {
+	        var tempItem = productsRes[rndNum];
+	        productsRes.splice(rndNum, 1);
+	        items.push(tempItem);
+	      });
+	    }
+	    var submit = {"related": items};
+	    $scope.relatedItems = submit;
+	  });
+	});
+	});
+
+
+
+	});
+
+
+/***/ },
+/* 46 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, eraseCartService, $location) {
+	  // Get Cart/User/Product
+	  dataService.getCart(function(response) {
+	        $scope.cart = response.data.cart;
+	        });
+	      dataService.getUser(function(response) {
+	        $scope.userCheckout = response.data.user;
+	      });
+	      dataService.getProducts(function(response) {
+	        $scope.productCheck = response.data.products;
+	});
+
+	// Checkout With Stripe
+	  $scope.checkoutStripe = function(callback) {
+	    var stripeToken = $scope.stripeToken;
+	    var tempLength = $scope.stripeToken.stripeToken.number.length;
+	    // Save Billing As Shipping For Sale; Save order is Automatic in a checkout API call (src/api/cart)
+	    dataService.checkout(stripeToken, function(response) {
+	      $location.path('/cart/confirmation');
+	      if (response.data.charge.paid == true) {
+	        callback(true);
+	      } else {
+	        callback(false);
+	      }
+	    });
+	    // Reset Token
+	    $scope.stripeToken =
+	    {
+	      stripeToken:
+	        {
+	        number: '',
+	        cvc: '',
+	        exp_month: '',
+	        exp_year: ''
+	        }
+	    }
+	  }
+	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
+	$scope.isProductAvailable = function(cb) {
+	  dataService.getCart(function(response) {
+	    var cart = response.data.cart.data.cart;
+	    dataService.getProducts(function(response) {
+	      var productCheck = response.data.products;
+	      functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
+	        if (response == true) {
+	          cb(true)
+	        }
+	        else {
+	          cb(false)
+	        }
+	      });
+	    });
+	  });
+	};
+
+
+	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
+	$scope.changeProductAvailablity = function(cb) {
+	dataService.getCart(function(response) {
+	  var cart = response.data.cart.data.cart;
+	  dataService.getProducts(function(response) {
+	    var productCheck = response.data.products;
+	    functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
+	      if (response == true) {
+	        //save inventory
+	        for (var x = 0; x < saveItems.length; x++) {
+	          var lookUp = saveItems[x].urlCode;
+	          var tempQuantity = saveItems[x].quantity;
+	          var tempActive = saveItems[x].active;
+	          dataService.getSingleItem(lookUp, function(item) {
+	          var temp = item.data.products;
+	          temp.quantity = tempQuantity;
+	          temp.active = tempActive;
+	            //save product
+	            dataService.saveItem(temp._id, temp, function(response) {
+	              cb(true)
+	            })
+	          })
+	        }
+	      }
+	      else {
+	        cb(false)
+	      }
+	    });
+	  });
+	});
+	};
+
+
+
+	//Checkout Process
+	$scope.checkout = function() {
+	$scope.isProductAvailable(function(status) {
+	  if (status == true) {
+	    $scope.checkoutStripe(function(data) {
+	      if (data == true) {
+	      $scope.changeProductAvailablity(function(response) {
+	        eraseCartService.eraseCart();
+	        $scope.cartA = null;
+	      })
+	    }
+	      else if (data == false) {
+	      alert("Error During Transaction")
+	    }
+
+	    });
+	  }
+	  else {
+	  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
+	    $location.path('/cart/view')
+	  }
+	}) //isProductAvailable function end
+	}
+	}); // End of Controller
+
+
+/***/ },
+/* 47 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.productsCtrl", function($scope, dataService, $location, $timeout) {
+	  dataService.getProducts(function(response) {
+	    $scope.products = response.data.products
+	  })
+	  $scope.editProduct = {show: false};
+	  var productBeingEditedIndex;
+	  $scope.productEdit = function(product, index) {
+	    productBeingEditedIndex = index;
+	    if (!product.quantity) {
+	      product.quantity = 0;
+	    }
+	    $scope.productDisplayEdit = product;
+	    $scope.editProduct = {show: true};
+	  }
+	  $scope.deleteItem = function(id) {
+	    dataService.deleteItem(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.products.splice(productBeingEditedIndex, 1);
+	      $scope.editProduct.show = false;
+	    } else {
+	      console.log('Error Deleteing Item?');
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
+	    $scope.successMessageDisplayTop = false;
+	  $scope.saveItem = function(id, product) {
+	    dataService.saveItem(id, product, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTop = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTop = false;
+	        }, 3075)
+	      } else {
+	        console.log('Error Saving Item?');
+	        alert('Error Saving Item?');
+	      }
+	    })
+	  }
+	  $scope.newItemStart = function() {
+	    var newProduct = {
+	      "name": "New Item",
+	      "active": true,
+	      "pictures": ["http://www.gettyimages.pt/gi-resources/images/Homepage/Hero/PT/PT_hero_42_153645159.jpg"],
+	      "price": {
+	        "amount": 100,
+	        "currency": 'USD'
+	      },
+	      "category": {"parent": "Paintings"},
+	      "urlCode": new Date().getTime(),
+	      "sku": new Date().getTime(),
+	      "quantity": 1
+	    };
+	      dataService.newItem(newProduct, function(res) {
+	        if (res.status == 200) {
+	          $scope.editProduct.show = true;
+	          $scope.products.push(newProduct);
+	          $scope.productDisplayEdit = newProduct;
+	          $scope.productDisplayEdit.id = res.data.products._id;
+	          $scope.productDisplayEdit._id = res.data.products._id;
+	        } else {
+	          alert("Error Creating Product")
+	        }
+	      });
+
+	  }
+	});
+
+
+/***/ },
+/* 48 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.postsCtrl", function($scope, dataService, $timeout) {
+	  dataService.getBlog(function(response) {
+	    $scope.blog = response.data.posts;
+	  })
+	  $scope.newPost = function() {
+	    var date = new Date;
+	        var month = (date.getUTCMonth()+1);
+	        var day = date.getDate();
+	        var year = date.getFullYear();
+	        var hour = date.getHours();
+	        if (hour >= 13) {
+	          hour -= 12;
+	        }
+	        var minutes = date.getMinutes();
+	        var time = hour+":"+minutes;
+	    var newPost = {
+	      "title": "Add Title",
+	      "description": "Add Description",
+	      "body": "Add Body",
+	      "urlCode": new Date().getTime(),
+	      "img": "https://tctechcrunch2011.files.wordpress.com/2015/08/clouds.jpg",
+	      "live": 'false',
+	      "date": {"month": month, "day": day, "year": year, "time": time},
+	      "loc": "main",
+	      "category": {"parent": "Homepage"}
+	    };
+	    dataService.newPost(newPost, function(res) {
+	      if (res.status == 200) {
+	        newPost._id = res.data.post._id;
+	        newPost.id = res.data.post._id;
+	      $scope.blog.push(newPost);
+	    } else {
+	      return res.status(500).json(res)
+	    }
+	    })
+	  }
+	  $scope.deletePost = function(id, post, index) {
+	    dataService.deletePost(id, post, function(res) {
+	        if (res.status == 200) {
+	          $scope.blog.splice(index, 1);
+	      } else {
+	        return res.status(500).json(res)
+	      }
+	    })
+	  }
+	  $scope.openBlog = {show : false};
+	    $scope.successMessageDisplayTopPost = false;
+	  $scope.savePost = function(id, post) {
+	    dataService.savePost(id, post, function(res) {
+	        if (res.status == 200) {
+	        $scope.openBlog.show = false;
+	          $scope.successMessageDisplayTopPost = true;
+	          $timeout(function() {
+	            $scope.successMessageDisplayTopPost = false;
+	          }, 3075)
+	      } else {
+	        console.log('Error Saving Post?');
+	        alert('Error Saving Post?');
+	        return res.status(500).json(res)
+	      }
+	    })
+	  }
+	});
+
+
+/***/ },
+/* 49 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.usersCtrl", function($scope, dataService, $timeout) {
+	  dataService.getUsers(function(response) {
+	    $scope.users = response.data.users;
+	  });
+	  //Save User Function
+	  $scope.successMessageDisplayTopUser = false;
+	  $scope.saveUserAdmin = function(id, user) {
+	    dataService.saveUserAdmin(id, user, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTopUser = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTopUser = false;
+	        }, 3000)
+	      }
+	      else {
+	        console.log('Error Saving User?');
+	        alert('Error Saving User?');
+	      }
+	    })
+	  }
+	});
+
+
+/***/ },
+/* 50 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("admin.portfolioCtrl", function($scope, portfolioDataService, $location, $timeout) {
+	  portfolioDataService.getPortfolio(function(res) {
+	    $scope.portfolioImages = res.data.portfolios;
+	  })
+	  $scope.deleteIndex = 0;
+	  $scope.saveIndex = 0;
+	  $scope.editPortfolio = {show: false};
+	  $scope.portfolioEdit = function(portfolio, index) {
+	    $scope.deleteIndex = index;
+	    $scope.saveIndex = index;
+	    if (portfolio.url == "") {
+	      portfolio.url = "http://";
+	    }
+	    if (portfolio.urlBig == "") {
+	      portfolio.urlBig = "http://";
+	    }
+	    $scope.portfolioDisplayEdit = portfolio;
+	    $scope.editPortfolio = {show: true};
+	  }
+	  $scope.deletePortfolio = function(id, index) {
+	  $scope.deleteIndex;
+	    $scope.portfolioImages.splice(index, 1);
+	    portfolioDataService.deletePortfolio(id, function(response) {
+	      if (response.status == 200) {
+	      $scope.editPortfolio.show = false;
+	    } else {
+	      console.log('Error Deleteing Item?');
+	      alert('Error Deleteing Item?');
+	    }
+	    })
+	  }
+	    $scope.successMessageDisplayTopPortfolio = false;
+	  $scope.savePortfolio = function(id, portfolio, index) {
+	  $scope.saveIndex = 0;
+	    portfolioDataService.savePortfolio(id, portfolio, function(res) {
+	      if (res.status == 200) {
+	        $scope.successMessageDisplayTopPortfolio = true;
+	        $timeout(function() {
+	          $scope.successMessageDisplayTopPortfolio = false;
+	        }, 3075)
+	      } else {
+	        console.log('Error Saving Portfolio?');
+	        alert('Error Saving Portfolio?');
+	      }
+	    })
+	  }
+	  $scope.newPiece = function() {
+	    var newPortfolio = {
+	      "url": "https://",
+	      "urlBig": "https://"
+	    };
+	      portfolioDataService.newPortfolio(newPortfolio, function(res) {
+	        if (res.status == 200) {
+	          newPortfolio._id = res.data.portfolio._id;
+	          newPortfolio.id = res.data.portfolio._id;
+	          $scope.editPortfolio.show = true;
+	          $scope.portfolioImages.push(newPortfolio);
+	          $scope.portfolioDisplayEdit = newPortfolio;
+	          $scope.portfolioDisplayEdit.id = res.data.portfolio._id;
+	          $scope.portfolioDisplayEdit._id = res.data.portfolio._id;
+	        } else {
+	          alert("Error Creating Portfolio")
+	        }
+	      });
+
+	  }
+	});
+
+
+/***/ },
+/* 51 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("adminCtrl", function($scope, dataService) {
+
+	});
+
+
+/***/ },
+/* 52 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	  .controller("portfolioCtrl", function($scope, portfolioDataService, $location) {
+	      portfolioDataService.getPortfolio(function(res) {
+	        if (res.data.portfolios.length == 0) {
+	          $scope.portfolioImages = [{
+	            "url": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg", "urlBig": "https://newevolutiondesigns.com/images/freebies/colorful-background-14.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-Full-HD-620x388.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-wallpaper-HD-desktop-620x349.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Abstract-rainbows-vortex-colorful-wallpaper-HD-620x388.jpg"
+	          }, {
+	            "url": "http://www.pixelstalk.net/wp-content/uploads/2016/03/Colorful-Wallpaper-HD-Pictures-620x388.jpg"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcTc_qWblhfr11zCkbxdZycggUaotcT4yMyYqHtDZnW7M2BYHsyPaw"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSOlbBCB_NXkXQtty0VS0OugvCEMBWpSNdn72S7-LyRqtH570LWcA"
+	          }, {
+	            "url": "https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcSfCwSkXBZjqLb2kApOYM0r8RjPqjGQTQZZDRMhSkOd5KLpoDvdTg"
+	          }, {
+	            "url": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"
+	          }]
+	        } else {
+	          $scope.portfolioImages = res.data.portfolios;
+	        }
+	      });
+	      var tempSearchItem = $location.path();
+	      if (tempSearchItem.search("/portfolio/id/") >= 0) {
+	        var tempItem = tempSearchItem.split("/");
+	        var tempID = tempItem[3];
+	        if (tempItem[3] != "") {
+	          portfolioDataService.getSinglePiece(tempID, function(res) {
+	            $scope.singlePiece = res.data.portfolios[0];
+	          })
+	        } else {
+	          console.log("Blank ID");
+	          $scope.singlePiece = {"urlBig": "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQmdc3NsMT3Fe7s7IbFv74Hzx66R1GZAUeTYv3LmIydpjrhKRxC"}
+	        }
+	      }
+
+	  });
+
 
 /***/ },
 /* 53 */
 /***/ function(module, exports) {
 
-	// shim for using process in browser
-
-	var process = module.exports = {};
-
-	// cached from whatever global is present so that test runners that stub it
-	// don't break things.  But we need to wrap it in a try catch in case it is
-	// wrapped in strict mode code which doesn't define any globals.  It's inside a
-	// function because try/catches deoptimize in certain engines.
-
-	var cachedSetTimeout;
-	var cachedClearTimeout;
-
-	(function () {
-	  try {
-	    cachedSetTimeout = setTimeout;
-	  } catch (e) {
-	    cachedSetTimeout = function () {
-	      throw new Error('setTimeout is not defined');
-	    }
+	'use strict';
+	angular.module("lionHeart")
+	.controller("cart.confirmationCtrl", function($scope, dataService) {
+	dataService.getCart(function(response) {
+	  var tempObject = response.data.cart.data.orderHistory;
+	  var tempLength = tempObject.length - 1;
+	  var order = tempObject[tempLength].charge.status;
+	  if ( order == "succeeded" ) {
+	    $scope.statusCharge = true;
 	  }
-	  try {
-	    cachedClearTimeout = clearTimeout;
-	  } catch (e) {
-	    cachedClearTimeout = function () {
-	      throw new Error('clearTimeout is not defined');
-	    }
+	  else {
+	    $scope.statusCharge = false;
 	  }
-	} ())
-	var queue = [];
-	var draining = false;
-	var currentQueue;
-	var queueIndex = -1;
 
-	function cleanUpNextTick() {
-	    if (!draining || !currentQueue) {
-	        return;
-	    }
-	    draining = false;
-	    if (currentQueue.length) {
-	        queue = currentQueue.concat(queue);
-	    } else {
-	        queueIndex = -1;
-	    }
-	    if (queue.length) {
-	        drainQueue();
-	    }
-	}
-
-	function drainQueue() {
-	    if (draining) {
-	        return;
-	    }
-	    var timeout = cachedSetTimeout.call(null, cleanUpNextTick);
-	    draining = true;
-
-	    var len = queue.length;
-	    while(len) {
-	        currentQueue = queue;
-	        queue = [];
-	        while (++queueIndex < len) {
-	            if (currentQueue) {
-	                currentQueue[queueIndex].run();
-	            }
-	        }
-	        queueIndex = -1;
-	        len = queue.length;
-	    }
-	    currentQueue = null;
-	    draining = false;
-	    cachedClearTimeout.call(null, timeout);
-	}
-
-	process.nextTick = function (fun) {
-	    var args = new Array(arguments.length - 1);
-	    if (arguments.length > 1) {
-	        for (var i = 1; i < arguments.length; i++) {
-	            args[i - 1] = arguments[i];
-	        }
-	    }
-	    queue.push(new Item(fun, args));
-	    if (queue.length === 1 && !draining) {
-	        cachedSetTimeout.call(null, drainQueue, 0);
-	    }
-	};
-
-	// v8 likes predictible objects
-	function Item(fun, array) {
-	    this.fun = fun;
-	    this.array = array;
-	}
-	Item.prototype.run = function () {
-	    this.fun.apply(null, this.array);
-	};
-	process.title = 'browser';
-	process.browser = true;
-	process.env = {};
-	process.argv = [];
-	process.version = ''; // empty string to avoid regexp issues
-	process.versions = {};
-
-	function noop() {}
-
-	process.on = noop;
-	process.addListener = noop;
-	process.once = noop;
-	process.off = noop;
-	process.removeListener = noop;
-	process.removeAllListeners = noop;
-	process.emit = noop;
-
-	process.binding = function (name) {
-	    throw new Error('process.binding is not supported');
-	};
-
-	process.cwd = function () { return '/' };
-	process.chdir = function (dir) {
-	    throw new Error('process.chdir is not supported');
-	};
-	process.umask = function() { return 0; };
+	  //Set Notation for Order History
+	  $scope.orderPlaced = tempObject[tempLength];
+	});
+	});
 
 
 /***/ },
