@@ -10,7 +10,7 @@
     </div>
     </div>
   <div class="row toggleBar posts" ng-repeat="post in blog">
-    <label class="col-xs-12" ng-click="openBlog.show = !openBlog.show">
+    <label class="col-xs-12" ng-click="openBlogToggle = !openBlogToggle">
         <span class="tooltiptexttop">Click To Toggle Display</span>
       <div class="row">
         <div class="col-xs-12">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </label>
-    <div class="col-xs-12 giveSpaceInAdminPanelForPostEdit" ng-show="openBlog.show">
+    <div class="col-xs-12 giveSpaceInAdminPanelForPostEdit" ng-show="openBlogToggle">
       <div class="row">
         <div class="col-xs-12">
           <h2>Title:</h2>
@@ -38,6 +38,10 @@
         <div class="col-xs-12">
           <h2>URL:</h2>
           <label ng-click="editing4 = !editing4" ng-hide="editing4">{{post.urlCode}}</label><input type="text" ng-model="post.urlCode" ng-blur="editing4 = false;" ng-show="editing4"/>
+        </div>
+        <div class="col-xs-12">
+          <h2>Image URL:</h2>
+          <label ng-click="editing41 = !editing41" ng-hide="editing41">{{post.img}}</label><input type="text" ng-model="post.img" ng-blur="editing41 = false;" ng-show="editing41"/>
         </div>
         <div class="col-xs-12 col-sm-6">
         Live:<br/><label ng-click="editing5 = !editing5" ng-hide="editing5">{{post.live}}</label>
