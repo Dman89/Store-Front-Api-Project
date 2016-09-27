@@ -39,6 +39,7 @@ webpackJsonp([0],[
 	__webpack_require__(37);
 	__webpack_require__(38);
 	__webpack_require__(39);
+	__webpack_require__(52);
 	__webpack_require__(40);
 	__webpack_require__(41);
 	__webpack_require__(42);
@@ -52,7 +53,6 @@ webpackJsonp([0],[
 	__webpack_require__(50);
 	__webpack_require__(51);
 	__webpack_require__(19);
-	__webpack_require__(52);
 	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
@@ -6752,7 +6752,7 @@ webpackJsonp([0],[
 	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
 	   var key = process.env.googleCalApiAPIKEY;
 	   var userEmail = process.env.googleCalApiUSEREMAIL;
-	   console.log(key, process.env.googleCalApiUSEREMAIL);
+	   console.log(key, process.env);
 	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
 	  // $Get REQUEST
 	  function dateCheck(data, success) {
