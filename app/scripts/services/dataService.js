@@ -112,6 +112,10 @@ angular.module("lionHeart")
     $http.get("/api/blog")
     .then(callback);
   }
+  this.getBlogById = function(id, callback) {
+    $http.get("/api/blog/" + id)
+    .then(callback);
+  }
   this.savePost = function(id, product, callback) {
   $http.put('/api/blog/post/id/' + id, product)
   .then(callback)

@@ -32,7 +32,7 @@ angular.module("lionHeart")
         var tempID = tempItem[3];
         if (tempItem[3] != "") {
           portfolioDataService.getSinglePiece(tempID, function(res) {
-            $scope.singlePiece = res.data.portfolios;
+            $scope.singlePiece = res.data.portfolios[0];
           })
         } else {
           console.log("Blank ID");

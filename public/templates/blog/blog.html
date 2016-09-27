@@ -1,0 +1,6 @@
+<div ng-repeat="blog in blogItemsToDisplay" ng-show="blog.live" class="text-center SpaceTop">
+<img ng-src="{{blog.img}}" alt="" ui-sref="blog.item({ id: blog._id })">
+<h1 ui-sref="blog.item({ id: blog._id })">{{blog.title}}</h1>
+<p ui-sref="blog.item({ id: blog._id })">{{blog.date.month + "/" + blog.date.day + "/" + blog.date.year}}</p>
+<p ui-sref="blog.item({ id: blog._id })">{{blog.description}}</p>
+</div>

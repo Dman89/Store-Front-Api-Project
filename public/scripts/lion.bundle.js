@@ -6,6 +6,7 @@ webpackJsonp([0],[
 	var angular = __webpack_require__(1);
 	angular.module("lionHeart", []);
 	__webpack_require__(3);
+	__webpack_require__(58);
 	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(8);
@@ -68,7 +69,7 @@ webpackJsonp([0],[
 	'use strict';
 	var lionHeart = angular.module("lionHeart", [__webpack_require__(4)])
 	lionHeart.config(['$urlRouterProvider', '$stateProvider', function($urlRouterProvider, $stateProvider) {
-	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').otherwise('/');
+	  $urlRouterProvider.when('/store', '/store/categories/all').when('/cart', '/cart/view').when('/profile', '/profile/dashboard').when('/admin', '/admin/products').when('/portfolio', '/portfolio/gallery').when('/blog', '/blog/').otherwise('/');
 	  $stateProvider
 	    .state('home', {
 	      url: '/',
@@ -225,6 +226,20 @@ webpackJsonp([0],[
 	      url: '/products',
 	      templateUrl: 'templates/admin/products.html',
 	      controller: 'admin.productsCtrl'
+	      })
+	      .state('blog', {
+	      url: '/blog',
+	      templateUrl: 'templates/blog.html',
+	      controller: 'blogCtrl'
+	      })
+	      .state('blog.blog', {
+	      url: '/',
+	      templateUrl: 'templates/blog/blog.html'
+	      })
+	      .state('blog.item', {
+	      url: '/id/:id',
+	      templateUrl: 'templates/blog/item.html',
+	      controller: 'blogCtrl'
 	      })
 	}])
 	lionHeart.run(['$state', function($state){}]);
@@ -5464,9 +5479,6 @@ webpackJsonp([0],[
 	          else if (viewLocation == '/bio') {
 	            return false;
 	          }
-	          else if (viewLocation == '/portfolio') {
-	            return false;
-	          }
 	          else {
 	            var temp = $location.path();
 	            var x = viewLocation;
@@ -5478,6 +5490,10 @@ webpackJsonp([0],[
 	            var cart = temp.search('/cart');
 	            var adminCheck = x.search('/admin');
 	            var admin = temp.search('/admin');
+	            var blogCheck = x.search('/blog');
+	            var blog = temp.search('/blog');
+	            var portfolioCheck = x.search('/portfolio');
+	            var portfolio = temp.search('/portfolio');
 	             if (store > -1 && storeCheck > -1) {
 	              return true;
 	            }
@@ -5488,6 +5504,12 @@ webpackJsonp([0],[
 	              return true;
 	            }
 	             else if (admin > -1 && adminCheck > -1) {
+	              return true;
+	            }
+	             else if (blog > -1 && blogCheck > -1) {
+	              return true;
+	            }
+	             else if (portfolio > -1 && portfolioCheck > -1) {
 	              return true;
 	            }
 	          }
@@ -6009,11 +6031,17 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest) {
+	.controller("indexHomeCtrl", function($scope, carouselDataService, $http, googleCalendarGetRequest, dataService) {
 	  googleCalendarGetRequest.calendar(function(events) {
+	    $scope.threeEvents = false;
+	    $scope.twoEvents = false;
 	    if (events.length > 3) {
 	      var temp = events.length - 3;
 	      events.splice(3, temp)
+	      $scope.threeEvents = true;
+	    }
+	    else if (events.length == 2) {
+	      $scope.twoEvents = true;
 	    }
 	    $scope.googleEvents = events;
 	  });
@@ -6042,6 +6070,35 @@ webpackJsonp([0],[
 
 	    });
 
+	    dataService.getBlog(function(res) {
+	      sortPosts(res, 'main', function(res) {
+	        $scope.posts = res;
+	      })
+	      sortPosts(res, 'subA', function(res) {
+	        $scope.postsA = res;
+	      })
+	      sortPosts(res, 'subB', function(res) {
+	        $scope.postsB = res;
+	      })
+	      sortPosts(res, 'subC', function(res) {
+	        $scope.postsC = res;
+	      })
+	    })
+
+	    var sortPosts = function(input, filter, success) {
+	      let posts = [];
+	      let mainPost = input.data.posts;
+	      for (var x = 0; x < mainPost.length; x++) {
+	        if (mainPost[x].loc == filter) {
+	          posts.push(mainPost[x])
+	        }
+	      }
+	      if (posts.length > 1) {
+	        let minusNum = (posts.length - 1)
+	        posts.splice(1, minusNum)
+	      }
+	      success(posts);
+	    }
 	});
 
 
@@ -6606,7 +6663,7 @@ webpackJsonp([0],[
 	        var tempID = tempItem[3];
 	        if (tempItem[3] != "") {
 	          portfolioDataService.getSinglePiece(tempID, function(res) {
-	            $scope.singlePiece = res.data.portfolios;
+	            $scope.singlePiece = res.data.portfolios[0];
 	          })
 	        } else {
 	          console.log("Blank ID");
@@ -6651,7 +6708,7 @@ webpackJsonp([0],[
 	  // Disable "configAuth" to turn off test mode
 
 	  var key, userEmail, configAuth;
-	  // 
+	  //
 	  // var configAuth = require('../config/auth');
 	  //
 	  //
@@ -6661,33 +6718,67 @@ webpackJsonp([0],[
 	  //   key = configAuth.googleCalApi.apiKey;
 	  //   userEmail = configAuth.googleCalApi.userEmail;
 	  // } else {
-	   key = process.env.googleCalApiAPIKEY;
-	   userEmail = process.env.googleCalApiUSEREMAIL;
+	   key = process.env.googleCalApiAPIKEY || "AIzaSyDG_qw5tMbtHxoSsjpVT-f9r284Ziqt4uE";
+	   userEmail = process.env.googleCalApiUSEREMAIL || "artbycale619@gmail.com";
 	  // }
 	  // Google API Info
 	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
 	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
 	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
 	  // $Get REQUEST
+	  function dateCheck(data, success) {
+	    let todaysDate = new Date();
+	    let m = (Math.round(todaysDate.getMonth().toString()) + 1);
+	    let yearB = todaysDate.getYear().toString();
+	    let y = yearB.slice(1,3);
+	    let d = todaysDate.getDate().toString();
+	    var list = data.data.items;
+	    for (var x = 0; x < list.length; x++) {
+	      let dateToCheck = list[x].end.dateTime;
+	      let year = dateToCheck.slice(2, 4);
+	      let month = Math.round(dateToCheck.slice(5, 7));
+	      let day = dateToCheck.slice(8, 10);
+	      if (y >= year) {
+	        if (year == y && m > month) {
+	          // No need to do anythin
+	        }
+	        else if (year == y && m == month && d >= day) {
+	          // No need to do anythin
+	        }
+	        else if (y > year) {
+	          // No need to do anythin
+	        }
+	        else {
+	          list = list.splice(x, y);
+	        }
+	      }
+	      else {
+	        list = list.splice(x, y);
+	      }
+	    }
+	    data.data.items = list;
+	    success(data)
+	  }
+	var events = []
 	this.calendar = function(callback) {
 	      $http.get(url)
-	      .then(function(res) {
-	        var events = []
+	      .then(function(sendData) {
+	        dateCheck(sendData, function(res) {
 	      // Call of FUNCTION ($GET REQUEST)
 	        var res = res.data.items;
 	        for (var x = 0; x < res.length; x++) {
-	          var eventItem = {};
+	          let eventItem = {};
 	          if (res[x].status == "confirmed") {
-	          var summary = res[x].summary;
+	            var summary = res[x].summary;
 	          if (!res[x].description) {
-	          var description = "No Description Available";
+	            var description = "No Description Available";
 	          } else {
-	          var description = res[x].description;
+	            var description = res[x].description;
 	          }
 	          if (!res[x].location) {
-	          var location = "To Be Decided";
+	            var location = "To Be Decided";
 	          } else {
-	          var location = res[x].location;
+	            var location = res[x].location;
 	          }
 	      // Date Conversion
 	            dateConversionForComputerCodePurposes(res[x].start.dateTime, res[x].end.dateTime, function(start, end) {
@@ -6705,8 +6796,11 @@ webpackJsonp([0],[
 	            }
 	          }
 	          callback(events);
+
+	        })
 	      })
 	};
+
 
 	var dateConversionForWebsite = function(events, callback) {
 	  events.end[3] = events.end[3].split(":").splice(0,2).join(":");
@@ -7154,6 +7248,10 @@ webpackJsonp([0],[
 	    $http.get("/api/blog")
 	    .then(callback);
 	  }
+	  this.getBlogById = function(id, callback) {
+	    $http.get("/api/blog/" + id)
+	    .then(callback);
+	  }
 	  this.savePost = function(id, product, callback) {
 	  $http.put('/api/blog/post/id/' + id, product)
 	  .then(callback)
@@ -7359,6 +7457,34 @@ webpackJsonp([0],[
 	      }
 	    )
 	  }
+	});
+
+
+/***/ },
+/* 58 */
+/***/ function(module, exports) {
+
+	'use strict';
+	angular.module("lionHeart")
+	.controller("blogCtrl", function($scope, dataService, $location) {
+	  dataService.getBlog(function(res) {
+	    $scope.blogItemsToDisplay = res.data.posts;
+	  })
+
+	  let tempSearchItem = $location.path();
+	  if (tempSearchItem.search("/blog/id/") >= 0) {
+	    let tempItem = tempSearchItem.split("/");
+	    let tempID = tempItem[3];
+	    if (tempItem[3] != "") {
+	      dataService.getBlogById(tempID, function(res) {
+	        console.log(res.data.posts._id);
+	        $scope.blogItem = res.data.posts;
+	      })
+	    }
+	  }
+
+
+
 	});
 
 
