@@ -6,15 +6,15 @@
   & .end {
     padding-right: 10px;
   }
+  & .navbar-brand {
+    margin-left: 10px;
+    color: $h;
+    @media (max-width: 480px) {
+      margin:  5px;
+    }
+  }
 }
 .stop {
   cursor: none;
   pointer-events: none;
-}
-.navbar-brand {
-  padding-left: 10px;
-  color: $h;
-  @media (max-width: 480px) {
-    margin:  5px;
-  }
 }

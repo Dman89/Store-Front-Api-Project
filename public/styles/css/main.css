@@ -409,17 +409,16 @@ img {
   cursor: pointer; }
 #menu .end {
   padding-right: 10px; }
+#menu .navbar-brand {
+  margin-left: 10px;
+  color: #f9be36; }
+  @media (max-width: 480px) {
+    #menu .navbar-brand {
+      margin: 5px; } }
 
 .stop {
   cursor: none;
   pointer-events: none; }
-
-.navbar-brand {
-  padding-left: 10px;
-  color: #f9be36; }
-  @media (max-width: 480px) {
-    .navbar-brand {
-      margin: 5px; } }
 
 input {
   border-radius: 4px; }

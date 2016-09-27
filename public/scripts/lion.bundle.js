@@ -6746,12 +6746,12 @@ webpackJsonp([0],[
 	  //   key = configAuth.googleCalApi.apiKey;
 	  //   userEmail = configAuth.googleCalApi.userEmail;
 	  // } else {
-	   var key = process.env.googleCalApiAPIKEY;
-	   var userEmail = process.env.googleCalApiUSEREMAIL;
 	  // }
 	  // Google API Info
 	  // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
 	  // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
+	   var key = process.env.googleCalApiAPIKEY;
+	   var userEmail = process.env.googleCalApiUSEREMAIL;
 	  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
 	  // $Get REQUEST
 	  function dateCheck(data, success) {
