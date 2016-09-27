@@ -51,7 +51,7 @@ app.get('/auth/facebook/callback',
         successFlash: 'Welcome!'
     }));
 app.constant('env', {
-  API_URL: "https://www.googleapis.com/calendar/v3/calendars/"+process.env.googleCalApiUSEREMAIL + "/events?key=" + process.env.googleCalApiAPIKEY;
+  API_URL: "https://www.googleapis.com/calendar/v3/calendars/"+process.env.googleCalApiUSEREMAIL + "/events?key=" + process.env.googleCalApiAPIKEY
 })
 // route for logging out
 app.get('/logout', function(req, res) {

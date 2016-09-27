@@ -18,10 +18,6 @@ angular.module("lionHeart")
   // Google API Info
   // var key = 'XXXXXXVT-f9r284Ziqt4uE' || process.env.googleCalApiAPIKEY;
   // var userEmail = "artbycaleXXX@gmail.com" || process.env.googleCalApiUSEREMAIL;
-   var key = process.env.googleCalApiAPIKEY;
-   var userEmail = process.env.googleCalApiUSEREMAIL;
-   console.log(key, process.env);
-  var url = "https://www.googleapis.com/calendar/v3/calendars/"+userEmail+"/events?key="+key;
   // $Get REQUEST
   function dateCheck(data, success) {
     let todaysDate = new Date();
@@ -58,7 +54,7 @@ angular.module("lionHeart")
   }
 var events = []
 this.calendar = function(callback) {
-      $http.get(url)
+      $http.get(env.API_URL)
       .then(function(sendData) {
         dateCheck(sendData, function(res) {
       // Call of FUNCTION ($GET REQUEST)
