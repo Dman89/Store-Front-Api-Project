@@ -6584,6 +6584,7 @@ webpackJsonp([0],[
 	  var cart = response.data.cart.data.cart;
 	  dataService.getProducts(function(response) {
 	    var productCheck = response.data.products;
+	    console.log(productCheck, cart, 0);
 	    functionService.isProductAvailable(productCheck, cart, function(response, saveItems) {
 	      if (response == true) {
 	        //save inventory
@@ -6614,7 +6615,7 @@ webpackJsonp([0],[
 
 	//Checkout Process
 	$scope.checkout = function() {
-	$scope.isProductAvailable(function(status) {
+	  $scope.isProductAvailable(function(status) {
 	  if (status == true) {
 	    $scope.checkoutStripe(function(data) {
 	      if (data == true) {
@@ -7177,6 +7178,7 @@ webpackJsonp([0],[
 	                            // Checking Product Availability
 	// Get Products
 	// Get Users Cart
+	console.log(product, cart);
 	      grabIDAndQuantity(product, cart, function(file, text) {
 	        var checkForTrue = "";
 	        var isItTrue = 0;

@@ -63,6 +63,7 @@ dataService.getCart(function(response) {
   var cart = response.data.cart.data.cart;
   dataService.getProducts(function(response) {
     var productCheck = response.data.products;
+    console.log(productCheck, cart, 0);
     functionService.isProductAvailable(productCheck, cart, function(response, saveItems) {
       if (response == true) {
         //save inventory
@@ -93,7 +94,7 @@ dataService.getCart(function(response) {
 
 //Checkout Process
 $scope.checkout = function() {
-$scope.isProductAvailable(function(status) {
+  $scope.isProductAvailable(function(status) {
   if (status == true) {
     $scope.checkoutStripe(function(data) {
       if (data == true) {

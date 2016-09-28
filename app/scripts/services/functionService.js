@@ -5,6 +5,7 @@ this.isProductAvailable = function(product, cart, callback) {
                             // Checking Product Availability
 // Get Products
 // Get Users Cart
+console.log(product, cart);
       grabIDAndQuantity(product, cart, function(file, text) {
         var checkForTrue = "";
         var isItTrue = 0;
