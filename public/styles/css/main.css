@@ -1908,12 +1908,12 @@ body {
   margin-bottom: 5%; }
 #html #body #ui-view .makeRoom {
   margin: 5% auto; }
-@media (max-width: 480px), (max-height: 480px) {
-  #html #body #ui-view #home img {
-    max-width: 225px; } }
 @media (max-width: 600px), (max-height: 600px) {
   #html #body #ui-view #home img {
     max-width: 300px; } }
+@media (max-width: 480px), (max-height: 480px) {
+  #html #body #ui-view #home img {
+    max-width: 225px; } }
 
 #redSold {
   color: red; }
