@@ -7234,7 +7234,7 @@ webpackJsonp([0],[
 	    }
 	    for (var x = 0; x < cart.items.length; x++) {
 	      var quantity = cart.items[x].quantity;
-	      var id2 = cart.items[x].product.id;
+	      var id2 = cart.items[x].product._id;
 	      useThisDataToSearch.push({"id": id2, "quantity": quantity});
 	      if (x < cart.items.length) {
 	        waypointTwo = true;
