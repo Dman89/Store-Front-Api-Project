@@ -1902,9 +1902,12 @@ body {
 #html #body #ui-view .mainPost {
   margin: 2.5% auto; }
 #html #body #ui-view .blogWhole {
-  margin: 5% auto; }
+  margin: 5% auto;
+  padding: 0 5%; }
 #html #body #ui-view .spaceBtm {
   margin-bottom: 5%; }
+#html #body #ui-view .makeRoom {
+  margin: 5% auto; }
 
 #redSold {
   color: red; }

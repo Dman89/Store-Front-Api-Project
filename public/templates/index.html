@@ -9,7 +9,7 @@
 <div class="col-xs-12 text-center">
   <h1>Upcoming Art Shows</h1>
 </div>
-<div class="col-xs-12 text-center" ng-class="{'col-sm-6': twoEvents, 'col-sm-4': threeEvents}" ng-repeat="event in googleEvents">
+<div class="col-xs-12 text-center makeRoom" ng-class="{'col-sm-6': twoEvents, 'col-sm-4': threeEvents}" ng-repeat="event in googleEvents">
   <div style="padding: .5em; border: 4px black solid; border-radius: 4px;">
     <h2>{{event.summary}}</h2>
     <p>{{event.description}}</p>
@@ -26,18 +26,20 @@
       <p class="text-left">{{post.description}}</p>
     </div>
   </div>
-  <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="posta in postsA">
-  <img ng-src="{{posta.img}}" alt="">
-  <p>{{posta.title}}</p>
-  </div>
-  <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="postb in postsB">
-  <img ng-src="{{postb.img}}" alt="">
-  <p>{{postb.title}}</p>
-  </div>
-  <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="postc in postsC">
-  <img ng-src="{{postc.img}}" alt="">
-  <p>{{postc.title}}</p>
-  </div>
+  <div class="row">
+      <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="posta in postsA">
+      <img ng-src="{{posta.img}}" alt="">
+      <p>{{posta.title}}</p>
+      </div>
+      <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="postb in postsB">
+      <img ng-src="{{postb.img}}" alt="">
+      <p>{{postb.title}}</p>
+      </div>
+      <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="postc in postsC">
+      <img ng-src="{{postc.img}}" alt="">
+      <p>{{postc.title}}</p>
+      </div>
+    </div>
 </div>
 <div class="col-xs-12 text-center">
   <h1>In the Market For Art?</h1>
