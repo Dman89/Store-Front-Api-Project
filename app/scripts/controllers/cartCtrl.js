@@ -98,14 +98,11 @@ $scope.quantityTotalAddition = function(index) {
     $scope.UserWithCart.data.cart.items[index].quantity += 1;
     var userWithCart = $scope.UserWithCart
     dataService.updateCart2(userWithCart, function(response) {
-      console.log(response);
-    dataService.getCart(function(response) {
-      $scope.cartA = response.data.cart.data.cart;
+      $scope.cartA = response.data.user.data.cart;
       var cart = $scope.cartA.items;
-      $scope.UserWithCart = response.data.cart;
+      $scope.UserWithCart = response.data.user;
       var user = $scope.UserWithCart;
       cartTotal(cart, user)
-    });
   });
   }
 }

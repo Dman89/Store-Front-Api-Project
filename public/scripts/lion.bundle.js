@@ -4893,17 +4893,17 @@ webpackJsonp([0],[
 	            if (check == "graphic design") {
 	              check = "graphics";
 	            }
-	          console.log(check + tempEdit);
+	          // console.log(check + tempEdit);
 	          if (check.search(tempEdit) > -1) {
 	            list.push(response.data.products[x]);
-	            console.log(list);
+	            // console.log(list);
 	          }
 	          if (x == varTemp - 1) {
 	          $scope.products = list;
 	          }
 	          if (check.search("tempEdit") > -1) {
 	            list.push(response.data.products[x]);
-	            console.log(list);
+	            // console.log(list);
 	          }
 	          if (x == varTemp - 1) {
 	            $scope.products = list;
@@ -4926,10 +4926,10 @@ webpackJsonp([0],[
 	    $scope.addToCart = function(id, quantity, product) {
 	    var id = id;
 	      addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
-	        console.log("Cart Saved");
+	        // console.log("Cart Saved");
 	        $scope.cart = res;
 	        cart = $scope.cart
-	        console.log("Completed!");
+	        // console.log("Completed!");
 	      });
 	    }
 	});
@@ -4941,20 +4941,20 @@ webpackJsonp([0],[
 
 	'use strict'
 	var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
-	  console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
+	  // console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
 	  var returnVal;
 	  if (!user) {
-	    console.log("Please Log In");
+	    // console.log("Please Log In");
 	  }
 	  else {
 	    functionService.addToCart(id, quantity, user, cart, product, function(response) {
 	      if (response == "nothing") {
-	        console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
+	        // console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
 	        returnVal = cart;
 	      } else {
 	        returnVal = response;
 	      }
-	      console.log("Saving Cart...");
+	      // console.log("Saving Cart...");
 	      finalCB(returnVal);
 	    });
 	  }
@@ -5209,14 +5209,11 @@ webpackJsonp([0],[
 	    $scope.UserWithCart.data.cart.items[index].quantity += 1;
 	    var userWithCart = $scope.UserWithCart
 	    dataService.updateCart2(userWithCart, function(response) {
-	      console.log(response);
-	    dataService.getCart(function(response) {
-	      $scope.cartA = response.data.cart.data.cart;
+	      $scope.cartA = response.data.user.data.cart;
 	      var cart = $scope.cartA.items;
-	      $scope.UserWithCart = response.data.cart;
+	      $scope.UserWithCart = response.data.user;
 	      var user = $scope.UserWithCart;
 	      cartTotal(cart, user)
-	    });
 	  });
 	  }
 	}

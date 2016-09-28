@@ -23,17 +23,17 @@ angular.module("lionHeart")
             if (check == "graphic design") {
               check = "graphics";
             }
-          console.log(check + tempEdit);
+          // console.log(check + tempEdit);
           if (check.search(tempEdit) > -1) {
             list.push(response.data.products[x]);
-            console.log(list);
+            // console.log(list);
           }
           if (x == varTemp - 1) {
           $scope.products = list;
           }
           if (check.search("tempEdit") > -1) {
             list.push(response.data.products[x]);
-            console.log(list);
+            // console.log(list);
           }
           if (x == varTemp - 1) {
             $scope.products = list;
@@ -56,10 +56,10 @@ angular.module("lionHeart")
     $scope.addToCart = function(id, quantity, product) {
     var id = id;
       addToCartReq(id, quantity, user, cart, product, functionService, $scope, function(res) {
-        console.log("Cart Saved");
+        // console.log("Cart Saved");
         $scope.cart = res;
         cart = $scope.cart
-        console.log("Completed!");
+        // console.log("Completed!");
       });
     }
 });
