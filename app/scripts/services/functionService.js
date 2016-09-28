@@ -13,9 +13,11 @@ this.isProductAvailable = function(product, cart, callback) {
         for (var x = 0; x < text.length; x++) {
           var aQuantity = text[x].quantity;
           var id = text[x].id;
+          console.log(text[x]);
 // Make Object of ID and Quantity
           for (var y = 0; y < file.length; y++) {
 // Search Products with Users Cart
+console.log(file[y].id);
             if (file[y].id.search(id) == 0) {
               if (file[y].quantity == 0) {
                 isItTrue == text.length - 1;
@@ -60,7 +62,7 @@ this.isProductAvailable = function(product, cart, callback) {
     }
     for (var x = 0; x < cart.items.length; x++) {
       var quantity = cart.items[x].quantity;
-      var id2 = cart.items[x].product.id;
+      var id2 = cart.items[x].product._id;
       useThisDataToSearch.push({"id": id2, "quantity": quantity});
       if (x < cart.items.length) {
         waypointTwo = true;
