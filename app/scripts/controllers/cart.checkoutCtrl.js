@@ -4,7 +4,7 @@ angular.module("lionHeart")
   // Get Cart/User/Product
   dataService.getCart(function(response) {
         $scope.cart = response.data.cart.data.cart;
-        $scope.cart = response.data.cart.data.cart;
+        $scope.cartA = response.data.cart.data.cart;
   });
   dataService.getUser(function(response) {
         $scope.userCheckout = response.data.user;
