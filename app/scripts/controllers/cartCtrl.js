@@ -45,11 +45,8 @@ $scope.deleteCartItem = function(abe) {
     var aUser = $scope.user;
     // Save User / Cart
     dataService.updateCart(aUser, function(response) {
-      console.log(response.data, 1);
-      $scope.cartA = response.data.user.data.cart;
-      var cart = $scope.cartA.items;
-      $scope.UserWithCart = response.data.user;
-      var user = $scope.UserWithCart;
+      var cart = response.data.user.data.cart.items;
+      var user = response.data.user;
       cartTotal(cart, user)
       });
     // Pass CC info to next State
@@ -90,12 +87,10 @@ $scope.deleteCartItem = function(abe) {
       user.data.cart.subTotal = newSubtotal;
       user.data.cart.tax = tax;
       user.data.cart.total = total;
+      $scope.cartA.total = total;
       user.data.cart.shipping = shipping;
       user.data.cart.len = len;
-      dataService.updateCart(user, function(response) {
-        console.log(response.data, 2);
-        $scope.cartA.total = response.data.user.data.cart.total;
-      });
+      dataService.updateCart(user, function(response) {});
     })
   }
 // Quanity Plus and Minus Functions for Cart Page
