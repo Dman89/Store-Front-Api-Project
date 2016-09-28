@@ -2,3 +2,4 @@ node_modules
 src/config/auth.js
 src/auth.js
 app/scripts/config/auth.js
+app/QUICKSTART.html
