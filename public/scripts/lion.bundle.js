@@ -5124,9 +5124,10 @@ webpackJsonp([0],[
 	      };
 	  // Get User/Cart/UserWithCart
 	  dataService.getCart(function(response) {
-	    $scope.cartA = response.data.user.data.cart;
+	    console.log(response);
+	    $scope.cartA = response.data.cart.data.cart;
 	    var cart = $scope.cartA.items;
-	    $scope.UserWithCart = response.data.user;
+	    $scope.UserWithCart = response.data.cart;
 	    var user = $scope.UserWithCart;
 	    $scope.user = $scope.UserWithCart;
 	    cartTotal(cart, user)
