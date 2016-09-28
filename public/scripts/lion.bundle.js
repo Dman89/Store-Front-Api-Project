@@ -6527,15 +6527,15 @@ webpackJsonp([0],[
 	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, eraseCartService, $location) {
 	  // Get Cart/User/Product
 	  dataService.getCart(function(response) {
-	    console.log(response, "cart");
-	        $scope.cart = response.data.cart.data;
-	        });
-	      dataService.getUser(function(response) {
+	        $scope.cart = response.data.cart.data.cart;
+	        $scope.cart = response.data.cart.data.cart;
+	  });
+	  dataService.getUser(function(response) {
 	        $scope.userCheckout = response.data.user;
-	      });
-	      dataService.getProducts(function(response) {
-	        $scope.productCheck = response.data.products;
-	});
+	  });
+	  dataService.getProducts(function(response) {
+	    $scope.productCheck = response.data.products;
+	  });
 
 	// Checkout With Stripe
 	  $scope.checkoutStripe = function(callback) {
