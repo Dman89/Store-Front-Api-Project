@@ -94,7 +94,6 @@ dataService.getCart(function(response) {
 //Checkout Process
 $scope.checkout = function() {
   isProductAvailable(function(status) {
-  console.log(status);
   if (status == true) {
     $scope.checkoutStripe(function(data) {
       if (data == true) {
@@ -110,7 +109,7 @@ $scope.checkout = function() {
     });
   }
   else {
-  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
+  alert(status + " Some items in your cart are no longer available. Sorry for any inconvenience")
     $location.path('/cart/view')
   }
 }) //isProductAvailable function end
