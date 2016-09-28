@@ -45,10 +45,9 @@ $scope.deleteCartItem = function(abe) {
     var aUser = $scope.user;
     // Save User / Cart
     dataService.updateCart(aUser, function(response) {
-      console.log(response);
-      $scope.cartA = response.data.cart.data.cart;
+      $scope.cartA = response.data.user.data.cart;
       var cart = $scope.cartA.items;
-      $scope.UserWithCart = response.data.cart;
+      $scope.UserWithCart = response.data.user;
       var user = $scope.UserWithCart;
       cartTotal(cart, user)
       });
