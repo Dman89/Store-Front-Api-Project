@@ -55,7 +55,7 @@ angular.module("lionHeart")
     };
       dataService.newItem(newProduct, function(res) {
         if (res.status == 200) {
-          $scope.editProduct.show = true;
+          $scope.editProduct = {'show':true};
           $scope.products.push(newProduct);
           $scope.productDisplayEdit = newProduct;
           $scope.productDisplayEdit.id = res.data.products._id;
