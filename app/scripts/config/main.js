@@ -145,7 +145,7 @@ controller: 'portfolioCtrl'
       controller: 'admin.postsCtrl'
       })
         .state('admin.portfolio', {
-        url: '/portfolio',
+        url: '/port',
         templateUrl: 'templates/admin/portfolio.html',
         controller: 'admin.portfolioCtrl'
         })
