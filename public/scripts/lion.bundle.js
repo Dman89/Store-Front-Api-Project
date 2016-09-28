@@ -6113,7 +6113,7 @@ webpackJsonp([0],[
 	  }
 	var events = []
 	this.calendar = function(callback) {
-	      $http.get("/env")
+	      $http.get("/api/env")
 	      .then(function(sendData) {
 	        console.log(sendData);
 	        dateCheck(sendData, function(res) {
