@@ -31,6 +31,7 @@ $scope.deleteCartItem = function(abe) {
     $scope.UserWithCart.data.cart.items.splice(abe, 1);
     var user = $scope.UserWithCart;
     dataService.updateCart(user, function(response) {
+      console.log(response, 1);
       $scope.cartA = response.data.user.data.cart;
       var cart = $scope.cartA.items;
       $scope.UserWithCart = response.data.user;
@@ -45,6 +46,7 @@ $scope.deleteCartItem = function(abe) {
     var aUser = $scope.user;
     // Save User / Cart
     dataService.updateCart(aUser, function(response) {
+      console.log(response, 2);
       $scope.cartA = response.data.user.data.cart;
       var cart = $scope.cartA.items;
       $scope.UserWithCart = response.data.user;
