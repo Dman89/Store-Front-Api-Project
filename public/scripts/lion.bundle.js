@@ -40,6 +40,7 @@ webpackJsonp([0],[
 	__webpack_require__(38);
 	__webpack_require__(39);
 	__webpack_require__(40);
+	__webpack_require__(41);
 	__webpack_require__(42);
 	__webpack_require__(43);
 	__webpack_require__(44);
@@ -51,13 +52,12 @@ webpackJsonp([0],[
 	__webpack_require__(50);
 	__webpack_require__(51);
 	__webpack_require__(52);
-	__webpack_require__(53);
 	__webpack_require__(19);
+	__webpack_require__(53);
 	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
-	__webpack_require__(58);
 
 
 /***/ },
@@ -5209,17 +5209,12 @@ webpackJsonp([0],[
 	    $scope.UserWithCart.data.cart.items[index].quantity += 1;
 	    var userWithCart = $scope.UserWithCart
 	    dataService.updateCart2(userWithCart, function(response) {
-	        $scope.cartA = response.data.user.data.cart;
-	        var cart = $scope.cartA.items;
-	        $scope.UserWithCart = response.data.user;
-	        var user = $scope.UserWithCart;
-	        cartTotal(cart, user)
 	    dataService.getCart(function(response) {
-	      // $scope.cartA = response.data.cart.data.cart;
-	      // var cart = $scope.cartA.items;
-	      // $scope.UserWithCart = response.data.cart;
-	      // var user = $scope.UserWithCart;
-	      // cartTotal(cart, user)
+	      $scope.cartA = response.data.cart.data.cart;
+	      var cart = $scope.cartA.items;
+	      $scope.UserWithCart = response.data.cart;
+	      var user = $scope.UserWithCart;
+	      cartTotal(cart, user)
 	    });
 	  });
 	  }
@@ -6299,8 +6294,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */,
-/* 42 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6377,7 +6371,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6387,7 +6381,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6397,7 +6391,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 44 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6517,7 +6511,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6560,12 +6554,12 @@ webpackJsonp([0],[
 	    }
 	  }
 	//  Checks Carts Items for Availability and Sets Quantity for the Product in Database
-	$scope.isProductAvailable = function(cb) {
+	var isProductAvailable = function(cb) {
 	  dataService.getCart(function(response) {
 	    var cart = response.data.cart.data.cart;
 	    dataService.getProducts(function(response) {
 	      var productCheck = response.data.products;
-	      functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
+	      functionService.isProductAvailable(productCheck, cart, function(response, saveItems) {
 	        if (response == true) {
 	          cb(true)
 	        }
@@ -6584,7 +6578,8 @@ webpackJsonp([0],[
 	  var cart = response.data.cart.data.cart;
 	  dataService.getProducts(function(response) {
 	    var productCheck = response.data.products;
-	    functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
+	    functionService.isProductAvailable(productCheck, cart, function(response, saveItems) {
+	      console.log(response, 1);
 	      if (response == true) {
 	        //save inventory
 	        for (var x = 0; x < saveItems.length; x++) {
@@ -6614,7 +6609,7 @@ webpackJsonp([0],[
 
 	//Checkout Process
 	$scope.checkout = function() {
-	$scope.isProductAvailable(function(status) {
+	  isProductAvailable(function(status) {
 	  if (status == true) {
 	    $scope.checkoutStripe(function(data) {
 	      if (data == true) {
@@ -6630,7 +6625,7 @@ webpackJsonp([0],[
 	    });
 	  }
 	  else {
-	  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
+	  alert(status + " Some items in your cart are no longer available. Sorry for any inconvenience")
 	    $location.path('/cart/view')
 	  }
 	}) //isProductAvailable function end
@@ -6639,7 +6634,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6714,7 +6709,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6785,7 +6780,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6814,7 +6809,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6889,7 +6884,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6900,7 +6895,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6949,7 +6944,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6973,7 +6968,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7001,7 +6996,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7034,7 +7029,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7167,7 +7162,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7185,9 +7180,11 @@ webpackJsonp([0],[
 	        for (var x = 0; x < text.length; x++) {
 	          var aQuantity = text[x].quantity;
 	          var id = text[x].id;
+	          console.log(text[x]);
 	// Make Object of ID and Quantity
 	          for (var y = 0; y < file.length; y++) {
 	// Search Products with Users Cart
+	console.log(file[y].id);
 	            if (file[y].id.search(id) == 0) {
 	              if (file[y].quantity == 0) {
 	                isItTrue == text.length - 1;
@@ -7213,7 +7210,7 @@ webpackJsonp([0],[
 	          checkForTrue = false;
 	        }
 	        // Return Truthy or Falsey
-	          callback(checkForTrue);
+	          callback(checkForTrue, saveItems);
 	      })
 	    }
 
@@ -7232,7 +7229,7 @@ webpackJsonp([0],[
 	    }
 	    for (var x = 0; x < cart.items.length; x++) {
 	      var quantity = cart.items[x].quantity;
-	      var id2 = cart.items[x].product.id;
+	      var id2 = cart.items[x].product._id;
 	      useThisDataToSearch.push({"id": id2, "quantity": quantity});
 	      if (x < cart.items.length) {
 	        waypointTwo = true;
@@ -7348,7 +7345,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
