@@ -25,4 +25,11 @@
   & .makeRoom {
     margin: 5% auto;
   }
+  & #home {
+    img {
+      @media (max-width: 600px), (max-height: 600px) {
+        max-width: 300px;
+      }
+    }
+  }
 }
