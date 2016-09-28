@@ -5116,10 +5116,10 @@ webpackJsonp([0],[
 	  $scope.edit = {};
 	  // Blank Stripe Card
 	    $scope.stripeToken = {stripeToken: {
-	      number: '',
-	      cvc: '',
-	      exp_month: '',
-	      exp_year: ''
+	      number: '4242424242424242',
+	      cvc: '123',
+	      exp_month: '12',
+	      exp_year: '2016'
 	      }
 	      };
 	  // Get User/Cart/UserWithCart
@@ -5209,6 +5209,7 @@ webpackJsonp([0],[
 	    $scope.UserWithCart.data.cart.items[index].quantity += 1;
 	    var userWithCart = $scope.UserWithCart
 	    dataService.updateCart2(userWithCart, function(response) {
+	      console.log(response);
 	    dataService.getCart(function(response) {
 	      $scope.cartA = response.data.cart.data.cart;
 	      var cart = $scope.cartA.items;
@@ -5243,7 +5244,6 @@ webpackJsonp([0],[
 	}
 	$scope.justGot = function(val) {
 	    if (val == 1) {
-	      console.log(1);
 	      return true;
 	    } else {
 	      return false
@@ -6579,7 +6579,6 @@ webpackJsonp([0],[
 	  dataService.getProducts(function(response) {
 	    var productCheck = response.data.products;
 	    functionService.isProductAvailable(productCheck, cart, function(response, saveItems) {
-	      console.log(response, 1);
 	      if (response == true) {
 	        //save inventory
 	        for (var x = 0; x < saveItems.length; x++) {
@@ -6625,7 +6624,7 @@ webpackJsonp([0],[
 	    });
 	  }
 	  else {
-	  alert(status + " Some items in your cart are no longer available. Sorry for any inconvenience")
+	  alert("Some items in your cart are no longer available. Sorry for any inconvenience")
 	    $location.path('/cart/view')
 	  }
 	}) //isProductAvailable function end
@@ -7180,11 +7179,9 @@ webpackJsonp([0],[
 	        for (var x = 0; x < text.length; x++) {
 	          var aQuantity = text[x].quantity;
 	          var id = text[x].id;
-	          console.log(text[x]);
 	// Make Object of ID and Quantity
 	          for (var y = 0; y < file.length; y++) {
 	// Search Products with Users Cart
-	console.log(file[y].id);
 	            if (file[y].id.search(id) == 0) {
 	              if (file[y].quantity == 0) {
 	                isItTrue == text.length - 1;
@@ -7248,28 +7245,28 @@ webpackJsonp([0],[
 	  var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
 
 	  cartSearch(cart, id, function(response) {
-	    console.log("***Logging*** ***Response*** ***Below***");
+	    // console.log("***Logging*** ***Response*** ***Below***");
 	    if (response == "true") {
-	      console.log("Already Added! : D");
+	      // console.log("Already Added! : D");
 	      //False Code Here if needed
 	      cba("nothing");
 	    }
 	    else if (response == "false") {
-	      console.log("Adding.");
+	      // console.log("Adding.");
 	      var items = [];
 	      if (cart == null || cart.items == 0) {
-	        console.log("Adding..(to a empty cart)");
+	        // console.log("Adding..(to a empty cart)");
 	        items = item;
 	      }
 	      else {
-	        console.log("Adding..(to a cart with items)");
+	        // console.log("Adding..(to a cart with items)");
 	        items = cart.items;
 	        items.push(item);
 	      }
 	      user.data.cart = {"items" : items};
 	      dataService.updateCart(user, function(response) {
 	        items = [];
-	        console.log("Adding...(saved cart)");
+	        // console.log("Adding...(saved cart)");
 	        newCart = response.data.user.data.cart;
 	        cba(newCart);
 	      });
@@ -7279,13 +7276,13 @@ webpackJsonp([0],[
 
 
 	  var cartSearch = function(cart, id, cbb) { // Get Cart
-	    console.log("Cart Found\n\nBegin searching...");
+	    // console.log("Cart Found\n\nBegin searching...");
 	    if (cart == null) {
-	      console.log("(Empty Cart)");
+	      // console.log("(Empty Cart)");
 	      cbb("false");
 	    }
 	    else if (!cart.items.length == 0) {
-	      console.log("Checking Cart...");
+	      // console.log("Checking Cart...");
 	      // Get ID's
 	      cartCheck(cart, id, function(tempCheck) {
 
@@ -7293,17 +7290,17 @@ webpackJsonp([0],[
 	        searchResponse(tempCheck, id, function(res) {
 
 	          if (res == true) {
-	            console.log("Checking Cart...(found ITEM in cart)");
+	            // console.log("Checking Cart...(found ITEM in cart)");
 	            cbb("true");
 	          } else {
-	            console.log("Checking Cart...(ITEM is not in cart)");
+	            // console.log("Checking Cart...(ITEM is not in cart)");
 	            cbb("false");
 	          }
 	        })
 	      });
 	    }
 	    else {
-	      console.log("(Empty Cart)");
+	      // console.log("(Empty Cart)");
 	      cbb("false");
 	    }
 	  }
@@ -7335,7 +7332,7 @@ webpackJsonp([0],[
 	        checkResult = true;
 	      }
 	      if (x == tempNumber) {
-	        console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
+	        // console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
 	        cbd(checkResult);
 	      }
 	    }

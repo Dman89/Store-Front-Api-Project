@@ -13,11 +13,9 @@ this.isProductAvailable = function(product, cart, callback) {
         for (var x = 0; x < text.length; x++) {
           var aQuantity = text[x].quantity;
           var id = text[x].id;
-          console.log(text[x]);
 // Make Object of ID and Quantity
           for (var y = 0; y < file.length; y++) {
 // Search Products with Users Cart
-console.log(file[y].id);
             if (file[y].id.search(id) == 0) {
               if (file[y].quantity == 0) {
                 isItTrue == text.length - 1;
@@ -81,28 +79,28 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
   var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
 
   cartSearch(cart, id, function(response) {
-    console.log("***Logging*** ***Response*** ***Below***");
+    // console.log("***Logging*** ***Response*** ***Below***");
     if (response == "true") {
-      console.log("Already Added! : D");
+      // console.log("Already Added! : D");
       //False Code Here if needed
       cba("nothing");
     }
     else if (response == "false") {
-      console.log("Adding.");
+      // console.log("Adding.");
       var items = [];
       if (cart == null || cart.items == 0) {
-        console.log("Adding..(to a empty cart)");
+        // console.log("Adding..(to a empty cart)");
         items = item;
       }
       else {
-        console.log("Adding..(to a cart with items)");
+        // console.log("Adding..(to a cart with items)");
         items = cart.items;
         items.push(item);
       }
       user.data.cart = {"items" : items};
       dataService.updateCart(user, function(response) {
         items = [];
-        console.log("Adding...(saved cart)");
+        // console.log("Adding...(saved cart)");
         newCart = response.data.user.data.cart;
         cba(newCart);
       });
@@ -112,13 +110,13 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
 
 
   var cartSearch = function(cart, id, cbb) { // Get Cart
-    console.log("Cart Found\n\nBegin searching...");
+    // console.log("Cart Found\n\nBegin searching...");
     if (cart == null) {
-      console.log("(Empty Cart)");
+      // console.log("(Empty Cart)");
       cbb("false");
     }
     else if (!cart.items.length == 0) {
-      console.log("Checking Cart...");
+      // console.log("Checking Cart...");
       // Get ID's
       cartCheck(cart, id, function(tempCheck) {
 
@@ -126,17 +124,17 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
         searchResponse(tempCheck, id, function(res) {
 
           if (res == true) {
-            console.log("Checking Cart...(found ITEM in cart)");
+            // console.log("Checking Cart...(found ITEM in cart)");
             cbb("true");
           } else {
-            console.log("Checking Cart...(ITEM is not in cart)");
+            // console.log("Checking Cart...(ITEM is not in cart)");
             cbb("false");
           }
         })
       });
     }
     else {
-      console.log("(Empty Cart)");
+      // console.log("(Empty Cart)");
       cbb("false");
     }
   }
@@ -168,7 +166,7 @@ this.addToCart = function(id, quantity, user, cart, product, cba) {
         checkResult = true;
       }
       if (x == tempNumber) {
-        console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
+        // console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
         cbd(checkResult);
       }
     }

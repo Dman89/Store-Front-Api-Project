@@ -5,10 +5,10 @@ angular.module("lionHeart")
   $scope.edit = {};
   // Blank Stripe Card
     $scope.stripeToken = {stripeToken: {
-      number: '',
-      cvc: '',
-      exp_month: '',
-      exp_year: ''
+      number: '4242424242424242',
+      cvc: '123',
+      exp_month: '12',
+      exp_year: '2016'
       }
       };
   // Get User/Cart/UserWithCart
@@ -98,6 +98,7 @@ $scope.quantityTotalAddition = function(index) {
     $scope.UserWithCart.data.cart.items[index].quantity += 1;
     var userWithCart = $scope.UserWithCart
     dataService.updateCart2(userWithCart, function(response) {
+      console.log(response);
     dataService.getCart(function(response) {
       $scope.cartA = response.data.cart.data.cart;
       var cart = $scope.cartA.items;
@@ -132,7 +133,6 @@ $scope.checkValForMaxInCart = function(index) {
 }
 $scope.justGot = function(val) {
     if (val == 1) {
-      console.log(1);
       return true;
     } else {
       return false
