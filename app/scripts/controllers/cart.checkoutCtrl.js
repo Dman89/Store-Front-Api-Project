@@ -38,7 +38,7 @@ angular.module("lionHeart")
     }
   }
 //  Checks Carts Items for Availability and Sets Quantity for the Product in Database
-$scope.isProductAvailable = function(cb) {
+var isProductAvailable = function(cb) {
   dataService.getCart(function(response) {
     var cart = response.data.cart.data.cart;
     dataService.getProducts(function(response) {
@@ -93,7 +93,7 @@ dataService.getCart(function(response) {
 
 //Checkout Process
 $scope.checkout = function() {
-$scope.isProductAvailable(function(status) {
+  isProductAvailable(function(status) {
   console.log(status);
   if (status == true) {
     $scope.checkoutStripe(function(data) {
