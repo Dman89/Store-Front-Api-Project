@@ -9,6 +9,7 @@ var passportFB = require('passport-facebook');
 var adminRouter = require('./api/admin');
 var blogRouter = require('./api/posts');
 var cartRouter = require('./api/cart');
+var googleRouter = require('./api/google');
 var categoryRouter = require('./api/category');
 var productRouter = require('./api/products');
 var orderHistoryRouter = require('./api/orderHistory');
@@ -43,6 +44,7 @@ app.use('/api', cartRouter);
 app.use('/api', orderHistoryRouter);
 app.use('/api', portfolioRouter);
 app.use('/api', carouselRouter);
+app.use('/api', googleRouter);
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: 'email'}));
 app.get('/auth/facebook/callback',
     passport.authenticate('facebook', {
@@ -50,9 +52,6 @@ app.get('/auth/facebook/callback',
         failureRedirect : '/#/login',
         successFlash: 'Welcome!'
     }));
-app.use('/env', function(res) {
-   return {'API_URL': "https://www.googleapis.com/calendar/v3/calendars/"+process.env.googleCalApiUSEREMAIL + "/events?key=" + process.env.googleCalApiAPIKEY}
-})
 // route for logging out
 app.get('/logout', function(req, res) {
     req.logout();
