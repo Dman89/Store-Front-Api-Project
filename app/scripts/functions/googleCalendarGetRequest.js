@@ -55,43 +55,45 @@ angular.module("lionHeart")
 var events = []
 this.calendar = function(callback) {
       $http.get("/api/env")
-      .then(function(sendData) {
-        console.log(sendData);
-        dateCheck(sendData, function(res) {
-      // Call of FUNCTION ($GET REQUEST)
-        var res = res.data.items;
-        for (var x = 0; x < res.length; x++) {
-          let eventItem = {};
-          if (res[x].status == "confirmed") {
-            var summary = res[x].summary;
-          if (!res[x].description) {
-            var description = "No Description Available";
-          } else {
-            var description = res[x].description;
-          }
-          if (!res[x].location) {
-            var location = "To Be Decided";
-          } else {
-            var location = res[x].location;
-          }
-      // Date Conversion
-            dateConversionForComputerCodePurposes(res[x].start.dateTime, res[x].end.dateTime, function(start, end) {
-              dateConversionForHumanBrainPurposes(start, end, function(start, end) {
-                if (x == 0) {
-                  events = [{"summary": "", "start": "", "end": ""}]
-                }
-              events[x] = {"summary": summary,"description": description, "location": location, "start": start, "end": end};
+      .then(function(sendDataA) {
+        $http.get('sendDataA.data')
+          .then(function (sendData) {
+            dateCheck(sendData, function(res) {
+          // Call of FUNCTION ($GET REQUEST)
+            var res = res.data.items;
+            for (var x = 0; x < res.length; x++) {
+              let eventItem = {};
+              if (res[x].status == "confirmed") {
+                var summary = res[x].summary;
+              if (!res[x].description) {
+                var description = "No Description Available";
+              } else {
+                var description = res[x].description;
+              }
+              if (!res[x].location) {
+                var location = "To Be Decided";
+              } else {
+                var location = res[x].location;
+              }
+          // Date Conversion
+                dateConversionForComputerCodePurposes(res[x].start.dateTime, res[x].end.dateTime, function(start, end) {
+                  dateConversionForHumanBrainPurposes(start, end, function(start, end) {
+                    if (x == 0) {
+                      events = [{"summary": "", "start": "", "end": ""}]
+                    }
+                  events[x] = {"summary": summary,"description": description, "location": location, "start": start, "end": end};
 
-                dateConversionForWebsite(events[x], function(eventOutput) {
-                  events[x] = eventOutput;
+                    dateConversionForWebsite(events[x], function(eventOutput) {
+                      events[x] = eventOutput;
+                    })
+                  })
                 })
-              })
-            })
-            }
-          }
-          callback(events);
+                }
+              }
+              callback(events);
 
-        })
+            })
+          })
       })
 };
 
