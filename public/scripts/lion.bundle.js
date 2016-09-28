@@ -6528,15 +6528,13 @@ webpackJsonp([0],[
 	  // Get Cart/User/Product
 	  dataService.getCart(function(response) {
 	    console.log(response, "cart");
-	        $scope.cart = response.data.cart;
-	            $scope.cartA = response.data.cart;
+	        $scope.cart = response.data.cart.data;
+	        $scope.cartA = response.data.cart.data;
 	        });
 	      dataService.getUser(function(response) {
-	        console.log(response, "user");
 	        $scope.userCheckout = response.data.user;
 	      });
 	      dataService.getProducts(function(response) {
-	        console.log(response, "products");
 	        $scope.productCheck = response.data.products;
 	});
 
