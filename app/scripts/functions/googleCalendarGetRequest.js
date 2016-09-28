@@ -54,8 +54,9 @@ angular.module("lionHeart")
   }
 var events = []
 this.calendar = function(callback) {
-      $http.get(env.API_URL)
+      $http.get(env)
       .then(function(sendData) {
+        console.log(sendData);
         dateCheck(sendData, function(res) {
       // Call of FUNCTION ($GET REQUEST)
         var res = res.data.items;
