@@ -93,6 +93,7 @@ dataService.getCart(function(response) {
 //Checkout Process
 $scope.checkout = function() {
 $scope.isProductAvailable(function(status) {
+  console.log(status);
   if (status == true) {
     $scope.checkoutStripe(function(data) {
       if (data == true) {
