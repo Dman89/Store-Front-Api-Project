@@ -41,7 +41,7 @@ this.isProductAvailable = function(product, cart, callback) {
           checkForTrue = false;
         }
         // Return Truthy or Falsey
-          callback(checkForTrue);
+          callback(checkForTrue, saveItems);
       })
     }
 
