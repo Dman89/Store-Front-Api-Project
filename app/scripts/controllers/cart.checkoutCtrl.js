@@ -62,7 +62,7 @@ dataService.getCart(function(response) {
   var cart = response.data.cart.data.cart;
   dataService.getProducts(function(response) {
     var productCheck = response.data.products;
-    functionService.isProductAvailable(productCheck, cart, function(mustSaveInventory, response, saveItems) {
+    functionService.isProductAvailable(productCheck, cart, function(response, saveItems) {
       if (response == true) {
         //save inventory
         for (var x = 0; x < saveItems.length; x++) {
