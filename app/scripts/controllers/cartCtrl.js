@@ -30,14 +30,12 @@ $scope.deleteCartItem = function(abe) {
     $scope.deletey = function(abe) {
     $scope.UserWithCart.data.cart.items.splice(abe, 1);
     var user = $scope.UserWithCart;
-    dataService.updateCart(user, function(response) {});
-    dataService.getCart(function(response) {
+    dataService.updateCart(user, function(response) {
       $scope.cartA = response.data.cart.data.cart;
       var cart = $scope.cartA.items;
       $scope.UserWithCart = response.data.cart;
       var user = $scope.UserWithCart;
-      cartTotal(cart, user)
-    })
+      cartTotal(cart, user)});
 }
 
 // Review Page: < > Arrow's function to save User Data
@@ -46,7 +44,13 @@ $scope.deleteCartItem = function(abe) {
     // Get User / Cart
     var aUser = $scope.user;
     // Save User / Cart
-    dataService.updateCart(aUser, function(response) {});
+    dataService.updateCart(aUser, function(response) {
+      $scope.cartA = response.data.cart.data.cart;
+      var cart = $scope.cartA.items;
+      $scope.UserWithCart = response.data.cart;
+      var user = $scope.UserWithCart;
+      cartTotal(cart, user)
+      });
     // Pass CC info to next State
     if (stripeToken) {
       if (stripeToken.stripeToken.number.length == 16 && stripeToken.stripeToken.cvc.length == 3 && stripeToken.stripeToken.exp_month.length == 2 && stripeToken.stripeToken.exp_year.length == 4) {
@@ -137,7 +141,6 @@ $scope.checkValForMaxInCart = function(index) {
 }
 $scope.justGot = function(val) {
     if (val == 1) {
-      console.log(1);
       return true;
     } else {
       return false

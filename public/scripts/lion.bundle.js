@@ -19,6 +19,7 @@ webpackJsonp([0],[
 	__webpack_require__(16);
 	__webpack_require__(17);
 	__webpack_require__(18);
+	__webpack_require__(19);
 	__webpack_require__(20);
 	__webpack_require__(21);
 	__webpack_require__(22);
@@ -40,9 +41,9 @@ webpackJsonp([0],[
 	__webpack_require__(38);
 	__webpack_require__(39);
 	__webpack_require__(40);
+	__webpack_require__(41);
 	__webpack_require__(42);
 	__webpack_require__(43);
-	__webpack_require__(44);
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
@@ -51,13 +52,12 @@ webpackJsonp([0],[
 	__webpack_require__(50);
 	__webpack_require__(51);
 	__webpack_require__(52);
+	__webpack_require__(44);
 	__webpack_require__(53);
-	__webpack_require__(19);
 	__webpack_require__(54);
 	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
-	__webpack_require__(58);
 
 
 /***/ },
@@ -4941,20 +4941,20 @@ webpackJsonp([0],[
 
 	'use strict'
 	var addToCartReq = function(id, quantity, user, cart, product, functionService, $scope, finalCB) {
-	  console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
+	  // console.log("\n\n\n\n\n*!*!*!*!*!*!*!*!Running Code:!*!*!*!*!*!*!*!*!*\n\n\n\n\n");
 	  var returnVal;
 	  if (!user) {
-	    console.log("Please Log In");
+	    // console.log("Please Log In");
 	  }
 	  else {
 	    functionService.addToCart(id, quantity, user, cart, product, function(response) {
 	      if (response == "nothing") {
-	        console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
+	        // console.log("!*^^*!NO ACTION NESSECARY!*^^*!");
 	        returnVal = cart;
 	      } else {
 	        returnVal = response;
 	      }
-	      console.log("Saving Cart...");
+	      // console.log("Saving Cart...");
 	      finalCB(returnVal);
 	    });
 	  }
@@ -5112,7 +5112,7 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("cartCtrl", function($scope, dataService, $timeout, $state) {
-	  var inputToggle = __webpack_require__(19);
+	  var inputToggle = __webpack_require__(44);
 	  $scope.edit = {};
 	  // Blank Stripe Card
 	    $scope.stripeToken = {stripeToken: {
@@ -5141,14 +5141,12 @@ webpackJsonp([0],[
 	    $scope.deletey = function(abe) {
 	    $scope.UserWithCart.data.cart.items.splice(abe, 1);
 	    var user = $scope.UserWithCart;
-	    dataService.updateCart(user, function(response) {});
-	    dataService.getCart(function(response) {
+	    dataService.updateCart(user, function(response) {
 	      $scope.cartA = response.data.cart.data.cart;
 	      var cart = $scope.cartA.items;
 	      $scope.UserWithCart = response.data.cart;
 	      var user = $scope.UserWithCart;
-	      cartTotal(cart, user)
-	    })
+	      cartTotal(cart, user)});
 	}
 
 	// Review Page: < > Arrow's function to save User Data
@@ -5157,7 +5155,13 @@ webpackJsonp([0],[
 	    // Get User / Cart
 	    var aUser = $scope.user;
 	    // Save User / Cart
-	    dataService.updateCart(aUser, function(response) {});
+	    dataService.updateCart(aUser, function(response) {
+	      $scope.cartA = response.data.cart.data.cart;
+	      var cart = $scope.cartA.items;
+	      $scope.UserWithCart = response.data.cart;
+	      var user = $scope.UserWithCart;
+	      cartTotal(cart, user)
+	      });
 	    // Pass CC info to next State
 	    if (stripeToken) {
 	      if (stripeToken.stripeToken.number.length == 16 && stripeToken.stripeToken.cvc.length == 3 && stripeToken.stripeToken.exp_month.length == 2 && stripeToken.stripeToken.exp_year.length == 4) {
@@ -5248,7 +5252,6 @@ webpackJsonp([0],[
 	}
 	$scope.justGot = function(val) {
 	    if (val == 1) {
-	      console.log(1);
 	      return true;
 	    } else {
 	      return false
@@ -5271,22 +5274,6 @@ webpackJsonp([0],[
 /* 19 */
 /***/ function(module, exports) {
 
-	'use strict'
-	var inputToggle = function(val, callback) {
-	  var maxVal = 20;
-	      if (val < maxVal) {
-	        callback(true);
-	      } else {
-	        callback(false);
-	      }
-	    }
-	module.exports = inputToggle;
-
-
-/***/ },
-/* 20 */
-/***/ function(module, exports) {
-
 	'use strict';
 	angular.module('lionHeart')
 	.directive("cart", function() {
@@ -5299,7 +5286,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 21 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5324,7 +5311,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 22 */
+/* 21 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5339,7 +5326,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 23 */
+/* 22 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5414,7 +5401,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 24 */
+/* 23 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5429,7 +5416,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 25 */
+/* 24 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5455,7 +5442,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 26 */
+/* 25 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5470,7 +5457,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 27 */
+/* 26 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5550,7 +5537,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 28 */
+/* 27 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5565,7 +5552,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 29 */
+/* 28 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5921,7 +5908,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 30 */
+/* 29 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5936,7 +5923,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 31 */
+/* 30 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5951,7 +5938,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
+/* 31 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5961,7 +5948,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 33 */
+/* 32 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5976,7 +5963,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 34 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -5989,7 +5976,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 35 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6002,7 +5989,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 36 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6015,7 +6002,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 37 */
+/* 36 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6028,7 +6015,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 38 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6041,7 +6028,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 39 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6054,7 +6041,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 40 */
+/* 39 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -6299,8 +6286,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */,
-/* 42 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6377,7 +6363,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6387,7 +6373,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 44 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6397,13 +6383,13 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 43 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("singleItemCtrl", function($scope, dataService, $stateParams, functionService) {
-	var inputToggle = __webpack_require__(19);
+	var inputToggle = __webpack_require__(44);
 	var user, cart;
 	var addToCartReq = __webpack_require__(8);
 	$scope.urlCode = $stateParams.urlCode;
@@ -6517,7 +6503,23 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 44 */
+/***/ function(module, exports) {
+
+	'use strict'
+	var inputToggle = function(val, callback) {
+	  var maxVal = 20;
+	      if (val < maxVal) {
+	        callback(true);
+	      } else {
+	        callback(false);
+	      }
+	    }
+	module.exports = inputToggle;
+
+
+/***/ },
+/* 45 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6639,7 +6641,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 46 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6714,7 +6716,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6785,7 +6787,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6814,7 +6816,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 49 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6889,7 +6891,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 51 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6900,7 +6902,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 52 */
+/* 51 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6949,7 +6951,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 53 */
+/* 52 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6973,7 +6975,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 54 */
+/* 53 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7001,7 +7003,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 55 */
+/* 54 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7034,7 +7036,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 56 */
+/* 55 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7167,7 +7169,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 57 */
+/* 56 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7251,28 +7253,28 @@ webpackJsonp([0],[
 	  var item = {"_id": id, "id": id, "name": product.name, "urlCode": product.urlCode, "internal": product.internal, "product": id, "quantity": quantity};
 
 	  cartSearch(cart, id, function(response) {
-	    console.log("***Logging*** ***Response*** ***Below***");
+	    // console.log("***Logging*** ***Response*** ***Below***");
 	    if (response == "true") {
-	      console.log("Already Added! : D");
+	      // console.log("Already Added! : D");
 	      //False Code Here if needed
 	      cba("nothing");
 	    }
 	    else if (response == "false") {
-	      console.log("Adding.");
+	      // console.log("Adding.");
 	      var items = [];
 	      if (cart == null || cart.items == 0) {
-	        console.log("Adding..(to a empty cart)");
+	        // console.log("Adding..(to a empty cart)");
 	        items = item;
 	      }
 	      else {
-	        console.log("Adding..(to a cart with items)");
+	        // console.log("Adding..(to a cart with items)");
 	        items = cart.items;
 	        items.push(item);
 	      }
 	      user.data.cart = {"items" : items};
 	      dataService.updateCart(user, function(response) {
 	        items = [];
-	        console.log("Adding...(saved cart)");
+	        // console.log("Adding...(saved cart)");
 	        newCart = response.data.user.data.cart;
 	        cba(newCart);
 	      });
@@ -7282,13 +7284,13 @@ webpackJsonp([0],[
 
 
 	  var cartSearch = function(cart, id, cbb) { // Get Cart
-	    console.log("Cart Found\n\nBegin searching...");
+	    // console.log("Cart Found\n\nBegin searching...");
 	    if (cart == null) {
-	      console.log("(Empty Cart)");
+	      // console.log("(Empty Cart)");
 	      cbb("false");
 	    }
 	    else if (!cart.items.length == 0) {
-	      console.log("Checking Cart...");
+	      // console.log("Checking Cart...");
 	      // Get ID's
 	      cartCheck(cart, id, function(tempCheck) {
 
@@ -7296,17 +7298,17 @@ webpackJsonp([0],[
 	        searchResponse(tempCheck, id, function(res) {
 
 	          if (res == true) {
-	            console.log("Checking Cart...(found ITEM in cart)");
+	            // console.log("Checking Cart...(found ITEM in cart)");
 	            cbb("true");
 	          } else {
-	            console.log("Checking Cart...(ITEM is not in cart)");
+	            // console.log("Checking Cart...(ITEM is not in cart)");
 	            cbb("false");
 	          }
 	        })
 	      });
 	    }
 	    else {
-	      console.log("(Empty Cart)");
+	      // console.log("(Empty Cart)");
 	      cbb("false");
 	    }
 	  }
@@ -7338,7 +7340,7 @@ webpackJsonp([0],[
 	        checkResult = true;
 	      }
 	      if (x == tempNumber) {
-	        console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
+	        // console.log("searchResponse: It is in the cart ( " + checkResult + " )!");
 	        cbd(checkResult);
 	      }
 	    }
@@ -7348,7 +7350,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 58 */
+/* 57 */
 /***/ function(module, exports) {
 
 	'use strict';
