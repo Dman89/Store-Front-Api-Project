@@ -6115,7 +6115,7 @@ webpackJsonp([0],[
 	this.calendar = function(callback) {
 	      $http.get("/api/env")
 	      .then(function(sendDataA) {
-	        $http.get('sendDataA.data')
+	        $http.get(sendDataA.data)
 	          .then(function (sendData) {
 	            dateCheck(sendData, function(res) {
 	          // Call of FUNCTION ($GET REQUEST)
