@@ -5142,7 +5142,6 @@ webpackJsonp([0],[
 	    $scope.UserWithCart.data.cart.items.splice(abe, 1);
 	    var user = $scope.UserWithCart;
 	    dataService.updateCart(user, function(response) {
-	      console.log(response, 1);
 	      $scope.cartA = response.data.user.data.cart;
 	      var cart = $scope.cartA.items;
 	      $scope.UserWithCart = response.data.user;
@@ -5157,7 +5156,6 @@ webpackJsonp([0],[
 	    var aUser = $scope.user;
 	    // Save User / Cart
 	    dataService.updateCart(aUser, function(response) {
-	      console.log(response, 2);
 	      $scope.cartA = response.data.user.data.cart;
 	      var cart = $scope.cartA.items;
 	      $scope.UserWithCart = response.data.user;
@@ -6529,12 +6527,16 @@ webpackJsonp([0],[
 	.controller("cart.checkoutCtrl", function($scope, dataService, functionService, eraseCartService, $location) {
 	  // Get Cart/User/Product
 	  dataService.getCart(function(response) {
+	    console.log(response, "cart");
 	        $scope.cart = response.data.cart;
+	            $scope.cartA = response.data.cart;
 	        });
 	      dataService.getUser(function(response) {
+	        console.log(response, "user");
 	        $scope.userCheckout = response.data.user;
 	      });
 	      dataService.getProducts(function(response) {
+	        console.log(response, "products");
 	        $scope.productCheck = response.data.products;
 	});
 
