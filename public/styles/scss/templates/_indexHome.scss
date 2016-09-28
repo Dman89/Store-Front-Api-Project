@@ -5,6 +5,7 @@
   // height: 100vh;
   // border: $b 3px solid;
   // border-bottom: $s 2px solid;
+    margin-top: 5%;
   @media (min-width: 992px) {
     margin-top: 2.5%;
   }
@@ -17,7 +18,7 @@
   }
   & .blogWhole {
     margin: 5% auto;
-  padding: 0 5%;
+    padding: 0 5%;
   }
   & .spaceBtm {
     margin-bottom: 5%;
@@ -34,6 +35,16 @@
       }
       @media (max-width: 480px), (max-height: 480px) {
         max-width: 225px;
+      }
+      &.onepointfournine {
+      @media (max-width: 600px), (max-height: 600px) {
+        max-width: 300px;
+        max-height: 447px;
+      }
+      @media (max-width: 480px), (max-height: 480px) {
+        max-width: 225px;
+        max-height: 335.25px;
+      }
       }
     }
   }

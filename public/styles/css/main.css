@@ -1895,9 +1895,11 @@ body {
   margin: 1.75em auto;
   background-color: white; }
 
-@media (min-width: 992px) {
-  .home {
-    margin-top: 2.5%; } }
+.home {
+  margin-top: 5%; }
+  @media (min-width: 992px) {
+    .home {
+      margin-top: 2.5%; } }
 
 #html #body #ui-view .mainPost {
   margin: 2.5% auto; }
@@ -1917,6 +1919,14 @@ body {
   @media (max-width: 480px), (max-height: 480px) {
     #html #body #ui-view #home img {
       max-width: 225px; } }
+  @media (max-width: 600px), (max-height: 600px) {
+    #html #body #ui-view #home img.onepointfournine {
+      max-width: 300px;
+      max-height: 447px; } }
+  @media (max-width: 480px), (max-height: 480px) {
+    #html #body #ui-view #home img.onepointfournine {
+      max-width: 225px;
+      max-height: 335.25px; } }
 
 #redSold {
   color: red; }
