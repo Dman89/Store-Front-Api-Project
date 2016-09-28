@@ -6529,7 +6529,6 @@ webpackJsonp([0],[
 	  dataService.getCart(function(response) {
 	    console.log(response, "cart");
 	        $scope.cart = response.data.cart.data;
-	        $scope.cartA = response.data.cart.data;
 	        });
 	      dataService.getUser(function(response) {
 	        $scope.userCheckout = response.data.user;
