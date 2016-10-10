@@ -1,0 +1,14 @@
+a {
+  &.onWhiteBackground {
+    color: $linkWhiteBackground;
+    &:hover {
+      color: $linkHoverWhiteBackground;
+    }
+  }
+  &.onBlueBackground {
+    color: $linkBlueBackground;
+    &:hover {
+      color: $linkHoverBlueBackground;
+    }
+  }
+}
