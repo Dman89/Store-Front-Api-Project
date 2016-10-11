@@ -1,0 +1,29 @@
+.banner {
+  width: 100%;
+  & img {
+    width: 100%;
+  }
+}
+
+div.landingPageTitles h1 {
+  text-align: left;
+  margin-left: 15px;
+  color: $blackLight;
+  @media (max-width: 767px) {
+    text-align: center;
+    margin-left: 0px;
+  }
+  & small {
+    color: $black;
+  }
+}
+
+.givePadding {
+  padding: 0 5%;
+}
+
+.spaceBtm {
+  height: 10%;
+  width: 100%;
+  margin-bottom: 10%;
+}

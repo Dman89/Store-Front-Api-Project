@@ -3,5 +3,27 @@
 }
 
 .menuLight {
-  background: $menuLight
+  background: $menuLight;
+}
+.navbar-brand {
+  padding: 0;
+}
+.logoMenu {
+  margin: auto;
+  max-width: 44px;
+  max-height: 49.648px;
+  margin-top: -3px;
+  margin-left: 15px;
+}
+nav#menu {
+  background: $menuNormal;
+  border-color: $menuLight;
+  color: $softWhite;
+  & li.active, & li.active a, & li:hover, & li a:active, & li a:hover, & .navbar-default .navbar-nav>.active>a {
+    background-color: $menuLight;
+    color: $white;
+  }
+  & li a:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset;
+  }
 }

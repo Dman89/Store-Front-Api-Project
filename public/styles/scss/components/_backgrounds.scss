@@ -11,3 +11,12 @@
 html {
   background: #fff;
 }
+#ui-view {
+  padding-top: 50px;
+}
+#portfolio {
+  padding-top: 5px;
+  @media (max-width: 767px) {
+    padding-top: 10px;
+  }
+}

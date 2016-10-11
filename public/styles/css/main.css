@@ -73,53 +73,275 @@
 html {
   background: #fff; }
 
-@media (min-width: 320px), (min-height: 320px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 11px;
-    line-height: 18px; } }
-@media (min-width: 480px), (min-height: 480px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 14px;
-    line-height: 22px; } }
-@media (min-width: 767px), (min-height: 767px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 17px;
-    line-height: 28px; } }
-@media (min-width: 992px), (min-height: 992px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 19px;
-    line-height: 31px; } }
-@media (min-width: 1100px), (min-height: 1100px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 20px;
-    line-height: 33px; } }
-@media (min-width: 1200px), (min-height: 1200px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 21px;
-    line-height: 34px; } }
-@media (min-width: 1500px), (min-height: 1500px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 24px;
-    line-height: 39px; } }
+#ui-view {
+  padding-top: 50px; }
+
+#portfolio {
+  padding-top: 5px; }
+  @media (max-width: 767px) {
+    #portfolio {
+      padding-top: 10px; } }
+
+html, body, p, span, a {
+  color: #000; }
+  @media (min-width: 320px), (min-height: 320px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 11px;
+      line-height: 18px; } }
+  @media (min-width: 480px), (min-height: 480px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 14px;
+      line-height: 22px; } }
+  @media (min-width: 767px), (min-height: 767px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 17px;
+      line-height: 28px; } }
+  @media (min-width: 992px), (min-height: 992px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 19px;
+      line-height: 31px; } }
+  @media (min-width: 1100px), (min-height: 1100px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 20px;
+      line-height: 33px; } }
+  @media (min-width: 1200px), (min-height: 1200px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 21px;
+      line-height: 34px; } }
+  @media (min-width: 1500px), (min-height: 1500px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 24px;
+      line-height: 39px; } }
 
 h1 {
+  color: #000;
   font-size: 2.6363rem;
   line-height: 3.5454rem; }
 
 h2 {
+  color: #000;
   font-size: 1.6363rem;
   line-height: 2.3636rem; }
 
 h3 {
+  color: #000;
   font-size: 1.2727rem;
   line-height: 1.90909rem; }
 
 h4 {
+  color: #000;
   font-size: 1rem;
   line-height: 1rem; }
 
 h5 {
+  color: #000;
   font-size: 0.818181rem;
   line-height: 1.63636rem; }
+
+.menuNormal {
+  background: #232f3f; }
+
+.menuLight {
+  background: #37475a; }
+
+.navbar-brand {
+  padding: 0; }
+
+.logoMenu {
+  margin: auto;
+  max-width: 44px;
+  max-height: 49.648px;
+  margin-top: -3px;
+  margin-left: 15px; }
+
+nav#menu {
+  background: #232f3f;
+  border-color: #37475a;
+  color: #c1ccc3; }
+  nav#menu li.active, nav#menu li.active a, nav#menu li:hover, nav#menu li a:active, nav#menu li a:hover, nav#menu .navbar-default .navbar-nav > .active > a {
+    background-color: #37475a;
+    color: #fff; }
+  nav#menu li a:active {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset; }
+
+a.onWhiteBackground {
+  color: #248fd3; }
+  a.onWhiteBackground:hover {
+    color: #c45500; }
+a.onBlueBackground {
+  color: #37708b; }
+  a.onBlueBackground:hover {
+    color: #fff; }
+
+.blogBox {
+  cursor: pointer;
+  padding: 16px;
+  background: #fff;
+  border-top: 3px solid #37475a;
+  border-radius: 1px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.12), 1px 0 2px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+  margin-bottom: 16px; }
+  @media (min-width: 768px) {
+    .blogBox {
+      -webkit-transition: all 0.15s cubic-bezier(0.33, 0.66, 0.66, 1);
+      transition: all 0.15s cubic-bezier(0.33, 0.66, 0.66, 1);
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      -webkit-perspective: 1000px;
+      perspective: 1000px;
+      -webkit-transform-style: preserve-3d;
+      transform-style: preserve-3d;
+      -webkit-transform: translateZ(0);
+      transform: translateZ(0);
+      min-height: 320px; }
+      .blogBox:hover {
+        transform: translate3d(0, -3px, 0);
+        box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.16), 2px 0 2px 0 rgba(0, 0, 0, 0.16), 0 2px 2px 0 rgba(0, 0, 0, 0.23); } }
+  .blogBox .description {
+    margin: auto;
+    text-align: left;
+    text-indent: 5%;
+    color: #0a172b; }
+  .blogBox img {
+    width: 100%;
+    height: 100%;
+    border-radius: 3px; }
+  .blogBox.smallerBlogPosts img {
+    max-height: 272px;
+    max-width: 209px;
+    margin: auto;
+    display: block; }
+  .blogBox.smallerBlogPosts h3 {
+    text-align: center; }
+  .blogBox.blog {
+    margin: auto;
+    margin-top: 19px;
+    margin-bottom: 16px; }
+    .blogBox.blog img {
+      max-height: 272px;
+      max-width: 209px;
+      margin: auto;
+      display: block; }
+    .blogBox.blog h2, .blogBox.blog .date {
+      text-align: center; }
+    .blogBox.blog .description {
+      padding: 0 5%;
+      margin: 5% auto; }
+
+.mainPost, .smallerBlogPosts {
+  width: 100%;
+  height: 100%; }
+
+.checkForThird:nth-child(4n+4) {
+  clear: left;
+  clear: both; }
+
+@media (min-width: 768px) {
+  .show-xs {
+    display: none;
+    visibility: hidden; } }
+
+.portfolioCard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  border-radius: 1px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  margin-bottom: 16px; }
+  .portfolioCard img {
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    border-radius: 1px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px; }
+  .portfolioCard .cardText {
+    display: none;
+    visibility: hidden; }
+  .portfolioCard:hover .cardText {
+    background: white;
+    background: rgba(255, 255, 255, 0.4);
+    color: #0a172b;
+    display: block;
+    visibility: visible;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    padding: 16px;
+    text-align: center;
+    border-radius: 1px;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    font-size: 1.115em;
+    font-weight: 900; }
+    .portfolioCard:hover .cardText p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      margin-right: -50%;
+      transform: translate(-50%, -50%); }
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black; }
+
+.tooltiptexttop {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 150%;
+  left: 50%;
+  margin-left: -60px; }
+
+.tooltiptexttop::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: black transparent transparent transparent; }
+
+label:hover .tooltiptexttop, .tooltips:hover .tooltiptexttop {
+  visibility: visible; }
+
+.banner {
+  width: 100%; }
+  .banner img {
+    width: 100%; }
+
+div.landingPageTitles h1 {
+  text-align: left;
+  margin-left: 15px;
+  color: #0a172b; }
+  @media (max-width: 767px) {
+    div.landingPageTitles h1 {
+      text-align: center;
+      margin-left: 0px; } }
+  div.landingPageTitles h1 small {
+    color: #000; }
+
+.givePadding {
+  padding: 0 5%; }
+
+.spaceBtm {
+  height: 10%;
+  width: 100%;
+  margin-bottom: 10%; }
 
 /*# sourceMappingURL=main.css.map */
