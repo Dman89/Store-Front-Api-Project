@@ -4,7 +4,7 @@
      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
        <i class="fa fa-navicon"></i>
      </button>
-     <a class="navbar-brand" href>K.C.</a>
+     <a class="navbar-brand" href><img class="logoMenu" src="img/preferedImages/pirate.png" alt=""></a>
    </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav navbar-right" id="myNav123">
@@ -43,9 +43,6 @@
                   </li>
                   <li class="menuBar" ng-class="{ active: isActive('/admin')}" ng-show="user.admin">
                      <a ui-sref="admin" class=""><i class="fa fa-puzzle-piece"></i> Admin</a>
-                  </li>
-                  <li class="hidden-xs menuBar" ng-show="user.profile">
-                     <img ng-src="{{user.profile.picture}}" class="loginThumbnail" alt=""/>
                   </li>
                   <li class="menuBar end" ng-show="user.profile">
                      <a class="" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>

@@ -1,3 +1,6 @@
-<div class="portfolioDisplay" >
-    <img ng-src="{{img.url}}" alt="" ui-sref="portfolio.singlePiece({ id: img._id })" ng-repeat="img in portfolioImages"/>
+<div class="col-xs-12 col-sm-4 portfolio" ng-repeat="img in portfolioImages">
+  <div class="portfolioCard">
+    <img ng-src="{{img.url}}" alt="" ui-sref="portfolio.singlePiece({ id: img._id })"/>
+    <div class="cardText"><p>{{img.text}}</p></div>
   </div>
+</div>

@@ -12,7 +12,7 @@
           <img ng-src="{{post.url}}" alt=""/>
         </div>
         <div class="col-xs-12">
-          <h3>{{post.url}}</h3>
+          <h3>{{post.text}}</h3>
         </div>
       </div>
     </label>
@@ -45,6 +45,14 @@
               <label ng-click="editDisplay2 = !editDisplay2" ng-hide="editDisplay2">
                   {{portfolioDisplayEdit.urlBig}}<span class="tooltiptexttop">Edit Url (BIG)</span></label>
               <input type="text" ng-model="portfolioDisplayEdit.urlBig" ng-show="editDisplay2" ng-blur="editDisplay2 = false;"/>
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              Text:
+            </div>
+            <div class="col-xs-12 col-sm-6">
+              <label ng-click="editDisplay3 = !editDisplay3" ng-hide="editDisplay3">
+                  {{portfolioDisplayEdit.text}}<span class="tooltiptexttop">Edit Text</span></label>
+              <input type="text" ng-model="portfolioDisplayEdit.text" ng-show="editDisplay3" ng-blur="editDisplay3 = false;"/>
             </div>
             <div class="col-xs-12 col-sm-4">
                   <button type="button" class="btn btn-block btn-warning" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>

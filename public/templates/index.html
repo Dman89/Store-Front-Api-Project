@@ -1,47 +1,63 @@
-<div class="row" id='home'>
-
-<div class="col-xs-12 text-center">
-  <h1>Upcoming Art Shows</h1>
+<div class="banner">
+  <img src="img/preferedImages/ARTBYCALE_BANNER.jpg" alt="">
 </div>
-<div class="col-xs-12 text-center makeRoom" ng-class="{'col-sm-6': twoEvents, 'col-sm-4': threeEvents}" ng-repeat="event in googleEvents">
-  <div >
-    <h2>{{event.summary}}</h2>
-    <p>{{event.description}}</p>
-    <h4>{{event.location}}</h4>
-    <h5>{{event.range}}</h5>
-  </div>
-</div>
-<div class="col-xs-12 text-center blogWhole">
-  <h1>Blog</h1>
-  <div class="row text-center mainPost" ng-repeat="post in posts">
-  <div class="col-xs-12 col-sm-6 col-md-4 text-center">
-    <img ng-src="{{post.img}}" alt="">
-  </div>
-    <div class="col-xs-12 col-sm-6 col-md-8 text-center">
-      <h3>{{post.title}}</h3>
-      <p class="text-left">{{post.description}}</p>
+<div class="container-fluid givePadding">
+  <div class="row" id='home'>
+    <div class="col-xs-12 landingPageTitles">
+      <h1>Art Shows</h1>
     </div>
-  </div>
-  <div class="row text-center">
-      <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="posta in postsA">
-      <img ng-src="{{posta.img}}" alt="" class="onepointfournine">
-      <p>{{posta.title}}</p>
-      </div>
-      <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="postb in postsB">
-      <img ng-src="{{postb.img}}" alt="">
-      <p>{{postb.title}}</p>
-      </div>
-      <div  class="col-xs-12 col-sm-4 text-center" ng-repeat="postc in postsC">
-      <img ng-src="{{postc.img}}" alt="">
-      <p>{{postc.title}}</p>
+    <div class="col-xs-12" ng-class="{'col-sm-6': twoEvents, 'col-sm-4': threeEvents}" ng-repeat="event in googleEvents">
+      <div class="blogBox">
+        <h2 class="text-center">{{event.summary}}</h2>
+        <p class="description">{{event.description}}</p>
+        <h3>In: {{event.location}}</h3>
+        <h4>At: {{event.range}}</h4>
       </div>
     </div>
-</div>
-<div class="col-xs-12 text-center">
-  <h1>In the Market For Art?</h1>
-</div>
-  <div class="text-center col-xs-12 spaceBtm">
-    <button type="button" class="btn btn-success" ui-sref="store">Shop Now</button>
+    <div class="col-xs-12 landingPageTitles">
+      <h1>Rant <small>&amp;</small> Rave</h1>
+    </div>
+    <div class="col-xs-12">
+      <div class="mainPost blogBox" ui-sref="blog.item({ id: post._id })" ng-repeat="post in posts">
+        <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-4 text-center">
+            <img ng-src="{{post.img}}" alt="">
+          </div>
+          <div class="col-xs-12 col-sm-6 col-md-8 text-center">
+            <h2>{{post.title}}</h2>
+            <p class="description">{{post.description}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="smallerBlogPosts blogBox" ui-sref="blog.item({ id: posta._id })" ng-repeat="posta in postsA">
+            <img ng-src="{{posta.img}}" alt="" class="">
+            <h3>{{posta.title}}</h3>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="smallerBlogPosts blogBox" ui-sref="blog.item({ id: postb._id })" ng-repeat="postb in postsB">
+            <img ng-src="{{postb.img}}" alt="" class="">
+            <h3>{{postb.title}}</h3>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <div class="smallerBlogPosts blogBox" ui-sref="blog.item({ id: postc._id })" ng-repeat="postc in postsC">
+            <img ng-src="{{postc.img}}" alt="" class="">
+            <h3>{{postc.title}}</h3>
+        </div>
+      </div>
+    </div>
+    <div class="col-xs-12 landingPageTitles">
+      <h1>In the Market For Art?</h1>
+    </div>
+    <div class="spaceBtm"></div>
+    <div class="text-center col-xs-12">
+      <button type="button" class="btn btn-gold hidden-xs" ui-sref="store">Shop Now</button>
+      <button type="button" class="btn btn-block btn-gold show-xs" ui-sref="store">Shop Now</button>
+    </div>
   </div>
-  <div class="spaceBtm"></div>
 </div>
+<div class="spaceBtm"></div>
