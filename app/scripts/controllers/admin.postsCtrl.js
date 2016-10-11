@@ -48,6 +48,15 @@ angular.module("lionHeart")
   $scope.openBlog = {show : false};
     $scope.successMessageDisplayTopPost = false;
   $scope.savePost = function(id, post) {
+    let subtract = post.description.length;
+    let desc = post.description;
+    if (subtract > 150) {
+      let num = 150 - subtract;
+      let total = subtract - num - 3;
+      let newPostDesc = desc.slice(0, total);
+      newPostDesc += '...'
+      post.description = newPostDesc;
+    }
     dataService.savePost(id, post, function(res) {
         if (res.status == 200) {
         $scope.openBlog.show = false;
