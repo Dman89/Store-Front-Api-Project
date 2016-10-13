@@ -75,3 +75,41 @@
   clear: left;
   clear: both;
 }
+
+.blogButton {
+  margin: 5% 5% 0 5%;
+}
+.blogSinglePage {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 5%;
+  & img {
+    border-radius: 4px;
+  }
+  & .blogBox {
+    cursor: auto;
+   & h1 {
+     color: $blackLight;
+     padding-left: 15px;
+     text-align: left;
+     @media (max-width: 767px) {
+       padding-left: 0px;
+       text-align: center;
+     }
+   }
+   & .date {
+     color: $lightBlue;
+     @media (min-width: 768px) {
+       text-align: right;
+       margin-right: 5%;
+     }
+   }
+   & .body {
+     margin: 0 5% 5% 5%;
+     text-align: left;
+     text-indent: 5%;
+   }
+  }
+}
