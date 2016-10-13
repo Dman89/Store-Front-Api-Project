@@ -1,0 +1,21 @@
+.bio {
+  padding: 5%;
+  margin-bottom: 5%;
+  & p {
+    font-size: 1.25em;
+    color: $blackLight;
+    text-indent: 10%;
+  }
+}
+.bioBlogBox {
+  text-align: center;
+  & h2 {
+    margin-bottom: 5%;
+  }
+  & h3 {
+    margin-bottom: 5%;
+  }
+  & .blogBox {
+    min-height: 200px;
+  }
+}
