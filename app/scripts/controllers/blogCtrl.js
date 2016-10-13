@@ -14,6 +14,9 @@ angular.module("lionHeart")
         $scope.blogItem = res.data.posts;
       })
     }
+    $scope.goBack = function() {
+      window.history.back();
+    }
   }
 
 

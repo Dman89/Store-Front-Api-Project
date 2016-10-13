@@ -4846,6 +4846,9 @@ webpackJsonp([0],[
 	        $scope.blogItem = res.data.posts;
 	      })
 	    }
+	    $scope.goBack = function() {
+	      window.history.back();
+	    }
 	  }
 
 
