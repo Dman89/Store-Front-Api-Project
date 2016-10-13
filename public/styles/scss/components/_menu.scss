@@ -26,4 +26,20 @@ nav#menu {
   & li a:active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset;
   }
+  & ul.dropdown-menu {
+    background-color: $menuNormal;
+    color: $softWhite;
+    & li {
+      background-color: $menuNormal;
+      color: $softWhite;
+      & a {
+        background-color: $menuNormal;
+        color: $softWhite;
+      }
+      & a:hover {
+        background-color: $menuLight;
+        color: $white;
+      }
+    }
+  }
 }

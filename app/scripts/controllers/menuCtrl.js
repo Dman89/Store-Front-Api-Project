@@ -57,8 +57,36 @@
             }
           }
         };
-    }
+    var hoverOfStoresLiInMenu = function(data) {
+      let hoveredDiv = document.getElementById('storeLiInMenu');
+      let classNameToAdd = ' open';
+      if (data == "hover") {
+        hoveredDiv.className += classNameToAdd;
+      }
+      else {
+        checkLiForActive(function(res) {
+          if (res >= 1) {
+            hoveredDiv.className = "dropdown";
+          }
+          else {
+            hoveredDiv.className = "dropdown active";
+          }
+        })
+      }
+    };
+    var checkLiForActive = function(cb) {
+      let hasActiveOrNot = 0;
+       let forLoopVarToCheck = document.getElementsByClassName('checkStateOfMenu');
+       for (var x = 0; x < forLoopVarToCheck.length; x++) {
+         let checkActiveState = forLoopVarToCheck[x].className;
+         let answer = checkActiveState.search('active');
+         if (answer >= 0) {
+           hasActiveOrNot += 1;
+         }
+       }
+       cb(hasActiveOrNot);
+    };
+    document.getElementById('storeLiInMenu').addEventListener('mouseenter', function() {hoverOfStoresLiInMenu('hover')});
+    document.getElementById('storeLiInMenu').addEventListener('mouseleave', function() {hoverOfStoresLiInMenu('notHover')});
 
-
-
-  );
+  });

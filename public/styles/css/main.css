@@ -157,6 +157,18 @@ nav#menu {
     color: #fff; }
   nav#menu li a:active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset; }
+  nav#menu ul.dropdown-menu {
+    background-color: #232f3f;
+    color: #c1ccc3; }
+    nav#menu ul.dropdown-menu li {
+      background-color: #232f3f;
+      color: #c1ccc3; }
+      nav#menu ul.dropdown-menu li a {
+        background-color: #232f3f;
+        color: #c1ccc3; }
+      nav#menu ul.dropdown-menu li a:hover {
+        background-color: #37475a;
+        color: #fff; }
 
 a.onWhiteBackground {
   color: #248fd3; }
