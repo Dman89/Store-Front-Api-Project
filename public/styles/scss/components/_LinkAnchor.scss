@@ -2,6 +2,7 @@ a {
   &.onWhiteBackground {
     color: $linkWhiteBackground;
     &:hover {
+      text-decoration: none;
       color: $linkHoverWhiteBackground;
     }
   }
