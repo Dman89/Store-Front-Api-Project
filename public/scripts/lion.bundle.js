@@ -31,14 +31,6 @@ webpackJsonp([0],[
 	__webpack_require__(29);
 	__webpack_require__(30);
 	__webpack_require__(31);
-	__webpack_require__(32);
-	__webpack_require__(33);
-	__webpack_require__(34);
-	__webpack_require__(35);
-	__webpack_require__(36);
-	__webpack_require__(37);
-	__webpack_require__(38);
-	__webpack_require__(39);
 	__webpack_require__(40);
 	__webpack_require__(41);
 	__webpack_require__(42);
@@ -58,6 +50,7 @@ webpackJsonp([0],[
 	__webpack_require__(55);
 	__webpack_require__(56);
 	__webpack_require__(57);
+	__webpack_require__(58);
 
 
 /***/ },
@@ -4872,7 +4865,7 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("productCtrl", function($scope, dataService, functionService, $location) {
+	.controller("productCtrl", function($scope, dataService, functionService, $location, storeCategoryService) {
 	  var addToCartReq = __webpack_require__(8);
 	  var cart;
 	  var user;
@@ -4895,17 +4888,14 @@ webpackJsonp([0],[
 	            if (check == "graphic design") {
 	              check = "graphics";
 	            }
-	          // console.log(check + tempEdit);
 	          if (check.search(tempEdit) > -1) {
 	            list.push(response.data.products[x]);
-	            // console.log(list);
 	          }
 	          if (x == varTemp - 1) {
 	          $scope.products = list;
 	          }
 	          if (check.search("tempEdit") > -1) {
 	            list.push(response.data.products[x]);
-	            // console.log(list);
 	          }
 	          if (x == varTemp - 1) {
 	            $scope.products = list;
@@ -4934,6 +4924,15 @@ webpackJsonp([0],[
 	        // console.log("Completed!");
 	      });
 	    }
+	    storeCategoryService.whatCategoryIsIt(function(res) {
+	      if (res !== false) {
+	        let resWithCap = res.charAt(0).toUpperCase();
+	        let resRestOfWord = res.slice(1, res.length);
+	        $scope.subcategoryActive = true;
+	        $scope.subcategory = resWithCap + resRestOfWord;
+	      }
+	      $scope.subcategoryActive = res;
+	    })
 	});
 
 
@@ -5920,109 +5919,14 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.categoriesCtrl", function($scope, dataService) {
-	});
-
-
-/***/ },
-/* 33 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module('lionHeart')
-	.directive("category.categories", function() {
-	  return {
-	    templateUrl: 'templates/category/categories.html',
-	    controller: 'category.categoriesCtrl',
-	    replace: true
-	  }
-	})
-
-
-/***/ },
-/* 34 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.paintingsCtrl", function($scope, dataService) {
-	  dataService.getCategoryPaintings(function(response) {
-	    $scope.products = response.data.products;
-	  });
-	});
-
-
-/***/ },
-/* 35 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.printsCtrl", function($scope, dataService) {
-	  dataService.getCategoryPrints(function(response) {
-	    $scope.products = response.data.products;
-	  });
-	});
-
-
-/***/ },
-/* 36 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.graphicsCtrl", function($scope, dataService) {
-	  dataService.getCategoryGraphics(function(response) {
-	    $scope.products = response.data.products;
-	  });
-	});
-
-
-/***/ },
-/* 37 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.upcycleCtrl", function($scope, dataService) {
-	  dataService.getCategoryUpcycle(function(response) {
-	    $scope.products = response.data.products;
-	  });
-	});
-
-
-/***/ },
-/* 38 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.skateboardsCtrl", function($scope, dataService) {
-	  dataService.getCategorySkateboards(function(response) {
-	    $scope.products = response.data.products;
-	  });
-	});
-
-
-/***/ },
-/* 39 */
-/***/ function(module, exports) {
-
-	'use strict';
-	angular.module("lionHeart")
-	.controller("category.stickersCtrl", function($scope, dataService) {
-	  dataService.getCategoryStickers(function(response) {
-	    $scope.products = response.data.products;
-	  });
-	});
-
-
-/***/ },
+/* 32 */,
+/* 33 */,
+/* 34 */,
+/* 35 */,
+/* 36 */,
+/* 37 */,
+/* 38 */,
+/* 39 */,
 /* 40 */
 /***/ function(module, exports) {
 
@@ -7324,6 +7228,28 @@ webpackJsonp([0],[
 
 /***/ },
 /* 57 */
+/***/ function(module, exports) {
+
+	"use strict";
+	angular.module("lionHeart")
+	  .service("storeCategoryService", function($http) {
+	    this.whatCategoryIsIt = function(cb) {
+	      let urlCheck = window.location.hash;
+	      let check = urlCheck.search('all');
+	      console.log(check);
+	      if (check == '-1') {
+	        let subcategory = urlCheck.slice(8, urlCheck.length)
+	        cb(subcategory)
+	      }
+	      else {
+	        cb(false)
+	      }
+	    }
+	  });
+
+
+/***/ },
+/* 58 */
 /***/ function(module, exports) {
 
 	'use strict';
