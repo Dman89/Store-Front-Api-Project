@@ -4,7 +4,6 @@ angular.module("lionHeart")
     this.whatCategoryIsIt = function(cb) {
       let urlCheck = window.location.hash;
       let check = urlCheck.search('all');
-      console.log(check);
       if (check == '-1') {
         let subcategory = urlCheck.slice(8, urlCheck.length)
         cb(subcategory)
