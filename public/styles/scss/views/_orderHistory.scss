@@ -1,0 +1,12 @@
+#orderHistory {
+  .blogBox {
+    min-height: 0;
+    & img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+    & .historySpace {
+      margin: 5%;
+    }
+  }
+}

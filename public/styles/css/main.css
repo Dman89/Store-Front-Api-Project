@@ -481,6 +481,13 @@ div.landingPageTitles h1 {
       .profile .mobileFloatSave button {
         width: 80%;
         margin: auto; } }
+  .profile .fixedButtonBtm {
+    position: fixed;
+    bottom: 0;
+    right: 5%;
+    z-index: 100;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
 
 #orderHistory .blogBox {
   min-height: 0; }
