@@ -532,4 +532,43 @@ div.landingPageTitles h1 {
   font-weight: 600;
   visibility: visible; }
 
+.checkoutCart {
+  padding: 15px; }
+  .checkoutCart h1.cart {
+    text-indent: 5%; }
+  .checkoutCart div.blogBox {
+    cursor: default;
+    padding: 16px;
+    min-height: 100px; }
+    .checkoutCart div.blogBox img {
+      max-width: 300px;
+      max-height: 300px; }
+  .checkoutCart .quantityChange {
+    max-width: 75px; }
+  .checkoutCart .inStock::after {
+    content: 'In Stock';
+    color: #ff9900; }
+  .checkoutCart .outStock::after {
+    content: 'Out Of Stock';
+    color: #777; }
+  @media (max-width: 767px) {
+    .checkoutCart .text-right {
+      text-align: center; } }
+  @media (max-width: 767px) {
+    .checkoutCart .notCenter .text-right {
+      text-align: right; } }
+  .checkoutCart .emptyCart {
+    padding: 10%; }
+  .checkoutCart .saveButton {
+    padding-top: 5%;
+    padding-bottom: 2%; }
+    @media (max-width: 767px) {
+      .checkoutCart .saveButton {
+        padding: 10% 10% 2% 10%; } }
+  .checkoutCart .checkoutButton {
+    margin-bottom: 10%; }
+    @media (max-width: 767px) {
+      .checkoutCart .checkoutButton {
+        padding: 0 10% 10% 10%; } }
+
 /*# sourceMappingURL=main.css.map */
