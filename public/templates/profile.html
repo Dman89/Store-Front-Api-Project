@@ -1,19 +1,19 @@
-<div class="row text-center" id="profile">
-      <div class="col-xs-12 btnbar">
-        <div class="row">
-          <div class="col-xs-12 col-sm-4">
-            <button type="button" class="btn btn-block btn-primary hidden-xs" ui-sref="profile.dashboard" ng-class="{ active: isActiveProfile('/profile/dashboard')}">Dashboard</button>
-            <button type="button" class="btn btn-block btn-primary hidden-sm hidden-md hidden-lg" ui-sref="profile.dashboard" ng-class="{ active: isActiveProfile('/profile/dashboard')}">Dashboard</button>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <button type="button" class="btn btn-block btn-primary hidden-xs" ui-sref="profile.edit" ng-class="{ active: isActiveProfile('/profile/edit')}">Edit Account</button>
-            <button type="button" class="btn btn-block btn-primary hidden-sm hidden-md hidden-lg" ui-sref="profile.edit" ng-class="{ active: isActiveProfile('/profile/edit')}">Edit Account</button>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <button type="button" class="btn btn-block btn-primary hidden-xs" ui-sref="profile.orderHistory" ng-class="{ active: isActiveProfile('/profile/orderHistory')}">Order History</button>
-            <button type="button" class="btn btn-block btn-primary hidden-sm hidden-md hidden-lg" ui-sref="profile.orderHistory" ng-class="{ active: isActiveProfile('/profile/orderHistory')}">Order History</button>
-          </div>
-        </div>
-      </div>
-      <div class="" ui-view></div>
+<div class="container-fluid profile">
+  <div class="row accountButtons" id="scrollBack">
+    <div class="col-xs-12 col-sm-4">
+      <button type="button" class="btn btn-block btn-goldSecondary hidden-xs" ui-sref="profile.dashboard" ng-class="{ active: isActiveProfile('/profile/dashboard')}">Dashboard</button>
+      <button type="button" class="btn btn-block btn-goldSecondary hidden-sm hidden-md hidden-lg" ui-sref="profile.dashboard" ng-class="{ active: isActiveProfile('/profile/dashboard')}">Dashboard</button>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <button type="button" class="btn btn-block btn-goldSecondary hidden-xs" ui-sref="profile.edit" ng-class="{ active: isActiveProfile('/profile/edit')}">Edit Account</button>
+      <button type="button" class="btn btn-block btn-goldSecondary hidden-sm hidden-md hidden-lg" ui-sref="profile.edit" ng-class="{ active: isActiveProfile('/profile/edit')}">Edit Account</button>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <button type="button" class="btn btn-block btn-goldSecondary hidden-xs" ui-sref="profile.orderHistory" ng-class="{ active: isActiveProfile('/profile/orderHistory')}">Order History</button>
+      <button type="button" class="btn btn-block btn-goldSecondary hidden-sm hidden-md hidden-lg" ui-sref="profile.orderHistory" ng-class="{ active: isActiveProfile('/profile/orderHistory')}">Order History</button>
+    </div>
+  </div>
+  <div class="row accountData">
+    <div class="" ui-view></div>
+  </div>
 </div>
