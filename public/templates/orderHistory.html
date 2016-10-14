@@ -2,8 +2,8 @@
   <h1 class="hidden-xs">Order History</h1>
   <h1 class="show-xs text-center">Order History</h1>
   <div class="blogBox row" ng-repeat="x in orderHistory">
-    <div class="col-xs-12" ng-click="reveal=!reveal">
-      <h2>{{x.date}}</h2>
+    <div class="col-xs-12 orderHistoryToolTip" ng-click="reveal=!reveal">
+      <h2>{{x.date}}</h2><span class="tooltiptexttop borderToolTip">Click to Toggle</span><span class="show-xs showForFiveSeconds">Click to Toggle</span>
     </div>
     <div class="col-xs-12" ng-show="reveal">
       <div class="row historySpace" ng-repeat="y in x.cart.items">
@@ -45,17 +45,15 @@
         </div>
       </div>
       <div class="col-xs-12 col-sm-5 col-sm-offset-7 col-md-4 col-lg-5 col-md-offset-8 col-lg-offset-7">
-        <div>
-          <button type="button" class="btn btn-primary btn-block" ng-click="toggleThis('Total')" ng-hide="showTotal; hideAll">Total</button>
-          <button type="button" class="btn btn-primary btn-block" ng-click="toggleThis('Charge')" ng-hide="showCharge; hideAll">Charge</button>
-          <button type="button" class="btn btn-primary btn-block" ng-click="toggleThis('Billing')" ng-hide="showBilling; hideAll">Billing Address</button>
-          <button type="button" class="btn btn-primary btn-block" ng-click="toggleThis('Shipping')" ng-hide="showShipping; hideAll">Shipping Address</button>
-        </div>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Total')" ng-hide="showTotal; hideAll">Total</button>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Charge')" ng-hide="showCharge; hideAll">Charge</button>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Billing')" ng-hide="showBilling; hideAll">Billing Address</button>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Shipping')" ng-hide="showShipping; hideAll">Shipping Address</button>
+        <div ng-include="'templates/orderHistory/total.html'" ng-show="showTotal"></div>
+        <div ng-include="'templates/orderHistory/charge.html'" ng-show="showCharge"></div>
+        <div ng-include="'templates/orderHistory/billing.html'" ng-show="showBilling"></div>
+        <div ng-include="'templates/orderHistory/shipping.html'" ng-show="showShipping"></div>
       </div>
-      <div ng-include="'templates/orderHistory/total.html'" ng-show="showTotal"></div>
-      <div ng-include="'templates/orderHistory/charge.html'" ng-show="showCharge"></div>
-      <div ng-include="'templates/orderHistory/billing.html'" ng-show="showBilling"></div>
-      <div ng-include="'templates/orderHistory/shipping.html'" ng-show="showShipping"></div>
     </div>
   </div>
 </div>
