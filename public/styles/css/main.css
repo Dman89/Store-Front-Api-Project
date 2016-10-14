@@ -14,7 +14,7 @@
 
 .btn-goldSecondary {
   background: #febd69; }
-  .btn-goldSecondary:hover {
+  .btn-goldSecondary:hover, .btn-goldSecondary.active {
     background: #f3a847; }
 
 .btn-plain {
@@ -83,34 +83,33 @@ html {
     #portfolio {
       padding-top: 10px; } }
 
-@media (min-width: 320px), (min-height: 320px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 11px;
-    line-height: 18px; } }
-@media (min-width: 480px), (min-height: 480px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 14px;
-    line-height: 22px; } }
-@media (min-width: 767px), (min-height: 767px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 17px;
-    line-height: 28px; } }
-@media (min-width: 992px), (min-height: 992px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 19px;
-    line-height: 31px; } }
-@media (min-width: 1100px), (min-height: 1100px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 20px;
-    line-height: 33px; } }
-@media (min-width: 1200px), (min-height: 1200px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 21px;
-    line-height: 34px; } }
-@media (min-width: 1500px), (min-height: 1500px) and (orientation: landscape) {
-  html, body, p, span, a {
-    font-size: 24px;
-    line-height: 39px; } }
+html, body, p, span, a {
+  font-size: 11px;
+  line-height: 18px; }
+  @media (min-width: 480px), (min-height: 480px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 14px;
+      line-height: 22px; } }
+  @media (min-width: 767px), (min-height: 767px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 17px;
+      line-height: 28px; } }
+  @media (min-width: 992px), (min-height: 992px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 19px;
+      line-height: 31px; } }
+  @media (min-width: 1100px), (min-height: 1100px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 20px;
+      line-height: 33px; } }
+  @media (min-width: 1200px), (min-height: 1200px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 21px;
+      line-height: 34px; } }
+  @media (min-width: 1500px), (min-height: 1500px) and (orientation: landscape) {
+    html, body, p, span, a {
+      font-size: 24px;
+      line-height: 39px; } }
 
 h1 {
   font-size: 2.6363rem;
@@ -152,6 +151,8 @@ nav#menu, nav#menu a {
   background: #232f3f;
   border-color: #37475a;
   color: #c1ccc3; }
+  nav#menu.saveButtonTopMobile, nav#menu a.saveButtonTopMobile {
+    border-color: #232f3f; }
   nav#menu li.active, nav#menu li.active a, nav#menu li:hover, nav#menu li a:active, nav#menu li a:hover, nav#menu .navbar-default .navbar-nav > .active > a, nav#menu a li.active, nav#menu a li.active a, nav#menu a li:hover, nav#menu a li a:active, nav#menu a li a:hover, nav#menu a .navbar-default .navbar-nav > .active > a {
     background-color: #37475a;
     color: #fff; }
@@ -430,5 +431,63 @@ div.landingPageTitles h1 {
     padding-left: 5%; }
     .store .storeTitle h1 a.onWhiteBackground {
       font-size: 65%; }
+
+.profile {
+  color: #000; }
+  .profile input.address {
+    width: 100%; }
+  .profile div.row.blogBox {
+    cursor: default !important; }
+  .profile div.accountButtons {
+    padding-top: 5%; }
+  .profile div.accountData {
+    padding: 5%; }
+  .profile h1 {
+    color: #0a172b; }
+    .profile h1.fadedOut {
+      color: #777; }
+  .profile h2 {
+    font-weight: 600; }
+  .profile .whiteOut {
+    background: #fff;
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    border-top-color: #adb1b8;
+    border-right-color: #a2a6ac;
+    border-bottom-color: #8d9096;
+    border-left-color: #a2a6ac;
+    border-style: solid;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px; }
+  .profile .saveSpacer {
+    padding: 5% 0; }
+  @media (max-width: 767px) {
+    .profile .mobileFloatSave {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      background-color: #232f3f;
+      border-bottom: 1px #37475a solid;
+      z-index: 100;
+      padding: 2px 0;
+      padding-top: 8px; }
+      .profile .mobileFloatSave button {
+        width: 80%;
+        margin: auto; } }
+
+#orderHistory .blogBox {
+  min-height: 0; }
+  #orderHistory .blogBox img {
+    max-width: 300px;
+    max-height: 300px; }
+  #orderHistory .blogBox .historySpace {
+    margin: 5%; }
 
 /*# sourceMappingURL=main.css.map */
