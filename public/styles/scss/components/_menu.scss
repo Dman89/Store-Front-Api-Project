@@ -19,6 +19,9 @@ nav#menu, nav#menu a {
   background: $menuNormal;
   border-color: $menuLight;
   color: $softWhite;
+  &.saveButtonTopMobile {
+    border-color: $menuNormal;
+  }
   & li.active, & li.active a, & li:hover, & li a:active, & li a:hover, & .navbar-default .navbar-nav>.active>a {
     background-color: $menuLight;
     color: $white;
