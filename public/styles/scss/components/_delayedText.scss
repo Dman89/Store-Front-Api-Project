@@ -1,0 +1,23 @@
+.showForFiveSeconds {
+  @media (max-width: 767px) {
+    opacity: 1;
+    display: inline-block;
+    animation: fiveSecondGhoast 3s linear forwards;
+  }
+}
+
+@keyframes fiveSecondGhoast {
+  99% {
+    opacity: 0;
+    visibility: visible;
+    display: inline-block;
+    position: relative;
+    left: 0px;
+  }
+  100% {
+    visibility: hidden;
+    display: none;
+    position: absolute;
+    left: -99999999px;
+  }
+}

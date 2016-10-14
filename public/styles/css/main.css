@@ -336,8 +336,8 @@ a.onBlueBackground {
 .tooltiptexttop {
   visibility: hidden;
   width: 120px;
-  background-color: black;
-  color: #fff;
+  background-color: white;
+  color: #000;
   text-align: center;
   border-radius: 6px;
   padding: 5px 0;
@@ -353,13 +353,31 @@ a.onBlueBackground {
   top: 100%;
   left: 50%;
   margin-left: -5px;
-  border-width: 5px;
+  border-width: 6px;
   border-style: solid;
   border-color: black transparent transparent transparent; }
 
 label:hover .tooltiptexttop, .tooltips:hover .tooltiptexttop {
   visibility: visible; }
 
+@media (max-width: 767px) {
+  .showForFiveSeconds {
+    opacity: 1;
+    display: inline-block;
+    animation: fiveSecondGhoast 3s linear forwards; } }
+
+@keyframes fiveSecondGhoast {
+  99% {
+    opacity: 0;
+    visibility: visible;
+    display: inline-block;
+    position: relative;
+    left: 0px; }
+  100% {
+    visibility: hidden;
+    display: none;
+    position: absolute;
+    left: -99999999px; } }
 .banner {
   width: 100%; }
   .banner img {
@@ -496,5 +514,15 @@ div.landingPageTitles h1 {
     max-height: 300px; }
   #orderHistory .blogBox .historySpace {
     margin: 5%; }
+#orderHistory .closeOut {
+  color: #248fd3; }
+  #orderHistory .closeOut:hover {
+    text-decoration: none;
+    color: #c45500; }
+#orderHistory .orderHistoryToolTip:hover .borderToolTip {
+  border: 1px black solid; }
+#orderHistory .orderHistoryToolTip:hover .tooltiptexttop {
+  font-weight: 600;
+  visibility: visible; }
 
 /*# sourceMappingURL=main.css.map */
