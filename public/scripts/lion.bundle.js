@@ -5337,10 +5337,11 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("orderHistoryCtrl", function($scope, dataService) {
+	.controller("orderHistoryCtrl", function($scope, dataService, $parse) {
 	dataService.getOrderHistory(function(response) {
 	  var aday, year, month, date, chargeId, chargeIdA, chargeIdB, chargeIdC, chargeIdD;
 	  $scope.orderHistory = response.data.orders;
+	  $scope.hideAll = false;
 	  for (var x = 0; x < response.data.orders.length; x++) {
 	    chargeId = response.data.orders[x].charge.id;
 	    chargeId.toString(chargeId)
@@ -5403,6 +5404,19 @@ webpackJsonp([0],[
 	    $scope.orderHistory[x].charge.displayId = pushArr;
 	  }
 	});
+	$scope.toggleThis = function(data) {
+	  let toggleData = 'show'+ data;
+	  let model = $parse(toggleData);
+	  if ($scope.hideAll == false) {
+	    model.assign($scope, true);
+	    $scope.hideAll = true;
+	  }
+	  else {
+	    model.assign($scope, false);
+	    $scope.hideAll = false;
+	  }
+
+	}
 	});
 
 
