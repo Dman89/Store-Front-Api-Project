@@ -58,20 +58,23 @@
           }
         };
     var hoverOfStoresLiInMenu = function(data) {
-      let hoveredDiv = document.getElementById('storeLiInMenu');
-      let classNameToAdd = ' open';
-      if (data == "hover") {
-        hoveredDiv.className += classNameToAdd;
-      }
-      else {
-        checkLiForActive(function(res) {
-          if (res >= 1) {
-            hoveredDiv.className = "dropdown";
-          }
-          else {
-            hoveredDiv.className = "dropdown active";
-          }
-        })
+      let checkWidth = window.innerWidth;
+      if (checkWidth >= 768) {
+        let hoveredDiv = document.getElementById('storeLiInMenu');
+        let classNameToAdd = ' open';
+        if (data == "hover") {
+          hoveredDiv.className += classNameToAdd;
+        }
+        else {
+          checkLiForActive(function(res) {
+            if (res >= 1) {
+              hoveredDiv.className = "dropdown";
+            }
+            else {
+              hoveredDiv.className = "dropdown active";
+            }
+          })
+        }
       }
     };
     var checkLiForActive = function(cb) {
