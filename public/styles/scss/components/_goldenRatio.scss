@@ -1,8 +1,6 @@
 html, body, p, span, a {
-  @media (min-width: 320px), (min-height: 320px) and (orientation: landscape) {
     font-size: 11px;
     line-height: 18px;
-  }
   @media (min-width: 480px), (min-height: 480px) and (orientation: landscape) {
     font-size: 14px;
     line-height: 22px;

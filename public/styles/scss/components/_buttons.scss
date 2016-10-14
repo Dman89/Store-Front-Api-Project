@@ -17,7 +17,7 @@
 }
 .btn-goldSecondary {
   background: $buttonSecondary;
-  &:hover {
+  &:hover, &.active {
     background: $buttonSecondaryHover;
   }
 }
