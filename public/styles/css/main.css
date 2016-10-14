@@ -148,25 +148,25 @@ h5 {
   margin-top: -3px;
   margin-left: 15px; }
 
-nav#menu {
+nav#menu, nav#menu a {
   background: #232f3f;
   border-color: #37475a;
   color: #c1ccc3; }
-  nav#menu li.active, nav#menu li.active a, nav#menu li:hover, nav#menu li a:active, nav#menu li a:hover, nav#menu .navbar-default .navbar-nav > .active > a {
+  nav#menu li.active, nav#menu li.active a, nav#menu li:hover, nav#menu li a:active, nav#menu li a:hover, nav#menu .navbar-default .navbar-nav > .active > a, nav#menu a li.active, nav#menu a li.active a, nav#menu a li:hover, nav#menu a li a:active, nav#menu a li a:hover, nav#menu a .navbar-default .navbar-nav > .active > a {
     background-color: #37475a;
     color: #fff; }
-  nav#menu li a:active {
+  nav#menu li a:active, nav#menu a li a:active {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4) inset; }
-  nav#menu ul.dropdown-menu {
+  nav#menu ul.dropdown-menu, nav#menu a ul.dropdown-menu {
     background-color: #232f3f;
     color: #c1ccc3; }
-    nav#menu ul.dropdown-menu li {
+    nav#menu ul.dropdown-menu li, nav#menu a ul.dropdown-menu li {
       background-color: #232f3f;
       color: #c1ccc3; }
-      nav#menu ul.dropdown-menu li a {
+      nav#menu ul.dropdown-menu li a, nav#menu a ul.dropdown-menu li a {
         background-color: #232f3f;
         color: #c1ccc3; }
-      nav#menu ul.dropdown-menu li a:hover {
+      nav#menu ul.dropdown-menu li a:hover, nav#menu a ul.dropdown-menu li a:hover {
         background-color: #37475a;
         color: #fff; }
 
