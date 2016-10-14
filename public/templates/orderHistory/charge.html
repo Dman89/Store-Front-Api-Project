@@ -1,0 +1,68 @@
+<div class="closeOut" ng-click="toggleThis('Charge')">
+  <i class="fa fa-times"></i>
+</div>
+<div class="col-xs-12 col-md-8 col-lg-10">
+  Transaction ID:
+</div>
+<div class="col-xs-12 text-right totalMargin">
+  {{x.charge.displayId[0] + " " + x.charge.displayId[1] + " " + x.charge.displayId[2] + " " + x.charge.displayId[3]}}
+</div>
+<div class="col-xs-12 col-md-8 col-lg-10">
+  Card Brand:
+</div>
+<div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+  {{x.charge.source.brand}}
+</div>
+<div class="col-xs-12 col-md-8 col-lg-10">
+  Last Four Digits:
+</div>
+<div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+  {{x.charge.source.last4}}
+</div>
+<div class="col-xs-12">
+  <h2>Total:</h2>
+</div>
+<div class="col-xs-12 text-right">
+  <h2>{{"$" + (x.charge.amount / 100)}}</h2>
+</div>
+</div>
+<div class="row innerShipping" ng-show="showBilling">
+<div class="closeOut" ng-click="showBilling = !showBilling; hideAll = !hideAll">
+  <i class="fa fa-times"></i>
+</div>
+<div class="col-xs-12 col-md-8 col-lg-10">
+  Name:
+</div>
+<div class="col-xs-12 text-right totalMargin">
+  {{x.billingAddress.name}}
+</div>
+<div class="col-xs-12 col-md-8 col-lg-10">
+  Address:
+</div>
+<div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
+  {{x.billingAddress.address}}
+</div>
+<div class="col-xs-12 col-md-8 col-lg-10">
+  City:
+</div>
+<div class="col-xs-12 text-right totalMargin">
+  {{x.billingAddress.city}}
+</div>
+<div class="col-xs-12">
+  State:
+</div>
+<div class="col-xs-12 text-right">
+  {{x.billingAddress.state}}
+</div>
+<div class="col-xs-12">
+  Postal Code:
+</div>
+<div class="col-xs-12 text-right">
+  {{x.billingAddress.zip}}
+</div>
+<div class="col-xs-12">
+  Country:
+</div>
+<div class="col-xs-12 text-right">
+  {{x.billingAddress.country}}
+</div>
