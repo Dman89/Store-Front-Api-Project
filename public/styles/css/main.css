@@ -171,6 +171,13 @@ nav#menu, nav#menu a {
         background-color: #37475a;
         color: #fff; }
 
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: #232f3f;
+  border-top-color: #37475a; }
+
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+  background-color: #232f3f; }
+
 a.onWhiteBackground {
   color: #248fd3; }
   a.onWhiteBackground:hover {

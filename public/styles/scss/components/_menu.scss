@@ -46,3 +46,10 @@ nav#menu, nav#menu a {
     }
   }
 }
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+  border-color: $menuNormal;
+  border-top-color: $menuLight;
+}
+.navbar-default .navbar-toggle:focus, .navbar-default .navbar-toggle:hover {
+    background-color: $menuNormal;
+}
