@@ -31,26 +31,26 @@ webpackJsonp([0],[
 	__webpack_require__(29);
 	__webpack_require__(30);
 	__webpack_require__(31);
+	__webpack_require__(32);
+	__webpack_require__(33);
+	__webpack_require__(34);
+	__webpack_require__(35);
+	__webpack_require__(36);
+	__webpack_require__(37);
+	__webpack_require__(38);
+	__webpack_require__(39);
 	__webpack_require__(40);
 	__webpack_require__(41);
 	__webpack_require__(42);
 	__webpack_require__(43);
 	__webpack_require__(44);
+	__webpack_require__(19);
 	__webpack_require__(45);
 	__webpack_require__(46);
 	__webpack_require__(47);
 	__webpack_require__(48);
 	__webpack_require__(49);
 	__webpack_require__(50);
-	__webpack_require__(51);
-	__webpack_require__(52);
-	__webpack_require__(19);
-	__webpack_require__(53);
-	__webpack_require__(54);
-	__webpack_require__(55);
-	__webpack_require__(56);
-	__webpack_require__(57);
-	__webpack_require__(58);
 
 
 /***/ },
@@ -5947,15 +5947,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 32 */,
-/* 33 */,
-/* 34 */,
-/* 35 */,
-/* 36 */,
-/* 37 */,
-/* 38 */,
-/* 39 */,
-/* 40 */
+/* 32 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -6200,7 +6192,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 41 */
+/* 33 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6258,7 +6250,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 42 */
+/* 34 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6268,17 +6260,46 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 43 */
+/* 35 */
 /***/ function(module, exports) {
 
 	'use strict';
 	angular.module("lionHeart")
 	.controller("profile.dashboard.editCtrl", function($scope, dataService) {
+
+	  var saveButtonScrollEvent = function () {
+	    let thisDiv = document.getElementById("scrollBTN");
+	    let location = thisDiv.offsetTop;
+	    let currentWidth = window.innerWidth;
+	    let bigger = "";
+	    let smaller = "";
+	    let spacerPX = document.getElementById("menu").offsetHeight;
+	    let scrollBackPosition = document.getElementById("scrollBack").offsetHeight + document.getElementById("scrollBack").offsetTop;
+	    let windowLocation = (window.pageYOffset || document.scrollTop)  - (document.clientTop || 0);
+	    let checkLocation = windowLocation + spacerPX;
+	    if (window.location.href.search('edit') < 0) {
+	      window.removeEventListener('scroll', saveButtonScrollEvent);
+	    }
+	    else {
+	      if (location > 0) {
+	        if (location <= checkLocation) {
+
+	          document.getElementById('dashboardSave').className = "mobileFloatSave show-xs";
+	          document.getElementById('menu').className = "saveButtonTopMobile navbar-fixed-top navbar navbar-default ng-scope";
+	        }
+	        if (scrollBackPosition >= checkLocation) {
+	          document.getElementById('dashboardSave').className = "saveSpacer show-xs";
+	          document.getElementById('menu').className = "navbar-fixed-top navbar navbar-default ng-scope";
+	        }
+	      }
+	    }
+	  }
+	  window.addEventListener('scroll', saveButtonScrollEvent);
 	});
 
 
 /***/ },
-/* 44 */
+/* 36 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -6398,7 +6419,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 45 */
+/* 37 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6520,7 +6541,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 46 */
+/* 38 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6595,7 +6616,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 47 */
+/* 39 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6675,7 +6696,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 48 */
+/* 40 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6704,7 +6725,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 49 */
+/* 41 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6796,7 +6817,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 50 */
+/* 42 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6807,7 +6828,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 51 */
+/* 43 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6856,7 +6877,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 52 */
+/* 44 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -6880,7 +6901,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 53 */
+/* 45 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -6908,7 +6929,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 54 */
+/* 46 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -6941,7 +6962,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 55 */
+/* 47 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7074,7 +7095,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 56 */
+/* 48 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -7255,7 +7276,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 57 */
+/* 49 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -7276,7 +7297,7 @@ webpackJsonp([0],[
 
 
 /***/ },
-/* 58 */
+/* 50 */
 /***/ function(module, exports) {
 
 	'use strict';
