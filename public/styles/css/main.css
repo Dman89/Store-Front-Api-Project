@@ -590,5 +590,13 @@ input.address {
   .checkout .blogBox a img {
     max-width: 300px;
     max-height: 300px; }
+  @media (min-width: 768px) {
+    .checkout .hidden-xs-border {
+      border-bottom: 1px #232f3f solid;
+      border-top: 1px #232f3f solid; }
+    .checkout .hidden-xs-side-border {
+      border-right: 1px #232f3f solid; }
+    .checkout .hidden-xs-border-bottom {
+      border-bottom: 1px #232f3f solid; } }
 
 /*# sourceMappingURL=main.css.map */

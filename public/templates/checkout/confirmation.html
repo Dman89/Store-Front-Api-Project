@@ -1,4 +1,140 @@
-<div class="row" id="profile">
+<div class="checkout">
+  <div class="col-xs-12 spaceTopReview">
+  </div>
+  <div class="col-xs-12">
+    <div class="blogBox noMin noPointer">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="hidden-xs">Billing Address</h1>
+          <h1 class="show-xs text-center">Billing Address</h1>
+        </div>
+        <div class="col-xs-12">
+          <h2>Name:</h2>
+          {{orderPlaced.billingAddress.name}}
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <h2>Address Line 1:</h2>
+          {{orderPlaced.billingAddress.address}}
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <h2>Address Line 2:</h2>
+          {{orderPlaced.billingAddress.address2}}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h2>City:</h2>
+          {{orderPlaced.billingAddress.city}}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h2>State:</h2>
+          {{orderPlaced.billingAddress.state}}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h2>Zip:</h2>
+          {{orderPlaced.billingAddress.zip}}
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h2>Country:</h2>
+          {{orderPlaced.billingAddress.country}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="blogBox noMin noPointer">
+      <div class="row">
+        <div ng-class="{'hidden': orderPlaced.shippingAddress.useBilling == true}">
+          <div class="col-xs-12">
+            <h1 class="hidden-xs">Shipping Address</h1>
+            <h1 class="show-xs text-center">Shipping Address</h1>
+          </div>
+          <div class="col-xs-12">
+            <h2>Name:</h2>
+            {{orderPlaced.shippingAddress.name}}
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <h2>Address Line 1:</h2>
+            {{orderPlaced.shippingAddress.address}}
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <h2>Address Line 2:</h2>
+            {{orderPlaced.shippingAddress.address2}}
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <h2>City:</h2>
+            {{orderPlaced.shippingAddress.city}}
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <h2>State:</h2>
+            {{orderPlaced.shippingAddress.state}}
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <h2>Zip:</h2>
+            {{orderPlaced.shippingAddress.zip}}
+          </div>
+          <div class="col-xs-12 col-sm-4">
+            <h2>Country:</h2>
+            {{orderPlaced.shippingAddress.country}}
+          </div>
+        </div>
+        <div ng-class="{'hidden': orderPlaced.shippingAddress.useBilling == false, 'profileUserName': orderPlaced.shippingAddress.useBilling == true}">
+          <div class="col-xs-12">
+            <h1 class="hidden-xs fadedOut">Shipping Address</h1>
+            <h1 class="show-xs text-center fadedOut">Shipping Address</h1>
+          </div>
+          <div class="col-xs-12">
+            <h2 class="hidden-xs">Same As Billing Address</h2>
+            <h2 class="show-xs">Same As Billing Address</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12">
+    <div class="blogBox noMin noPointer">
+      <div class="row">
+        <div class="col-xs-12">
+          <h1 class="hidden-xs">Charge</h1>
+          <h1 class="show-xs text-center">Charge</h1>
+        </div>
+      </div>
+      <div class="row hidden-xs-border">
+        <div class="col-xs-12 col-sm-4 hidden-xs-side-border">
+          <h3>Card:</h3>
+          <h4 class="text-right">{{orderPlaced.card + " " + orderPlaced.last4}}</h4>
+        </div>
+        <div class="col-xs-12 col-sm-4 hidden-xs-side-border">
+          <h3># items:</h3>
+          <h4 class="text-right">{{orderPlaced.cart.len}}</h4>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h3>Sub-Total:</h3>
+          <h4 class="text-right">${{orderPlaced.cart.subTotal}}</h4>
+        </div>
+      </div>
+      <div class="row hidden-xs-border-bottom">
+        <div class="col-xs-12 col-sm-4 hidden-xs-side-border">
+          <h3>Shipping:</h3>
+          <h4 class="text-right">${{orderPlaced.cart.shipping}}</h4>
+        </div>
+        <div class="col-xs-12 col-sm-4 hidden-xs-side-border">
+          <h3>Tax:</h3>
+          <h4 class="text-right">${{orderPlaced.cart.tax}}</h4>
+        </div>
+        <div class="col-xs-12 col-sm-4">
+          <h3>Grand total:</h3>
+          <h4 class="text-right">${{orderPlaced.cart.total}}</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="row" id="profile">
   <div class="" id="dashboard">
     <div id="confirmation">
       <div class="divider"><h1 class="title highlight">Confirmation</h1></div>
@@ -122,7 +258,7 @@
 
           <div class="col-xs-12 col-sm-4 col-sm-offset-8 reviewUseBill" id="useBill">
             <div class="gold">
-                <label ng-class="{'greena': user.data.shippingAddress.useBilling, 'reda': !user.data.shippingAddress.useBilling}" id="reviewUseBilling">Use Billing <span ng-show="user.data.shippingAddress.useBilling" class="thumbAnimation" ng-class="{'showAnimation': user.data.shippingAddress.useBilling, 'hideAnimation': !user.data.shippingAddress.useBilling}"><i class="fa fa-thumbs-up"></i></span><span ng-show="!user.data.shippingAddress.useBilling" class="thumbAnimation" ng-class="{'showAnimation': !user.data.shippingAddress.useBilling, 'hideAnimation': user.data.shippingAddress.useBilling}"><i class="fa fa-thumbs-down"></i></span></label>
+                <label ng-class="{'greena': orderPlaced.shippingAddress.useBilling, 'reda': !orderPlaced.shippingAddress.useBilling}" id="reviewUseBilling">Use Billing <span ng-show="orderPlaced.shippingAddress.useBilling" class="thumbAnimation" ng-class="{'showAnimation': orderPlaced.shippingAddress.useBilling, 'hideAnimation': !orderPlaced.shippingAddress.useBilling}"><i class="fa fa-thumbs-up"></i></span><span ng-show="!orderPlaced.shippingAddress.useBilling" class="thumbAnimation" ng-class="{'showAnimation': !orderPlaced.shippingAddress.useBilling, 'hideAnimation': orderPlaced.shippingAddress.useBilling}"><i class="fa fa-thumbs-down"></i></span></label>
                 </div>
           </div>
         </div>
@@ -169,4 +305,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
