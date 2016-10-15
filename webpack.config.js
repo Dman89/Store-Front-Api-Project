@@ -14,34 +14,34 @@ module.exports = {
     plugins: [
     new webpack.OldWatchingPlugin(),
     new webpack.optimize.CommonsChunkPlugin(/* chunkName= */"vendor", /* filename= */"vendor.bundle.js"),
-    new webpack.optimize.UglifyJsPlugin({
-  cacheFolder: path.resolve(__dirname, 'public/cached_uglify/'),
-  debug: true,
-  minimize: true,
-  sourceMap: false,
-  output: {
-    comments: false
-  },
-  compressor: {
-    warnings: false
-  }
-})
+//     new webpack.optimize.UglifyJsPlugin({
+//   cacheFolder: path.resolve(__dirname, 'public/cached_uglify/'),
+//   debug: true,
+//   minimize: true,
+//   sourceMap: false,
+//   output: {
+//     comments: false
+//   },
+//   compressor: {
+//     warnings: false
+//   }
+// })
 
-  ],
-   module: {
-       loaders: [
-           {
-               test: /\.js$/,
-               loader: 'babel-loader',
-               query: {
-                   presets: ['es2015']
-               },
-               exclude: /node_modules/
-           }
-       ]
-   },
-   stats: {
-       colors: true
-   },
-   devtool: 'source-map'
+  ]
+  //  module: {
+  //      loaders: [
+  //          {
+  //              test: /\.js$/,
+  //              loader: 'babel-loader',
+  //              query: {
+  //                  presets: ['es2015']
+  //              },
+  //              exclude: /node_modules/
+  //          }
+  //      ]
+  //  },
+  //  stats: {
+  //      colors: true
+  //  },
+  //  devtool: 'source-map'
 };
