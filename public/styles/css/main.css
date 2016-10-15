@@ -211,9 +211,13 @@ a.onBlueBackground {
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
       min-height: 320px; }
+      .blogBox.noMin {
+        min-height: 0px; }
       .blogBox:hover {
         transform: translate3d(0, -3px, 0);
         box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.16), 2px 0 2px 0 rgba(0, 0, 0, 0.16), 0 2px 2px 0 rgba(0, 0, 0, 0.23); } }
+  .blogBox.noPointer {
+    cursor: default; }
   .blogBox .description {
     margin: auto;
     text-align: left;
@@ -514,6 +518,9 @@ div.landingPageTitles h1 {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0; }
 
+input.address {
+  width: 100%; }
+
 #orderHistory .blogBox {
   min-height: 0; }
   #orderHistory .blogBox img {
@@ -570,5 +577,18 @@ div.landingPageTitles h1 {
     @media (max-width: 767px) {
       .checkoutCart .checkoutButton {
         padding: 0 10% 10% 10%; } }
+
+.cartButtons {
+  margin-bottom: 10%;
+  padding-top: 10%; }
+
+.spaceTopReview {
+  margin-top: 5%; }
+
+.checkout {
+  padding: 0 5%; }
+  .checkout .blogBox a img {
+    max-width: 300px;
+    max-height: 300px; }
 
 /*# sourceMappingURL=main.css.map */
