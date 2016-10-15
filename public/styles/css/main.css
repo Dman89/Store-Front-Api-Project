@@ -14,7 +14,7 @@
 
 .btn-goldSecondary {
   background: #febd69; }
-  .btn-goldSecondary:hover, .btn-goldSecondary.active {
+  .btn-goldSecondary:hover, .btn-goldSecondary.active, .btn-goldSecondary.btnActive {
     background: #f3a847; }
 
 .btn-plain {
@@ -60,6 +60,30 @@
   .W2BButton:hover {
     background: #000;
     color: #fff; }
+
+.btn-block-xs {
+  display: block;
+  width: 80%;
+  margin: 2% auto; }
+
+.button-row {
+  margin: 5% 0; }
+
+.fixedButtonBtm {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  z-index: 100;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
+
+.fixedButtonBtmLeft {
+  position: fixed;
+  bottom: 0;
+  left: 5%;
+  z-index: 100;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
 
 .blueGraident {
   background: #2a4e7e;

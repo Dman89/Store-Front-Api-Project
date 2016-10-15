@@ -1,20 +1,38 @@
-<div class="row text-center" id="profile">
-      <div class="col-xs-12 lilSpaceDawg">
-        <div class="row">
-          <div class="col-xs-12 col-sm-6 col-lg-3">
-            <button ui-sref="admin.posts" class="adminPanelLinks abtn btn-block btn-success"><h2>Posts</h2></button>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-lg-3">
-            <button ui-sref="admin.users" class="adminPanelLinks abtn btn-block btn-success"><h2>Users</h2></button>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-lg-3">
-            <button ui-sref="admin.products" class="adminPanelLinks abtn btn-block btn-success"><h2>Products</h2></button>
-          </div>
-          <div class="col-xs-12 col-sm-6 col-lg-3">
-            <button ui-sref="admin.portfolio" class="adminPanelLinks abtn btn-block btn-success"><h2>Portfolio</h2></button>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12" ui-view>
+<div class="container-fluid button-row">
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+      <button ui-sref="admin.posts" class="btn btn-block hidden-xs btn-goldSecondary" ng-class="{ 'active' : postButton }">
+        Posts
+      </button>
+      <button ui-sref="admin.posts" class="btn btn-block-xs show-xs  btn-goldSecondary" ng-class="{ 'active' : postButton }">
+        Posts
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-3 ">
+      <button ui-sref="admin.users" class="btn btn-block hidden-xs btn-goldSecondary" ng-class='{"active": userButton}'>
+        Users
+      </button>
+      <button ui-sref="admin.users" class="btn btn-block-xs show-xs  btn-goldSecondary" ng-class='{"active": userButton}'>
+        Users
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-3 ">
+      <button ui-sref="admin.products" class="btn btn-block hidden-xs btn-goldSecondary" ng-class='{"active": productButton}'>
+        Products
+      </button>
+      <button ui-sref="admin.products" class="btn btn-block-xs show-xs  btn-goldSecondary" ng-class='{"active": productButton}'>
+        Products
+      </button>
+    </div>
+    <div class="col-xs-12 col-sm-3 ">
+      <button ui-sref="admin.portfolio" class="btn btn-block hidden-xs btn-goldSecondary" ng-class='{"active": portButton}'>
+        Portfolio
+      </button>
+      <button ui-sref="admin.portfolio" class="btn btn-block-xs show-xs  btn-goldSecondary" ng-class='{"active": portButton}'>
+        Portfolio
+      </button>
+    </div>
   </div>
 </div>
+
+<div class="" ui-view></div>
