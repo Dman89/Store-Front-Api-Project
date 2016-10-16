@@ -11,9 +11,11 @@ angular.module("lionHeart")
     let tempID = tempItem[3];
     if (tempItem[3] != "") {
       dataService.getBlogById(tempID, function(res) {
-        console.log(res.data.posts._id);
         $scope.blogItem = res.data.posts;
       })
+    }
+    $scope.goBack = function() {
+      window.history.back();
     }
   }
 

@@ -1,0 +1,27 @@
+<div class="closeOut" ng-click="toggleThis('Total')">
+  <i class="fa fa-times"></i>
+</div>
+<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+  Subtotal:
+</div>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
+  {{"$" + x.cart.subTotal}}
+</div>
+<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+  Tax:
+</div>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
+  {{"$" + x.cart.tax}}
+</div>
+<div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
+  Shipping:
+</div>
+<div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
+  {{"$" + x.cart.shipping}}
+</div>
+<div class="col-xs-12">
+  <h2>Total:</h2>
+</div>
+<div class="col-xs-12 text-right">
+  <h2>{{"$" + x.cart.total}}</h2>
+</div>

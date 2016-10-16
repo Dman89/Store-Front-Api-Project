@@ -1,0 +1,22 @@
+.blueGraident {
+  background: $blueGraidentB1;
+  background: $blueGraidentB2;
+  background: $blueGraidentB3;
+  background: $blueGraidentB4;
+}
+.box {
+  height: 600px;
+  width: 100%;
+}
+html {
+  background: #fff;
+}
+#ui-view {
+  padding-top: 50px;
+}
+#portfolio {
+  padding-top: 5px;
+  @media (max-width: 767px) {
+    padding-top: 10px;
+  }
+}

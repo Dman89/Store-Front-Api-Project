@@ -1,0 +1,26 @@
+#orderHistory {
+  .blogBox {
+    min-height: 0;
+    & img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+    & .historySpace {
+      margin: 5%;
+    }
+  }
+  .closeOut {
+    color: $linkWhiteBackground;
+    &:hover {
+      text-decoration: none;
+      color: $linkHoverWhiteBackground;
+    }
+  }
+  .orderHistoryToolTip:hover .borderToolTip {
+    border: 1px black solid;
+  }
+  .orderHistoryToolTip:hover .tooltiptexttop {
+    font-weight: 600;
+    visibility: visible;
+  }
+}

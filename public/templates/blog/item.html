@@ -1,7 +1,11 @@
-<button  class="btn btn-warning roomTop" ui-sref="blog.blog">Back</button>
-<div class="text-center">
-<img ng-src="{{blogItem.img}}" alt="">
-<h1>{{blogItem.title}}</h1>
-<p>{{blogItem.date.month + "/" + blogItem.date.day + "/" + blogItem.date.year}}</p>
-<p>{{blogItem.body}}</p>
+<button  class="btn W2BButton blogButton" ng-click="goBack()">Back</button>
+<div class="blogSinglePage">
+  <div class="col-xs-12">
+    <div class="blogBox">
+      <img ng-src="{{blogItem.img}}" alt="">
+      <h1>{{blogItem.title}}</h1>
+      <h3 class="date">{{blogItem.date.month + "/" + blogItem.date.day + "/" + blogItem.date.year}}</h3>
+      <p class="body">{{blogItem.body}}</p>
+    </div>
+  </div>
 </div>

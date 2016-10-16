@@ -1,63 +1,22 @@
-<div class="row" id='products'>
-  <div class="" id="cards">
-      <div class="col-xs-12 col-md-6 col-lg-4 fivehundredpx"  ng-repeat="product in products | filter:{active: true}">
-      <div class="hover">
-        <div class="card-container" ng-class="{'flip': learnMore}">
-        <div class="card sideA">
+<div class="store">
+  <div class="storeTitle">
+    <h1 ng-class="{ 'hidden': subcategoryActive }">All</h1>
+    <h1 ng-class="{ 'hidden': !subcategoryActive }"><a class="onWhiteBackground" ui-sref="store.categories.all">All </a><small class="arrow">&gt; </small> {{subcategory}}</h1>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-xs-12 col-md-6 col-lg-4 storeBlogBox checkForThird"  ng-repeat="product in products | filter:{active: true}">
+        <div class="blogBox">
           <a ui-sref="store.product({ urlCode: product.urlCode })">
-                    <div class="imgBackground">
-                      <img ng-src="{{product.pictures[0]}}" alt="" />
-                    </div>
-                    </a>
-                    <p class="title highlight">{{product.name}}</p>
-                    <button href class="btnProductDisplay btnInfo" id="infoOne" ng-click="learnMore = !learnMore">
-              <i class="fa fa-info-circle"></i><span class="learnMore"></span>
-            </button>
-                    <button ng-click="addToCart(product._id, 1, product)" class="btnProductDisplay btnCart">
-              <span></span>
-              <i class="fa fa-shopping-cart"></i>
-            </button>
+            <img ng-src="{{product.pictures[0]}}" class="img-responsive" alt="" />
+          </a>
+          <a ui-sref="store.product({ urlCode: product.urlCode })" class="onWhiteBackground">
+            <p class="title">{{product.name}}</p>
+          </a>
+          <button ng-click="addToCart(product._id, 1, product)" class="btn btn-gold hidden-xs cartButton"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
+          <button ng-click="addToCart(product._id, 1, product)" class="btn btn-block btn-gold show-xs cartButton"><i class="fa fa-shopping-cart"></i> Add To Cart</button>
         </div>
-        <div class="card sideB">
-                        <a ui-sref="store.product({ urlCode: product.urlCode })">
-                        <div class="imgBackground backside">
-                          <p class="backsideTitle">{{product.name}}</p>
-                          <p class="body hidden-xs hidden-landscape">{{product.info}}</p>
-                        </div>
-                        </a>
-                        <p class="title">{{product.displayPrice}}</p>
-                        <button href class="btnProductDisplay btnInfo" id="backOne" ng-click="learnMore = !learnMore">
-                  <i class="fa fa-info-circle"></i><span class="artwork"></span>
-                </button>
-                        <button href class="btnProductDisplay btnCart" ng-click="addToCart(product._id, 1, product)">
-                  <span></span>
-                  <i class="fa fa-shopping-cart"></i>
-                </button>
-        </div>
-
       </div>
-
-
-
-
-
-
-          <!-- <a ui-sref="store.product({ urlCode: product.urlCode })">
-      <div class="card flip">
-        <div class="imgBackground">
-          <img ng-src="{{product.pictures[0]}}" alt="" />
-        </div>
-        <p class="highlight">{{product.name}}</p>
-        <button href class="btn btnInfo">
-    <i class="fa fa-info-circle"></i><span class="learnMore"></span>
-  </button>
-        <button href class="btn btnCart">
-    <span></span>
-    <i class="fa fa-shopping-cart"></i>
-  </button>
-      </div>
-    </a> -->
     </div>
-    </div>
-</div>
+  </div>
 </div>

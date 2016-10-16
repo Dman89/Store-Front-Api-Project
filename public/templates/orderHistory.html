@@ -1,185 +1,59 @@
-    <div class="text-center" id="orderHistory">
-        <div class="topOH">
-            <h1 class="title highlight hidden-xs titleOH">Order History</h1>
+<div class="col-xs-12" id="orderHistory">
+  <h1 class="hidden-xs">Order History</h1>
+  <h1 class="show-xs text-center">Order History</h1>
+  <div class="blogBox row" ng-repeat="x in orderHistory">
+    <div class="col-xs-12 orderHistoryToolTip" ng-click="reveal=!reveal">
+      <h2>{{x.date}}</h2><span class="tooltiptexttop borderToolTip">Click to Toggle</span><span class="show-xs showForFiveSeconds">Click to Toggle</span>
+    </div>
+    <div class="col-xs-12" ng-show="reveal">
+      <div class="row historySpace" ng-repeat="y in x.cart.items">
+        <div class="show-xs text-center">
+          <div class="col-xs-12 col-sm-6">
+            <a ui-sref="store.product({ urlCode: y.urlCode })">
+              <img src="{{y.product.pictures[0]}}" alt="{{y.product.name}}" />
+            </a>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <a ui-sref="store.product({ urlCode: y.urlCode })" class="onWhiteBackground">
+              <h3>{{y.product.name}}</h3>
+            </a>
+          </div>
+          <div class="col-xs-12 col-sm-6 text-right">
+            <h4>{{y.quantity}}</h4>
+          </div>
+          <div class="col-xs-12 col-sm-6 text-right">
+            <h4>{{y.product.displayPrice}}</h4>
+          </div>
         </div>
-                    <div class="row orderHistoryDiv" ng-repeat="x in orderHistory">
-                        <div class="col-xs-12 text-center" ng-click="reveal=!reveal">
-                          <h3>{{x.date}}</h3>
-                        </div>
-                        <div class="col-xs-12 cartOH" ng-show="reveal">
-                          <div class="row innerRow" ng-repeat="y in x.cart.items">
-                                <div class="col-xs-12 col-sm-8 col-md-6 col-lg-5 col-lg-offset-1" id="cards">
-                                      <div class="" id="singleCards">
-                                        <div class="card-container">
-                                          <div class="card sideA">
-                                            <div class="imgBackground">
-                                              <a ui-sref="store.product({ urlCode: y.urlCode })">
-                                              <img src="{{y.product.pictures[0]}}" alt="{{y.product.name}}" />
-                                              </a>
-                                            </div>
-                                            <p class="title highlight"></p>
-                                          </div>
-                                        </div>
-                                  </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-4 col-md-4 col-lg-3 title">
-                                  <h2>{{y.product.name}}</h2>
-                                </div>
-                                <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1 col-md-offset-1 col-lg-offset-2 text-center">
-                                  <h3>{{y.quantity}}</h3>
-                                </div>
-                                <div class="col-xs-6 col-sm-2 col-md-1 col-lg-1 col-md-offset-5 col-lg-offset-5 text-center">
-                                  <h3>{{y.product.displayPrice}}</h3>
-                                </div>
-                              </div>
-                              <div class="col-xs-12 col-sm-5 col-sm-offset-7 col-md-4 col-lg-5 col-md-offset-8 col-lg-offset-7">
-                                <div class="">
-                                  <button type="button" class="btn btn-primary btn-block" ng-click="showTotal = !showTotal; hideAll = !hideAll" ng-hide="showTotal; hideAll">Total</button>
-                                  <button type="button" class="btn btn-primary btn-block" ng-click="showCharge = !showCharge; hideAll = !hideAll" ng-hide="showCharge; hideAll">Charge</button>
-                                  <button type="button" class="btn btn-primary btn-block" ng-click="showBilling = !showBilling; hideAll = !hideAll" ng-hide="showBilling; hideAll">Billing Address</button>
-                                  <button type="button" class="btn btn-primary btn-block" ng-click="showShipping = !showShipping; hideAll = !hideAll" ng-hide="showShipping; hideAll">Shipping Address</button>
-                                </div>
-                                <div class="row innerShipping" ng-show="showTotal">
-                                  <div class="closeOut" ng-click="showTotal = !showTotal; hideAll = !hideAll">
-                                    <i class="fa fa-times"></i>
-                                  </div>
-                                  <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
-                                    Subtotal:
-                                  </div>
-                                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{"$" + x.cart.subTotal}}
-                                  </div>
-                                  <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
-                                    Tax:
-                                  </div>
-                                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{"$" + x.cart.tax}}
-                                  </div>
-                                  <div class="col-xs-12 col-sm-6 col-md-8 col-lg-10">
-                                    Shipping:
-                                  </div>
-                                  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{"$" + x.cart.shipping}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    <h2>Total:</h2>
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    <h2>{{"$" + x.cart.total}}</h2>
-                                  </div>
-                                </div>
-                                <div class="row innerShipping" ng-show="showCharge">
-                                  <div class="closeOut" ng-click="showCharge = !showCharge; hideAll = !hideAll">
-                                    <i class="fa fa-times"></i>
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Transaction ID:
-                                  </div>
-                                  <div class="col-xs-12 text-right totalMargin">
-                                    {{x.charge.displayId[0] + " " + x.charge.displayId[1] + " " + x.charge.displayId[2] + " " + x.charge.displayId[3]}}
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Card Brand:
-                                  </div>
-                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{x.charge.source.brand}}
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Last Four Digits:
-                                  </div>
-                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{x.charge.source.last4}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    <h2>Total:</h2>
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    <h2>{{"$" + (x.charge.amount / 100)}}</h2>
-                                  </div>
-                                </div>
-                                <div class="row innerShipping" ng-show="showBilling">
-                                  <div class="closeOut" ng-click="showBilling = !showBilling; hideAll = !hideAll">
-                                    <i class="fa fa-times"></i>
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Name:
-                                  </div>
-                                  <div class="col-xs-12 text-right totalMargin">
-                                    {{x.billingAddress.name}}
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Address:
-                                  </div>
-                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{x.billingAddress.address}}
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    City:
-                                  </div>
-                                  <div class="col-xs-12 text-right totalMargin">
-                                    {{x.billingAddress.city}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    State:
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    {{x.billingAddress.state}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    Postal Code:
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    {{x.billingAddress.zip}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    Country:
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    {{x.billingAddress.country}}
-                                  </div>
-                                </div>
-                                <div class="row innerShipping" ng-show="showShipping">
-                                  <div class="closeOut" ng-click="showShipping = !showShipping; hideAll = !hideAll">
-                                    <i class="fa fa-times"></i>
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Name:
-                                  </div>
-                                  <div class="col-xs-12 text-right totalMargin">
-                                    {{x.shippingAddress.name}}
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    Address:
-                                  </div>
-                                  <div class="col-xs-12 col-md-4 col-lg-2 text-right totalMargin">
-                                    {{x.shippingAddress.address}}
-                                  </div>
-                                  <div class="col-xs-12 col-md-8 col-lg-10">
-                                    City:
-                                  </div>
-                                  <div class="col-xs-12 text-right totalMargin">
-                                    {{x.shippingAddress.city}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    State:
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    {{x.shippingAddress.state}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    Postal Code:
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    {{x.shippingAddress.zip}}
-                                  </div>
-                                  <div class="col-xs-12">
-                                    Country:
-                                  </div>
-                                  <div class="col-xs-12 text-right">
-                                    {{x.shippingAddress.country}}
-                                  </div>
-                                </div>
-                                </div>
-                    </div>
-              </div>
-            </div>
+        <div class="hidden-xs">
+          <div class="col-xs-12 col-sm-6">
+            <a ui-sref="store.product({ urlCode: y.urlCode })">
+              <img src="{{y.product.pictures[0]}}" alt="{{y.product.name}}" />
+            </a>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <a ui-sref="store.product({ urlCode: y.urlCode })" class="onWhiteBackground">
+              <h3>{{y.product.name}}</h3>
+            </a>
+          </div>
+          <div class="col-xs-12 col-sm-6 text-right">
+            <h4>{{y.quantity}}</h4>
+          </div>
+          <div class="col-xs-12 col-sm-6 text-right">
+            <h4>{{y.product.displayPrice}}</h4>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-sm-offset-7 col-md-4 col-lg-5 col-md-offset-8 col-lg-offset-7">
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Total')" ng-hide="showTotal; hideAll">Total</button>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Charge')" ng-hide="showCharge; hideAll">Charge</button>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Billing')" ng-hide="showBilling; hideAll">Billing Address</button>
+        <button type="button" class="btn W2BButton btn-block" ng-click="toggleThis('Shipping')" ng-hide="showShipping; hideAll">Shipping Address</button>
+        <div ng-include="'templates/orderHistory/total.html'" ng-show="showTotal"></div>
+        <div ng-include="'templates/orderHistory/charge.html'" ng-show="showCharge"></div>
+        <div ng-include="'templates/orderHistory/billing.html'" ng-show="showBilling"></div>
+        <div ng-include="'templates/orderHistory/shipping.html'" ng-show="showShipping"></div>
+      </div>
+    </div>
+  </div>
+</div>

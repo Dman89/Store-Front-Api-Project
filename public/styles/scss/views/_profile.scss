@@ -1,0 +1,70 @@
+.profile {
+  color: $black;
+  & input.address {
+    width: 100%;
+  }
+  & div.row.blogBox {
+    cursor: default !important;
+  }
+  & div.accountButtons {
+    padding-top: 5%;
+  }
+  & div.accountData {
+    padding: 5%;
+  }
+  & h1 {
+    color: $blackLight;
+    &.fadedOut {
+      color: $blackFaded;
+    }
+  }
+  & h2 {
+    font-weight: 600;
+  }
+  & .whiteOut {
+    background: $white;
+    border-color: #adb1b8 #a2a6ac #8d9096;
+    border-top-color: rgb(173, 177, 184);
+    border-right-color: rgb(162, 166, 172);
+    border-bottom-color: rgb(141, 144, 150);
+    border-left-color: rgb(162, 166, 172);
+    border-style: solid;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    border-width: 1px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+  }
+  .saveSpacer {
+    padding: 5% 0;
+  }
+  .mobileFloatSave {
+    @media (max-width: 767px) {
+      position: fixed;
+      top: 50px;
+      left: 0;
+      width: 100%;
+      background-color: $menuNormal;
+      border-bottom: 1px $lightBlue solid;
+      z-index: 100;
+      padding: 2px 0;
+      padding-top: 8px;
+      & button {
+        width: 80%;
+        margin: auto;
+      }
+    }
+  }
+  & .fixedButtonBtm {
+    position: fixed;
+    bottom: 0;
+    right: 5%;
+    z-index: 100;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}

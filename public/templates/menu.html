@@ -4,23 +4,23 @@
      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
        <i class="fa fa-navicon"></i>
      </button>
-     <a class="navbar-brand" href>K.C.</a>
+     <a class="navbar-brand" href><img class="logoMenu" src="img/preferedImages/pirate.png" alt=""></a>
    </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                <ul class="nav navbar-nav navbar-right" id="myNav123">
-                  <li  class="menuBar" ng-class="{ active: isActive('/')}">
+                  <li  class="menuBar checkStateOfMenu" ng-class="{ active: isActive('/')}">
                      <a ui-sref="home" target="">Home</a>
                   </li>
-                     <li  ng-class="{ active: isActive('/portfolio')}" class="menuBar">
+                     <li  ng-class="{ active: isActive('/portfolio')}" class="menuBar checkStateOfMenu">
                         <a ui-sref="portfolio" target="">Portfolio</a>
                      </li>
-                  <li ng-class="{ active: isActive('/blog')}" class="menuBar">
+                  <li ng-class="{ active: isActive('/blog')}" class="menuBar checkStateOfMenu">
                      <a ui-sref="blog">Blog</a>
                   </li>
-                  <li ng-class="{ active: isActive('/bio')}" class="menuBar">
+                  <li ng-class="{ active: isActive('/bio')}" class="menuBar checkStateOfMenu">
                      <a ui-sref="bio">Bio</a>
                   </li>
-                    <li ng-class="{ active: isActive('/store')}" class="dropdown " ><a class="dropdown-toggle" data-toggle="dropdown" ui-sref="store">Store
+                    <li id="storeLiInMenu" ng-class="{ active: isActive('/store')}" class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" ui-sref="store">Store
                       <span class="caret"></span></a>
                   <ul class="dropdown-menu">
                     <li class="menuBar"><a ui-sref="store.categories.all">All</a></li>
@@ -32,23 +32,20 @@
                     <li class="menuBar"><a ui-sref="store.upcycle">Upcycle</a></li>
                       </ul>
                   </li>
-                  <li class="menuBar" ng-class="{ active: isActive('/profile')}">
+                  <li class="menuBar checkStateOfMenu" ng-class="{ active: isActive('/profile')}">
                      <a ui-sref="profile" class="" ng-show="user.profile"><i class="fa fa-profile"></i> Profile</a>
                   </li>
                   <li class="menuBar end" ng-hide="user.profile">
                      <a href="/auth/facebook" class=""><i class="fa fa-sign-in"></i> Login</a>
                   </li>
-                  <li class="menuBar" ng-class="{ active: isActive('/cart')}" ng-show="user.profile">
+                  <li class="menuBar checkStateOfMenu" ng-class="{ active: isActive('/cart')}" ng-show="user.profile">
                      <a ui-sref="cart" class=""><i class="fa fa-shopping-cart"></i> Cart</a>
                   </li>
-                  <li class="menuBar" ng-class="{ active: isActive('/admin')}" ng-show="user.admin">
+                  <li class="menuBar checkStateOfMenu" ng-class="{ active: isActive('/admin')}" ng-show="user.admin">
                      <a ui-sref="admin" class=""><i class="fa fa-puzzle-piece"></i> Admin</a>
                   </li>
-                  <li class="hidden-xs menuBar" ng-show="user.profile">
-                     <img ng-src="{{user.profile.picture}}" class="loginThumbnail" alt=""/>
-                  </li>
                   <li class="menuBar end" ng-show="user.profile">
-                     <a class="" href="/logout"><i class="fa fa-sign-out"></i> Logout</a>
+                     <a class="" href="/logout"><i class="fa fa-sign-out"></i></a>
                   </li>
                </ul>
             </div>

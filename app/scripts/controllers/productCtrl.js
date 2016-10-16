@@ -1,6 +1,6 @@
 'use strict';
 angular.module("lionHeart")
-.controller("productCtrl", function($scope, dataService, functionService, $location) {
+.controller("productCtrl", function($scope, dataService, functionService, $location, storeCategoryService) {
   var addToCartReq = require("../functions/addToCartReq");
   var cart;
   var user;
@@ -23,17 +23,14 @@ angular.module("lionHeart")
             if (check == "graphic design") {
               check = "graphics";
             }
-          // console.log(check + tempEdit);
           if (check.search(tempEdit) > -1) {
             list.push(response.data.products[x]);
-            // console.log(list);
           }
           if (x == varTemp - 1) {
           $scope.products = list;
           }
           if (check.search("tempEdit") > -1) {
             list.push(response.data.products[x]);
-            // console.log(list);
           }
           if (x == varTemp - 1) {
             $scope.products = list;
@@ -62,4 +59,13 @@ angular.module("lionHeart")
         // console.log("Completed!");
       });
     }
+    storeCategoryService.whatCategoryIsIt(function(res) {
+      if (res !== false) {
+        let resWithCap = res.charAt(0).toUpperCase();
+        let resRestOfWord = res.slice(1, res.length);
+        $scope.subcategoryActive = true;
+        $scope.subcategory = resWithCap + resRestOfWord;
+      }
+      $scope.subcategoryActive = res;
+    })
 });

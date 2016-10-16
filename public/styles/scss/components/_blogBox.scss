@@ -1,0 +1,115 @@
+.blogBox {
+  cursor: pointer;
+  padding: 16px;
+  background: #fff;
+  border-top: 3px solid $menuLight;
+  border-radius: 1px;
+  border-bottom-left-radius: 4px;
+  border-bottom-right-radius: 4px;
+  box-shadow: -1px 0 2px 0 rgba(0,0,0,0.12) , 1px 0 2px 0 rgba(0,0,0,0.12) , 0 1px 1px 0 rgba(0,0,0,0.24);
+  margin-bottom: 16px;
+  @media (min-width: 768px) {
+    -webkit-transition: all .15s cubic-bezier(.33,.66,.66,1);
+    transition: all .15s cubic-bezier(.33,.66,.66,1);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    min-height: 320px;
+    &:hover {
+      transform: translate3d(0,-3px,0);
+      box-shadow: -2px 0 2px 0 rgba(0,0,0,0.16) , 2px 0 2px 0 rgba(0,0,0,0.16) , 0 2px 2px 0 rgba(0,0,0,0.23);
+    }
+  }
+  & .description {
+    margin: auto;
+    text-align: left;
+    text-indent: 5%;
+    color: $blackLight;
+  }
+  & img {
+    width: 100%;
+    height: 100%;
+    border-radius: 3px;
+  }
+  &.smallerBlogPosts {
+    & img {
+      max-height: 272px;
+      max-width: 209px;
+      margin: auto;
+      display: block;
+    }
+    & h3 {
+      text-align: center;
+    }
+  }
+  &.blog {
+    margin: auto;
+    margin-top: 19px;
+    margin-bottom: 16px;
+    & img {
+      max-height: 272px;
+      max-width: 209px;
+      margin: auto;
+      display: block;
+    }
+    & h2, & .date {
+      text-align: center;
+    }
+    & .description {
+      padding: 0 5%;
+      margin: 5% auto;
+    }
+  }
+}
+
+.mainPost, .smallerBlogPosts {
+  width: 100%;
+  height: 100%;
+}
+.checkForThird:nth-child(3n+1) {
+  clear: left;
+  clear: both;
+}
+
+.blogButton {
+  margin: 5% 5% 0 5%;
+}
+.blogSinglePage {
+  width: 100%;
+  height: 100%;
+  margin: auto;
+  text-align: center;
+  padding: 5%;
+  & img {
+    border-radius: 4px;
+  }
+  & .blogBox {
+    cursor: auto;
+   & h1 {
+     color: $blackLight;
+     padding-left: 15px;
+     text-align: left;
+     @media (max-width: 767px) {
+       padding-left: 0px;
+       text-align: center;
+     }
+   }
+   & .date {
+     color: $lightBlue;
+     @media (min-width: 768px) {
+       text-align: right;
+       margin-right: 5%;
+     }
+   }
+   & .body {
+     margin: 0 5% 5% 5%;
+     text-align: left;
+     text-indent: 5%;
+   }
+  }
+}

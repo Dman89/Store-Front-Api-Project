@@ -1,0 +1,15 @@
+a {
+  &.onWhiteBackground {
+    color: $linkWhiteBackground;
+    &:hover {
+      text-decoration: none;
+      color: $linkHoverWhiteBackground;
+    }
+  }
+  &.onBlueBackground {
+    color: $linkBlueBackground;
+    &:hover {
+      color: $linkHoverBlueBackground;
+    }
+  }
+}

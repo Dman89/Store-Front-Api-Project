@@ -1,6 +1,10 @@
-<div ng-repeat="blog in blogItemsToDisplay" ng-show="blog.live" class="text-center SpaceTop">
-<img ng-src="{{blog.img}}" alt="" ui-sref="blog.item({ id: blog._id })">
-<h1 ui-sref="blog.item({ id: blog._id })">{{blog.title}}</h1>
-<p ui-sref="blog.item({ id: blog._id })">{{blog.date.month + "/" + blog.date.day + "/" + blog.date.year}}</p>
-<p ui-sref="blog.item({ id: blog._id })">{{blog.description}}</p>
+<div class="col-xs-12 col-sm-4 checkForThird" ng-repeat="blog in blogItemsToDisplay" ng-show="blog.live">
+  <div  class="blogBox blog" ui-sref="blog.item({ id: blog._id })">
+        <h2>{{blog.title}}</h2>
+        <img ng-src="{{blog.img}}" alt="">
+        <h3 class="date">{{blog.date.month + "/" + blog.date.day + "/" + blog.date.year}}</h3>
+        <p class="description">{{blog.description}}</p>
+  </div>
+
 </div>
+<div class="spaceBtm"></div>

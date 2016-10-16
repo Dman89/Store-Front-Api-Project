@@ -1,125 +1,141 @@
-<div class="row" id="edit">
-<div class="col-xs-12 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-10">
-  <button ui-sref="profile.dashboard" type="button" class="abtn btn-success btn-block topBtnSaveProfile" ng-click="saveUser(user)"><i class="fa fa-floppy-o"></i> Save</button>
+<div id='dashboardSave' class="show-xs saveSpacer">
+  <button id="scrollBTN" ui-sref="profile.dashboard" type="button" class="btn btn-goldSecondary btn-block" ng-click="saveUser(user)">
+    <i class="fa fa-floppy-o"></i> Save
+  </button>
 </div>
-  <div class="divider"><h1 class="title highlight">Public Profile</h1></div>
-  <div class="col-xs-12 footing">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-      <h3>Display Name:</h3><input type="text" ng-model="user.profile.displayName"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      <h3>Username:</h3><label class="profileUserName">{{user.profile.username}}</label>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      <h3>Picture:</h3><input type="text" ng-model="user.profile.picture"/>
-      </div>
+<button ui-sref="profile.dashboard" type="button" class="btn btn-goldSecondary hidden-xs fixedButtonBtm" ng-click="saveUser(user)">
+  <i class="fa fa-floppy-o"></i> Save
+</button>
+<div class="col-xs-12">
+  <div class="row blogBox">
+    <div class="col-xs-12">
+      <h1 class="hidden-xs">Account Info</h1>
+      <h1 class="show-xs text-center">Account Info</h1>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>First Name:</h2>
+      <input type="text" ng-model="user.data.firstName"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>Last Name:</h2>
+      <input type="text" ng-model="user.data.lastName"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>Email:</h2>
+      <label>{{user.data.email[0]}}</label>
     </div>
   </div>
-  <div class="divider"><h1 class="title highlight">Account Info</h1></div>
-  <div class="col-xs-12 footing">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-      <h3>First Name:</h3><input type="text" ng-model="user.data.firstName"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      <h3>Last Name:</h3><input type="text" ng-model="user.data.lastName"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-      <h3>Email:</h3><label class="profileUserName">{{user.data.email[0]}}</label>
-      </div>
+</div>
+<div class="col-xs-12">
+  <div class="row blogBox">
+    <div class="col-xs-12">
+      <h1 class="hidden-xs">Billing Address</h1>
+      <h1 class="show-xs text-center">Billing Address</h1>
     </div>
-  </div>
-  <div class="divider"><h1 class="title highlight">Billing Address</h1></div>
-  <div class="col-xs-12 footing">
-    <div class="row">
-      <div class="col-xs-12">
-        <h3>Billing Address:</h3>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <input type="text" ng-model="user.data.billingAddress.name"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <input type="text" ng-model="user.data.billingAddress.address"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <input type="text" ng-model="user.data.billingAddress.city"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <input type="text" ng-model="user.data.billingAddress.state"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <input type="text" ng-model="user.data.billingAddress.zip"/>
-      </div>
-      <div class="col-xs-12 col-sm-4">
-        <input type="text" ng-model="user.data.billingAddress.country"/>
-      </div>
-    </div>
-  </div>
-  <div class="divider"><h1 class="title highlight">Shipping Address</h1></div>
-  <div class="col-xs-12 footingSA">
-    <div class="row">
-      <div class="col-xs-12">
-        <h3>Shipping Address:</h3>
-      </div>
-      <div class="row" ng-class="{'hidden': user.data.shippingAddress.useBilling == true}">
-        <div class="col-xs-12 col-sm-4">
-          <input type="text" ng-model="user.data.shippingAddress.name"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <input type="text" ng-model="user.data.shippingAddress.address"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <input type="text" ng-model="user.data.shippingAddress.city"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <input type="text" ng-model="user.data.shippingAddress.state"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <input type="text" ng-model="user.data.shippingAddress.zip"/>
-        </div>
-        <div class="col-xs-12 col-sm-4">
-          <input type="text" ng-model="user.data.shippingAddress.country"/>
-        </div>
-      </div>
-      <div class="row"  ng-class="{'hidden': user.data.shippingAddress.useBilling == false, 'profileUserName': user.data.shippingAddress.useBilling == true}">
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.name}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.address}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.city}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.state}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.zip}}</label>
-          </div>
-          <div class="col-xs-12 col-sm-4">
-            <label>{{user.data.billingAddress.country}}</label>
-          </div>
-      </div>
-      <div class="col-xs-12">
-        <button type="button" ng-click="user.data.shippingAddress.useBilling = !user.data.shippingAddress.useBilling" ng-class="{'green': user.data.shippingAddress.useBilling, 'red': !user.data.shippingAddress.useBilling}" ng-model="user.data.shippingAddress.useBilling" class="abtn btn-success" title="Join Our Mailing List">Use Billing Address</button>
-      </div>
-    </div>
-  </div>
-  <div class="divider"><h1 class="title highlight">Extras</h1></div>
-  <div class="col-xs-12 footing">
-    <div class="row">
-    <div class="col-xs-12 col-sm-6">
-    <button type="button" ng-click="user.data.emailMailingList = !user.data.emailMailingList" ng-class="{'green': user.data.emailMailingList, 'red': !user.data.emailMailingList}" ng-model="user.data.emailMailingList" class="abtn btn-success" title="Use Your Billing Address as Your Shipping Address">Be the First to Know</button>
+    <div class="col-xs-12">
+      <h2>Name:</h2>
+      <input type="text" ng-model="user.data.billingAddress.name"/>
     </div>
     <div class="col-xs-12 col-sm-6">
-    <button type="button" ng-click="user.data.researchAndDevelopment = !user.data.researchAndDevelopment" ng-class="{'green': user.data.researchAndDevelopment, 'red': !user.data.researchAndDevelopment}" ng-model="user.data.researchAndDevelopment" class="abtn btn-success" title="Participate in Research and Development by Sumbiting Data">Contribute to Humanity</button>
+      <h2>Address Line 1:</h2>
+      <input type="text" class="address" ng-model="user.data.billingAddress.address"/>
     </div>
+    <div class="col-xs-12 col-sm-6">
+      <h2>Address Line 2:</h2>
+      <input type="text" class="address" ng-model="user.data.billingAddress.address2"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>City:</h2>
+      <input type="text" ng-model="user.data.billingAddress.city"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>State:</h2>
+      <input type="text" ng-model="user.data.billingAddress.state"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>Zip:</h2>
+      <input type="text" ng-model="user.data.billingAddress.zip"/>
+    </div>
+    <div class="col-xs-12 col-sm-4">
+      <h2>Country:</h2>
+      <input type="text" ng-model="user.data.billingAddress.country"/>
     </div>
   </div>
-  <div class="divider"></div>
-  <div class="col-xs-12 col-sm-2 col-sm-offset-5 col-md-2 col-md-offset-10">
-    <button ui-sref="profile.dashboard" type="button" class="abtn btn-success btn-block bottomBtnSaveProfile" ng-click="saveUser(user)"><i class="fa fa-floppy-o"></i> Save</button>
+</div>
+<div class="col-xs-12">
+  <div class="row blogBox">
+    <div ng-class="{'hidden': user.data.shippingAddress.useBilling == true}">
+      <div class="col-xs-12">
+        <h1 class="hidden-xs">Shipping Address</h1>
+        <h1 class="show-xs text-center">Shipping Address</h1>
+      </div>
+      <div class="col-xs-12">
+        <h2>Name:</h2>
+        <input type="text" ng-model="user.data.shippingAddress.name"/>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <h2>Address Line 1:</h2>
+        <input type="text" class="address" ng-model="user.data.shippingAddress.address"/>
+      </div>
+      <div class="col-xs-12 col-sm-6">
+        <h2>Address Line 2:</h2>
+        <input type="text" class="address" ng-model="user.data.shippingAddress.address2"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <h2>City:</h2>
+        <input type="text" ng-model="user.data.shippingAddress.city"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <h2>State:</h2>
+        <input type="text" ng-model="user.data.shippingAddress.state"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <h2>Zip:</h2>
+        <input type="text" ng-model="user.data.shippingAddress.zip"/>
+      </div>
+      <div class="col-xs-12 col-sm-4">
+        <h2>Country:</h2>
+        <input type="text" ng-model="user.data.shippingAddress.country"/>
+      </div>
+    </div>
+    <div ng-class="{'hidden': !user.data.shippingAddress.useBilling}">
+      <div class="col-xs-12">
+        <h1 class="hidden-xs fadedOut">Shipping Address</h1>
+        <h1 class="show-xs text-center fadedOut">Shipping Address</h1>
+      </div>
+      <div class="col-xs-12">
+        <h2 class="hidden-xs">Same As Billing Address</h2>
+        <h2 class="show-xs">Same As Billing Address</h2>
+      </div>
+    </div>
+    <div class="col-xs-12 text-right">
+      <button type="button" ng-click="user.data.shippingAddress.useBilling = !user.data.shippingAddress.useBilling" ng-class="{'btn-goldSecondary': user.data.shippingAddress.useBilling, 'btn-plain': !user.data.shippingAddress.useBilling}" ng-model="user.data.shippingAddress.useBilling" class="btn" title="Join Our Mailing List">
+        Use Billing Address
+      </button>
+    </div>
+  </div>
+</div>
+<div class="col-xs-12">
+  <div class="row blogBox">
+    <div class="col-xs-12">
+      <h1 class="hidden-xs">Extras</h1>
+      <h1 class="show-xs text-center">Extras</h1>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h2>Mailing List:</h2>
+      <div class="text-center">
+        <button type="button" ng-click="user.data.emailMailingList = !user.data.emailMailingList" ng-class="{'btn-goldSecondary': user.data.emailMailingList, 'btn-plain': !user.data.emailMailingList}" ng-model="user.data.emailMailingList" class="btn" title="Use Your Billing Address as Your Shipping Address">
+          Be the First to Know
+        </button>
+      </div>
+    </div>
+    <div class="col-xs-12 col-sm-6">
+      <h2>Send Useage Data:</h2>
+      <div class="text-center">
+        <button type="button" ng-click="user.data.researchAndDevelopment = !user.data.researchAndDevelopment" ng-class="{'btn-goldSecondary': user.data.researchAndDevelopment, 'btn-plain': !user.data.researchAndDevelopment}" ng-model="user.data.researchAndDevelopment" class="btn" title="Participate in Research and Development by Sumbiting Data">
+          Contribute to Humanity
+        </button>
+      </div>
+    </div>
   </div>
 </div>

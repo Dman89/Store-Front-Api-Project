@@ -27,8 +27,8 @@ var addition = {
     emailMailingList: {type: Boolean},
     researchAndDevelopment: {type: Boolean},
     customerNumber: {type: String},
-    billingAddress: {name: {type: String}, address: {type: String}, city: {type: String}, state: {type: String}, zip:{type: String}, country: {type: String}},
-    shippingAddress: {name: {type: String}, address: {type: String}, city: {type: String}, state: {type: String}, zip:{type: String}, country: {type: String}, useBilling: {type: Boolean}},
+    billingAddress: {name: {type: String}, address: {type: String}, address2: String, city: {type: String}, state: {type: String}, zip:{type: String}, country: {type: String}},
+    shippingAddress: {name: {type: String}, address: {type: String}, address2: String, city: {type: String}, state: {type: String}, zip:{type: String}, country: {type: String}, useBilling: {type: Boolean}},
     posts: [Blog.Posts]
   },
   admin: Admin.Panel
