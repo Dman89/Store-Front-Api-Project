@@ -1,15 +1,17 @@
 <div class="admin">
-  <div class="col-xs-12 hidden-xs fixedButtonBtmLeft">
-    <button type="button" class="btn btn-gold" ng-click="newPost()">New Post</button>
+  <div class="div" ng-hide='openBlog.show'>
+    <div class="col-xs-12 hidden-xs fixedButtonBtmLeft">
+      <button type="button" class="btn btn-gold" ng-click="newPost()">New Post</button>
+    </div>
+    <div class="col-xs-12 show-xs">
+      <button class="btn-gold btn btn-block btn-block-xs" ng-click="newPost()">
+        New Post
+      </button>
+    </div>
   </div>
-  <div class="col-xs-12 show-xs">
-    <button class="btn-gold btn btn-block btn-block-xs" ng-click="newPost()">
-      New Post
-    </button>
-  </div>
-  <div class="col-xs-12" ng-repeat="post in blog">
+  <div class="col-xs-12" ng-repeat="post in blog" ng-hide='openBlog.show'>
     <div class="blogBox noMin noPointer">
-      <div class="row pointer" ng-click="openBlogToggle = !openBlogToggle">
+      <div class="row pointer" ng-click="blogEdits(post, $index)">
         <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
           <img ng-src="{{post.img}}" alt="" />
         </div>
@@ -21,48 +23,71 @@
           <p>{{post.description}}</p>
         </div>
       </div>
-      <div class="row" ng-show='openBlogToggle'>
+    </div>
+  </div>
+  <div class="col-xs-12"  ng-show='openBlog.show'>
+
+    <div class="blogBox noMin noPointer">
+      <div class="row" >
+        <div class="col-xs-12 hidden-xs text-left button-row">
+          <button class="btn btn-white" ng-click="openBlog.show = !openBlog.show">Back</button>
+        </div>
+        <div class="col-xs-12 show-xs text-center button-row">
+          <button class="btn btn-white btn-block" ng-click="openBlog.show = !openBlog.show">Back</button>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+          <img ng-src="{{postToEdit.img}}" alt="" />
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+          <h2 class="show-xs text-center">{{postToEdit.title}}</h2>
+          <h2 class="hidden-xs text-left">{{postToEdit.title}}</h2>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-8 col-lg-9">
+          <p>{{postToEdit.description}}</p>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-xs-12">
           <h3>Title:</h3>
-          <input type="text" ng-model="post.title"/>
+          <input type="text" ng-model="postToEdit.title"/>
         </div>
         <div class="col-xs-12">
           <h3>Description:</h3>
-          <textarea ROWS=3 class="textbox" ng-model="post.description"/>
+          <textarea ROWS=3 class="textbox" ng-model="postToEdit.description"/>
         </div>
         <div class="col-xs-12">
           <h3>Body:</h3>
-          <textarea ROWS=10 class="textbox" ng-model="post.body"/>
+          <textarea ROWS=10 class="textbox" ng-model="postToEdit.body"/>
         </div>
         <div class="col-xs-12 col-sm-6">
           <h3>URL:</h3>
-          <input type="text" ng-model="post.urlCode"/>
+          <input type="text" ng-model="postToEdit.urlCode"/>
         </div>
         <div class="col-xs-12 col-sm-6">
           <h3>Image URL:</h3>
-          <input type="text" ng-model="post.img"/>
+          <input type="text" ng-model="postToEdit.img"/>
         </div>
         <div class="col-xs-12 col-sm-6">
           <h3>Live:</h3>
-          <select class="" type="text" ng-model="post.live">
+          <select class="" type="text" ng-model="postToEdit.live">
             <option value="true">True</option>
             <option value="false">False</option>
           </select>
         </div>
         <div class="col-xs-12 col-sm-6">
           <h3>Category:</h3>
-          <input type="text" ng-model="post.category.parent"/>
+          <input type="text" ng-model="postToEdit.category.parent"/>
         </div>
         <div class="col-xs-12 col-sm-6 timeInput">
         <h3>Month/Day/Year/Time:</h3>
-          <input type="text" ng-model="post.date.month"/> /
-          <input type="text" ng-model="post.date.day"/> /
-          <input type="text" ng-model="post.date.year"/> @
-          <input type="text" ng-model="post.date.time"/>
+          <input type="text" ng-model="postToEdit.date.month"/> /
+          <input type="text" ng-model="postToEdit.date.day"/> /
+          <input type="text" ng-model="postToEdit.date.year"/> @
+          <input type="text" ng-model="postToEdit.date.time"/>
         </div>
         <div class="col-xs-12 col-sm-6">
         <h3>Location:</h3>
-        <select type="text" ng-model="post.loc">
+        <select type="text" ng-model="postToEdit.loc">
             <option value="main">Main
             </option>
             <option value="subA">Sub-A
@@ -75,13 +100,19 @@
         </div>
         <div class="col-xs-12 buttonRowbottom text-center">
           <div class="row">
-            <div class="col-xs-12 col-sm-6">
-              <button type="button" class="btn btn-plain btn-block show-xs" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
-              <button type="button" class="btn btn-plain" ng-click="deletePost(post._id, post, $index)">Delete Post</button>
+            <div class="col-xs-12 hidden-xs col-sm-4">
+              <button class="btn btn-white" ng-click="openBlog.show = !openBlog.show">Back</button>
             </div>
-            <div class="col-xs-12 col-sm-6">
-              <button type="button" class="btn btn-gold btn-block show-xs" ng-click="savePost(post._id, post, $index)">Save Post</button>
-              <button type="button" class="btn btn-gold" ng-click="savePost(post._id, post, $index)">Save Post</button>
+            <div class="col-xs-12 show-xs">
+              <button class="btn btn-white btn-block" ng-click="openBlog.show = !openBlog.show">Back</button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-gold btn-block show-xs" ng-click="savePost(postToEdit._id, postToEdit)">Save Post</button>
+              <button type="button" class="btn btn-gold save" ng-click="savePost(postToEdit._id, postToEdit)">Save Post</button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-plain btn-block show-xs" ng-click="deletePost(postToEdit._id, postToEdit)">Delete Post</button>
+              <button type="button" class="btn btn-plain" ng-click="deletePost(postToEdit._id, postToEdit)">Delete Post</button>
             </div>
           </div>
         </div>
