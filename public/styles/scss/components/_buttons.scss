@@ -99,3 +99,8 @@
     border-bottom-left-radius: 0;
   }
 }
+button.save {
+  $savePadding: 25%;
+  padding-left: $savePadding;
+  padding-right: $savePadding;
+}

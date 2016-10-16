@@ -88,6 +88,10 @@
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0; }
 
+button.save {
+  padding-left: 25%;
+  padding-right: 25%; }
+
 .blueGraident {
   background: #2a4e7e;
   background: -moz-radial-gradient(center, ellipse cover, #2a4e7e 0%, #0e1b2c 100%);
@@ -632,8 +636,13 @@ input.address {
 .admin .timeInput input {
   width: 3em;
   text-align: center; }
+.admin .amount input {
+  width: 5em;
+  text-align: center; }
 .admin input {
   width: 100%; }
+.admin .productEditInput input {
+  text-align: center; }
 .admin textarea {
   width: 100%;
   resize: vertical; }
@@ -645,5 +654,9 @@ input.address {
 
 .pointer {
   cursor: pointer; }
+
+img.max {
+  max-width: 300px;
+  max-height: 300px; }
 
 /*# sourceMappingURL=main.css.map */
