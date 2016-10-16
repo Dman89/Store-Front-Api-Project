@@ -6595,6 +6595,7 @@ webpackJsonp([0],[
 	    dataService.saveItem(id, product, function(res) {
 	      if (res.status == 200) {
 	        $scope.successMessageDisplayTop = true;
+	        $scope.editProduct = false;
 	        $timeout(function() {
 	          $scope.successMessageDisplayTop = false;
 	        }, 3075)
