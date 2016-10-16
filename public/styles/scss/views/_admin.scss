@@ -1,1 +1,29 @@
-
+.admin {
+  & .blogBox {
+    & img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+  }
+  & .timeInput input {
+    width: 3em;
+    text-align: center;
+  }
+  & input {
+    width: 100%;
+  }
+  & textarea {
+    width: 100%;
+    resize: vertical;
+  }
+  & .row.pointer:hover h2 {
+    text-decoration: none;
+    color: $linkHoverWhiteBackground;
+  }
+  & .buttonRowbottom {
+    margin-top: 5%;
+  }
+}
+.pointer {
+  cursor: pointer;
+}

@@ -35,7 +35,7 @@
     background: #dcdfe3;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset; }
 
-.W2BButton {
+.W2BButton, .btn-white {
   font-size: 1.5em;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
   color: #000;
@@ -57,7 +57,7 @@
   border-right-width: 1px;
   border-bottom-width: 1px;
   border-left-width: 1px; }
-  .W2BButton:hover {
+  .W2BButton:hover, .btn-white:hover {
     background: #000;
     color: #fff; }
 
@@ -84,6 +84,9 @@
   z-index: 100;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0; }
+  .fixedButtonBtmLeft .btn {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
 
 .blueGraident {
   background: #2a4e7e;
@@ -622,5 +625,25 @@ input.address {
       border-right: 1px #232f3f solid; }
     .checkout .hidden-xs-border-bottom {
       border-bottom: 1px #232f3f solid; } }
+
+.admin .blogBox img {
+  max-width: 300px;
+  max-height: 300px; }
+.admin .timeInput input {
+  width: 3em;
+  text-align: center; }
+.admin input {
+  width: 100%; }
+.admin textarea {
+  width: 100%;
+  resize: vertical; }
+.admin .row.pointer:hover h2 {
+  text-decoration: none;
+  color: #c45500; }
+.admin .buttonRowbottom {
+  margin-top: 5%; }
+
+.pointer {
+  cursor: pointer; }
 
 /*# sourceMappingURL=main.css.map */
