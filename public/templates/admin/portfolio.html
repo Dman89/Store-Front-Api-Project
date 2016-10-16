@@ -1,66 +1,77 @@
-<div class="" id="blogPosts">
-  <div class="row">
-    <div class="col-xs-12 newitemStart">
-      <button type="button" class="btn btn-success" ng-click="newPiece()">New Piece</button>
+<div class="admin">
+  <div class="col-xs-12">
+    <button type="button" class="btn btn-gold fixedButtonBtmLeft" ng-click="newPiece()"  ng-hide="editPortfolio.show">New Piece</button>
+  </div>
+  <div ng-hide="editPortfolio.show">
+    <div class="col-xs-12" ng-repeat="post in portfolioImages">
+      <div class="blogBox noMin" ng-click="portfolioEdit(post, $index)">
+        <div class="row text-center">
+          <div class="col-xs-12 col-sm-6">
+            <img ng-src="{{post.url}}" alt="" class='max'/>
+          </div>
+          <div class="col-xs-12 col-sm-6">
+            <h2>{{post.text}}</h2>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-  <div class="row toggleBar posts" ng-repeat="post in portfolioImages" ng-hide="editPortfolio.show">
-    <label class="col-xs-12" ng-click="portfolioEdit(post, $index)">
-        <span class="tooltiptexttop">Click To Toggle Display</span>
+  </div>
+  <div class="col-xs-12" ng-show="editPortfolio.show">
+    <div class="blogBox noPointer noMin">
       <div class="row">
-        <div class="col-xs-12">
-          <img ng-src="{{post.url}}" alt=""/>
+        <div class="col-xs-12 text-left hidden-xs button-row">
+          <button type="button" class="btn hidden-xs btn-white" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
+        </div>
+        <div class="col-xs-12 text-center show-xs button-row">
+          <button type="button" class="btn btn-block show-xs btn-white" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
         </div>
         <div class="col-xs-12">
-          <h3>{{post.text}}</h3>
+          <div class="text-center">
+            <img data-ng-src="{{portfolioDisplayEdit.url}}" alt="" class="max"/>
+          </div>
+          <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <h2>Url:</h2>
+              <input type="text" ng-model="portfolioDisplayEdit.url"/>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <h2>Large Image Url:</h2>
+              <input type="text" ng-model="portfolioDisplayEdit.urlBig"/>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <h2>Display Text:</h2>
+              <input type="text" ng-model="portfolioDisplayEdit.text"/>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-12 buttonRowbottom text-center">
+          <div class="row">
+            <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block show-xs btn-white" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
+              <button type="button" class="btn hidden-xs btn-white" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block show-xs btn-gold" ng-click="savePortfolio(portfolioDisplayEdit._id, portfolioDisplayEdit, deleteIndex)">Save</button>
+              <button type="button" class="btn save hidden-xs btn-gold" ng-click="savePortfolio(portfolioDisplayEdit._id, portfolioDisplayEdit, deleteIndex)">Save</button>
+            </div>
+            <div class="col-xs-12 col-sm-4">
+              <button type="button" class="btn btn-block show-xs btn-plain" ng-click="deletePortfolio(portfolioDisplayEdit._id, deleteIndex)">Delete</button>
+              <button type="button" class="btn hidden-xs btn-plain" ng-click="deletePortfolio(portfolioDisplayEdit._id, deleteIndex)">Delete</button>
+            </div>
+          </div>
         </div>
       </div>
-    </label>
-      </div>
-      <div class="col-xs-12" id='products' ng-show="editPortfolio.show">
-      <div class="col-xs-12 col-sm-4  col-md-3 col-lg-2" id="backButtonTop">
-            <button type="button" class="btn btn-block btn-warning" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
-      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!--
         <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopPortfolio}">
           <div class="inner">
           </div>
         </div>
-      <div class="col-xs-12 editSpace displayEdit">
-        <div class="row center">
-            <div class="col-xs-12">
-                  <img data-ng-src="{{portfolioDisplayEdit.url}}" alt="" class="editImgRnd"/>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              Url:
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <label ng-click="editDisplay1 = !editDisplay1" ng-hide="editDisplay1">
-                  {{portfolioDisplayEdit.url}}<span class="tooltiptexttop">Edit Url</span></label>
-              <input type="text" ng-model="portfolioDisplayEdit.url" ng-show="editDisplay1" ng-blur="editDisplay1 = false;"/>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              Url:
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <label ng-click="editDisplay2 = !editDisplay2" ng-hide="editDisplay2">
-                  {{portfolioDisplayEdit.urlBig}}<span class="tooltiptexttop">Edit Url (BIG)</span></label>
-              <input type="text" ng-model="portfolioDisplayEdit.urlBig" ng-show="editDisplay2" ng-blur="editDisplay2 = false;"/>
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              Text:
-            </div>
-            <div class="col-xs-12 col-sm-6">
-              <label ng-click="editDisplay3 = !editDisplay3" ng-hide="editDisplay3">
-                  {{portfolioDisplayEdit.text}}<span class="tooltiptexttop">Edit Text</span></label>
-              <input type="text" ng-model="portfolioDisplayEdit.text" ng-show="editDisplay3" ng-blur="editDisplay3 = false;"/>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                  <button type="button" class="btn btn-block btn-warning" ng-click="editPortfolio.show = !editPortfolio.show">Back</button>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                  <button type="button" class="btn btn-block btn-danger" ng-click="deletePortfolio(portfolioDisplayEdit._id, deleteIndex)">Delete</button>
-            </div>
-            <div class="col-xs-12 col-sm-4">
-                  <button type="button" class="btn btn-block btn-success" ng-click="savePortfolio(portfolioDisplayEdit._id, portfolioDisplayEdit, deleteIndex)">Save</button>
-            </div>
-    </div>
+ -->
