@@ -1,35 +1,49 @@
-<div class="row" id="singleItem">
-      <div class="singleItemDisplay">
-          <div class="col-xs-12 col-sm-6 col-md-5 col-lg-3 col-lg-offset-2" id="cards">
-            <div class="" id="singleCards">
-              <div class="card-container">
-                <div class="card sideA">
-                  <div class="imgBackground">
-                    <img src="{{singleItem.pictures[0]}}" alt="" />
-                  </div>
-                  <p class="title highlight"></p>
-
-                </div>
-              </div>
-
-
+<div class="singleItem">
+  <div class="col-xs-12">
+    <div class="blogBox noMin noPointer">
+      <div class="row text-center">
+        <div class="col-xs-12">
+          <img src="{{singleItem.pictures[0]}}" alt="" class="max"/>
+        </div>
+        <div class="col-xs-12">
+          <h2>{{singleItem.name}}</h2>
+        </div>
+        <div class="col-xs-12 text-center">
+          <h6 ng-hide="!singleItem.sku">{{singleItem.sku}}</h6>
+          <h6 ng-hide="singleItem.sku">sku-sku-sku-number</h6>
+        </div>
+        <div class="col-xs-12">
+          <h3 ng-hide="!singleItem.quantity">{{singleItem.displayPrice}}</h3>
+          <h3 ng-show="!singleItem.quantity" id="redSold">SOLD!</h3>
+        </div>
+        <div class="col-xs-12 col-sm-offset-9 col-sm-3">
+          <div class="row text-center spaceForQuantity">
+            <div class="col-xs-12">
+              <h3 ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || quantityCheck(singleItem.quantity)">{{quantity.val}}</h3>
+              <h3 ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || !quantityCheck(singleItem.quantity)">{{quantity.val}}</h3>
+            </div>
+            <div class="col-xs-12">
+              <button ng-hide="!singleItem.quantity" type="button" class="btn btn-plain" ng-class="{'hideAnimation disabledBTN': quantity.val == singleItem.quantity, 'showAnimation': quantity.val != singleItem.quantity}" ng-click="quantityChange(1)"><i class="fa fa-arrow-up"></i></button>
+              <button ng-hide="!singleItem.quantity" type="button" class="btn btn-plain" id="downArrow" ng-class="{'hideAnimation disabledBTN': quantity.val == 1, 'showAnimation': quantity.val != 1}" ng-click="quantityChange(0)"><i class="fa fa-arrow-down"></i></button>
+            </div>
+            <div class="col-xs-12">
+              <button id="blockBtn" type="button" class="btn btn-gold btn-block show-xs" ng-click="addToCart(singleItem._id, quantity.val, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
+              <button ng-hide="!singleItem.active" type="button" id="nonblockBtn" class="btn btn-gold hidden-xs" ng-click="addToCart(singleItem._id, quantity.val, singleItem)"><i class="fa fa-shopping-cart"></i> Add to Cart</button>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="singleItem" ng-include="'templates/relatedItems/relatedItemsDisplay.html'"></div>
 
-          <div class="col-xs-12 col-sm-6 col-md-7 col-lg-5 text-center">
-            <div class="row">
-              <div class="col-xs-12">
-                <h1>{{singleItem.name}}</h1>
-              </div>
-                <div class="col-xs-12 text-center">
-                  <h6 ng-hide="!singleItem.sku">{{singleItem.sku}}</h6>
-                  <h6 ng-hide="singleItem.sku">sku-sku-sku-number</h6>
-                </div>
-              <div class="col-xs-12">
-                <label ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || edit || quantityCheck(singleItem.quantity)" ng-click="edit = !edit">{{quantity.val}}<span class="tooltiptexttop">Click to Change</span></label>
-                <label ng-show="quantityCheck(singleItem.quantity)" ng-hide="!singleItem.quantity || !quantityCheck(singleItem.quantity)">{{quantity.val}}</label>
-                <input ng-show="edit" type="number" maxlength="3" size="1" ng-blur="checkValForMax();" ng-model="quantity.val" class="text-center" />
-              </div>
+
+
+
+
+<!--
+
             <div class="col-xs-12">
                     <button ng-hide="!singleItem.quantity" type="button" class="abtn qUp cartButton thumbAnimation" ng-class="{'hideAnimation disabledBTN': quantity.val == singleItem.quantity, 'showAnimation': quantity.val != singleItem.quantity}" ng-click="quantityChange(1)"><i class="fa fa-arrow-up"></i></button>
                       <button ng-hide="!singleItem.quantity" type="button" class="abtn qDown cartButton thumbAnimation" id="downArrow" ng-class="{'hideAnimation disabledBTN': quantity.val == 1, 'showAnimation': quantity.val != 1}" ng-click="quantityChange(0)"><i class="fa fa-arrow-down"></i></button>
@@ -44,4 +58,4 @@
           </div>
           </div>
         </div>
-        <div class="" ng-include="'templates/relatedItems/relatedItemsDisplay.html'"></div>
+        <div class="" ng-include="'templates/relatedItems/relatedItemsDisplay.html'"></div> -->
