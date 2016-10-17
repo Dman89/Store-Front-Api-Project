@@ -1,0 +1,19 @@
+.singleItem {
+  padding: 5%;
+  & .spaceForQuantity div.col-xs-12 {
+    margin: 3% 0;
+  }
+}
+.relatedItems {
+  .blogBox {
+    min-height: 400px;
+    .imgMinForTitle {
+      min-height: 300px;
+      margin: auto;
+      & img {
+        display: block;
+        margin: auto;
+      }
+    }
+  }
+}

@@ -659,4 +659,18 @@ img.max {
   max-width: 300px;
   max-height: 300px; }
 
+.singleItem {
+  padding: 5%; }
+  .singleItem .spaceForQuantity div.col-xs-12 {
+    margin: 3% 0; }
+
+.relatedItems .blogBox {
+  min-height: 400px; }
+  .relatedItems .blogBox .imgMinForTitle {
+    min-height: 300px;
+    margin: auto; }
+    .relatedItems .blogBox .imgMinForTitle img {
+      display: block;
+      margin: auto; }
+
 /*# sourceMappingURL=main.css.map */
