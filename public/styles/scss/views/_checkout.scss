@@ -1,0 +1,21 @@
+.checkout {
+  padding: 0 5%;
+  & .blogBox {
+    & a img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+  }
+  @media (min-width: 768px) {
+    .hidden-xs-border {
+      border-bottom: 1px $menuNormal solid;
+      border-top: 1px $menuNormal solid;
+    }
+    .hidden-xs-side-border {
+      border-right: 1px $menuNormal solid;
+    }
+    .hidden-xs-border-bottom {
+      border-bottom: 1px $menuNormal solid;
+    }
+  }
+}

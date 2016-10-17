@@ -5125,12 +5125,14 @@ webpackJsonp([0],[
 	      };
 	  // Get User/Cart/UserWithCart
 	  dataService.getCart(function(response) {
-	    $scope.cartA = response.data.cart.data.cart;
-	    var cart = $scope.cartA.items;
-	    $scope.UserWithCart = response.data.cart;
-	    var user = $scope.UserWithCart;
-	    $scope.user = $scope.UserWithCart;
-	    cartTotal(cart, user)
+	    if (response.data.cart.data.cart !== null) {
+	      $scope.cartA = response.data.cart.data.cart;
+	      var cart = $scope.cartA.items;
+	      $scope.UserWithCart = response.data.cart;
+	      var user = $scope.UserWithCart;
+	      $scope.user = $scope.UserWithCart;
+	      cartTotal(cart, user)
+	    }
 	  });
 	  // Delete Items out of Cart
 	$scope.deleteCartItem = function(abe) {
@@ -6593,6 +6595,7 @@ webpackJsonp([0],[
 	    dataService.saveItem(id, product, function(res) {
 	      if (res.status == 200) {
 	        $scope.successMessageDisplayTop = true;
+	        $scope.editProduct = false;
 	        $timeout(function() {
 	          $scope.successMessageDisplayTop = false;
 	        }, 3075)
@@ -6639,10 +6642,13 @@ webpackJsonp([0],[
 	'use strict';
 	angular.module("lionHeart")
 	.controller("admin.postsCtrl", function($scope, dataService, $timeout) {
+	  var postBeingEditedIndex;
 	  dataService.getBlog(function(response) {
 	    $scope.blog = response.data.posts;
 	  })
 	  $scope.newPost = function() {
+	    $scope.openBlog = {show : false};
+	    $scope.successMessageDisplayTopPost = false;
 	    var date = new Date;
 	        var month = (date.getUTCMonth()+1);
 	        var day = date.getDate();
@@ -6668,23 +6674,34 @@ webpackJsonp([0],[
 	      if (res.status == 200) {
 	        newPost._id = res.data.post._id;
 	        newPost.id = res.data.post._id;
-	      $scope.blog.push(newPost);
-	    } else {
+	        $scope.blog.push(newPost);
+	        let lastItemInArray = $scope.blog.length - 1;
+	        postBeingEditedIndex = lastItemInArray
+	        $scope.openBlog = {show: true};
+	        $scope.postToEdit = newPost;
+	    }
+	    else {
 	      return res.status(500).json(res)
 	    }
 	    })
 	  }
-	  $scope.deletePost = function(id, post, index) {
+	  $scope.blogEdits = function(post, index) {
+	    postBeingEditedIndex = index;
+	    $scope.postToEdit = post;
+	    $scope.openBlog = {show: true};
+	  }
+
+	  $scope.deletePost = function(id, post) {
 	    dataService.deletePost(id, post, function(res) {
 	        if (res.status == 200) {
-	          $scope.blog.splice(index, 1);
+	          $scope.blog.splice(postBeingEditedIndex, 1);
+	          $scope.openBlog = {show: false};
 	      } else {
+	        $scope.openBlog = {show: false};
 	        return res.status(500).json(res)
 	      }
 	    })
 	  }
-	  $scope.openBlog = {show : false};
-	    $scope.successMessageDisplayTopPost = false;
 	  $scope.savePost = function(id, post) {
 	    let subtract = post.description.length;
 	    let desc = post.description;
@@ -6697,14 +6714,14 @@ webpackJsonp([0],[
 	    }
 	    dataService.savePost(id, post, function(res) {
 	        if (res.status == 200) {
-	        $scope.openBlog.show = false;
+	          $scope.openBlog.show = false;
 	          $scope.successMessageDisplayTopPost = true;
 	          $timeout(function() {
 	            $scope.successMessageDisplayTopPost = false;
 	          }, 3075)
 	      } else {
 	        console.log('Error Saving Post?');
-	        alert('Error Saving Post?');
+	        // alert('Error Saving Post?');
 	        return res.status(500).json(res)
 	      }
 	    })
@@ -6839,8 +6856,31 @@ webpackJsonp([0],[
 
 	'use strict';
 	angular.module("lionHeart")
-	.controller("adminCtrl", function($scope, dataService) {
+	.controller("adminCtrl", function($scope, dataService, $location, $parse) {
 
+	  var searchForCurrentLocation = function(cb) {
+	    let searchThis = $location.path();
+	    let checkVariableForAdmin = searchThis.search('admin');
+	    if (checkVariableForAdmin >= 0) {
+	      let arrayOfItems = ["post", "user", "product", "port"];
+	      arrayOfItems.map(function(term) {
+	        let checkVariable = searchThis.search(term);
+	        if (checkVariable >= 0) {
+	          let scopeSaving = $parse(term+'Button');
+	          scopeSaving.assign($scope, true);
+	        }
+	        else {
+	          let scopeSavingFalse = $parse(term+'Button');
+	          scopeSavingFalse.assign($scope, false);
+	        }
+	      })
+	    }
+	    else {
+	      window.removeEventListener('hashchange', searchForCurrentLocation)
+	    }
+	  }
+	  searchForCurrentLocation();
+	  window.addEventListener('hashchange', searchForCurrentLocation)
 	});
 
 

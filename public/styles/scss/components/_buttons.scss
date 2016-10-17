@@ -17,7 +17,7 @@
 }
 .btn-goldSecondary {
   background: $buttonSecondary;
-  &:hover, &.active {
+  &:hover, &.active, &.btnActive {
     background: $buttonSecondaryHover;
   }
 }
@@ -41,7 +41,7 @@
     box-shadow: 0 1px 3px rgba(0,0,0,.2) inset;
   }
 }
-.W2BButton {
+.W2BButton, .btn-white {
   font-size: 1.5em;
   transition: $W2BButtonTransition;
   color: #000;
@@ -67,4 +67,40 @@
     background: #000;
     color: #fff;
   }
+}
+
+.btn-block-xs {
+  display: block;
+  width: 80%;
+  margin: 2% auto;
+}
+
+.button-row {
+  margin: 5% 0;
+}
+
+.fixedButtonBtm {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  z-index: 100;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.fixedButtonBtmLeft {
+  position: fixed;
+  bottom: 0;
+  left: 5%;
+  z-index: 100;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  & .btn {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+}
+button.save {
+  $savePadding: 25%;
+  padding-left: $savePadding;
+  padding-right: $savePadding;
 }

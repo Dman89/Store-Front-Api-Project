@@ -14,7 +14,7 @@
 
 .btn-goldSecondary {
   background: #febd69; }
-  .btn-goldSecondary:hover, .btn-goldSecondary.active {
+  .btn-goldSecondary:hover, .btn-goldSecondary.active, .btn-goldSecondary.btnActive {
     background: #f3a847; }
 
 .btn-plain {
@@ -35,7 +35,7 @@
     background: #dcdfe3;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2) inset; }
 
-.W2BButton {
+.W2BButton, .btn-white {
   font-size: 1.5em;
   transition: background-color 150ms ease-in-out, border-color 150ms ease-in-out, color 150ms ease-in-out;
   color: #000;
@@ -57,9 +57,40 @@
   border-right-width: 1px;
   border-bottom-width: 1px;
   border-left-width: 1px; }
-  .W2BButton:hover {
+  .W2BButton:hover, .btn-white:hover {
     background: #000;
     color: #fff; }
+
+.btn-block-xs {
+  display: block;
+  width: 80%;
+  margin: 2% auto; }
+
+.button-row {
+  margin: 5% 0; }
+
+.fixedButtonBtm {
+  position: fixed;
+  bottom: 0;
+  right: 5%;
+  z-index: 100;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
+
+.fixedButtonBtmLeft {
+  position: fixed;
+  bottom: 0;
+  left: 5%;
+  z-index: 100;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
+  .fixedButtonBtmLeft .btn {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
+
+button.save {
+  padding-left: 25%;
+  padding-right: 25%; }
 
 .blueGraident {
   background: #2a4e7e;
@@ -211,9 +242,13 @@ a.onBlueBackground {
       -webkit-transform: translateZ(0);
       transform: translateZ(0);
       min-height: 320px; }
+      .blogBox.noMin {
+        min-height: 0px; }
       .blogBox:hover {
         transform: translate3d(0, -3px, 0);
         box-shadow: -2px 0 2px 0 rgba(0, 0, 0, 0.16), 2px 0 2px 0 rgba(0, 0, 0, 0.16), 0 2px 2px 0 rgba(0, 0, 0, 0.23); } }
+  .blogBox.noPointer {
+    cursor: default; }
   .blogBox .description {
     margin: auto;
     text-align: left;
@@ -514,6 +549,9 @@ div.landingPageTitles h1 {
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0; }
 
+input.address {
+  width: 100%; }
+
 #orderHistory .blogBox {
   min-height: 0; }
   #orderHistory .blogBox img {
@@ -531,5 +569,94 @@ div.landingPageTitles h1 {
 #orderHistory .orderHistoryToolTip:hover .tooltiptexttop {
   font-weight: 600;
   visibility: visible; }
+
+.checkoutCart {
+  padding: 15px; }
+  .checkoutCart h1.cart {
+    text-indent: 5%; }
+  .checkoutCart div.blogBox {
+    cursor: default;
+    padding: 16px;
+    min-height: 100px; }
+    .checkoutCart div.blogBox img {
+      max-width: 300px;
+      max-height: 300px; }
+  .checkoutCart .quantityChange {
+    max-width: 75px; }
+  .checkoutCart .inStock::after {
+    content: 'In Stock';
+    color: #ff9900; }
+  .checkoutCart .outStock::after {
+    content: 'Out Of Stock';
+    color: #777; }
+  @media (max-width: 767px) {
+    .checkoutCart .text-right {
+      text-align: center; } }
+  @media (max-width: 767px) {
+    .checkoutCart .notCenter .text-right {
+      text-align: right; } }
+  .checkoutCart .emptyCart {
+    padding: 10%; }
+  .checkoutCart .saveButton {
+    padding-top: 5%;
+    padding-bottom: 2%; }
+    @media (max-width: 767px) {
+      .checkoutCart .saveButton {
+        padding: 10% 10% 2% 10%; } }
+  .checkoutCart .checkoutButton {
+    margin-bottom: 10%; }
+    @media (max-width: 767px) {
+      .checkoutCart .checkoutButton {
+        padding: 0 10% 10% 10%; } }
+
+.cartButtons {
+  margin-bottom: 10%;
+  padding-top: 10%; }
+
+.spaceTopReview {
+  margin-top: 5%; }
+
+.checkout {
+  padding: 0 5%; }
+  .checkout .blogBox a img {
+    max-width: 300px;
+    max-height: 300px; }
+  @media (min-width: 768px) {
+    .checkout .hidden-xs-border {
+      border-bottom: 1px #232f3f solid;
+      border-top: 1px #232f3f solid; }
+    .checkout .hidden-xs-side-border {
+      border-right: 1px #232f3f solid; }
+    .checkout .hidden-xs-border-bottom {
+      border-bottom: 1px #232f3f solid; } }
+
+.admin .blogBox img {
+  max-width: 300px;
+  max-height: 300px; }
+.admin .timeInput input {
+  width: 3em;
+  text-align: center; }
+.admin .amount input {
+  width: 5em;
+  text-align: center; }
+.admin input {
+  width: 100%; }
+.admin .productEditInput input {
+  text-align: center; }
+.admin textarea {
+  width: 100%;
+  resize: vertical; }
+.admin .row.pointer:hover h2 {
+  text-decoration: none;
+  color: #c45500; }
+.admin .buttonRowbottom {
+  margin-top: 5%; }
+
+.pointer {
+  cursor: pointer; }
+
+img.max {
+  max-width: 300px;
+  max-height: 300px; }
 
 /*# sourceMappingURL=main.css.map */

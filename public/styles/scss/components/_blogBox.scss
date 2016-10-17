@@ -20,10 +20,16 @@
     -webkit-transform: translateZ(0);
     transform: translateZ(0);
     min-height: 320px;
+    &.noMin {
+      min-height: 0px;
+    }
     &:hover {
       transform: translate3d(0,-3px,0);
       box-shadow: -2px 0 2px 0 rgba(0,0,0,0.16) , 2px 0 2px 0 rgba(0,0,0,0.16) , 0 2px 2px 0 rgba(0,0,0,0.23);
     }
+  }
+  &.noPointer {
+    cursor: default;
   }
   & .description {
     margin: auto;

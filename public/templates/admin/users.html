@@ -1,23 +1,43 @@
-<div class="row" id="adminPanelUser">
+<div class="admin">
+  <div class="col-xs-12"  ng-repeat="user in users">
+    <div class="blogBox noPointer noMin">
+      <div class="row pointer" ng-click="revealUserAdminPanel=!revealUserAdminPanel">
+        <div class="col-xs-12 text-center">
+          <h2>{{user.profile.displayName}}</h2>
+        </div>
+      </div>
+      <div class="row text-center" ng-show="revealUserAdminPanel">
+        <div class="col-xs-12">
+          <h3 ng-hide='user.admin.status == "777"'>Admin:</h3>
+          <select ng-model="user.admin.status" ng-hide='user.admin.status == "777"' type="checkbox" class="btn btn-primary">
+            <option value="true">True</option>
+            <option value="false">False</option>
+          </select>
+          <h3 ng-class="{'profileUserName': user.admin.status == '777'}" ng-show='user.admin.status == "777"' class="spaceForAdminPanelUserEdit">Full Access User</h3>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-sm-offset-3 buttonRowbottom hidden-xs text-center">
+          <button type="button" ng-hide='user.admin.status == "777"' class="btn btn-gold save" ng-click="saveUserAdmin(user._id, user)">Save User</button>
+        </div>
+        <div class="col-xs-12 buttonRowbottom show-xs text-center">
+          <button type="button" ng-hide='user.admin.status == "777"' class="btn btn-gold btn-block" ng-click="saveUserAdmin(user._id, user)">Save User</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+<!-- <div class="row" id="adminPanelUser">
   <div class="goGreen2 col-xs-12" ng-class="{'hidden' : !successMessageDisplayTopUser}">
     <div class="inner">
 
     </div>
   </div>
-  <div class="col-xs-12 toggleBar" ng-repeat="user in users">
-    <div class="row">
-      <div class="col-xs-12 revealAdminUserPanel clicker" ng-click="revealUserAdminPanel=!revealUserAdminPanel">
-      <label type="text" >{{user.profile.displayName}}</label>
-      </div>
-      <div class="col-xs-12" ng-show="revealUserAdminPanel">
-        <label ng-hide='user.admin.status == "777"'>Admin:  </label>
-        <select ng-model="user.admin.status" ng-hide='user.admin.status == "777"' type="checkbox" class="btn btn-primary">
-          <option value="true">True</option>
-          <option value="false">False</option>
-        </select>
-        <label ng-class="{'profileUserName': user.admin.status == '777'}" ng-show='user.admin.status == "777"' class="spaceForAdminPanelUserEdit">Full Access User</label>
-        <button type="button" ng-hide='user.admin.status == "777"' class="btn btn-success spaceForAdminPanelUserEdit" ng-click="saveUserAdmin(user._id, user)">Save User</button>
+
+
       </div>
     </div>
   </div>
-</div>
+</div> -->

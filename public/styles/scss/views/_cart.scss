@@ -1,0 +1,59 @@
+.checkoutCart {
+  padding: 15px;
+  & h1.cart {
+    text-indent: 5%;
+  }
+  & div.blogBox {
+    cursor: default;
+    padding: 16px;
+    min-height: 100px;
+    & img {
+      max-width: 300px;
+      max-height: 300px;
+    }
+  }
+  & .quantityChange {
+    max-width: 75px;
+  }
+  & .inStock::after {
+    content: 'In Stock';
+    color: $gold;
+  }
+  & .outStock::after {
+    content: 'Out Of Stock';
+    color: $blackFaded;
+  }
+  & .text-right {
+    @media(max-width: 767px) {
+      text-align: center;
+    }
+  }
+  & .notCenter .text-right {
+    @media(max-width: 767px) {
+      text-align: right;
+    }
+  }
+  & .emptyCart {
+    padding: 10%;
+  }
+  & .saveButton {
+    padding-top: 5%;
+    padding-bottom: 2%;
+    @media (max-width: 767px) {
+      padding: 10% 10% 2% 10%;
+    }
+  }
+  & .checkoutButton {
+    @media (max-width: 767px) {
+      padding: 0 10% 10% 10%;
+    }
+    margin-bottom: 10%;
+  }
+}
+.cartButtons {
+  margin-bottom: 10%;
+  padding-top: 10%;
+}
+.spaceTopReview {
+  margin-top: 5%;
+}
