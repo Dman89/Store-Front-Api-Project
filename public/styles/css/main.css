@@ -673,4 +673,8 @@ img.max {
       display: block;
       margin: auto; }
 
+.max600 {
+  max-height: 600px;
+  max-width: 600px; }
+
 /*# sourceMappingURL=main.css.map */
